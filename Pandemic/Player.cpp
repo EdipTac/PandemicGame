@@ -13,20 +13,22 @@
 
 // Default Constructor
 Player::Player()
-	: _name(""), _pawn(Pawn()), _cards(std::vector<PlayerCard*>()), _role("") {}
+	: _name(""), _pawn(Pawn()), _cards(std::vector<std::unique_ptr<PlayerCard>>()), _role("") {}
 // Constructor
-Player::Player(const std::string name, const Pawn& pawn, const std::vector<PlayerCard*>& cards, const std::string role)
+Player::Player(const std::string name, const Pawn& pawn, const std::vector<std::unique_ptr<PlayerCard>>& cards, const std::string role)
 	: _name(name), _pawn(pawn), _cards(cards), _role(role) {}
-
+// Copy Constructor
+//Player::Player(const Player& player)
+//	: Player() {}
 
 // Accessors and Mutators
-std::vector<PlayerCard*> Player::getCards() {
+std::vector<std::unique_ptr<PlayerCard>> Player::getCards() {
 	return _cards;
 }
-void Player::addCard(PlayerCard* card) {
+void Player::addCard(std::unique_ptr<PlayerCard> card) {
 	_cards.push_back(card);
 }
-void Player::removeCard(PlayerCard* card) {
+void Player::removeCard(std::unique_ptr<PlayerCard> card) {
 	auto iter = find(_cards.begin(), _cards.end(), card);
 	if (iter != _cards.end()) { // the deck contains the card
 		_cards.erase(iter); // TODO: avoid a memory leak
@@ -36,15 +38,15 @@ void Player::removeCard(PlayerCard* card) {
 	}
 }
 
-std::ostream& operator<<(std::ostream& os, PlayerCard* card)
+std::ostream& operator<<(std::ostream& os, std::unique_ptr<PlayerCard> card)
 {
 	return os << card->toString();
 }
 
 void Player::displayCards() {
 	std::cout << "\nDisplaying Cards: \n";
-	for (std::vector<PlayerCard*>::iterator i = _cards.begin(); i != _cards.end(); ++i) {
-		std::cout << *i << "\n";
+	for (std::vector<std::unique_ptr<PlayerCard>>::iterator i = _cards.begin(); i != _cards.end(); ++i) {
+		std::cout << std::move(*i) << "\n";
 	}
 }
 
@@ -76,22 +78,22 @@ int main() {
 	p1.setName("Player1");
 	p1.setRole("Medic");
 	p1.setPawn(Pawn("Atlanta", "Red"));
-	PlayerCard* c1 = new PCCity("London");
-	p1.addCard(c1);
-	PlayerCard* c2 = new PCEvent("Helicopter", "Description");
-	p1.addCard(c2);
-	PlayerCard* c3 = new PCCity("Ho Chi Mihn City");
-	p1.addCard(c3);
+	std::unique_ptr<PlayerCard> c1 = std::make_unique<PCCity>("London");
+	p1.addCard(std::move(c1));
+	std::unique_ptr<PlayerCard> c2 = std::make_unique<PCEvent>("Helicopter", "Description");
+	p1.addCard(std::move(c2));
+	std::unique_ptr<PlayerCard> c3 = std::make_unique<PCCity>("Ho Chi Mihn City");
+	p1.addCard(std::move(c3));
 
 	p2.setName("Player2");
 	p2.setRole("Researcher");
 	p2.setPawn(Pawn("Montreal", "Green"));
-	PlayerCard* c4 = new PCCity("Delhi");
-	p2.addCard(c4);
-	PlayerCard* c5 = new PCCity("Los Angeles");
-	p2.addCard(c5);
-	PlayerCard* c6 = new PCEpidemic();
-	p2.addCard(c6);
+	std::unique_ptr<PlayerCard> c4 = std::make_unique<PCCity>("Delhi");
+	p2.addCard(std::move(c4));
+	std::unique_ptr<PlayerCard> c5 = std::make_unique<PCCity>("Los Angeles");
+	p2.addCard(std::move(c5));
+	std::unique_ptr<PlayerCard> c6 = std::make_unique<PCEpidemic>();
+	p2.addCard(std::move(c6));
 
 	std::cout << "p1.name: " << p1.getName();
 	std::cout << "\np1.role: " << p1.getRole();
@@ -104,11 +106,4 @@ int main() {
 	p2.displayCards();
 
 	std::system("pause");
-
-	delete(c1);
-	delete(c2);
-	delete(c3);
-	delete(c4);
-	delete(c5);
-	delete(c6);
 }

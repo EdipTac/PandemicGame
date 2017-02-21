@@ -22,6 +22,8 @@ private:
 public:
 	PlayerCard();
 	PlayerCard(std::string name);
+	//PlayerCard(const PlayerCard& playercard);
+	//~PlayerCard();
 
 	std::string getName() const;
 	void setName(const std::string name);

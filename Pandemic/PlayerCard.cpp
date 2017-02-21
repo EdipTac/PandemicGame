@@ -6,6 +6,9 @@ PlayerCard::PlayerCard()
 PlayerCard::PlayerCard(std::string name)
 	: _name(name) {}
 
+//PlayerCard::PlayerCard(const PlayerCard& playercard)
+//	:_name("") {}
+
 std::string PlayerCard::getName() const
 {
 	return _name;

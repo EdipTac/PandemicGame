@@ -5,25 +5,28 @@
 #include "Pawn.h"
 #include <algorithm>
 #include "PlayerCard.h"
+#include <memory>
 
 class Player {
 private:
 	std::string _name;
 	Pawn _pawn;
-	std::vector<PlayerCard*> _cards;
+	std::vector<std::unique_ptr<PlayerCard>> _cards;
 	std::string _role;
 
 public:
-	// Constructor
-	Player(const std::string name, const Pawn& pawn, const std::vector<PlayerCard*>& cards, const std::string role);
 	// Default Constructor
 	Player();
+	// Constructor
+	Player(const std::string name, const Pawn& pawn, const std::vector<std::unique_ptr<PlayerCard>>& cards, const std::string role);
+	// Copy Constructor
+	//Player(const Player& player);
 
 
 	// Accessors and Mutators
-	std::vector<PlayerCard*> getCards();
-	void addCard(PlayerCard* card);
-	void removeCard(PlayerCard* card);
+	std::vector<std::unique_ptr<PlayerCard>> getCards();
+	void addCard(std::unique_ptr<PlayerCard> card);
+	void removeCard(std::unique_ptr<PlayerCard> card);
 
 	Pawn getPawn() const;
 	void setPawn(const Pawn& pawn);
