@@ -74,10 +74,12 @@ void Player::setName(const std::string name) {
 // Main method - performs both the requirements for the Common Part and Part 3
 int main() {
 	// Constructing two players
+	std::cout << "Creating two players, p1 and p2..." << std::endl;
 	Player p1{};
 	Player p2{};
 
 	// Initializing attributes of p1, including PlayerCards
+	std::cout << "Initializing p1..." << std::endl;
 	p1.setName("Player1");
 	p1.setRole("Medic");
 	p1.setPawn(Pawn("Atlanta", "Red"));
@@ -89,6 +91,7 @@ int main() {
 	p1.addCard(c3);
 
 	// Initializing attributes for p2, including PlayerCards
+	std::cout << "Initializing p2..." << std::endl;
 	p2.setName("Player2");
 	p2.setRole("Researcher");
 	p2.setPawn(Pawn("Montreal", "Green"));
@@ -99,19 +102,21 @@ int main() {
 	PlayerCard* c6 = new PCEpidemic();
 	p2.addCard(c6);
 
+	std::cout << "\nDisplaying information for p1:" << std::endl;
 	std::cout << "p1.name: " << p1.name();
 	std::cout << "\np1.role: " << p1.role();
 	std::cout << "\np1.pawn: " << p1.pawn().toString();
 	p1.displayCards();
 
-	std::cout << "\n\np2.name: " << p2.name();
+	std::cout << "\n\nDisplaying information for p2:" << std::endl;
+	std::cout << "p2.name: " << p2.name();
 	std::cout << "\np2.role: " << p2.role();
 	std::cout << "\np2.pawn: " << p2.pawn().toString();
 	p2.displayCards();
 
 	std::system("pause");
 
-	// Clean up Dynamic variables to avoid Memory Leak...
+	// Clean up Dynamic variables to avoid Memory Leak
 	delete(c1);
 	delete(c2);
 	delete(c3);
