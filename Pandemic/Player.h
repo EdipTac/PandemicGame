@@ -21,17 +21,17 @@ public:
 
 
 	// Accessors and Mutators
-	std::vector<PlayerCard*> getCards();
+	std::vector<PlayerCard*> cards();
 	void addCard(PlayerCard* card);
 	void removeCard(PlayerCard* card);
 
-	Pawn getPawn() const;
+	Pawn pawn() const;
 	void setPawn(const Pawn& pawn);
 
-	std::string getRole() const;
+	std::string role() const;
 	void setRole(const std::string role);
 
-	std::string getName() const;
+	std::string name() const;
 	void setName(const std::string name);
 
 	void displayCards();

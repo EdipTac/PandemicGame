@@ -1,5 +1,3 @@
-#pragma once
-
 /*
 Distinct Part 3 – Player cards classes:
 Implement a C++ classes that represents the various 
@@ -11,9 +9,9 @@ with different player cards, and demonstrate how the
 player’s cards affect the players’ action.
 */
 
+#pragma once
 #include <string>
 #include <iostream>
-
 
 class PlayerCard {
 private:
@@ -23,7 +21,7 @@ public:
 	PlayerCard();
 	PlayerCard(std::string name);
 
-	std::string getName() const;
+	std::string name() const;
 	void setName(const std::string name);
 
 	virtual std::string toString();
@@ -43,7 +41,7 @@ public:
 	PCEvent();
 	PCEvent(std::string name, std::string description);
 
-	std::string getDescription() const;
+	std::string description() const;
 	void setDescription(const std::string description);
 	std::string toString();
 };

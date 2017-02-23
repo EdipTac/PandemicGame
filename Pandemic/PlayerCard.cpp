@@ -6,7 +6,7 @@ PlayerCard::PlayerCard()
 PlayerCard::PlayerCard(std::string name)
 	: _name(name) {}
 
-std::string PlayerCard::getName() const
+std::string PlayerCard::name() const
 {
 	return _name;
 }
@@ -38,7 +38,7 @@ PCEvent::PCEvent()
 PCEvent::PCEvent(std::string name, std::string description)
 	: PlayerCard(name), _description(description) {}
 
-std::string PCEvent::getDescription() const
+std::string PCEvent::description() const
 {
 	return _description;
 }

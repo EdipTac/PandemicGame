@@ -20,7 +20,7 @@ Player::Player(const std::string name, const Pawn& pawn, const std::vector<Playe
 
 
 // Accessors and Mutators
-std::vector<PlayerCard*> Player::getCards() {
+std::vector<PlayerCard*> Player::cards() {
 	return _cards;
 }
 void Player::addCard(PlayerCard* card) {
@@ -48,21 +48,21 @@ void Player::displayCards() {
 	}
 }
 
-Pawn Player::getPawn() const {
+Pawn Player::pawn() const {
 	return _pawn;
 }
 void Player::setPawn(const Pawn& pawn) {
 	this->_pawn = pawn;
 }
 
-std::string Player::getRole() const {
+std::string Player::role() const {
 	return _role;
 }
 void Player::setRole(const std::string role) {
 	this->_role = role;
 }
 
-std::string Player::getName() const {
+std::string Player::name() const {
 	return _name;
 }
 void Player::setName(const std::string name) {
@@ -93,14 +93,14 @@ int main() {
 	PlayerCard* c6 = new PCEpidemic();
 	p2.addCard(c6);
 
-	std::cout << "p1.name: " << p1.getName();
-	std::cout << "\np1.role: " << p1.getRole();
-	std::cout << "\np1.pawn: " << p1.getPawn().toString();
+	std::cout << "p1.name: " << p1.name();
+	std::cout << "\np1.role: " << p1.role();
+	std::cout << "\np1.pawn: " << p1.pawn().toString();
 	p1.displayCards();
 
-	std::cout << "\n\np2.name: " << p2.getName();
-	std::cout << "\np2.role: " << p2.getRole();
-	std::cout << "\np2.pawn: " << p2.getPawn().toString();
+	std::cout << "\n\np2.name: " << p2.name();
+	std::cout << "\np2.role: " << p2.role();
+	std::cout << "\np2.pawn: " << p2.pawn().toString();
 	p2.displayCards();
 
 	std::system("pause");
