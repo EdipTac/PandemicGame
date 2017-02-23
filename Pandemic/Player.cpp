@@ -1,8 +1,3 @@
-// Implement a group of C++ classes that represent the player different 
-// possession (e.g. pawn, reference cards, etc.). Write a driver program 
-// that instantiates one player, and adds the possessions.Then implement
-// classes for two concrete players.
-
 #pragma once
 #include "Player.h"
 #include <iostream>
@@ -19,28 +14,34 @@ Player::Player(const std::string name, const Pawn& pawn, const std::vector<Playe
 	: _name(name), _pawn(pawn), _cards(cards), _role(role) {}
 
 
-// Accessors and Mutators
+// Accessors for _cards
 std::vector<PlayerCard*> Player::cards() {
 	return _cards;
 }
+// Mutator for _cards -- adds a single card into the hand
 void Player::addCard(PlayerCard* card) {
 	_cards.push_back(card);
 }
+// Mutator for _cards -- removes a single card from the hand, if it exists
 void Player::removeCard(PlayerCard* card) {
 	auto iter = find(_cards.begin(), _cards.end(), card);
-	if (iter != _cards.end()) { // the deck contains the card
+	if (iter != _cards.end()) { 
+		// the deck contains the card
 		_cards.erase(iter); // TODO: avoid a memory leak
 	}
-	else { // deck does not contain the card
-		std::cout << "Cannot remove card that doesn't exist!";
+	else { 
+		// deck does not contain the card
+		std::cout << "Cannot remove card that doesn't exist!" << std::endl;
 	}
 }
 
+// Overload the << operator for PlayerCard type. Needed in next method.
 std::ostream& operator<<(std::ostream& os, PlayerCard* card)
 {
 	return os << card->toString();
 }
 
+// print all of the Player's cards, uses the loaded << operator
 void Player::displayCards() {
 	std::cout << "\nDisplaying Cards: \n";
 	for (std::vector<PlayerCard*>::iterator i = _cards.begin(); i != _cards.end(); ++i) {
@@ -48,31 +49,40 @@ void Player::displayCards() {
 	}
 }
 
+// Accessor for _pawn
 Pawn Player::pawn() const {
 	return _pawn;
 }
+// Mutator for _pawn
 void Player::setPawn(const Pawn& pawn) {
 	this->_pawn = pawn;
 }
 
+// Accessor for _role
 std::string Player::role() const {
 	return _role;
 }
+// Mutator for _role
 void Player::setRole(const std::string role) {
 	this->_role = role;
 }
 
+// Accessor for _name
 std::string Player::name() const {
 	return _name;
 }
+// Mutator for _name
 void Player::setName(const std::string name) {
 	this->_name = name;
 }
 		
+// Main method - performs both the requirements for the Common Part and Part 3
 int main() {
+	// Constructing two players
 	Player p1{};
 	Player p2{};
 
+	// Initializing attributes of p1, including PlayerCards
 	p1.setName("Player1");
 	p1.setRole("Medic");
 	p1.setPawn(Pawn("Atlanta", "Red"));
@@ -83,6 +93,7 @@ int main() {
 	PlayerCard* c3 = new PCCity("Ho Chi Mihn City");
 	p1.addCard(c3);
 
+	// Initializing attributes for p2, including PlayerCards
 	p2.setName("Player2");
 	p2.setRole("Researcher");
 	p2.setPawn(Pawn("Montreal", "Green"));
@@ -105,6 +116,7 @@ int main() {
 
 	std::system("pause");
 
+	// Clean up Dynamic variables to avoid Memory Leak...
 	delete(c1);
 	delete(c2);
 	delete(c3);
