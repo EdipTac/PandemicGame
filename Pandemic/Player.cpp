@@ -1,10 +1,5 @@
 #pragma once
 #include "Player.h"
-#include <iostream>
-#include <vector>
-#include <string>
-#include "Pawn.h"
-#include <algorithm>
 
 // Default Constructor
 Player::Player()
@@ -41,7 +36,7 @@ std::ostream& operator<<(std::ostream& os, PlayerCard* card)
 	return os << card->toString();
 }
 
-// print all of the Player's cards, uses the loaded << operator
+// Prints all of the Player's cards, uses the overloaded << operator
 void Player::displayCards() {
 	std::cout << "\nDisplaying Cards: \n";
 	for (std::vector<PlayerCard*>::iterator i = _cards.begin(); i != _cards.end(); ++i) {
@@ -88,7 +83,7 @@ int main() {
 	p1.setPawn(Pawn("Atlanta", "Red"));
 	PlayerCard* c1 = new PCCity("London");
 	p1.addCard(c1);
-	PlayerCard* c2 = new PCEvent("Helicopter", "Description");
+	PlayerCard* c2 = new PCEvent("Helicopter", "Fly any player directly to another city");
 	p1.addCard(c2);
 	PlayerCard* c3 = new PCCity("Ho Chi Mihn City");
 	p1.addCard(c3);

@@ -3,7 +3,6 @@
 #include <vector>
 #include <string>
 #include "Pawn.h"
-#include <algorithm>
 #include "PlayerCard.h"
 
 class Player {
