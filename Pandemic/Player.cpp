@@ -26,17 +26,17 @@ std::vector<std::unique_ptr<PlayerCard>> Player::getCards() {
 	return _cards;
 }
 void Player::addCard(std::unique_ptr<PlayerCard> card) {
-	_cards.push_back(card);
+	_cards.push_back(std::move(card));
 }
-void Player::removeCard(std::unique_ptr<PlayerCard> card) {
-	auto iter = find(_cards.begin(), _cards.end(), card);
-	if (iter != _cards.end()) { // the deck contains the card
-		_cards.erase(iter); // TODO: avoid a memory leak
-	}
-	else { // deck does not contain the card
-		std::cout << "Cannot remove card that doesn't exist!";
-	}
-}
+//void Player::removeCard(std::unique_ptr<PlayerCard> card) {
+//	auto iter = find(_cards.begin(), _cards.end(), card);
+//	if (iter != _cards.end()) { // the deck contains the card
+//		_cards.erase(iter); // TODO: avoid a memory leak
+//	}
+//	else { // deck does not contain the card
+//		std::cout << "Cannot remove card that doesn't exist!";
+//	}
+//}
 
 std::ostream& operator<<(std::ostream& os, std::unique_ptr<PlayerCard> card)
 {

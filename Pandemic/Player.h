@@ -26,7 +26,7 @@ public:
 	// Accessors and Mutators
 	std::vector<std::unique_ptr<PlayerCard>> getCards();
 	void addCard(std::unique_ptr<PlayerCard> card);
-	void removeCard(std::unique_ptr<PlayerCard> card);
+	//void removeCard(std::unique_ptr<PlayerCard> card);
 
 	Pawn getPawn() const;
 	void setPawn(const Pawn& pawn);
