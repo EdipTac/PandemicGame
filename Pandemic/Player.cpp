@@ -71,7 +71,7 @@ void Player::setName(const std::string name) {
 	this->_name = name;
 }
 		
-// Main method - performs both the requirements for the Common Part and Part 3
+/*// Main method - performs both the requirements for the Common Part and Part 3
 int main() {
 	// Constructing two players
 	std::cout << "Creating two players, p1 and p2..." << std::endl;
@@ -123,4 +123,4 @@ int main() {
 	delete(c4);
 	delete(c5);
 	delete(c6);
-}
+}*/

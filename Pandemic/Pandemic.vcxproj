@@ -115,6 +115,7 @@
     <ClInclude Include="PlayerCard.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Pandemic.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCard.cpp" />
