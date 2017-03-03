@@ -1,12 +1,13 @@
 #pragma once
 #include "Player.h"
 
+
 // Default Constructor
 Player::Player()
-	: _name(""), _pawn(Pawn()), _cards(std::vector<std::unique_ptr<PlayerCard>>()), _role("") {}
+	: _name(""), _pawn(Pawn()), _cards(std::vector<PlayerCard*>()), _role{ std::make_unique<RoleCard>() }  {}
 // Constructor
-Player::Player(const std::string name, const Pawn& pawn, std::vector<std::unique_ptr<PlayerCard>>& cards, const std::string role)
-	: _name(name), _pawn(pawn), _cards(std::move(cards)), _role(role) {}
+Player::Player(const std::string name, const Pawn& pawn, const std::vector<PlayerCard*>& cards, const std::string role)
+	: _name(name), _pawn(pawn), _cards(cards), _role(std::move(role)) {}
 
 // Accessors and Mutators
 const std::vector<std::unique_ptr<PlayerCard>>& Player::getCards() const {
@@ -44,16 +45,23 @@ void Player::setPawn(const Pawn& pawn) {
 	this->_pawn = pawn;
 }
 
-std::string Player::getRole() const {
-	return _role;
-}
-void Player::setRole(const std::string role) {
-	this->_role = role;
-}
+// Accessor for _role
+//std::string Player::role() const {
+//	return _role;
+//}
+// Mutator for _role
+//void Player::setRole(const std::string role) {
+//	this->_role = role;
+//}
 
 std::string Player::getName() const {
 	return _name;
 }
 void Player::setName(const std::string name) {
 	this->_name = name;
+}
+
+//display function for _role
+void Player::displayRole() {
+	_role->printRole();
 }
