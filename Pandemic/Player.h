@@ -3,40 +3,39 @@
 #include <vector>
 #include <string>
 #include "Pawn.h"
+#include <algorithm>
 #include "PlayerCard.h"
+#include <memory>
 
 class Player {
 private:
-	// Attributes for Player objects
 	std::string _name;
 	Pawn _pawn;
-	std::vector<PlayerCard*> _cards; // Must be a vector of pointers to PlayerCard to allow for use of derived classes (PCCity, PCEvent, PCEpidemic)
+	std::vector<std::unique_ptr<PlayerCard>> _cards;
 	std::string _role;
 
 public:
 	// Default Constructor
 	Player();
 	// Constructor
-	Player(const std::string name, const Pawn& pawn, const std::vector<PlayerCard*>& cards, const std::string role);
+	Player(const std::string name, const Pawn& pawn, std::vector<std::unique_ptr<PlayerCard>>& cards, const std::string role);
+	// Copy Constructor
+	//Player(const Player& player);
 
 
-	// Accessors and Mutators for _cards
-	std::vector<PlayerCard*> cards();
-	void addCard(PlayerCard* card);
-	void removeCard(PlayerCard* card);
+	// Accessors and Mutators
+	const std::vector<std::unique_ptr<PlayerCard>>& getCards() const;
+	void addCard(std::unique_ptr<PlayerCard> card);
+	//void removeCard(std::unique_ptr<PlayerCard> card);
 
-	// Accessors and Mutators for _pawn
-	Pawn pawn() const;
+	Pawn getPawn() const;
 	void setPawn(const Pawn& pawn);
 
-	// Accessors and Mutators for _role
-	std::string role() const;
+	std::string getRole() const;
 	void setRole(const std::string role);
 
-	// Accessors and Mutators for _name
-	std::string name() const;
+	std::string getName() const;
 	void setName(const std::string name);
 
-	// Print all of the cards in a Player's "hand"
 	void displayCards();
 };
