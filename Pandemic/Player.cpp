@@ -22,7 +22,7 @@ Player::Player(const std::string name, const Pawn& pawn, const std::vector<std::
 //	: Player() {}
 
 // Accessors and Mutators
-std::vector<std::unique_ptr<PlayerCard>> Player::getCards() {
+const std::vector<std::unique_ptr<PlayerCard>>& Player::getCards() const{
 	return _cards;
 }
 void Player::addCard(std::unique_ptr<PlayerCard> card) {
@@ -38,15 +38,15 @@ void Player::addCard(std::unique_ptr<PlayerCard> card) {
 //	}
 //}
 
-std::ostream& operator<<(std::ostream& os, std::unique_ptr<PlayerCard> card)
+std::ostream& operator<<(std::ostream& os, PlayerCard card)
 {
-	return os << card->toString();
+	return os << card.toString();
 }
 
 void Player::displayCards() {
 	std::cout << "\nDisplaying Cards: \n";
 	for (std::vector<std::unique_ptr<PlayerCard>>::iterator i = _cards.begin(); i != _cards.end(); ++i) {
-		std::cout << std::move(*i) << "\n";
+		std::cout << **i << "\n";
 	}
 }
 
