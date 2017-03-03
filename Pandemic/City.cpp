@@ -34,7 +34,7 @@ bool City::isConnectedTo(const City& target)
 
 unsigned int City::diseaseCubes(const Colour& colour) const
 {
-	return 0;
+	return _diseaseCubes[colour];
 }
 
 void City::name(const std::string& name)
