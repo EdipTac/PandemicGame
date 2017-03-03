@@ -57,8 +57,10 @@ void City::connectTo(City &target)
 
 void City::addDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source)
 {
-
+	_diseaseCubes.takeFrom(colour, amount, source);
 }
 
 void City::removeDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source)
-{}
+{
+	_diseaseCubes.giveTo(colour, amount, source);
+}
