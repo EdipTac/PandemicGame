@@ -12,7 +12,7 @@ class Player {
 private:
 	std::string _name;
 	Pawn _pawn;
-	std::vector<PlayerCard*> _cards; // Must be a vector of pointers to PlayerCard to allow for use of derived classes (PCCity, PCEvent, PCEpidemic)
+	std::vector<std::unique_ptr<PlayerCard>> _cards; // Must be a vector of pointers to PlayerCard to allow for use of derived classes (PCCity, PCEvent, PCEpidemic)
 	//std::string _role;
 	std::unique_ptr < RoleCard > _role;
 public:

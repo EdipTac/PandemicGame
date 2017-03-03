@@ -120,6 +120,7 @@
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCard.h" />
+    <ClInclude Include="RoleCard.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="City.cpp" />
@@ -133,6 +134,7 @@
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCard.cpp" />
+    <ClCompile Include="RoleCard.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt" />

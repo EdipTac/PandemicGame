@@ -18,7 +18,7 @@ public:
 	void takeFrom(const Colour& colour, const unsigned int amount, CubePool& target);
 
 	// The number of cubes of a given colour
-	unsigned int operator[](const Colour& colour);
+	unsigned int operator[](const Colour& colour) const;
 
 private:
 	// Holds the count of disease cubes of each colour.

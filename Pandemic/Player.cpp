@@ -4,10 +4,10 @@
 
 // Default Constructor
 Player::Player()
-	: _name(""), _pawn(Pawn()), _cards(std::vector<PlayerCard*>()), _role{ std::make_unique<RoleCard>() }  {}
+	: _name(""), _pawn(Pawn()), _cards(std::vector<std::unique_ptr<PlayerCard>>()), _role{ std::make_unique<RoleCard>() }  {}
 // Constructor
-Player::Player(const std::string name, const Pawn& pawn, const std::vector<PlayerCard*>& cards, const std::string role)
-	: _name(name), _pawn(pawn), _cards(cards), _role(std::move(role)) {}
+Player::Player(const std::string name, const Pawn& pawn, std::vector<std::unique_ptr<PlayerCard>>& cards, std::unique_ptr<RoleCard> role)
+	: _name(name), _pawn(pawn), _cards(std::move(cards)), _role(std::move(role)) {}
 
 // Accessors and Mutators
 const std::vector<std::unique_ptr<PlayerCard>>& Player::getCards() const {
