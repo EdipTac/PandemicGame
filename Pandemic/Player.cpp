@@ -15,11 +15,8 @@
 Player::Player()
 	: _name(""), _pawn(Pawn()), _cards(std::vector<std::unique_ptr<PlayerCard>>()), _role("") {}
 // Constructor
-Player::Player(const std::string name, const Pawn& pawn, const std::vector<std::unique_ptr<PlayerCard>>& cards, const std::string role)
-	: _name(name), _pawn(pawn), _cards(cards), _role(role) {}
-// Copy Constructor
-//Player::Player(const Player& player)
-//	: Player() {}
+Player::Player(const std::string name, const Pawn& pawn, std::vector<std::unique_ptr<PlayerCard>>& cards, const std::string role)
+	: _name(name), _pawn(pawn), _cards(std::move(cards)), _role(role) {}
 
 // Accessors and Mutators
 const std::vector<std::unique_ptr<PlayerCard>>& Player::getCards() const{
@@ -45,7 +42,7 @@ std::ostream& operator<<(std::ostream& os, PlayerCard card)
 
 void Player::displayCards() {
 	std::cout << "\nDisplaying Cards: \n";
-	for (std::vector<std::unique_ptr<PlayerCard>>::iterator i = _cards.begin(); i != _cards.end(); ++i) {
+	for (auto i = _cards.begin(); i != _cards.end(); ++i) {
 		std::cout << **i << "\n";
 	}
 }
@@ -69,41 +66,4 @@ std::string Player::getName() const {
 }
 void Player::setName(const std::string name) {
 	this->_name = name;
-}
-		
-int main() {
-	Player p1{};
-	Player p2{};
-
-	p1.setName("Player1");
-	p1.setRole("Medic");
-	p1.setPawn(Pawn("Atlanta", "Red"));
-	std::unique_ptr<PlayerCard> c1 = std::make_unique<PCCity>("London");
-	p1.addCard(std::move(c1));
-	std::unique_ptr<PlayerCard> c2 = std::make_unique<PCEvent>("Helicopter", "Description");
-	p1.addCard(std::move(c2));
-	std::unique_ptr<PlayerCard> c3 = std::make_unique<PCCity>("Ho Chi Mihn City");
-	p1.addCard(std::move(c3));
-
-	p2.setName("Player2");
-	p2.setRole("Researcher");
-	p2.setPawn(Pawn("Montreal", "Green"));
-	std::unique_ptr<PlayerCard> c4 = std::make_unique<PCCity>("Delhi");
-	p2.addCard(std::move(c4));
-	std::unique_ptr<PlayerCard> c5 = std::make_unique<PCCity>("Los Angeles");
-	p2.addCard(std::move(c5));
-	std::unique_ptr<PlayerCard> c6 = std::make_unique<PCEpidemic>();
-	p2.addCard(std::move(c6));
-
-	std::cout << "p1.name: " << p1.getName();
-	std::cout << "\np1.role: " << p1.getRole();
-	std::cout << "\np1.pawn: " << p1.getPawn().toString();
-	p1.displayCards();
-
-	std::cout << "\n\np2.name: " << p2.getName();
-	std::cout << "\np2.role: " << p2.getRole();
-	std::cout << "\np2.pawn: " << p2.getPawn().toString();
-	p2.displayCards();
-
-	std::system("pause");
 }

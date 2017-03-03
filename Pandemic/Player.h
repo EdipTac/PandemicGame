@@ -18,7 +18,7 @@ public:
 	// Default Constructor
 	Player();
 	// Constructor
-	Player(const std::string name, const Pawn& pawn, const std::vector<std::unique_ptr<PlayerCard>>& cards, const std::string role);
+	Player(const std::string name, const Pawn& pawn, std::vector<std::unique_ptr<PlayerCard>>& cards, const std::string role);
 	// Copy Constructor
 	//Player(const Player& player);
 
