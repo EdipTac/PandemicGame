@@ -27,6 +27,8 @@
 //#include "GameState.h"
 //#include "Player.h"
 //#include "Map.h"
+//#include "InfectionCard.h"
+//#include "InfectionCardDeck.h"
 //#include "Serialization.h"
 
 //  ----    Constant definitions    ----

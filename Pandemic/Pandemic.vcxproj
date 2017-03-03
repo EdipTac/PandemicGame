@@ -113,6 +113,8 @@
     <ClInclude Include="City.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="InfectionCard.h" />
+    <ClInclude Include="InfectionCardDeck.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Player.h" />
@@ -122,6 +124,8 @@
     <ClCompile Include="City.cpp" />
     <ClCompile Include="Colour.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="InfectionCard.cpp" />
+    <ClCompile Include="InfectionCardDeck.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Pandemic.cpp" />
     <ClCompile Include="Pawn.cpp" />
