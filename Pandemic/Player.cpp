@@ -1,15 +1,5 @@
-// Implement a group of C++ classes that represent the player different 
-// possession (e.g. pawn, reference cards, etc.). Write a driver program 
-// that instantiates one player, and adds the possessions.Then implement
-// classes for two concrete players.
-
 #pragma once
 #include "Player.h"
-#include <iostream>
-#include <vector>
-#include <string>
-#include "Pawn.h"
-#include <algorithm>
 
 // Default Constructor
 Player::Player()
