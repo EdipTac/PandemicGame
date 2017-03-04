@@ -1,9 +1,12 @@
 #pragma once
 
+//#include "Pawn.h"
 #include "Player.h"
 
 // Default Constructor
 Player::Player()
+	: _pawn { *this }
+	, _role { std::make_unique<RoleCard>() }
 {
 	// Empty
 }
@@ -47,12 +50,13 @@ void Player::displayCards() {
 	}
 }
 
-Pawn Player::getPawn() const {
+Pawn& Player::getPawn()
+{
 	return _pawn;
 }
-void Player::setPawn(const Pawn& pawn) {
-	this->_pawn = pawn;
-}
+//void Player::setPawn(const Pawn& pawn) {
+//	_pawn = pawn;
+//}
 
 // Accessor for _role
 //std::string Player::role() const {

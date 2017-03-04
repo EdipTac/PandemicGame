@@ -1,19 +1,22 @@
 #pragma once
+
 #include <iostream>
 #include <vector>
 #include <string>
 #include <memory>
-#include "Pawn.h"
 #include <algorithm>
+
+#include "Pawn.h"
 #include "PlayerCard.h"
 #include "RoleCard.h"
+
+//class Pawn;
 
 class Player {
 private:
 	std::string _name;
 	Pawn _pawn;
 	std::vector<std::unique_ptr<PlayerCard>> _cards; // Must be a vector of pointers to PlayerCard to allow for use of derived classes (PCCity, PCEvent, PCEpidemic)
-	//std::string _role;
 	std::unique_ptr < RoleCard > _role;
 public:
 	// Default Constructor
@@ -29,8 +32,8 @@ public:
 	void addCard(std::unique_ptr<PlayerCard> card);
 	//void removeCard(std::unique_ptr<PlayerCard> card);
 
-	Pawn getPawn() const;
-	void setPawn(const Pawn& pawn);
+	Pawn& getPawn();
+	//void setPawn(const Pawn& pawn);
 
 	// Accessors and Mutators for _role
 	//std::string role() const;

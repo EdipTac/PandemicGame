@@ -1,31 +1,24 @@
 #include "Pawn.h"
 
-// Default Constructor 
-Pawn::Pawn() 
-	: _city(""), _colour("") {}
-// Constructor
-Pawn::Pawn(std::string city, std::string colour)
-	: _city(city), _colour(colour) {}
-
-// Accessor for _city
-std::string Pawn::city() const {
-	return _city;
-}
-// Mutator for _city
-void Pawn::setCity(std::string city) {
-	this->_city = city;
+Pawn::Pawn(const Player& owner)
+	: _owner { owner }
+	, _position { nullptr }
+{
+	// Empty
 }
 
-// Accessor for _colour
-std::string Pawn::colour() const {
-	return _colour;
-}
-// Mutator for _colour
-void Pawn::setColour(const std::string colour) {
-	this->_colour = colour;
+const Player& Pawn::owner() const
+{
+	return _owner;
 }
 
-// Implementation of a function that converts a Pawn object into an informative string
-std::string Pawn::toString() {
-	return "Pawn: city=", _city, " colour=", _colour;
+const City& Pawn::position() const
+{
+	return *_position;
+}
+
+Pawn& Pawn::setPosition(const City & position)
+{
+	_position = &position;
+	return *this;
 }
