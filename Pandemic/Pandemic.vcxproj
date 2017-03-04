@@ -121,6 +121,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCard.h" />
     <ClInclude Include="RoleCard.h" />
+    <ClInclude Include="Serialization.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="City.cpp" />
@@ -135,9 +136,13 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCard.cpp" />
     <ClCompile Include="RoleCard.cpp" />
+    <ClCompile Include="Serialization.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="earth.map" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

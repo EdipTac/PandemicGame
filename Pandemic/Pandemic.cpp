@@ -21,7 +21,7 @@
 #include <string>
 #include <vector>
 
-//// Project file inclusions
+// Project file inclusions
 //#include "Card.h"
 #include "City.h"
 #include "GameState.h"
@@ -36,5 +36,5 @@
 void main()
 {
 	// Title display
-	std::cout << "    --------    P A N D E M I C    --------\n\n\n";
+	std::cout << "    --------    P A N D E M I C    --------    \n\n\n";
 }
