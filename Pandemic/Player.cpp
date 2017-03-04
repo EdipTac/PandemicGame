@@ -1,6 +1,6 @@
 #pragma once
 
-//#include "Pawn.h"
+#include "Pawn.h"
 #include "Player.h"
 
 // Default Constructor
@@ -28,15 +28,6 @@ const std::vector<std::unique_ptr<PlayerCard>>& Player::getCards() const {
 void Player::addCard(std::unique_ptr<PlayerCard> card) {
 	_cards.push_back(std::move(card));
 }
-//void Player::removeCard(std::unique_ptr<PlayerCard> card) {
-//	auto iter = find(_cards.begin(), _cards.end(), card);
-//	if (iter != _cards.end()) { // the deck contains the card
-//		_cards.erase(iter); // TODO: avoid a memory leak
-//	}
-//	else { // deck does not contain the card
-//		std::cout << "Cannot remove card that doesn't exist!";
-//	}
-//}
 
 std::ostream& operator<<(std::ostream& os, PlayerCard card)
 {
@@ -54,18 +45,16 @@ Pawn& Player::getPawn()
 {
 	return _pawn;
 }
-//void Player::setPawn(const Pawn& pawn) {
-//	_pawn = pawn;
-//}
 
-// Accessor for _role
-//std::string Player::role() const {
-//	return _role;
-//}
-// Mutator for _role
-//void Player::setRole(const std::string role) {
-//	this->_role = role;
-//}
+const RoleCard& Player::role() const
+{
+	return *_role;
+}
+
+void Player::setRole(std::unique_ptr<RoleCard> role)
+{
+	_role = std::move(role);
+}
 
 std::string Player::getName() const {
 	return _name;

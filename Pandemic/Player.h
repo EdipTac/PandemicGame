@@ -16,8 +16,9 @@ class Player {
 private:
 	std::string _name;
 	Pawn _pawn;
-	std::vector<std::unique_ptr<PlayerCard>> _cards; // Must be a vector of pointers to PlayerCard to allow for use of derived classes (PCCity, PCEvent, PCEpidemic)
-	std::unique_ptr < RoleCard > _role;
+	// Must be a vector of pointers to PlayerCard to allow for use of derived classes (PCCity, PCEvent, PCEpidemic)
+	std::vector<std::unique_ptr<PlayerCard>> _cards;
+	std::unique_ptr<RoleCard> _role;
 public:
 	// Default Constructor
 	Player();
@@ -33,6 +34,7 @@ public:
 	//void removeCard(std::unique_ptr<PlayerCard> card);
 
 	Pawn& getPawn();
+	const RoleCard& role() const;
 	//void setPawn(const Pawn& pawn);
 
 	// Accessors and Mutators for _role
@@ -40,6 +42,8 @@ public:
 	//void setRole(const std::string role);
 	//Prints the role of the player
 	void displayRole();
+
+	void setRole(std::unique_ptr<RoleCard> role);
 
 	std::string getName() const;
 	void setName(const std::string name);
