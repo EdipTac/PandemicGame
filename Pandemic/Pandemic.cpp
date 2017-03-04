@@ -51,13 +51,12 @@ void main()
 	// Title display
 	std::cout << "    --------    P A N D E M I C    --------    \n\n\n";
 	mainMenu.solicitInput();
-	waitForExit();
 }
 
 void waitForExit()
 {
 	std::cout << "Press any key to continue...\n";
-	getchar();
+	std::cin.get();
 }
 
 void newGame()
