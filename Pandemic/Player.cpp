@@ -7,9 +7,7 @@
 Player::Player()
 	: _pawn { *this }
 	, _role { std::make_unique<RoleCard>() }
-{
-	// Empty
-}
+{}
 
 // Constructor
 Player::Player(const std::string name, const Pawn& pawn, std::vector<std::unique_ptr<PlayerCard>>& cards, std::unique_ptr<RoleCard> role)
@@ -17,12 +15,10 @@ Player::Player(const std::string name, const Pawn& pawn, std::vector<std::unique
 	, _pawn { pawn }
 	, _cards { std::move(cards) }
 	, _role { std::move(role) }
-{
-	// Empty
-}
+{}
 
 // Accessors and Mutators
-const std::vector<std::unique_ptr<PlayerCard>>& Player::getCards() const {
+const std::vector<std::unique_ptr<PlayerCard>>& Player::getCards() const{
 	return _cards;
 }
 void Player::addCard(std::unique_ptr<PlayerCard> card) {
@@ -63,7 +59,6 @@ void Player::setName(const std::string name) {
 	this->_name = name;
 }
 
-//display function for _role
 void Player::displayRole() {
 	_role->printRole();
 }

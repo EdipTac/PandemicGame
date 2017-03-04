@@ -24,8 +24,6 @@ public:
 	Player();
 	// Constructor
 	Player(const std::string name, const Pawn& pawn, std::vector<std::unique_ptr<PlayerCard>>& cards, std::unique_ptr<RoleCard> role);
-	// Copy Constructor
-	//Player(const Player& player);
 
 
 	// Accessors and Mutators
@@ -35,11 +33,8 @@ public:
 
 	Pawn& getPawn();
 	const RoleCard& role() const;
-	//void setPawn(const Pawn& pawn);
 
 	// Accessors and Mutators for _role
-	//std::string role() const;
-	//void setRole(const std::string role);
 	//Prints the role of the player
 	void displayRole();
 
