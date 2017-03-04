@@ -17,6 +17,11 @@ Player::Player(const std::string name, const Pawn& pawn, std::vector<std::unique
 	, _role { std::move(role) }
 {}
 
+std::string Player::name() const
+{
+	return _name;
+}
+
 // Accessors and Mutators
 const std::vector<std::unique_ptr<PlayerCard>>& Player::getCards() const{
 	return _cards;
@@ -37,7 +42,7 @@ void Player::displayCards() {
 	}
 }
 
-Pawn& Player::getPawn()
+Pawn& Player::pawn()
 {
 	return _pawn;
 }

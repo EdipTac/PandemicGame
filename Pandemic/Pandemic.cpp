@@ -31,10 +31,22 @@
 #include "InfectionCardDeck.h"
 //#include "Serialization.h"
 
+void waitForExit();
 
 //	----    Program entry point    ----
 void main()
 {
 	// Title display
 	std::cout << "    --------    P A N D E M I C    --------    \n\n\n";
+	std::cout << "Please select an option:\n";
+	std::cout << "\t(1) New Game\n";
+	std::cout << "\t(2) Load Game\n";
+	std::cout << "\t(3) Exit\n";
+	waitForExit();
+}
+
+void waitForExit()
+{
+	std::cout << "Press any key to continue...\n";
+	getchar();
 }

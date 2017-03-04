@@ -82,7 +82,7 @@ Map readMapFromFile(const std::string& fileName)
 	for (const auto& name : playerNames)
 	{
 		map.addPlayer(name);
-		//map.players().back()->pawn().position(map.city(playerLocations[name]));
+		map.players().back()->pawn().setPosition(map.city(playerLocations[name]));
 	}
 
 	return map;
@@ -94,7 +94,7 @@ void writeMapToFile(const Map& map, const std::string& fileName)
 	std::map<std::string, std::string> players;
 	for (const auto& player : map.players())
 	{
-		//players[player->name()] = player->pawn().position().name();
+		players[player->name()] = player->pawn().position().name();
 	}
 
 	std::map<std::string, std::pair<std::string, std::vector<std::string>>> cities;
