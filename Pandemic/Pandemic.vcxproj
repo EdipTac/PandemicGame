@@ -117,6 +117,8 @@
     <ClInclude Include="InfectionCard.h" />
     <ClInclude Include="InfectionCardDeck.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MenuOption.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCard.h" />
@@ -131,6 +133,8 @@
     <ClCompile Include="InfectionCard.cpp" />
     <ClCompile Include="InfectionCardDeck.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="MenuOption.cpp" />
     <ClCompile Include="Pandemic.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Player.cpp" />
