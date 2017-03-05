@@ -72,6 +72,8 @@ void newGame()
 {
 	std::cout << "\n    --------    N E W   G A M E    --------    \n\n";
 
+	game = std::make_unique<GameState>();
+
 	const auto& fileName = solicitFileName();
 	std::cout << "\nLoading map \"" << fileName << "\"...\n";
 	game->setMap(readMapFromFile(fileName));
@@ -81,10 +83,10 @@ void newGame()
 	const auto& numPlayers = solicitSize(minPlayers, maxPlayers);
 	for (auto i = 1; i <= numPlayers; ++i)
 	{
-		 const auto& playerName = solicitPlayerName(i);
-		 auto player = std::make_unique<Player>();
-		 player->setName(playerName);
-		 game->addPlayer(std::move(player));
+		const auto& playerName = solicitPlayerName(i);
+		auto player = std::make_unique<Player>();
+		player->setName(playerName);
+		game->addPlayer(std::move(player));
 	}
 }
 
