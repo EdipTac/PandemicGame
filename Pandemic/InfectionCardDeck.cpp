@@ -66,7 +66,7 @@ InfectionCardDeck::InfectionCardDeck() {
 }
 void InfectionCardDeck::shuffle(vector <InfectionCard> & cards) {
 
-
+	cards.clear();
 	//srand(time(0));
 	//int index;
 	//InfectionCard temp;
@@ -111,7 +111,7 @@ int InfectionCardDeck::getInfectionRate() {
 	return infectionRate;
 }
 void InfectionCardDeck::moveOutbreakMarker() {
-	if (outbreakMarker = 5) {
+	if (outbreakMarker == 5) {
 		cout << "Outbreak tracker reaches the last space, the game is over. " << endl;
 		system("pause");
 		system(0);

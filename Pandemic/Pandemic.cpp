@@ -13,6 +13,8 @@
 //
 // An implementation of the board game "Pandemic" by Z-Man Games.
 
+#pragma warning (disable: 4592)
+
 //  ----    Inclusions    ----
 // Standard library inclusions
 #include <iostream>

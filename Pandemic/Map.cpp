@@ -24,8 +24,10 @@ City& Map::addCity(CityPtr city)
 
 Player& Map::addPlayer(const std::string& name)
 {
-	//_players.push_back(std::make_unique<Player>(name, *this));
-	return *_players.back().get();
+	_players.push_back(std::make_unique<Player>());
+	auto& player = *_players.back();
+	player.setName(name);
+	return player;
 }
 
 City& Map::city(const std::string& name) const
