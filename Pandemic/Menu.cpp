@@ -38,5 +38,6 @@ std::string Menu::string() const
 	{
 		ss << "\t(" << (i + 1) << ") " << _options[i].text << "\n";
 	}
+	ss << ": ";
 	return ss.str();
 }

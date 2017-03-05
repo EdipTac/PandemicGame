@@ -11,6 +11,7 @@
 class GameState
 {
 public:
+	GameState();
 	const std::vector<std::unique_ptr<Player>>& players() const;
 	Map& map() const;
 

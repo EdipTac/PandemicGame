@@ -21,7 +21,7 @@ std::string getline(std::ifstream& fs)
 	return line;
 }
 
-Map readMapFromFile(const std::string& fileName)
+std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 {
 	std::ifstream fs { fileName };
 	if (!fs)
@@ -55,18 +55,18 @@ Map readMapFromFile(const std::string& fileName)
 		}
 	}
 
-	Map map { fileName, std::move(cities) };
+	auto map  = std::make_unique<Map>(fileName, std::move(cities));
 
 	for (const auto& list : connections)
 	{
 		for (const auto& targetName : list.second)
 		{
-			auto& target = map.city(targetName);
+			auto& target = map->city(targetName);
 			list.first->connectTo(target);
 		}
 	}
 
-	return map;
+	return std::move(map);
 }
 
 void writeMapToFile(const Map& map, const std::string& fileName)
