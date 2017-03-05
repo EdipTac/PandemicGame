@@ -14,6 +14,9 @@ public:
 	// Constructor
 	EventCard(std::string name, std::string description);
 
+	// Destructor
+	~EventCard() override;
+
 	std::string name() const override;
 	std::string description() const override;
 

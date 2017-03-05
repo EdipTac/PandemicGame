@@ -11,7 +11,7 @@ public:
 	TextualCard(std::string name, std::string description);
 
 	// Virutal destructor to make class abstract
-	virtual ~TextualCard() = 0;
+	virtual ~TextualCard() override = 0;
 
 	// The card's name
 	virtual std::string name() const override;

@@ -24,6 +24,8 @@ RoleCard::RoleCard(std::string role, std::string description, std::string color)
 	
 }
 
+RoleCard::~RoleCard() {}
+
 void RoleCard::printRole() {
 	std::cout << name() << std::endl << _color << std::endl << description() << std::endl;
 }

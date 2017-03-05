@@ -9,6 +9,8 @@ EventCard::EventCard(std::string name, std::string description)
 	: TextualCard { name, description }
 {}
 
+EventCard::~EventCard() {}
+
 std::string EventCard::name() const
 {
 	return TextualCard::name();

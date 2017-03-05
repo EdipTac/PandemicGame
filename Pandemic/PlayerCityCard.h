@@ -13,6 +13,8 @@ public:
 	// Constructor
 	PlayerCityCard(City& city);
 
+	~PlayerCityCard() override;
+
 	// Custom implementation of the inherited virtual function from PlayerCard
 	std::string toString();
 };

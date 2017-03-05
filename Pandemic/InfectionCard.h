@@ -13,4 +13,5 @@ class InfectionCard
 {
 public:
 	InfectionCard(City& city);
+	~InfectionCard() override;
 };

@@ -8,6 +8,8 @@
 PlayerCard::PlayerCard()
 {}
 
+PlayerCard::~PlayerCard() {}
+
 // virtual function that converts a PlayerCard object into an informative string.
 std::string PlayerCard::toString()
 {

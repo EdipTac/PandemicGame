@@ -9,6 +9,8 @@ PlayerCityCard::PlayerCityCard(City& city)
 	: CityCard { city }
 {}
 
+PlayerCityCard::~PlayerCityCard() {}
+
 // Custom implementation of the inherited virtual function from PlayerCard
 std::string PlayerCityCard::toString()
 {
