@@ -1,7 +1,14 @@
 #include <array>
 #include <map>
+#include <string>
 
 #include "Colour.h"
+
+struct ColourData
+{
+	const std::string name;
+	const std::string abbreviation;
+};
 
 static const std::array<Colour, 4> _colours
 {
@@ -11,12 +18,12 @@ static const std::array<Colour, 4> _colours
 	Colour::Yellow
 };
 
-static const std::map<Colour, std::string> _colourStrings
+static const std::map<Colour, ColourData> _colourData
 {
-	{ Colour::Black,  "Black"  },
-	{ Colour::Blue,   "Blue"   },
-	{ Colour::Red,    "Red"    },
-	{ Colour::Yellow, "Yellow" }
+	{ Colour::Black,  { "Black",  "K" } },
+	{ Colour::Blue,   { "Blue",   "B" } },
+	{ Colour::Red,    { "Red",    "R" } },
+	{ Colour::Yellow, { "Yellow", "Y" } }
 };
 
 std::array<Colour, 4> colours()
@@ -24,7 +31,12 @@ std::array<Colour, 4> colours()
 	return _colours;
 }
 
-std::string colourToString(const Colour & colour)
+std::string colourName(const Colour& colour)
 {
-	return _colourStrings.at(colour);
+	return _colourData.at(colour).name;
+}
+
+std::string colourAbbreviation(const Colour& colour)
+{
+	return _colourData.at(colour).abbreviation;
 }
