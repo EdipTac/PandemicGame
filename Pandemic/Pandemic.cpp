@@ -72,6 +72,7 @@ void newGame()
 {
 	std::cout << "\n    --------    N E W   G A M E    --------    \n\n";
 
+	game.release();
 	game = std::make_unique<GameState>();
 
 	const auto& fileName = solicitFileName();

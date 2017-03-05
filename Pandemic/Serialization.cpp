@@ -31,31 +31,42 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 
 	std::vector<std::unique_ptr<City>> cities;
 	std::map<City*, std::vector<std::string>> connections;
+	City* startingCity;
 	while (!fs.eof())
 	{
-		const auto line = getline(fs);
-		if (line == "</cities>")
-		{
-			break;
-		}
-		else if (line.empty())
+		auto line = getline(fs);
+		if (line.empty() || line[0] == '\\')
 		{
 			continue;
 		}
-		else if (line[0] != '\t')
+		else if (line == "</cities>")
 		{
+			break;
+		}
+		else if (line[0] == '\t')
+		{
+			connections[cities.back().get()].push_back(line.substr(1));
+		}
+		else
+		{
+			bool isStartingCity = false;
+			if (line[0] == '*')
+			{
+				line = line.substr(1);
+				isStartingCity = true;
+			}
 			std::string name, colour;
 			std::tie(name, colour) = splitOnLastSpace(line);
 			cities.push_back(std::make_unique<City>(name, colourFromAbbreviation(colour)));
 			connections[cities.back().get()];
-		}
-		else
-		{
-			connections[cities.back().get()].push_back(line.substr(1));
+			if (isStartingCity)
+			{
+				startingCity = cities.back().get();
+			}
 		}
 	}
 
-	auto map  = std::make_unique<Map>(fileName, std::move(cities));
+	auto map  = std::make_unique<Map>(fileName, startingCity, std::move(cities));
 
 	for (const auto& list : connections)
 	{
