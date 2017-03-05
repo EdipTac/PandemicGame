@@ -115,8 +115,8 @@
     <ClInclude Include="CityCard.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="CubePool.h" />
-    <ClInclude Include="Epidemic.h" />
-    <ClInclude Include="Event.h" />
+    <ClInclude Include="EpidemicCard.h" />
+    <ClInclude Include="EventCard.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="InfectionCard.h" />
     <ClInclude Include="InfectionCardDeck.h" />
@@ -132,12 +132,13 @@
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Card.cpp" />
     <ClCompile Include="City.cpp" />
     <ClCompile Include="CityCard.cpp" />
     <ClCompile Include="Colour.cpp" />
     <ClCompile Include="CubePool.cpp" />
-    <ClCompile Include="Epidemic.cpp" />
-    <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EpidemicCard.cpp" />
+    <ClCompile Include="EventCard.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="InfectionCard.cpp" />
     <ClCompile Include="InfectionCardDeck.cpp" />

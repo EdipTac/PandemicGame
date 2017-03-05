@@ -30,7 +30,7 @@ void Player::addCard(std::unique_ptr<PlayerCard> card) {
 	_cards.push_back(std::move(card));
 }
 
-std::ostream& operator<<(std::ostream& os, PlayerCard card)
+std::ostream& operator<<(std::ostream& os, PlayerCard& card)
 {
 	return os << card.toString();
 }

@@ -69,7 +69,7 @@ private:
 	//Whether the city is quarantined
 	bool _quarantined;
 	// Maximum cuber per colour each city can hold
-	int const MAX_CUBE_PER_DISEASE = 3;
+	unsigned int const MAX_CUBE_PER_DISEASE = 3;
 	// Place one cube for each infection
 	int const CUBE_PER_INFECTION = 1;
 };

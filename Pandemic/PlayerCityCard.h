@@ -1,4 +1,6 @@
 #pragma once
+
+#include "City.h"
 #include "PlayerCard.h"
 #include "CityCard.h"
 #include <string>
@@ -7,9 +9,9 @@
 class PlayerCityCard : public PlayerCard, CityCard {
 public:
 	// Default Constructor
-	PlayerCityCard();
+	//PlayerCityCard();
 	// Constructor
-	PlayerCityCard(std::string name);
+	PlayerCityCard(City& city);
 
 	// Custom implementation of the inherited virtual function from PlayerCard
 	std::string toString();

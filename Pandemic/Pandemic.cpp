@@ -35,7 +35,18 @@
 #include "InfectionCardDeck.h"
 //#include "Serialization.h"
 
+void newGame();
+void loadGame();
 void waitForExit();
+
+static const Menu mainMenu
+{
+	{
+		{ "New Game",  newGame },
+		{ "Load Game", loadGame },
+		{ "Exit",      waitForExit }
+	}
+};
 
 //	----    Program entry point    ----
 void main()

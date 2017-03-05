@@ -5,14 +5,15 @@ Version: 1.0
 Data: 20170209*/
 #include <iostream>
 #include "InfectionCardDeck.h"
-#include <ctime>    
+#include <ctime>
+#include <string>
 
 using namespace std;
 
 InfectionCardDeck::InfectionCardDeck() {
 	// put 48 infection cards on deck
 
-	deck.push_back(InfectionCard("Altlanta", "Blue"));
+	/*deck.push_back(InfectionCard { "Altlanta", "Blue" });
 	deck.push_back(InfectionCard("Newyork", "Blue"));
 	deck.push_back(InfectionCard("Paris", "Blue"));
 	deck.push_back(InfectionCard("London", "Blue"));
@@ -61,21 +62,21 @@ InfectionCardDeck::InfectionCardDeck() {
 	deck.push_back(InfectionCard("Miami", "Yellow"));
 	deck.push_back(InfectionCard("Los Angeles", "Yellow"));
 	infectionRate = outbreakTracker[outbreakMarker];
-    shuffle(deck);// shuffle infection cards on deck
+    shuffle(deck);// shuffle infection cards on deck*/
 }
 void InfectionCardDeck::shuffle(vector <InfectionCard> & cards) {
 
 
-	srand(time(0));
-	int index;
-	InfectionCard temp;
-	for (unsigned int i = 0; i < cards.size(); i++) {
-		index = rand() % cards.size();
-		temp = cards[i];
-		cards[i] = cards[index];
-		cards[index] = temp;
+	//srand(time(0));
+	//int index;
+	//InfectionCard temp;
+	//for (unsigned int i = 0; i < cards.size(); i++) {
+	//	index = rand() % cards.size();
+	//	temp = cards[i];
+	//	cards[i] = cards[index];
+	//	cards[index] = temp;
 
-	}
+	//}
 
 }
 InfectionCardDeck::~InfectionCardDeck() {
@@ -83,14 +84,14 @@ InfectionCardDeck::~InfectionCardDeck() {
 }
 
 void InfectionCardDeck::print() {
-	for (unsigned int i = 0; i < deck.size(); i++) {
-		cout << "Infection card: " << deck[i].getCity() <<" " <<deck[i].getColor()<<endl;
-	}
+	//for (unsigned int i = 0; i < deck.size(); i++) {
+	//	cout << "Infection card: " << deck[i].getCity() <<" " <<deck[i].getColor()<<endl;
+	//}
 }
 void InfectionCardDeck::checkInfectionCardHistory() {
-	for (unsigned int i = 0; i < discardPile.size(); i++) {
-		cout << "Infection card: " << discardPile[i].getCity()<<" "<<discardPile[i].getColor() << endl;
-	}
+	//for (unsigned int i = 0; i < discardPile.size(); i++) {
+	//	cout << "Infection card: " << discardPile[i].getCity()<<" "<<discardPile[i].getColor() << endl;
+	//}
 }
 void InfectionCardDeck::flipInfectionCard() {
 	if (deck.size() < 1) {
@@ -120,14 +121,14 @@ void InfectionCardDeck::moveOutbreakMarker() {
 }
 void InfectionCardDeck::pullBottomInfectionCard() {
 	discardPile.push_back(deck[0]);
-	deck.erase(deck.begin());
+//	deck.erase(deck.begin());
 	deck.shrink_to_fit();
 
 }
 void InfectionCardDeck::reshuffleAndputback() {
 	shuffle(discardPile);
-	int k = discardPile.size();
-	for (unsigned int i = 0; i < k; i++) {
+	const auto k = discardPile.size();
+	for (auto i = 0; i < k; i++) {
 		deck.push_back(discardPile[i]);
 	}
 	discardPile.clear();

@@ -21,7 +21,8 @@ private:
 public:
 	RoleCard();
 	RoleCard(std::string role, std::string description, std::string color);
-
+	std::string name() const override;
+	std::string description() const override;
 
 	void printRole();
 };

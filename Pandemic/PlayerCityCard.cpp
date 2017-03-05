@@ -1,12 +1,13 @@
 #include "PlayerCityCard.h"
 
 // Default Constructor
-PlayerCityCard::PlayerCityCard()
-	: PlayerCard() {}
+//PlayerCityCard::PlayerCityCard()
+//	: PlayerCard() {}
 
 // Constructor
-PlayerCityCard::PlayerCityCard(std::string name)
-	: PlayerCard(name) {}
+PlayerCityCard::PlayerCityCard(City& city)
+	: CityCard { city }
+{}
 
 // Custom implementation of the inherited virtual function from PlayerCard
 std::string PlayerCityCard::toString()
