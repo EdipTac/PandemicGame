@@ -1,14 +1,21 @@
 #pragma once
+
+#include <string>
+
 #include "Card.h"
+#include "Colour.h"
 #include "City.h"
 
-class CityCard : Card {
-private:
-	City _city;
+class CityCard
+	: Card
+{
 public:
-	CityCard();
-	CityCard(City city);
+	CityCard(City& city);
+	City& city() const;
+	std::string name() const override;
+	std::string description() const override;
+	Colour colour() const;
 
-	City city() const;
-	void setCity(const City city);
+private:
+	City& _city;
 };

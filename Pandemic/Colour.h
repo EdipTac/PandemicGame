@@ -16,4 +16,13 @@ enum class Colour
 std::array<Colour, 4> colours();
 
 // Returns a string representation of a colour enum value
-std::string colourToString(const Colour& colour);
+std::string colourName(const Colour& colour);
+
+// Colour abbreviation
+std::string colourAbbreviation(const Colour& colour);
+
+// Make colour from name
+Colour colourFromName(const std::string& name);
+
+// Make colour from abbreviation
+Colour colourFromAbbreviation(const std::string& abbreviation);

@@ -5,22 +5,10 @@ Version: 1.0
 Data: 20170209*/
 
 #include <iostream>
-#include "InfectionCard.h"
 #include <string>
-using namespace std;
 
-InfectionCard::InfectionCard() {
+#include "InfectionCard.h"
 
-}
-InfectionCard::~InfectionCard() {
-
-}
-InfectionCard::InfectionCard(const City n, const string c) {
-	CityCard(n);
-	color = c;
-	
-}
-
-string InfectionCard::getColor() const {
-	return  color ;
-}
+InfectionCard::InfectionCard(City& city)
+	: CityCard { city }
+{}

@@ -22,6 +22,16 @@ RoleCard::RoleCard(std::string role, std::string description, std::string color)
 	
 }
 
+std::string RoleCard::name() const
+{
+	return _role;
+}
+
+std::string RoleCard::description() const
+{
+	return _description;
+}
+
 void RoleCard::printRole() {
 	std::cout << _role << std::endl << _color << std::endl << _description << std::endl;
 }

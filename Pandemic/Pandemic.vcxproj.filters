@@ -57,6 +57,9 @@
     <ClInclude Include="MenuOption.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="Card.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -66,10 +69,10 @@
     <ClInclude Include="PlayerCityCard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Event.h">
+    <ClInclude Include="EpidemicCard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Epidemic.h">
+    <ClInclude Include="EventCard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -119,16 +122,22 @@
     <ClCompile Include="MenuOption.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="CityCard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PlayerCityCard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Event.cpp">
+    <ClCompile Include="Card.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Epidemic.cpp">
+    <ClCompile Include="EpidemicCard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EventCard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

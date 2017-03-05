@@ -7,82 +7,63 @@
 
 #include "Colour.h"
 #include "Serialization.h"
+#include "Util.h"
 
 bool fileExists(const std::string& fileName)
 {
 	return std::fstream { fileName }.good();
 }
 
+std::string getline(std::ifstream& fs)
+{
+	std::string line;
+	std::getline(fs, line);
+	return line;
+}
+
 Map readMapFromFile(const std::string& fileName)
 {
-	//throw std::logic_error { "Not implemented." };
-	std::vector<std::string> playerNames;
-	std::map<std::string, std::string> playerLocations;
-	std::vector<std::string> cityNames;
-	std::map<std::string, std::string> colours;
-	std::map<std::string, std::vector<std::string>> connections;
-	std::ifstream stream{ fileName };
-	if (!stream)
+	std::ifstream fs { fileName };
+	if (!fs)
 	{
-		throw std::runtime_error{ "File not found!" };
+		throw std::runtime_error { "File not found!" };
 	}
-	while (!stream.eof())
+
+	std::vector<std::unique_ptr<City>> cities;
+	std::map<City*, std::vector<std::string>> connections;
+	while (!fs.eof())
 	{
-		std::string line;
-		std::getline(stream, line);
-		if (line[0] == '/' || line.empty())
+		const auto line = getline(fs);
+		if (line == "</cities>")
 		{
-			// Skip comments started with "/" or blank lines
+			break;
+		}
+		else if (line.empty())
+		{
 			continue;
 		}
-		else if (line.back() == ':')
+		else if (line[0] != '\t')
 		{
-			playerNames.push_back(line.substr(0, line.size() - 1));
-		}
-		else if (line.front() == '@')
-		{
-			playerLocations[playerNames.back()] = line.substr(1);
-		}
-		else if (line[0] == '\t')
-		{
-			connections[cityNames.back()].push_back(line.substr(1));
+			std::string name, colour;
+			std::tie(name, colour) = splitOnLastSpace(line);
+			cities.push_back(std::make_unique<City>(name, colourFromAbbreviation(colour)));
+			connections[cities.back().get()];
 		}
 		else
 		{
-			const auto idx = line.find_last_of(' ');
-			const auto cityName = line.substr(0, idx);
-			const auto colour = line.substr(idx + 1);
-			cityNames.push_back(cityName);
-			connections[cityName];
-			colours[cityName] = colour;
+			connections[cities.back().get()].push_back(line.substr(1));
 		}
 	}
-	stream.close();
 
-	Map map(fileName);
+	Map map { fileName, std::move(cities) };
 
-	// Add cities
-	for (const auto& pair : connections)
+	for (const auto& list : connections)
 	{
-		map.addCity(std::make_unique<City>(pair.first));
-	}
-
-	// Add connections
-	for (const auto& pair : connections)
-	{
-		auto& source = map.city(pair.first);
-		for (const auto& targetName : pair.second)
+		for (const auto& targetName : list.second)
 		{
 			auto& target = map.city(targetName);
-			source.connectTo(target);
+			list.first->connectTo(target);
 		}
-	}
-
-	// Add players and pawn locations
-	for (const auto& name : playerNames)
-	{
-		map.addPlayer(name);
-		map.players().back()->pawn().setPosition(map.city(playerLocations[name]));
 	}
 
 	return map;
@@ -101,7 +82,7 @@ void writeMapToFile(const Map& map, const std::string& fileName)
 	for (const auto& source : map.cities())
 	{
 		const auto& connections = source->connections();
-		cities[source->name()].first = colourToString(source->colour());
+		cities[source->name()].first = colourName(source->colour());
 		for (const auto& target : connections)
 		{
 			cities[source->name()].second.push_back(target->name());

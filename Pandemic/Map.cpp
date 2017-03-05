@@ -6,8 +6,9 @@
 #include <map>
 #include <stdexcept>
 
-Map::Map(const std::string& name)
-	: _name{ name }
+Map::Map(const std::string& name, std::vector<std::unique_ptr<City>> cities)
+	: _name { name }
+	, _cities { std::move(cities) }
 {}
 
 std::string Map::name() const
