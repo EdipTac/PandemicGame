@@ -7,12 +7,37 @@
 
 #include "Colour.h"
 #include "Serialization.h"
+#include "Util.h"
 
 bool fileExists(const std::string& fileName)
 {
 	return std::fstream { fileName }.good();
 }
 
+Map readMapFromFile(const std::string& fileName)
+{
+	std::ifstream fs { fileName };
+	if (!fs)
+	{
+		throw std::runtime_error { "File not found!" };
+	}
+	Map map { fileName };
+	std::stringstream ss;
+	while (!fs.eof())
+	{
+		char c = fs.get();
+		if (c == '\n')
+		{
+			map.addCity(std::make_unique<City>(ss.str()));
+			clearStringStream(ss);
+		}
+		ss << c;
+	}
+	const auto s = ss.str();
+	return Map { fileName };
+}
+
+/*
 Map readMapFromFile(const std::string& fileName)
 {
 	//throw std::logic_error { "Not implemented." };
@@ -87,6 +112,7 @@ Map readMapFromFile(const std::string& fileName)
 
 	return map;
 }
+*/
 
 void writeMapToFile(const Map& map, const std::string& fileName)
 {
