@@ -60,7 +60,7 @@ InfectionCardDeck::InfectionCardDeck() {
 	deck.push_back(InfectionCard("Mexico City", "Yellow"));
 	deck.push_back(InfectionCard("Miami", "Yellow"));
 	deck.push_back(InfectionCard("Los Angeles", "Yellow"));
-	infectionRate = 2;
+	infectionRate = outbreakTracker[outbreakMarker];
     shuffle(deck);// shuffle infection cards on deck
 }
 void InfectionCardDeck::shuffle(vector <InfectionCard> & cards) {
@@ -103,13 +103,20 @@ void InfectionCardDeck::flipInfectionCard() {
 		deck.pop_back();
 		deck.shrink_to_fit();
 		discardPile.push_back(temp);
+
 	}
 }
 int InfectionCardDeck::getInfectionRate() {
 	return infectionRate;
 }
-void InfectionCardDeck::setInfectionRate(int rate) {
-	infectionRate = rate;
+void InfectionCardDeck::moveOutbreakMarker() {
+	if (outbreakMarker = 5) {
+		cout << "Outbreak tracker reaches the last space, the game is over. " << endl;
+		system("pause");
+		system(0);
+	}
+	outbreakMarker++;
+	infectionRate = outbreakTracker[outbreakMarker];
 }
 void InfectionCardDeck::pullBottomInfectionCard() {
 	discardPile.push_back(deck[0]);

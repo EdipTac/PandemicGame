@@ -26,26 +26,16 @@
 //#include "Card.h"
 #include "City.h"
 #include "GameState.h"
-#include "InfectionCard.h"
-#include "InfectionCardDeck.h"
 #include "Player.h"
 #include "Map.h"
 #include "Menu.h"
 #include "Serialization.h"
 #include "Util.h"
+#include "InfectionCard.h"
+#include "InfectionCardDeck.h"
+//#include "Serialization.h"
 
-void newGame();
-void loadGame();
 void waitForExit();
-
-static const Menu mainMenu
-{
-	{
-		{ "New Game",  newGame },
-		{ "Load Game", loadGame },
-		{ "Exit",      waitForExit }
-	}
-};
 
 //	----    Program entry point    ----
 void main()

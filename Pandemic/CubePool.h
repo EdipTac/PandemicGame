@@ -19,9 +19,16 @@ public:
 
 	// The number of cubes of a given colour
 	unsigned int operator[](const Colour& colour) const;
+	// The eradication boolean of a given colour
+	bool isEradicated (const Colour& colour) const;
+	
 
 private:
 	// Holds the count of disease cubes of each colour.
 	std::map<Colour, unsigned int> _diseaseCubes;
+	// Holds the cured boolean of each colour
+	std::map<Colour, bool> _diseasesCured;
+	// Holds the eradicated boolean of each colour
+	std::map<Colour, bool> _diseasesEradicated;
 };
 

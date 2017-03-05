@@ -50,10 +50,26 @@ public:
 
 	// Removes disease cubes of a given colour from a given source
 	void removeDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source);
+	
+	// True iff quarantine specialist locates at this city or at cities with direct connection with this city
+	bool quarantined() const {
+		return _quarantined;
+	}
+	void setQuarantined() {
+		_quarantined = true;
+	}
 
 private:
 	std::string _name;
 	Colour _colour;
 	std::vector<City*> _connections;
 	CubePool _diseaseCubes;
+	//Hold outbreak boolean of each colour
+    std::map < Colour, bool> _outbreaks;
+	//Whether the city is quarantined
+	bool _quarantined;
+	// Maximum cuber per colour each city can hold
+	int const MAX_CUBE_PER_DISEASE = 3;
+	// Place one cube for each infection
+	int const CUBE_PER_INFECTION = 1;
 };

@@ -31,9 +31,8 @@ public:
 		//getInfectionRate 
 		//@return int - infection rate
 	//Mutator function
-	void setInfectionRate(int);
-	     //setInfectionRate 
-	     //@param int - infection rate
+	void moveOutbreakMarker();
+	     //move outbreak marker by one 
 	void checkInfectionCardHistory();
 	     //checkInfectionCardHistory - check all used infection cards
 	void pullBottomInfectionCard();
@@ -43,6 +42,8 @@ public:
 private:
 	//Member variables
 	int infectionRate; // infection rate
+	const unsigned int outbreakTracker[7] = { 2,2,2,3,3,4,4 };// outbreak marker tracker
+	int outbreakMarker = 0;
 	vector <InfectionCard> deck; // vector holds all unused infection cards
 	vector <InfectionCard> discardPile;// vector holds all used infection cards
 	
