@@ -16,7 +16,7 @@ class Player {
 private:
 	std::string _name;
 	Pawn _pawn;
-	// Must be a vector of pointers to PlayerCard to allow for use of derived classes (PCCity, PCEvent, PCEpidemic)
+	// Must be a vector of pointers to PlayerCard to allow for use of derived classes (PlayerCityCard, Event, Epidemic)
 	std::vector<std::unique_ptr<PlayerCard>> _cards;
 	std::unique_ptr<RoleCard> _role;
 public:

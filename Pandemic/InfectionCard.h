@@ -9,18 +9,16 @@
 
 #include <iostream>
 #include <string>
+#include "CityCard.h"
 using namespace std;
 
-class InfectionCard {
+class InfectionCard : CityCard {
 public:
 	//Default constructor
 	InfectionCard();
 	//Overload constructor
-	InfectionCard(const string, const string);
+	InfectionCard(const City, const string);
 	//Accessor
-	string getCity() const;
-	       //getCity 
-	       //@return string - city name on infection card
 	string getColor() const;
 	       //getColor 
 	       //@return string - city color on infection card
@@ -29,7 +27,6 @@ public:
 	
 private:
 	//Member variables
-	string name; // city name
 	string color;// infection card color
 	
 

@@ -7,6 +7,7 @@
 #include "Map.h"
 #include "Player.h"
 
+// Represents the state of the game
 class GameState
 {
 public:
@@ -20,6 +21,6 @@ private:
 	std::unique_ptr<Map> _map;
 	std::vector<std::unique_ptr<Player>> _players;
 	CubePool _cubePool;
-	
+	// Deck
 };
 

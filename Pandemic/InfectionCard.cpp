@@ -15,13 +15,10 @@ InfectionCard::InfectionCard() {
 InfectionCard::~InfectionCard() {
 
 }
-InfectionCard::InfectionCard(const string n, const string c) {
-	name = n;
+InfectionCard::InfectionCard(const City n, const string c) {
+	CityCard(n);
 	color = c;
 	
-}
-string InfectionCard::getCity() const {
-	return  name ;
 }
 
 string InfectionCard::getColor() const {

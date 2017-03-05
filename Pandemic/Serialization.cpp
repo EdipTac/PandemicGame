@@ -15,7 +15,7 @@ bool fileExists(const std::string& fileName)
 
 Map readMapFromFile(const std::string& fileName)
 {
-	throw std::logic_error { "Not implemented." };
+	//throw std::logic_error { "Not implemented." };
 	std::vector<std::string> playerNames;
 	std::map<std::string, std::string> playerLocations;
 	std::vector<std::string> cityNames;
@@ -90,7 +90,7 @@ Map readMapFromFile(const std::string& fileName)
 
 void writeMapToFile(const Map& map, const std::string& fileName)
 {
-	throw std::logic_error { "Not implemented." };
+	//throw std::logic_error { "Not implemented." };
 	std::map<std::string, std::string> players;
 	for (const auto& player : map.players())
 	{

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Card.h"
 
 /*
 This is the header file for the RoleCards that will be used in the game that indicate the
@@ -12,7 +13,7 @@ of the role cards, i.e, their Name, Color, and Description.
 */
 
 
-class RoleCard{
+class RoleCard : Card{
 private:
 	std::string _role;
 	std::string _description;
