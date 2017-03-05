@@ -16,7 +16,7 @@ class Map
 
 public:
 	// Constructs a map with a given file name
-	Map(const std::string& name);
+	Map(const std::string& name, std::vector<std::unique_ptr<City>> cities = {});
 
 	// Accessors
 	std::string name() const;						// Map file name

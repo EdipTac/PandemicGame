@@ -31,7 +31,8 @@
 #include "Player.h"
 #include "Map.h"
 #include "Menu.h"
-//#include "Serialization.h"
+#include "Serialization.h"
+#include "Util.h"
 
 void newGame();
 void loadGame();
@@ -49,6 +50,7 @@ static const Menu mainMenu
 //	----    Program entry point    ----
 void main()
 {
+	readMapFromFile("earth.map");
 	// Title display
 	std::cout << "    --------    P A N D E M I C    --------    \n\n\n";
 	mainMenu.solicitInput();
