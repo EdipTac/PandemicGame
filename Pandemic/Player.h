@@ -1,42 +1,48 @@
 #pragma once
+
 #include <iostream>
 #include <vector>
 #include <string>
+#include <memory>
+#include <algorithm>
+
 #include "Pawn.h"
 #include "PlayerCard.h"
+#include "RoleCard.h"
+
+//class Pawn;
 
 class Player {
 private:
-	// Attributes for Player objects
 	std::string _name;
 	Pawn _pawn;
-	std::vector<PlayerCard*> _cards; // Must be a vector of pointers to PlayerCard to allow for use of derived classes (PCCity, PCEvent, PCEpidemic)
-	std::string _role;
-
+	// Must be a vector of pointers to PlayerCard to allow for use of derived classes (PCCity, PCEvent, PCEpidemic)
+	std::vector<std::unique_ptr<PlayerCard>> _cards;
+	std::unique_ptr<RoleCard> _role;
 public:
 	// Default Constructor
 	Player();
 	// Constructor
-	Player(const std::string name, const Pawn& pawn, const std::vector<PlayerCard*>& cards, const std::string role);
+	Player(const std::string name, const Pawn& pawn, std::vector<std::unique_ptr<PlayerCard>>& cards, std::unique_ptr<RoleCard> role);
 
+	std::string name() const;
 
-	// Accessors and Mutators for _cards
-	std::vector<PlayerCard*> cards();
-	void addCard(PlayerCard* card);
-	void removeCard(PlayerCard* card);
+	// Accessors and Mutators
+	const std::vector<std::unique_ptr<PlayerCard>>& getCards() const;
+	void addCard(std::unique_ptr<PlayerCard> card);
+	//void removeCard(std::unique_ptr<PlayerCard> card);
 
-	// Accessors and Mutators for _pawn
-	Pawn pawn() const;
-	void setPawn(const Pawn& pawn);
+	Pawn& pawn();
+	const RoleCard& role() const;
 
 	// Accessors and Mutators for _role
-	std::string role() const;
-	void setRole(const std::string role);
+	//Prints the role of the player
+	void displayRole();
 
-	// Accessors and Mutators for _name
-	std::string name() const;
+	void setRole(std::unique_ptr<RoleCard> role);
+
+	std::string getName() const;
 	void setName(const std::string name);
 
-	// Print all of the cards in a Player's "hand"
 	void displayCards();
 };
