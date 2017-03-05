@@ -1,6 +1,9 @@
 #pragma once
+
 #include <string>
+
 #include "Card.h"
+#include "TextualCard.h"
 
 /*
 This is the header file for the RoleCards that will be used in the game that indicate the
@@ -13,16 +16,15 @@ of the role cards, i.e, their Name, Color, and Description.
 */
 
 
-class RoleCard : Card{
-private:
-	std::string _role;
-	std::string _description;
-	std::string _color;
+class RoleCard
+	: public TextualCard
+{
 public:
 	RoleCard();
 	RoleCard(std::string role, std::string description, std::string color);
-	std::string name() const override;
-	std::string description() const override;
 
 	void printRole();
+
+private:
+	std::string _color;
 };

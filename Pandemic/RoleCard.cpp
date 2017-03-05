@@ -11,27 +11,19 @@ during the game. Each of the cards have their specific role (name) the descripti
 the color corresponding to each role that will be used to decide on the color of the pawn for that character.
 */
 RoleCard::RoleCard()
-	: _role{ "" }, _description{ "" }, _color{ "" }
+	: TextualCard { "", ""}
+	, _color { "" }
 {
 
 }
 
 RoleCard::RoleCard(std::string role, std::string description, std::string color)
-	: _role( role ), _description( description ), _color( color )
+	: TextualCard { role, description }
+	, _color { color }
 {
 	
 }
 
-std::string RoleCard::name() const
-{
-	return _role;
-}
-
-std::string RoleCard::description() const
-{
-	return _description;
-}
-
 void RoleCard::printRole() {
-	std::cout << _role << std::endl << _color << std::endl << _description << std::endl;
+	std::cout << name() << std::endl << _color << std::endl << description() << std::endl;
 }

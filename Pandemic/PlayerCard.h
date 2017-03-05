@@ -6,7 +6,7 @@
 
 // PlayerCard class - base class for all different types of PlayerCards.
 class PlayerCard
-	: public Card
+	: virtual public Card
 {
 public:
 	// Default Constructor
