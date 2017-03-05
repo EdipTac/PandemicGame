@@ -10,6 +10,7 @@ class CityCard
 	: Card
 {
 public:
+	
 	CityCard(City& city);
 	City& city() const;
 	std::string name() const override;

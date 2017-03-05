@@ -11,4 +11,14 @@ Data: 20170209*/
 
 InfectionCard::InfectionCard(City& city)
 	: CityCard { city }
+
 {}
+string InfectionCard::getCityName() const{
+	return name();
+}
+Colour InfectionCard::getCityColour() const {
+	return colour();
+}
+City InfectionCard::getCity() const {
+	return city();
+}

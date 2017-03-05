@@ -13,4 +13,7 @@ class InfectionCard
 {
 public:
 	InfectionCard(City& city);
+	string getCityName() const; 
+	Colour getCityColour() const;
+	City getCity() const;
 };
