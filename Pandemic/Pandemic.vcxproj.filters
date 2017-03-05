@@ -1,151 +1,159 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Cards">
+      <UniqueIdentifier>{a4a46059-1194-4b5d-9354-962712d90885}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cards\header">
+      <UniqueIdentifier>{478694a9-22ff-43f6-a515-7a0f23f6eb52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cards\src">
+      <UniqueIdentifier>{49ad233d-fe1c-4f09-8f41-95e095b7024c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="General">
+      <UniqueIdentifier>{0cd3817d-db93-4235-9227-fc01f32916b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="General\header">
+      <UniqueIdentifier>{1e8f2166-812c-4967-a65c-c0dc53fffe69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="General\src">
+      <UniqueIdentifier>{ebbb15ad-6978-42dc-af33-b3e807544bcc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Pawn.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerCard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="City.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Colour.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InfectionCard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InfectionCardDeck.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CubePool.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="RoleCard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Serialization.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuOption.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Util.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Card.h">
-      <Filter>Header Files</Filter>
+      <Filter>Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="CityCard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerCityCard.h">
-      <Filter>Header Files</Filter>
+      <Filter>Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="EpidemicCard.h">
-      <Filter>Header Files</Filter>
+      <Filter>Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="EventCard.h">
-      <Filter>Header Files</Filter>
+      <Filter>Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="InfectionCard.h">
+      <Filter>Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCard.h">
+      <Filter>Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCityCard.h">
+      <Filter>Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="RoleCard.h">
+      <Filter>Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="TextualCard.h">
-      <Filter>Header Files</Filter>
+      <Filter>Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="City.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Colour.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="CubePool.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="InfectionCardDeck.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuOption.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Pawn.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Serialization.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Util.h">
+      <Filter>General\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Pawn.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerCard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Pandemic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="City.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Colour.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InfectionCard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="InfectionCardDeck.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CubePool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RoleCard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Serialization.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuOption.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Util.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Card.cpp">
+      <Filter>Cards\src</Filter>
     </ClCompile>
     <ClCompile Include="CityCard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerCityCard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Card.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Cards\src</Filter>
     </ClCompile>
     <ClCompile Include="EpidemicCard.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Cards\src</Filter>
     </ClCompile>
     <ClCompile Include="EventCard.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="InfectionCard.cpp">
+      <Filter>Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCard.cpp">
+      <Filter>Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCityCard.cpp">
+      <Filter>Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="RoleCard.cpp">
+      <Filter>Cards\src</Filter>
     </ClCompile>
     <ClCompile Include="TextualCard.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Cards\src</Filter>
     </ClCompile>
+    <ClCompile Include="City.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Colour.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="CubePool.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="InfectionCardDeck.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuOption.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Pawn.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Serialization.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Util.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Pandemic.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
