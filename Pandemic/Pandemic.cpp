@@ -1,12 +1,13 @@
 // Pandemic - Build 1
 //
-// Authors
+//					Authors
+//		============================
 //		Michael Deom	-	29549641
 //		Jonny Linton	-	
 //		Edip Tac		-	
 //		Kechun Ye		-	
 //
-// Submitted 10/03/2017
+// Submitted 15/03/2017
 //
 // Build 1 of project.
 //
