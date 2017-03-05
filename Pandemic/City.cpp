@@ -7,6 +7,7 @@
 City::City(const std::string& name, const Colour& colour)
 	: _name(name)
 	, _colour(colour)
+	, outbreak(false)
 {
 	for (const auto& c : colours())
 	{

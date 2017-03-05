@@ -27,13 +27,13 @@
 //#include "GameState.h"
 //#include "Player.h"
 //#include "Map.h"
-//#include "InfectionCard.h"
-//#include "InfectionCardDeck.h"
+
+#include "InfectionCardDeck.h"
 //#include "Serialization.h"
 
 //  ----    Constant definitions    ----
 constexpr size_t numPlayers = 2;		// Number of players in the game.
-constexpr size_t startingHandSize = 5;	// Number of player cards each player receives.
+constexpr size_t startingHandSize = 4;	// Number of player cards each player receives.
 
 //static const std::vector<Card> roleCards	// Role cards in the game. To be expanded later.
 //{
@@ -115,6 +115,10 @@ void main()
 	//
 	//writeMapToFile(map, saveFileName);
 	//std::cout << "Game saved as " << saveFileName << "\nThanks for playing!" << std::endl;
+	//initiate an infectionCardDeck
+	InfectionCardDeck infectionDeck();
+
+
 }
 
 //std::vector<Card> populatePlayerCards(const Map& map, const size_t number)

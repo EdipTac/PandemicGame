@@ -35,4 +35,5 @@ private:
 	Colour _colour;
 	std::vector<City*> _connections;
 	std::map<Colour, unsigned int> _diseaseCubes;
+	bool outbreak; 
 };

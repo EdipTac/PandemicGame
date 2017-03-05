@@ -103,6 +103,7 @@ void InfectionCardDeck::flipInfectionCard() {
 		deck.pop_back();
 		deck.shrink_to_fit();
 		discardPile.push_back(temp);
+
 	}
 }
 int InfectionCardDeck::getInfectionRate() {
