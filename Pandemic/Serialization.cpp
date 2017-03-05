@@ -101,7 +101,7 @@ void writeMapToFile(const Map& map, const std::string& fileName)
 	for (const auto& source : map.cities())
 	{
 		const auto& connections = source->connections();
-		cities[source->name()].first = colourToString(source->colour());
+		cities[source->name()].first = colourName(source->colour());
 		for (const auto& target : connections)
 		{
 			cities[source->name()].second.push_back(target->name());

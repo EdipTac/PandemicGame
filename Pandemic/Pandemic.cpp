@@ -54,12 +54,6 @@ void main()
 	mainMenu.solicitInput();
 }
 
-void waitForExit()
-{
-	std::cout << "Press any key to continue...\n";
-	std::cin.get();
-}
-
 void newGame()
 {
 	std::cout << "New game...\n";
@@ -68,4 +62,10 @@ void newGame()
 void loadGame()
 {
 	std::cout << "Load game...\n";
+}
+
+void waitForExit()
+{
+	std::cout << "Press any key to continue...\n";
+	std::cin.get();
 }
