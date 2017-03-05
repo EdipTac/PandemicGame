@@ -8,6 +8,8 @@ City::City(const std::string& name, const Colour& colour)
 	: _name { name }
 	, _colour { colour }
 	, _diseaseCubes { 0 }
+	, _outbreaks {false}
+	, _quarantined {false}
 {
 	// Empty
 }
@@ -57,7 +59,19 @@ void City::connectTo(City &target)
 
 void City::addDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source)
 {
-	_diseaseCubes.takeFrom(colour, amount, source);
+	if (!_outbreaks[colour] && !_quarantined && ! source.isEradicated[colour]) {
+		_diseaseCubes.takeFrom(colour, amount, source);
+		if (_diseaseCubes[colour] > MAX_CUBE_PER_DISEASE) {
+			_outbreaks[colour] = true;
+			_diseaseCubes.giveTo(colour, (_diseaseCubes.operator[](colour) - MAX_CUBE_PER_DISEASE), source);// may change source to a garbage CubePool
+			for (const auto& city : connections())
+			{
+				city->addDiseaseCubes(colour, CUBE_PER_INFECTION, source);
+			}
+		}
+
+	}
+
 }
 
 void City::removeDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source)
