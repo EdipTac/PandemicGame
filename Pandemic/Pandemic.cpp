@@ -57,6 +57,8 @@ const Menu mainMenu
 	}
 };
 
+std::unique_ptr<GameState> game;
+
 //	----    Program entry point    ----  //
 void main()
 {
@@ -69,7 +71,6 @@ void main()
 void newGame()
 {
 	std::cout << "\n    --------    N E W   G A M E    --------    \n\n";
-	auto game = std::make_unique<GameState>();
 
 	const auto& fileName = solicitFileName();
 	std::cout << "\nLoading map \"" << fileName << "\"...\n";
