@@ -7,6 +7,8 @@ CityCard::CityCard(City& city)
 	: _city{ city }
 {}
 
+CityCard::~CityCard() {}
+
 City& CityCard::city() const
 {
 	return _city;

@@ -6,9 +6,10 @@
 #include <map>
 #include <stdexcept>
 
-Map::Map(const std::string& name, std::vector<std::unique_ptr<City>> cities)
+Map::Map(const std::string& name, City* const startingCity, std::vector<std::unique_ptr<City>> cities)
 	: _name { name }
 	, _cities { std::move(cities) }
+	, _startingCity { *startingCity }
 {}
 
 std::string Map::name() const
@@ -49,6 +50,11 @@ bool Map::contains(const std::string& name) const
 	{
 		return cityPtr->name() == name;
 	});
+}
+
+City& Map::startingCity() const
+{
+	return _startingCity;
 }
 
 const std::vector<Map::CityPtr>& Map::cities() const

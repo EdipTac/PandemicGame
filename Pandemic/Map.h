@@ -16,12 +16,13 @@ class Map
 
 public:
 	// Constructs a map with a given file name
-	Map(const std::string& name, std::vector<std::unique_ptr<City>> cities = {});
+	Map(const std::string& name, City* const startingCity, std::vector<std::unique_ptr<City>> cities = {});
 
 	// Accessors
 	std::string name() const;						// Map file name
 	City& city(const std::string& name) const;		// Find a city by name
 	bool contains(const std::string& name) const;	// True iff map contains city of given name
+	City& startingCity() const;
 	const std::vector<CityPtr>& cities() const;		// List of pointers to all contained cities
 	const std::vector<PlayerPtr>& players() const;	// List of pointers to contained players
 
@@ -32,5 +33,6 @@ public:
 private:
 	std::string _name;
 	std::vector<CityPtr> _cities;
+	City& _startingCity;
 	std::vector<PlayerPtr> _players;
 };

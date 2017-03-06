@@ -1,5 +1,9 @@
 #include "GameState.h"
 
+GameState::GameState()
+	: _cubePool { 96 / 4 }
+{}
+
 const std::vector<std::unique_ptr<Player>>& GameState::players() const
 {
 	return _players;

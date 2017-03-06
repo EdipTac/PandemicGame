@@ -12,6 +12,7 @@ class CityCard
 public:
 	
 	CityCard(City& city);
+	virtual ~CityCard() override;
 	City& city() const;
 	std::string name() const override;
 	std::string description() const override;
