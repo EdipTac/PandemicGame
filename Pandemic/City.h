@@ -7,6 +7,7 @@
 
 #include "Colour.h"
 #include "CubePool.h"
+#include "InfectionCardDeck.h"
 
 // Represents a single city.
 // Each city should belong to a map. A city has a name and a coloured "region" that it belongs to, for the purposes of disease classification.
@@ -46,7 +47,7 @@ public:
 	void connectTo(City& target);
 
 	// Adds disease cubes of a given colour from a given source
-	void addDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source);
+	void addDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source, InfectionCardDeck& infectionDeck);
 
 	// Removes disease cubes of a given colour from a given source
 	void removeDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source);
@@ -71,5 +72,5 @@ private:
 	// Maximum cuber per colour each city can hold
 	unsigned int const MAX_CUBE_PER_DISEASE = 3;
 	// Place one cube for each infection
-	int const CUBE_PER_INFECTION = 1;
+	unsigned int const CUBE_PER_INFECTION = 1;
 };

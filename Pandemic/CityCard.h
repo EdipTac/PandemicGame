@@ -10,6 +10,7 @@ class CityCard
 	: Card
 {
 public:
+	
 	CityCard(City& city);
 	virtual ~CityCard() override;
 	City& city() const;

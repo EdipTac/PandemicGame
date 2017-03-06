@@ -91,6 +91,9 @@
     <ClInclude Include="Deck.h">
       <Filter>General\header</Filter>
     </ClInclude>
+    <ClInclude Include="DeckofRoles.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -158,6 +161,9 @@
     </ClCompile>
     <ClCompile Include="Pandemic.cpp" />
     <ClCompile Include="Deck.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="DeckofRoles.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
   </ItemGroup>

@@ -57,16 +57,17 @@ void City::connectTo(City &target)
 	}
 }
 
-void City::addDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source)
+void City::addDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source, InfectionCardDeck& infectionDeck)
 {
 	if (!_outbreaks[colour] && !_quarantined && ! source.isEradicated(colour)) {
 		_diseaseCubes.takeFrom(colour, amount, source);
 		if (_diseaseCubes[colour] > MAX_CUBE_PER_DISEASE) {
 			_outbreaks[colour] = true;
+			infectionDeck.moveOutbreakMarker();
 			_diseaseCubes.giveTo(colour, (_diseaseCubes.operator[](colour) - MAX_CUBE_PER_DISEASE), source);// may change source to a garbage CubePool
 			for (const auto& city : connections())
 			{
-				city->addDiseaseCubes(colour, CUBE_PER_INFECTION, source);
+				city->addDiseaseCubes(colour, CUBE_PER_INFECTION, source, infectionDeck);
 			}
 		}
 

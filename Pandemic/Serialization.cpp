@@ -42,10 +42,6 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 			{
 				continue;
 			}
-			else if (line == "</cities>")
-			{
-				break;
-			}
 			else if (line[0] == '\t')
 			{
 				connections[cities.back().get()].push_back(line.substr(1));

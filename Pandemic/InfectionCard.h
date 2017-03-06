@@ -13,5 +13,7 @@ class InfectionCard
 {
 public:
 	InfectionCard(City& city);
-	~InfectionCard() override;
+	string getCityName() const; 
+	Colour getCityColour() const;
+	City getCity() const;
 };

@@ -9,17 +9,18 @@
 #include <iostream>
 #include <vector>
 #include "InfectionCard.h"
+#include "Serialization.h"
 using namespace std;
 
 class InfectionCardDeck {
 public:
 	//Default constructor
-	InfectionCardDeck();
-	void shuffle(vector <InfectionCard> &);
+	InfectionCardDeck(string fileName);
+	void shuffle(vector <InfectionCard>& );
 	     //shuffle - shuffle infection cards in random order
 	     //@param vector <InfectionCard> - infection card vector which 
-	void flipInfectionCard();
-	     //flipInfectionCard - flip the infection card on the top of the infection deck and put it 
+	void flipInfectionCard(CubePool&);
+	     //flipInfectionCard - flip the infection card on the top of the infection deck and infect one specific city then put it 
 	     //to the infection card discard pile
 	void print();
 	     //print - print all infection cards on deck. 
@@ -35,10 +36,12 @@ public:
 	     //move outbreak marker by one 
 	void checkInfectionCardHistory();
 	     //checkInfectionCardHistory - check all used infection cards
-	void pullBottomInfectionCard();
-	     //pullBottomInfectionCard - pull the bottom infection card on the deck
+	void pullBottomInfectionCard(CubePool&);
+	     //pullBottomInfectionCard - When player draw the epidemic card he/she must pull one infection card from the bottom of the deck and 
+	     // place three cubes on the specific city
 	void reshuffleAndputback();
 	     //reshuffle all discard infection cards and put them back to deck
+	
 private:
 	//Member variables
 	int infectionRate; // infection rate
@@ -46,6 +49,8 @@ private:
 	int outbreakMarker = 0;
 	vector <InfectionCard> deck; // vector holds all unused infection cards
 	vector <InfectionCard> discardPile;// vector holds all used infection cards
+	unsigned int const CUBE_NORMAL_INFECTION = 1;
+	unsigned int const CUBE_EPIDEMIC_INFECTION = 3;
 	
 };
 
