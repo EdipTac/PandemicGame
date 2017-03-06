@@ -1,3 +1,5 @@
+#pragma warning (disable: 4592)
+
 #include <array>
 #include <map>
 #include <string>
@@ -52,7 +54,6 @@ Colour _colourFromField(const std::string ColourData::* const field, const std::
 		}
 	}
 	throw std::logic_error { "No matching colour attribute." };
-	return Colour::Black;
 }
 
 Colour colourFromName(const std::string& name)
