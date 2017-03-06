@@ -176,5 +176,8 @@
     <None Include="earth.map">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="game.save">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
