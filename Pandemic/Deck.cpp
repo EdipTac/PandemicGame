@@ -4,17 +4,17 @@
 
 Deck::~Deck() {}
 
-//void Deck::shuffleDeck(std::vector <Card*> deckToShuffle) {
+//EDIP -- fix this.
+//void Deck::shuffleDeck() {
 //	srand(time(0));
 //	int index;
-//	Card temp; //we need to make a copy constructor for Card
-//	for (unsigned int i = 0; i < deckToShuffle.size(); i++) {
-//		index = rand() % deckToShuffle.size();
-//		temp = deckToShuffle[i];
-//		deckToShuffle[i] = deckToShuffle[index];
-//		deckToShuffle[index] = temp;
+//	Card* temp; //we need to make a copy constructor for Card
+//	for (unsigned int i = 0; i < deckOfCards.size(); i++) {
+//		index = rand() % deckOfCards.size();
+//		temp = deckOfCards[i];
+//		deckOfCards[i] = deckOfCards[index];
+//		deckOfCards[index] = temp;
 //	}
-//
 //
 //}
 //

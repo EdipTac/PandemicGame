@@ -13,13 +13,13 @@ public:
 	Deck();
 	Deck(Card& card);
 	virtual ~Deck();
-	virtual void shuffleDeck(std::vector <Card*> deckToShuffle);
-	virtual void printDeck(std::vector <Card*> deckToPrint);
-	virtual std::unique_ptr<Card*> drawCard(std::vector<Card*> deckToDrawFrom);
+	virtual void shuffleDeck();
+	virtual void printDeck();
+	virtual std::unique_ptr<Card*> drawCard();
 
 
 protected:
-	std::unique_ptr<Card*> deckOfCards;
+	std::vector<std::unique_ptr<Card>> deckOfCards;
 	std::unique_ptr<Card*> discardDeck;
 	
 
