@@ -29,44 +29,48 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 		throw std::runtime_error { "File not found!" };
 	}
 
-	std::vector<std::unique_ptr<City>> cities;
+	std::unique_ptr<Map> map;
 	std::map<City*, std::vector<std::string>> connections;
-	City* startingCity;
-	while (!fs.eof())
-	{
-		auto line = getline(fs);
-		if (line.empty() || line[0] == '\\')
-		{
-			continue;
-		}
-		else if (line == "</cities>")
-		{
-			break;
-		}
-		else if (line[0] == '\t')
-		{
-			connections[cities.back().get()].push_back(line.substr(1));
-		}
-		else
-		{
-			bool isStartingCity = false;
-			if (line[0] == '*')
-			{
-				line = line.substr(1);
-				isStartingCity = true;
-			}
-			std::string name, colour;
-			std::tie(name, colour) = splitOnLastSpace(line);
-			cities.push_back(std::make_unique<City>(name, colourFromAbbreviation(colour)));
-			connections[cities.back().get()];
-			if (isStartingCity)
-			{
-				startingCity = cities.back().get();
-			}
-		}
-	}
 
-	auto map  = std::make_unique<Map>(fileName, startingCity, std::move(cities));
+	{
+		std::vector<std::unique_ptr<City>> cities;
+		City* startingCity;
+		while (!fs.eof())
+		{
+			auto line = getline(fs);
+			if (line.empty() || line[0] == '\\')
+			{
+				continue;
+			}
+			else if (line == "</cities>")
+			{
+				break;
+			}
+			else if (line[0] == '\t')
+			{
+				connections[cities.back().get()].push_back(line.substr(1));
+			}
+			else
+			{
+				bool isStartingCity = false;
+				if (line[0] == '*')
+				{
+					line = line.substr(1);
+					isStartingCity = true;
+				}
+				std::string name, colour;
+				std::tie(name, colour) = splitOnLastSpace(line);
+				cities.push_back(std::make_unique<City>(name, colourFromAbbreviation(colour)));
+				connections[cities.back().get()];
+				if (isStartingCity)
+				{
+					startingCity = cities.back().get();
+				}
+			}
+		}
+
+		map = std::make_unique<Map>(fileName, startingCity, std::move(cities));
+	}
 
 	for (const auto& list : connections)
 	{
