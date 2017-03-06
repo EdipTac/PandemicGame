@@ -88,6 +88,9 @@
     <ClInclude Include="Util.h">
       <Filter>General\header</Filter>
     </ClInclude>
+    <ClInclude Include="Deck.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -154,6 +157,9 @@
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="Pandemic.cpp" />
+    <ClCompile Include="Deck.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">

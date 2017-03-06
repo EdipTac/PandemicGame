@@ -116,6 +116,7 @@
     <ClInclude Include="CityCard.h" />
     <ClInclude Include="Colour.h" />
     <ClInclude Include="CubePool.h" />
+    <ClInclude Include="Deck.h" />
     <ClInclude Include="EpidemicCard.h" />
     <ClInclude Include="EventCard.h" />
     <ClInclude Include="GameState.h" />
@@ -139,6 +140,7 @@
     <ClCompile Include="CityCard.cpp" />
     <ClCompile Include="Colour.cpp" />
     <ClCompile Include="CubePool.cpp" />
+    <ClCompile Include="Deck.cpp" />
     <ClCompile Include="EpidemicCard.cpp" />
     <ClCompile Include="EventCard.cpp" />
     <ClCompile Include="GameState.cpp" />
