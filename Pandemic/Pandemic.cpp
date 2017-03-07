@@ -13,7 +13,8 @@
 //
 // An implementation of the board game "Pandemic" by Z-Man Games.
 
-#pragma warning (disable: 4592)	// Static initialization warning
+// Disable static initialization warning
+#pragma warning (disable: 4592)
 
 //  ----    Inclusions    ----  //
 // Standard library inclusions
@@ -72,7 +73,6 @@ void newGame()
 {
 	std::cout << "\n    --------    N E W   G A M E    --------    \n\n";
 
-	game.release();
 	game = std::make_unique<GameState>();
 
 	const auto& fileName = solicitFileName();
