@@ -296,14 +296,17 @@ City& solicitConnection(const City& source)
 {
 	std::cout << "Where would you like to move to? ";
 	std::string targetName;
-	City* target;
+	City* target = nullptr;
 	while (true)
 	{
 		std::cin >> targetName;
-		target = &game->map().city(targetName);
-		if (game->map().contains(targetName) && source.isConnectedTo(*target))
+		if (game->map().contains(targetName))
 		{
-			break;
+			target = &game->map().city(targetName);
+			if (source.isConnectedTo(*target))
+			{
+				break;
+			}
 		}
 		std::cout << "No city of that name connected to " << targetName << ".\n";
 	}
