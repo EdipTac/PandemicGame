@@ -65,6 +65,8 @@ public:
 	bool hasResearchStation() const;
 	void giveResearchStation(GameState& game);
 
+	std::vector<Colour> diseases() const;
+
 	friend bool operator==(const City& lhs, const City& rhs);
 
 private:

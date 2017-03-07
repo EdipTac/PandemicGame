@@ -12,7 +12,7 @@ enum class Colour
 	Yellow
 };
 
-// Allows enumeration through all colour enum values
+// Allows enumeration through all colour values
 std::array<Colour, 4> colours();
 
 // Returns a string representation of a colour enum value

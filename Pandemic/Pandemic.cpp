@@ -47,6 +47,7 @@ bool directFlight();
 bool charterFlight();
 bool shuttleFlight();
 bool buildResearchStation();
+bool treatDisease();
 void quit();
 bool actionQuit();
 std::string solicitFileName();
@@ -81,11 +82,13 @@ const GeneralMenu turnMenu
 const ActionMenu actionMenu
 {
 	{
-		{ "Drive/Ferry",	driveOrFerry	},
-		{ "Direct Flight",	directFlight	},
-		{ "Charter Flight",	directFlight	},
-		{ "Shuttle Flight",	shuttleFlight	},
-		{ "Quit Game",		actionQuit		}
+		{ "Drive/Ferry",				driveOrFerry			},
+		{ "Direct Flight",				directFlight			},
+		{ "Charter Flight",				directFlight			},
+		{ "Shuttle Flight",				shuttleFlight			},
+		{ "Build a Research Station",	buildResearchStation	},
+		{ "Treat Disease",				treatDisease			},
+		{ "Quit Game",					actionQuit				}
 	}
 };
 
@@ -272,6 +275,25 @@ bool buildResearchStation()
 	// TODO - Discard card
 
 	player.pawn().position().giveResearchStation(*game);
+	return true;
+}
+
+bool treatDisease()
+{
+	const auto& position = game->currentPlayer().pawn().position();
+	const auto& diseases = position.diseases();
+	if (diseases.empty())
+	{
+		std::cout << "No disease in this city.\n";
+		return false;
+	}
+	std::cout << "Select a disease:\n";
+	for (const auto& disease : diseases)
+	{
+		std::cout << "\t" << colourName(disease) << ": " << position.diseaseCubes(disease) << " cubes\n";
+	}
+
+	// TODO - Add selection mechanism
 	return true;
 }
 
