@@ -24,7 +24,7 @@ public:
 	City& city(const std::string& name) const;
 
 	// Find a city by name. Returns nullptr if not found.
-	City* getCityIfContains(const std::string& name) const;
+	City* findCityIfContained(const std::string& name) const;
 
 	// True iff map contains city of given name
 	bool contains(const std::string& name) const;

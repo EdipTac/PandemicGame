@@ -36,7 +36,7 @@ City& Map::city(const std::string& name) const
 	return *it->get();
 }
 
-City* Map::getCityIfContains(const std::string& name) const
+City* Map::findCityIfContained(const std::string& name) const
 {
 	City* p = nullptr;
 	if (contains(name))

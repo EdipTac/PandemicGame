@@ -301,13 +301,10 @@ City& solicitConnection(const City& source)
 	while (true)
 	{
 		std::cin >> targetName;
-		if (game->map().contains(targetName))
+		target = game->map().findCityIfContained(targetName);
+		if (target && source.isConnectedTo(*target))
 		{
-			target = &game->map().city(targetName);
-			if (source.isConnectedTo(*target))
-			{
-				break;
-			}
+			break;
 		}
 		std::cout << "No city of that name connected to " << targetName << ".\n";
 	}
