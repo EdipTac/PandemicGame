@@ -12,27 +12,34 @@
 class Map
 {
 	using CityPtr = std::unique_ptr<City>;
-	using PlayerPtr = std::unique_ptr<Player>;
 
 public:
 	// Constructs a map with a given file name
 	Map(const std::string& name, City* const startingCity, std::vector<std::unique_ptr<City>> cities = {});
 
-	// Accessors
-	std::string name() const;						// Map file name
-	City& city(const std::string& name) const;		// Find a city by name
-	bool contains(const std::string& name) const;	// True iff map contains city of given name
-	City& startingCity() const;
-	const std::vector<CityPtr>& cities() const;		// List of pointers to all contained cities
-	const std::vector<PlayerPtr>& players() const;	// List of pointers to contained players
+	// Map file name
+	std::string name() const;
 
-	// Mutators
-	City& addCity(CityPtr city);					// Add city
-	Player& addPlayer(const std::string& name);		// Add a player with a given name
+	// Find a city by name
+	City& city(const std::string& name) const;
+
+	// Find a city by name. Returns nullptr if not found.
+	City* getCityIfContains(const std::string& name) const;
+
+	// True iff map contains city of given name
+	bool contains(const std::string& name) const;
+
+	// The map's starting city
+	City& startingCity() const;
+
+	// List of pointers to all contained cities
+	const std::vector<CityPtr>& cities() const;
+
+	// Add a city
+	City& addCity(CityPtr city);
 
 private:
 	std::string _name;
 	std::vector<CityPtr> _cities;
 	City& _startingCity;
-	std::vector<PlayerPtr> _players;
 };

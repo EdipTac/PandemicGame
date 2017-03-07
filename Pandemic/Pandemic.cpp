@@ -146,7 +146,8 @@ void performAction()
 	while (!game->shouldQuit() && actions > 0)
 	{
 		std::cout << "You have " << actions << " actions remaining.\n";
-		if (actionMenu.solicitInput())
+		const auto& actionCompleted = actionMenu.solicitInput();
+		if (actionCompleted)
 		{
 			--actions;
 		}
