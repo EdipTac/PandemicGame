@@ -52,3 +52,18 @@ Player& GameState::currentPlayer() const
 {
 	return *_players[_currentPlayerIdx];
 }
+
+unsigned GameState::researchStations() const
+{
+	return _researchStations;
+}
+
+void GameState::removeResearchStation()
+{
+	if (_researchStations == 0)
+	{
+		throw std::logic_error { "No research stations in pool." };
+	}
+
+	--_researchStations;
+}

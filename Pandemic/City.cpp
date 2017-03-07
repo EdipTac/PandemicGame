@@ -80,3 +80,19 @@ void City::removeDiseaseCubes(const Colour& colour, const unsigned int amount, C
 {
 	_diseaseCubes.giveTo(colour, amount, source);
 }
+
+bool City::hasResearchStation() const
+{
+	return _hasResearchStation;
+}
+
+void City::giveResearchStation(GameState& game)
+{
+	game.removeResearchStation();
+	_hasResearchStation = true;
+}
+
+bool operator==(const City& lhs, const City& rhs)
+{
+	return lhs._name == rhs._name;
+}

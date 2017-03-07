@@ -8,6 +8,7 @@
 #include "Colour.h"
 #include "CubePool.h"
 
+class GameState;
 class InfectionCardDeck;
 
 // Represents a single city.
@@ -61,6 +62,11 @@ public:
 		_quarantined = true;
 	}
 
+	bool hasResearchStation() const;
+	void giveResearchStation(GameState& game);
+
+	friend bool operator==(const City& lhs, const City& rhs);
+
 private:
 	std::string _name;
 	Colour _colour;
@@ -74,4 +80,5 @@ private:
 	unsigned int const MAX_CUBE_PER_DISEASE = 3;
 	// Place one cube for each infection
 	unsigned int const CUBE_PER_INFECTION = 1;
+	bool _hasResearchStation = false;
 };

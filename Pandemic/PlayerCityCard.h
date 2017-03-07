@@ -7,7 +7,8 @@
 
 // PlayerCityCard class - represents PlayerCards of type City.
 class PlayerCityCard
-	: public PlayerCard, CityCard
+	: public PlayerCard
+	, public CityCard
 {
 public:
 	// Default Constructor

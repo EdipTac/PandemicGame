@@ -24,6 +24,9 @@ public:
 	Player& nextPlayer();
 	Player& currentPlayer() const;
 
+	unsigned researchStations() const;
+	void removeResearchStation();
+
 private:
 	bool _shouldQuit = false;
 	std::unique_ptr<Map> _map;
@@ -31,5 +34,6 @@ private:
 	size_t _currentPlayerIdx = std::numeric_limits<size_t>::max();
 	CubePool _cubePool;
 	unsigned _outbreakCounter;
+	unsigned _researchStations = 6;
 };
 

@@ -26,18 +26,17 @@
 #include <vector>
 
 // Project file inclusions
-//#include "Card.h"
+#include "Card.h"
 #include "City.h"
 #include "GameState.h"
-#include "Player.h"
-#include "PlayerCityCard.h"
-#include "Map.h"
-#include "Menu.h"
-#include "Serialization.h"
-#include "Util.h"
 #include "InfectionCard.h"
 #include "InfectionCardDeck.h"
+#include "Map.h"
+#include "Menu.h"
+#include "Player.h"
+#include "PlayerCityCard.h"
 #include "Serialization.h"
+#include "Util.h"
 
 void newGame();
 void loadGame();
@@ -45,9 +44,12 @@ void waitForExit();
 void performAction();
 void driveOrFerry();
 void directFlight();
+void charterFlight();
+void shuttleFlight();
+void quit();
 std::string solicitFileName();
-City& solicitCity(const Map& map);
-City& solicitConnection(const Map& map, const City& source);
+City& solicitCity();
+City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
 size_t solicitSize(size_t min, size_t max);
 
@@ -57,31 +59,31 @@ constexpr size_t actionsPerTurn = 4;
 
 std::unique_ptr<GameState> game;
 
-const auto& noOp = [](){};
-
 const Menu mainMenu
 {
 	{
 		{ "New Game",  newGame	},
 		{ "Load Game", loadGame	},
-		{ "Exit",	   noOp		}
+		{ "Exit",	   quit		}
 	}
 };
 
 const Menu turnMenu
 {
 	{
-		{ "Perform Action",	performAction		   },
-		{ "Quit Game",		[]() { game->quit(); } }
+		{ "Perform Action",	performAction	},
+		{ "Quit Game",		quit			}
 	}
 };
 
 const Menu actionMenu
 {
 	{
-		{ "Drive/Ferry",	driveOrFerry			},
-		{ "Direct Flight",	directFlight			},
-		{ "Quit Game",		[]() { game->quit(); }	}
+		{ "Drive/Ferry",	driveOrFerry	},
+		{ "Direct Flight",	directFlight	},
+		{ "Charter Flight",	directFlight	},
+		{ "Shuttle Flight",	shuttleFlight	},
+		{ "Quit Game",		quit			}
 	}
 };
 
@@ -140,11 +142,11 @@ void waitForExit()
 void performAction()
 {
 	auto actions = actionsPerTurn;
-	std::cout << "You have " << actions << " actions remaining.\n";
 	while (!game->shouldQuit() && actions > 0)
 	{
-		--actions;
+		std::cout << "You have " << actions << " actions remaining.\n";
 		actionMenu.solicitInput();
+		--actions;
 	}
 }
 
@@ -160,7 +162,7 @@ void driveOrFerry()
 		std::cout << "\t" << connection->name() << "\n";
 	}
 
-	const auto& newPosition = solicitConnection(game->map(), position);
+	const auto& newPosition = solicitConnection(position);
 	player.pawn().setPosition(newPosition);
 }
 
@@ -181,6 +183,58 @@ void directFlight()
 	}
 }
 
+void charterFlight()
+{
+	auto& player = game->currentPlayer();
+	auto& pawn = player.pawn();
+	const auto& cards = player.cityCards();
+	const auto& isPositionCard = [&pawn](const PlayerCityCard* card)
+	{
+		return card->city() == pawn.position();
+	};
+
+	if (!std::any_of(cards.begin(), cards.end(), isPositionCard))
+	{
+		std::cout << "You don't have any city cards that match your position.\n";
+		return;
+	}
+
+	const auto& target = solicitCity();
+	pawn.setPosition(target);
+}
+
+void shuttleFlight()
+{
+	if (!game->currentPlayer().pawn().position().hasResearchStation())
+	{
+		std::cout << "Your city does not have a research station.\n";
+		return;
+	}
+
+	std::vector<City*> stations;
+
+	for (const auto& city : game->map().cities())
+	{
+		if (city->hasResearchStation())
+		{
+			stations.push_back(city.get());
+		}
+	}
+
+	if (stations.empty())
+	{
+		std::cout << "There are no other cities with research stations.\n";
+		return;
+	}
+
+
+}
+
+void quit()
+{
+	game->quit();
+}
+
 std::string solicitFileName()
 {
 	std::string fileName;
@@ -198,23 +252,23 @@ std::string solicitFileName()
 	return fileName;
 }
 
-City& solicitCity(const Map& map)
+City& solicitCity()
 {
 	std::cout << "Where would you like to place your pawn? ";
 	std::string cityName;
 	while (true)
 	{
 		std::cin >> cityName;
-		if (map.contains(cityName))
+		if (game->map().contains(cityName))
 		{
 			break;
 		}
 		std::cout << "No city of that name exists.\n";
 	}
-	return map.city(cityName);
+	return game->map().city(cityName);
 }
 
-City& solicitConnection(const Map& map, const City& source)
+City& solicitConnection(const City& source)
 {
 	std::cout << "Where would you like to move to? ";
 	std::string targetName;
@@ -222,8 +276,8 @@ City& solicitConnection(const Map& map, const City& source)
 	while (true)
 	{
 		std::cin >> targetName;
-		target = &map.city(targetName);
-		if (map.contains(targetName) && source.isConnectedTo(*target))
+		target = &game->map().city(targetName);
+		if (game->map().contains(targetName) && source.isConnectedTo(*target))
 		{
 			break;
 		}
@@ -245,7 +299,6 @@ std::string solicitPlayerName(const size_t number)
 		}
 		std::cout << "Player name cannot be empty.\n";
 	}
-	//std::cout << "Welcome, " << playerName << "\n\n";
 	return playerName;
 }
 
