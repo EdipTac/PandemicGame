@@ -10,10 +10,12 @@
 
 #include "CityCard.h"
 
+// Represents an infection card
 class InfectionCard
 	: CityCard
 {
 public:
+	// Constructs an infection card for infecting a given city
 	InfectionCard(City& city);
 	std::string getCityName() const;
 	Colour getCityColour() const;
