@@ -7,7 +7,6 @@
 
 #include "Colour.h"
 #include "CubePool.h"
-//#include "InfectionCardDeck.h"
 
 class InfectionCardDeck;
 
@@ -32,7 +31,7 @@ public:
 	const std::vector<City*>& connections() const;
 
 	// True iff the city is connected to another given city
-	bool isConnectedTo(const City& target);
+	bool isConnectedTo(const City& target) const;
 
 	// The number of disease cubes of a given colour the city has
 	unsigned int diseaseCubes(const Colour& colour) const;

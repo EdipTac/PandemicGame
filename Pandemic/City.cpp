@@ -30,7 +30,7 @@ const std::vector<City*>& City::connections() const
 	return _connections;
 }
 
-bool City::isConnectedTo(const City& target)
+bool City::isConnectedTo(const City& target) const
 {
 	return std::any_of(_connections.begin(), _connections.end(), [&](const City* city) -> bool { return city == &target; });
 }

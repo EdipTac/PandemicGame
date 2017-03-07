@@ -41,24 +41,46 @@
 void newGame();
 void loadGame();
 void waitForExit();
+void performAction();
+void driveOrFerry();
 std::string solicitFileName();
 City& solicitCity(const Map& map);
+City& solicitConnection(const Map& map, const City& source);
 std::string solicitPlayerName(const size_t number);
 size_t solicitSize(size_t min, size_t max);
 
 constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
+constexpr size_t actionsPerTurn = 4;
+
+std::unique_ptr<GameState> game;
+
+const auto& noOp = [](){};
 
 const Menu mainMenu
 {
 	{
-		{ "New Game",  newGame  },
-		{ "Load Game", loadGame },
-		{ "Exit",	   [](){}   }
+		{ "New Game",  newGame	},
+		{ "Load Game", loadGame	},
+		{ "Exit",	   noOp		}
 	}
 };
 
-std::unique_ptr<GameState> game;
+const Menu turnMenu
+{
+	{
+		{ "Perform Action",	performAction		   },
+		{ "Quit Game",		[]() { game->quit(); } }
+	}
+};
+
+const Menu actionMenu
+{
+	{
+		{ "Drive/Ferry", driveOrFerry			},
+		{ "Quit Game",	 []() { game->quit(); } }
+	}
+};
 
 //	----    Program entry point    ----  //
 void main()
@@ -66,6 +88,14 @@ void main()
 	// Title display
 	std::cout << "    --------    P A N D E M I C    --------    \n\n\n";
 	mainMenu.solicitInput();
+
+	while (!game->shouldQuit())
+	{
+		auto& currentPlayer = game->nextPlayer();
+		std::cout << currentPlayer.name() << "'s turn.\n";
+		turnMenu.solicitInput();
+	}
+
 	waitForExit();
 }
 
@@ -82,11 +112,13 @@ void newGame()
 
 	std::cout << "How many players? ";
 	const auto& numPlayers = solicitSize(minPlayers, maxPlayers);
+	const auto& map = game->map();
 	for (auto i = 1; i <= numPlayers; ++i)
 	{
 		const auto& playerName = solicitPlayerName(i);
 		auto player = std::make_unique<Player>();
 		player->setName(playerName);
+		player->pawn().setPosition(map.startingCity());
 		game->addPlayer(std::move(player));
 	}
 }
@@ -100,6 +132,33 @@ void waitForExit()
 {
 	std::cout << "Press any key to continue...\n";
 	std::cin.get();
+}
+
+void performAction()
+{
+	auto actions = actionsPerTurn;
+	std::cout << "You have " << actions << " actions remaining.\n";
+	while (!game->shouldQuit() && actions > 0)
+	{
+		--actions;
+		actionMenu.solicitInput();
+	}
+}
+
+void driveOrFerry()
+{
+	auto& player = game->currentPlayer();
+	
+	const auto& position = player.pawn().position();
+	std::cout << "You are currently in " << position.name() << "\n";
+	std::cout << "You can move to\n";
+	for (const auto& connection : position.connections())
+	{
+		std::cout << "\t" << connection->name();
+	}
+
+	const auto& newPosition = solicitConnection(game->map(), position);
+	player.pawn().setPosition(newPosition);
 }
 
 std::string solicitFileName()
@@ -133,6 +192,24 @@ City& solicitCity(const Map& map)
 		std::cout << "No city of that name exists.\n";
 	}
 	return map.city(cityName);
+}
+
+City& solicitConnection(const Map& map, const City& source)
+{
+	std::cout << "Where would you like to move to? ";
+	std::string targetName;
+	City* target;
+	while (true)
+	{
+		std::cin >> targetName;
+		target = &map.city(targetName);
+		if (map.contains(targetName) && source.isConnectedTo(*target))
+		{
+			break;
+		}
+		std::cout << "No city of that name connected to " << targetName << ".\n";
+	}
+	return *target;
 }
 
 std::string solicitPlayerName(const size_t number)
