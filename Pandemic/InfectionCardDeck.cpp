@@ -57,7 +57,7 @@ void InfectionCardDeck::flipInfectionCard(CubePool& pool) {
 		(temp->city()).addDiseaseCubes(temp->colour(), CUBE_NORMAL_INFECTION, pool, *this);
 		deck.pop_back();
 		deck.shrink_to_fit();
-		discardPile.push_back(temp);
+		discardPile.push_back(move(temp));
 
 	}
 }
@@ -77,7 +77,7 @@ void InfectionCardDeck::moveOutbreakMarker() {
 // Use pointers!
 void InfectionCardDeck::pullBottomInfectionCard(CubePool& pool) {
 	(deck[0]->city()).addDiseaseCubes(deck[0]->colour(), CUBE_EPIDEMIC_INFECTION, pool, *this);
-	discardPile.push_back(deck[0]);
+	discardPile.push_back(move(deck[0]));
    deck[0].reset(nullptr);
    deck.erase(deck.begin());
 	deck.shrink_to_fit();
@@ -87,7 +87,7 @@ void InfectionCardDeck::reshuffleAndputback() {
 	shuffle(discardPile);
 	const auto k = discardPile.size();
 	for (auto i = 0; i < k; i++) {
-		deck.push_back(discardPile[i]);
+		deck.push_back(move(discardPile[i]));
 	}
 	discardPile.clear();
 }
