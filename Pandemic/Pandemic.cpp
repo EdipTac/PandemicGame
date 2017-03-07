@@ -13,7 +13,8 @@
 //
 // An implementation of the board game "Pandemic" by Z-Man Games.
 
-#pragma warning (disable: 4592)	// Static initialization warning
+// Disable static initialization warning
+#pragma warning (disable: 4592)
 
 //  ----    Inclusions    ----  //
 // Standard library inclusions
@@ -25,39 +26,66 @@
 #include <vector>
 
 // Project file inclusions
-//#include "Card.h"
+#include "Card.h"
 #include "City.h"
 #include "GameState.h"
-#include "Player.h"
-#include "Map.h"
-#include "Menu.h"
-#include "Serialization.h"
-#include "Util.h"
 #include "InfectionCard.h"
 #include "InfectionCardDeck.h"
+#include "Map.h"
+#include "Menu.h"
+#include "Player.h"
+#include "PlayerCityCard.h"
 #include "Serialization.h"
+#include "Util.h"
 
 void newGame();
 void loadGame();
 void waitForExit();
+void performAction();
+void driveOrFerry();
+void directFlight();
+void charterFlight();
+void shuttleFlight();
+void quit();
 std::string solicitFileName();
-City& solicitCity(const Map& map);
+City& solicitCity();
+City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
 size_t solicitSize(size_t min, size_t max);
 
 constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
+constexpr size_t actionsPerTurn = 4;
+
+std::unique_ptr<GameState> game;
 
 const Menu mainMenu
 {
 	{
-		{ "New Game",  newGame  },
-		{ "Load Game", loadGame },
-		{ "Exit",	   [](){}   }
+		{ "New Game",  newGame	},
+		{ "Load Game", loadGame	},
+		{ "Exit",	   quit		}
 	}
 };
 
-std::unique_ptr<GameState> game;
+const Menu turnMenu
+{
+	{
+		{ "Perform Action",	performAction	},
+		{ "Quit Game",		quit			}
+	}
+};
+
+const Menu actionMenu
+{
+	{
+		{ "Drive/Ferry",	driveOrFerry	},
+		{ "Direct Flight",	directFlight	},
+		{ "Charter Flight",	directFlight	},
+		{ "Shuttle Flight",	shuttleFlight	},
+		{ "Quit Game",		quit			}
+	}
+};
 
 //	----    Program entry point    ----  //
 void main()
@@ -65,6 +93,14 @@ void main()
 	// Title display
 	std::cout << "    --------    P A N D E M I C    --------    \n\n\n";
 	mainMenu.solicitInput();
+
+	while (!game->shouldQuit())
+	{
+		auto& currentPlayer = game->nextPlayer();
+		std::cout << currentPlayer.name() << "'s turn.\n";
+		turnMenu.solicitInput();
+	}
+
 	waitForExit();
 }
 
@@ -72,7 +108,6 @@ void newGame()
 {
 	std::cout << "\n    --------    N E W   G A M E    --------    \n\n";
 
-	game.release();
 	game = std::make_unique<GameState>();
 
 	const auto& fileName = solicitFileName();
@@ -82,11 +117,13 @@ void newGame()
 
 	std::cout << "How many players? ";
 	const auto& numPlayers = solicitSize(minPlayers, maxPlayers);
+	const auto& map = game->map();
 	for (auto i = 1; i <= numPlayers; ++i)
 	{
 		const auto& playerName = solicitPlayerName(i);
 		auto player = std::make_unique<Player>();
 		player->setName(playerName);
+		player->pawn().setPosition(map.startingCity());
 		game->addPlayer(std::move(player));
 	}
 }
@@ -100,6 +137,102 @@ void waitForExit()
 {
 	std::cout << "Press any key to continue...\n";
 	std::cin.get();
+}
+
+void performAction()
+{
+	auto actions = actionsPerTurn;
+	while (!game->shouldQuit() && actions > 0)
+	{
+		std::cout << "You have " << actions << " actions remaining.\n";
+		actionMenu.solicitInput();
+		--actions;
+	}
+}
+
+void driveOrFerry()
+{
+	auto& player = game->currentPlayer();
+	
+	const auto& position = player.pawn().position();
+	std::cout << "You are currently in " << position.name() << "\n";
+	std::cout << "You can move to\n";
+	for (const auto& connection : position.connections())
+	{
+		std::cout << "\t" << connection->name() << "\n";
+	}
+
+	const auto& newPosition = solicitConnection(position);
+	player.pawn().setPosition(newPosition);
+}
+
+void directFlight()
+{
+	const auto& cards = game->currentPlayer().cityCards();
+	
+	if (cards.empty())
+	{
+		std::cout << "You have no city cards.\n";
+		return;
+	}
+
+	std::cout << "City cards: \n";
+	for (const auto& card : cards)
+	{
+		std::cout << "\t" << card->name() << "\n";
+	}
+}
+
+void charterFlight()
+{
+	auto& player = game->currentPlayer();
+	auto& pawn = player.pawn();
+	const auto& cards = player.cityCards();
+	const auto& isPositionCard = [&pawn](const PlayerCityCard* card)
+	{
+		return card->city() == pawn.position();
+	};
+
+	if (!std::any_of(cards.begin(), cards.end(), isPositionCard))
+	{
+		std::cout << "You don't have any city cards that match your position.\n";
+		return;
+	}
+
+	const auto& target = solicitCity();
+	pawn.setPosition(target);
+}
+
+void shuttleFlight()
+{
+	if (!game->currentPlayer().pawn().position().hasResearchStation())
+	{
+		std::cout << "Your city does not have a research station.\n";
+		return;
+	}
+
+	std::vector<City*> stations;
+
+	for (const auto& city : game->map().cities())
+	{
+		if (city->hasResearchStation())
+		{
+			stations.push_back(city.get());
+		}
+	}
+
+	if (stations.empty())
+	{
+		std::cout << "There are no other cities with research stations.\n";
+		return;
+	}
+
+
+}
+
+void quit()
+{
+	game->quit();
 }
 
 std::string solicitFileName()
@@ -119,20 +252,38 @@ std::string solicitFileName()
 	return fileName;
 }
 
-City& solicitCity(const Map& map)
+City& solicitCity()
 {
 	std::cout << "Where would you like to place your pawn? ";
 	std::string cityName;
 	while (true)
 	{
 		std::cin >> cityName;
-		if (map.contains(cityName))
+		if (game->map().contains(cityName))
 		{
 			break;
 		}
 		std::cout << "No city of that name exists.\n";
 	}
-	return map.city(cityName);
+	return game->map().city(cityName);
+}
+
+City& solicitConnection(const City& source)
+{
+	std::cout << "Where would you like to move to? ";
+	std::string targetName;
+	City* target;
+	while (true)
+	{
+		std::cin >> targetName;
+		target = &game->map().city(targetName);
+		if (game->map().contains(targetName) && source.isConnectedTo(*target))
+		{
+			break;
+		}
+		std::cout << "No city of that name connected to " << targetName << ".\n";
+	}
+	return *target;
 }
 
 std::string solicitPlayerName(const size_t number)
@@ -148,7 +299,6 @@ std::string solicitPlayerName(const size_t number)
 		}
 		std::cout << "Player name cannot be empty.\n";
 	}
-	//std::cout << "Welcome, " << playerName << "\n\n";
 	return playerName;
 }
 

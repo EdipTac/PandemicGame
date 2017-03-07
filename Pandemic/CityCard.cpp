@@ -1,8 +1,6 @@
 #include "City.h"
 #include "CityCard.h"
 
-
-
 CityCard::CityCard(City& city)
 	: _city{ city }
 {}

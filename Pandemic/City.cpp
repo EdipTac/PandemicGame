@@ -30,7 +30,7 @@ const std::vector<City*>& City::connections() const
 	return _connections;
 }
 
-bool City::isConnectedTo(const City& target)
+bool City::isConnectedTo(const City& target) const
 {
 	return std::any_of(_connections.begin(), _connections.end(), [&](const City* city) -> bool { return city == &target; });
 }
@@ -79,4 +79,20 @@ void City::addDiseaseCubes(const Colour& colour, const unsigned int amount, Cube
 void City::removeDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source)
 {
 	_diseaseCubes.giveTo(colour, amount, source);
+}
+
+bool City::hasResearchStation() const
+{
+	return _hasResearchStation;
+}
+
+void City::giveResearchStation(GameState& game)
+{
+	game.removeResearchStation();
+	_hasResearchStation = true;
+}
+
+bool operator==(const City& lhs, const City& rhs)
+{
+	return lhs._name == rhs._name;
 }

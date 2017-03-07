@@ -1,18 +1,18 @@
 #pragma once
-#include "PlayerCard.h"
+
 #include <string>
 
-// Epidemic class - represents PlayerCards of type Epidemic.
-class EpidemicCard : public PlayerCard {
-private:
-	// Attribute for Epidemic objects, constant because all Epidemic cards are the same.
-	
-public:
-	// Default Constructor
-	EpidemicCard();
+#include "PlayerCard.h"
 
-	// Accessor for EPIDEMIC_DESCRIPTION
+// Represents an epidemic player card.
+class EpidemicCard
+	: public PlayerCard
+{	
+public:
+	// Returns "EPIDEMIC"
 	virtual std::string name() const override;
+
+	// The rules of the epidemic card
 	virtual std::string description() const override;
 
 	// Custom implementation of the inherited virtual function from PlayerCard

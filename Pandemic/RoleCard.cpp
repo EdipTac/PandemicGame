@@ -17,7 +17,7 @@ RoleCard::RoleCard()
 
 }
 
-RoleCard::RoleCard(std::string role, std::string description, std::string color)
+RoleCard::RoleCard(const std::string& role, const std::string& description, const std::string& color)
 	: TextualCard { role, description }
 	, _color { color }
 {

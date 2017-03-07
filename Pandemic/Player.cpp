@@ -2,6 +2,7 @@
 
 #include "Pawn.h"
 #include "Player.h"
+#include "PlayerCityCard.h"
 
 // Default Constructor
 Player::Player()
@@ -40,6 +41,19 @@ void Player::displayCards() {
 	for (auto i = _cards.begin(); i != _cards.end(); ++i) {
 		std::cout << **i << "\n";
 	}
+}
+
+std::vector<PlayerCityCard*> Player::cityCards() const
+{
+	std::vector<PlayerCityCard*> cards;
+	for (const auto& card : _cards)
+	{
+		if (card->isCityCard())
+		{
+			cards.push_back(static_cast<PlayerCityCard*>(card.get()));
+		}
+	}
+	return cards;
 }
 
 Pawn& Player::pawn()

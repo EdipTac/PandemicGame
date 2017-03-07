@@ -23,3 +23,47 @@ void GameState::setMap(std::unique_ptr<Map> map)
 {
 	_map = std::move(map);
 }
+
+bool GameState::shouldQuit() const
+{
+	return _shouldQuit;
+}
+
+void GameState::quit()
+{
+	_shouldQuit = true;
+}
+
+Player& GameState::nextPlayer()
+{
+	if (_currentPlayerIdx >= std::numeric_limits<size_t>::max())
+	{
+		_currentPlayerIdx = 0;
+	}
+	else
+	{
+		++_currentPlayerIdx;
+		_currentPlayerIdx %= _players.size();
+	}
+	return currentPlayer();
+}
+
+Player& GameState::currentPlayer() const
+{
+	return *_players[_currentPlayerIdx];
+}
+
+unsigned GameState::researchStations() const
+{
+	return _researchStations;
+}
+
+void GameState::removeResearchStation()
+{
+	if (_researchStations == 0)
+	{
+		throw std::logic_error { "No research stations in pool." };
+	}
+
+	--_researchStations;
+}

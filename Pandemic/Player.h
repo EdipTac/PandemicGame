@@ -10,6 +10,7 @@
 #include "PlayerCard.h"
 #include "RoleCard.h"
 
+class PlayerCityCard;
 //class Pawn;
 
 class Player {
@@ -31,6 +32,8 @@ public:
 	const std::vector<std::unique_ptr<PlayerCard>>& getCards() const;
 	void addCard(std::unique_ptr<PlayerCard> card);
 	//void removeCard(std::unique_ptr<PlayerCard> card);
+
+	std::vector<PlayerCityCard*> cityCards() const;
 
 	Pawn& pawn();
 	const RoleCard& role() const;

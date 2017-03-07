@@ -1,16 +1,12 @@
 #include "PlayerCard.h"
 
-// Default Constructor
-//PlayerCard::PlayerCard()
-//	: _name("") {}
-
-// Constructor
-PlayerCard::PlayerCard()
-{}
-
 PlayerCard::~PlayerCard() {}
 
-// virtual function that converts a PlayerCard object into an informative string.
+bool PlayerCard::isCityCard() const
+{
+	return false;
+}
+
 std::string PlayerCard::toString()
 {
 	return "Name: " + name();
