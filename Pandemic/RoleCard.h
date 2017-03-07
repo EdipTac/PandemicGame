@@ -21,7 +21,7 @@ class RoleCard
 {
 public:
 	RoleCard();
-	RoleCard(std::string role, std::string description, std::string color);
+	RoleCard(const std::string& role, const std::string& description, const std::string& color);
 	~RoleCard() override;
 
 	void printRole();

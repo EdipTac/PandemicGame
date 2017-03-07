@@ -11,13 +11,13 @@ class PlayerCityCard
 	, public CityCard
 {
 public:
-	// Default Constructor
-	//PlayerCityCard();
-	// Constructor
+	// Constructs a city player card for a given city
 	PlayerCityCard(City& city);
 
+	// Destructor
 	~PlayerCityCard() override;
 
+	// True
 	bool isCityCard() const override;
 
 	// Custom implementation of the inherited virtual function from PlayerCard
