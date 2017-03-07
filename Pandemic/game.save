@@ -1,0 +1,90 @@
+{
+	"map": "earth.map",
+	"players": {
+		"numberOfPlayers": 3,
+		"playerList": [
+			{
+				"name": "Wishe",
+				"position": "Montreal",
+				"role": "Researcher",
+				"hand": [
+					"Montreal", 
+					"Airlift"
+				]
+			},
+			{
+				"name": "Jonny",
+				"position": "Montreal",
+				"role": "Medic",
+				"hand": [
+					"Toronto"
+				]
+			},
+			{
+				"name": "Kechun",
+				"position": "London",
+				"role": "Contigency Planner",
+				"hand": []
+			}
+		]
+	},		
+	"cities": [
+		{
+			"Montreal": {
+				"B": 1,
+				"Y": 2,
+				"K": 0,
+				"R": 0
+			},
+			"researchStation": true
+		},
+		{
+			"Toronto": {
+				"B": 0,
+				"Y": 0,
+				"K": 0,
+				"R": 3
+			},
+			"researchStation": false
+		},
+		{
+			"London": {
+				"B": 0,
+				"Y": 0,
+				"K": 2,
+				"R": 0
+			},
+			"researchStation": false
+		}
+	],
+	"infection": {
+		"deck": [
+			"London", 
+			"Montreal"
+		],
+		"discard": [
+			"Toronto"
+		],
+		"outbreak": 3,
+		"rate": 2,
+		"cured": [
+			"B"
+		]
+	},
+	"playercards": {
+		"deck": [
+			"Toronto",
+			"Montreal",
+			"One Quiet Night",
+			"Government Grant"
+		],
+		"discard": [
+			"London",
+			"Resilient Population"
+		],
+		"removed": [
+			"Epidemic",
+			"Forecast"
+		]
+	}
+}

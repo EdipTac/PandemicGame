@@ -17,12 +17,13 @@ public:
 
 	void addPlayer(std::unique_ptr<Player> player);
 	void setMap(std::unique_ptr<Map> map);
-	
+
 
 private:
 	std::unique_ptr<Map> _map;
 	std::vector<std::unique_ptr<Player>> _players;
 	CubePool _cubePool;
-
+	unsigned _outbreakCounter;
+	// Deck
 };
 

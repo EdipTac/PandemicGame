@@ -91,6 +91,9 @@
     <ClInclude Include="Deck.h">
       <Filter>General\header</Filter>
     </ClInclude>
+    <ClInclude Include="DeckofRoles.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -160,6 +163,9 @@
     <ClCompile Include="Deck.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
+    <ClCompile Include="DeckofRoles.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
@@ -168,6 +174,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="game.save">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

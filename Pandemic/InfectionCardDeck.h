@@ -3,20 +3,19 @@
 //Author: Ke chun Ye
 //Version: 1.0
 //Data : 20170209
-#ifndef	INFECTIONCARDDCEK_H
-#define INFECTIONCARDDECK_H
+
+#pragma once
 
 #include <iostream>
 #include <vector>
 #include "InfectionCard.h"
 #include "Serialization.h"
-using namespace std;
 
 class InfectionCardDeck {
 public:
 	//Default constructor
-	InfectionCardDeck(string fileName);
-	void shuffle(vector <InfectionCard>& );
+	InfectionCardDeck(std::string fileName);
+	void shuffle(std::vector <InfectionCard>& );
 	     //shuffle - shuffle infection cards in random order
 	     //@param vector <InfectionCard> - infection card vector which 
 	void flipInfectionCard(CubePool&);
@@ -53,7 +52,3 @@ private:
 	unsigned int const CUBE_EPIDEMIC_INFECTION = 3;
 	
 };
-
-
-#endif
-

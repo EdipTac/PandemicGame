@@ -4,10 +4,13 @@
 
 #include "Card.h"
 #include "Colour.h"
-#include "City.h"
+//#include "City.h"
+
+//class Card;
+class City;
 
 class CityCard
-	: Card
+	: public Card
 {
 public:
 	
