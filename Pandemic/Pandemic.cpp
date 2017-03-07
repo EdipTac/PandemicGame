@@ -46,6 +46,7 @@ bool driveOrFerry();
 bool directFlight();
 bool charterFlight();
 bool shuttleFlight();
+bool buildResearchStation();
 void quit();
 bool actionQuit();
 std::string solicitFileName();
@@ -203,13 +204,8 @@ bool charterFlight()
 {
 	auto& player = game->currentPlayer();
 	auto& pawn = player.pawn();
-	const auto& cards = player.cityCards();
-	const auto& isPositionCard = [&pawn](const PlayerCityCard* card)
-	{
-		return card->city() == pawn.position();
-	};
 
-	if (!std::any_of(cards.begin(), cards.end(), isPositionCard))
+	if (!player.hasPositionCard())
 	{
 		std::cout << "You don't have any city cards that match your position.\n";
 		return false;
@@ -217,6 +213,8 @@ bool charterFlight()
 
 	const auto& target = solicitCity();
 	pawn.setPosition(target);
+
+	// Must still remove card!
 
 	return true;
 }
@@ -247,6 +245,11 @@ bool shuttleFlight()
 	}
 	
 	return true;
+}
+
+bool buildResearchStation()
+{
+	return false;
 }
 
 void quit()

@@ -48,4 +48,7 @@ public:
 	void setName(const std::string name);
 
 	void displayCards();
+
+	// True iff the player has a city card matching their pawn's position
+	bool hasPositionCard() const;
 };
