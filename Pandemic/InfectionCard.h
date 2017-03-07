@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <string>
+
 #include "CityCard.h"
 
 class InfectionCard
@@ -13,7 +15,7 @@ class InfectionCard
 {
 public:
 	InfectionCard(City& city);
-	string getCityName() const; 
+	std::string getCityName() const;
 	Colour getCityColour() const;
 	City getCity() const;
 };

@@ -3,6 +3,7 @@
 
 #include "City.h"
 #include "Colour.h"
+#include "InfectionCardDeck.h"
 
 City::City(const std::string& name, const Colour& colour)
 	: _name { name }

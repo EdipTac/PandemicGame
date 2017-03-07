@@ -10,12 +10,12 @@ class Deck {
 
 public:
 	
-	Deck();
-	Deck(Card& card);
-	virtual ~Deck();
-	virtual void shuffleDeck();
-	virtual void printDeck();
-	virtual std::unique_ptr<Card*> drawCard();
+	//Deck();
+	//Deck(Card& card);
+	//virtual ~Deck();
+	//virtual void shuffleDeck();
+	//virtual void printDeck();
+	//virtual std::unique_ptr<Card*> drawCard();
 
 
 protected:

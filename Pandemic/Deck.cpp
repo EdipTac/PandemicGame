@@ -2,7 +2,7 @@
 
 
 
-Deck::~Deck() {}
+//Deck::~Deck() {}
 
 //EDIP -- fix this.
 //void Deck::shuffleDeck() {
