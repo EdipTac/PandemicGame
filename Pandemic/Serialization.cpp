@@ -119,3 +119,6 @@ void writeMapToFile(const Map& map, const std::string& fileName)
 		}
 	}
 }
+
+//std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
+//{}
