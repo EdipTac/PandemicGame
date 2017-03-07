@@ -7,7 +7,9 @@
 
 #include "Colour.h"
 #include "CubePool.h"
-#include "InfectionCardDeck.h"
+//#include "InfectionCardDeck.h"
+
+class InfectionCardDeck;
 
 // Represents a single city.
 // Each city should belong to a map. A city has a name and a coloured "region" that it belongs to, for the purposes of disease classification.

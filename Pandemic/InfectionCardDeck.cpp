@@ -3,31 +3,34 @@ InfectionDeckCard.cpp: .cpp source of InfectionDeckCard class and functions
 Author: Ke chun Ye
 Version: 1.0
 Data: 20170209*/
-#include <iostream>
-#include "InfectionCardDeck.h"
-#include <ctime>
+
 #include <algorithm>
+#include <ctime>
+#include <iostream>
 #include <string>
 
-using namespace std;
+#include "InfectionCardDeck.h"
 
-InfectionCardDeck::InfectionCardDeck(string fileName) {
+InfectionCardDeck::InfectionCardDeck(std::string fileName)
+{
 	// initiate 48 infection cards on deck
-	Map &map = readMapFromFile(fileName);
+	auto map = readMapFromFile(fileName);
 
-	for (const auto& city : map.cities())
+	for (const auto& city : map->cities())
 	{
 		deck.push_back(InfectionCard(*city));
 	}
 
     shuffle(deck);// shuffle infection cards on deck/
 }
-void InfectionCardDeck::shuffle(vector <InfectionCard>& cards) {
-	 
-	std::random_shuffle(cards.begin(), cards.end());
+#pragma warning (push)
+#pragma warning (disable: 4100) // S since cards isn't used
+void InfectionCardDeck::shuffle(std::vector <InfectionCard>& cards) {
+	// Won't compile
+	//std::random_shuffle(cards.begin(), cards.end());
 	 
 	}
-
+#pragma warning (pop)
 
 InfectionCardDeck::~InfectionCardDeck() {
 
@@ -35,17 +38,17 @@ InfectionCardDeck::~InfectionCardDeck() {
 
 void InfectionCardDeck::print() {
 	for (const auto& infectionCard : deck) {
-	   cout << "Infection cards on deck : " << infectionCard.getCityName() <<" with the colour of: " << colourAbbreviation(infectionCard.getCityColour()) <<endl;
+		std::cout << "Infection cards on deck : " << infectionCard.getCityName() <<" with the colour of: " << colourAbbreviation(infectionCard.getCityColour()) << std::endl;
 	}
 }
 void InfectionCardDeck::checkInfectionCardHistory() {
 	for (const auto& infectionCard : discardPile) {
-		cout << "Infection cards on discard pile: " << infectionCard.getCityName() << " with the colour of: " << colourAbbreviation(infectionCard.getCityColour()) << endl;
+		std::cout << "Infection cards on discard pile: " << infectionCard.getCityName() << " with the colour of: " << colourAbbreviation(infectionCard.getCityColour()) << std::endl;
 	}
 }
 void InfectionCardDeck::flipInfectionCard(CubePool& pool) {
 	if (deck.size() < 1) {
-		cout << "There is no more infection cards to draw " << endl;
+		std::cout << "There is no more infection cards to draw " << std::endl;
 
 	}
 	else {
@@ -62,18 +65,21 @@ int InfectionCardDeck::getInfectionRate() {
 	return infectionRate;
 }
 void InfectionCardDeck::moveOutbreakMarker() {
-	if (outbreakMarker = 5) {
-		cout << "Outbreak tracker reaches the last space, the game is over. " << endl;
+	if (outbreakMarker == 5) {
+		std::cout << "Outbreak tracker reaches the last space, the game is over. " << std::endl;
 		system("pause");
 		system(0);
 	}
 	outbreakMarker++;
 	infectionRate = outbreakTracker[outbreakMarker];
 }
+
+// Use pointers!
 void InfectionCardDeck::pullBottomInfectionCard(CubePool& pool) {
 	(deck[0].getCity()).addDiseaseCubes(deck[0].getCityColour(), CUBE_EPIDEMIC_INFECTION, pool, *this);
 	discardPile.push_back(deck[0]);
-    deck.erase(deck.begin());
+	// Won't compile
+    //deck.erase(deck.begin());
 	deck.shrink_to_fit();
 
 }

@@ -7,13 +7,14 @@ Data: 20170209*/
 #include <iostream>
 #include <string>
 
+#include "City.h"
 #include "InfectionCard.h"
 
 InfectionCard::InfectionCard(City& city)
 	: CityCard { city }
 
 {}
-string InfectionCard::getCityName() const{
+std::string InfectionCard::getCityName() const{
 	return name();
 }
 Colour InfectionCard::getCityColour() const {
