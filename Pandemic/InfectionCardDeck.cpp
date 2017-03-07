@@ -74,7 +74,6 @@ void InfectionCardDeck::moveOutbreakMarker() {
 	infectionRate = outbreakTracker[outbreakMarker];
 }
 
-// Use pointers!
 void InfectionCardDeck::pullBottomInfectionCard(CubePool& pool) {
 	(deck[0]->city()).addDiseaseCubes(deck[0]->colour(), CUBE_EPIDEMIC_INFECTION, pool, *this);
 	discardPile.push_back(move(deck[0]));
