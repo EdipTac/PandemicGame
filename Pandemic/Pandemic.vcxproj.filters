@@ -23,6 +23,15 @@
     <Filter Include="General\src">
       <UniqueIdentifier>{ebbb15ad-6978-42dc-af33-b3e807544bcc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Menus">
+      <UniqueIdentifier>{15999139-a7f9-42ac-bb4f-b6f66e343798}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menus\header">
+      <UniqueIdentifier>{f3f60604-24cd-4a70-8234-278ae3ba1966}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Menus\src">
+      <UniqueIdentifier>{f13a43fe-de5a-4b06-bf76-b5690cdc0bf1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -70,12 +79,6 @@
     <ClInclude Include="Map.h">
       <Filter>General\header</Filter>
     </ClInclude>
-    <ClInclude Include="Menu.h">
-      <Filter>General\header</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuOption.h">
-      <Filter>General\header</Filter>
-    </ClInclude>
     <ClInclude Include="Pawn.h">
       <Filter>General\header</Filter>
     </ClInclude>
@@ -93,6 +96,12 @@
     </ClInclude>
     <ClInclude Include="DeckofRoles.h">
       <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Menus\header</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuOption.h">
+      <Filter>Menus\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -141,12 +150,6 @@
     <ClCompile Include="Map.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>General\src</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuOption.cpp">
-      <Filter>General\src</Filter>
-    </ClCompile>
     <ClCompile Include="Pawn.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
@@ -165,6 +168,9 @@
     </ClCompile>
     <ClCompile Include="DeckofRoles.cpp">
       <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Menus\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -150,7 +150,6 @@
     <ClCompile Include="InfectionCardDeck.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="MenuOption.cpp" />
     <ClCompile Include="Pandemic.cpp" />
     <ClCompile Include="Pawn.cpp" />
     <ClCompile Include="Player.cpp" />
