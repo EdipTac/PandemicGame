@@ -15,7 +15,7 @@ class InfectionCardDeck {
 public:
 	//Default constructor
 	InfectionCardDeck(std::string fileName);
-	void shuffle(std::vector <InfectionCard>& );
+	void shuffle(std::vector <std::unique_ptr<InfectionCard>>&);
 	     //shuffle - shuffle infection cards in random order
 	     //@param vector <InfectionCard> - infection card vector which 
 	void flipInfectionCard(CubePool&);
@@ -46,8 +46,8 @@ private:
 	int infectionRate; // infection rate
 	const unsigned int outbreakTracker[7] = { 2,2,2,3,3,4,4 };// outbreak marker tracker
 	int outbreakMarker = 0;
-	vector <unique_ptr<InfectionCard>> deck; // vector holds all unused infection cards
-	vector <InfectionCard> discardPile;// vector holds all used infection cards
+	std::vector <std::unique_ptr<InfectionCard>> deck; // vector holds all unused infection cards
+	std::vector <std::unique_ptr<InfectionCard>> discardPile;// vector holds all used infection cards
 	unsigned int const CUBE_NORMAL_INFECTION = 1;
 	unsigned int const CUBE_EPIDEMIC_INFECTION = 3;
 	

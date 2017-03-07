@@ -25,7 +25,7 @@ InfectionCardDeck::InfectionCardDeck(std::string fileName)
 }
 #pragma warning (push)
 #pragma warning (disable: 4100) // S since cards isn't used
-void InfectionCardDeck::shuffle(vector <unique_ptr<InfectionCard>>& cards) {
+void InfectionCardDeck::shuffle(std::vector <std::unique_ptr<InfectionCard>>& cards) {
 	// Won't compile
 	//std::random_shuffle(cards.begin(), cards.end());
 	 
@@ -38,12 +38,12 @@ InfectionCardDeck::~InfectionCardDeck() {
 
 void InfectionCardDeck::print() {
 	for (const auto& infectionCard : deck) {
-		std::cout << "Infection cards on deck : " << infectionCard->getCityName() <<" with the colour of: " << colourAbbreviation(infectionCard->getCityColour()) << std::endl;
+		std::cout << "Infection cards on deck : " << infectionCard->name() <<" with the colour of: " << colourAbbreviation(infectionCard->colour()) << std::endl;
 	}
 }
 void InfectionCardDeck::checkInfectionCardHistory() {
 	for (const auto& infectionCard : discardPile) {
-		std::cout << "Infection cards on discard pile: " << infectionCard->getCityName() << " with the colour of: " << colourAbbreviation(infectionCard->getCityColour()) << std::endl;
+		std::cout << "Infection cards on discard pile: " << infectionCard->name() << " with the colour of: " << colourAbbreviation(infectionCard->colour()) << std::endl;
 	}
 }
 void InfectionCardDeck::flipInfectionCard(CubePool& pool) {
@@ -54,7 +54,7 @@ void InfectionCardDeck::flipInfectionCard(CubePool& pool) {
 	else {
 
 		auto temp = move(deck[deck.size() -1]);
-		(temp->getCity()).addDiseaseCubes(temp->getCityColour(), CUBE_NORMAL_INFECTION, pool, *this);
+		(temp->city()).addDiseaseCubes(temp->colour(), CUBE_NORMAL_INFECTION, pool, *this);
 		deck.pop_back();
 		deck.shrink_to_fit();
 		discardPile.push_back(temp);
@@ -76,7 +76,7 @@ void InfectionCardDeck::moveOutbreakMarker() {
 
 // Use pointers!
 void InfectionCardDeck::pullBottomInfectionCard(CubePool& pool) {
-	(deck[0]->getCity()).addDiseaseCubes(deck[0]->getCityColour(), CUBE_EPIDEMIC_INFECTION, pool, *this);
+	(deck[0]->city()).addDiseaseCubes(deck[0]->colour(), CUBE_EPIDEMIC_INFECTION, pool, *this);
 	discardPile.push_back(deck[0]);
    deck[0].reset(nullptr);
    deck.erase(deck.begin());
