@@ -13,11 +13,11 @@ using namespace std;
 
 InfectionCardDeck::InfectionCardDeck(string fileName) {
 	// initiate 48 infection cards on deck
-	Map &map = readMapFromFile(fileName);
+	auto  map = readMapFromFile(fileName);
 
-	for (const auto& city : map.cities())
+	for (const auto& city : map->cities())
 	{
-		deck.push_back(InfectionCard(*city));
+		deck.push_back(std::make_unique<InfectionCard>(*city));
 	}
 
     shuffle(deck);// shuffle infection cards on deck/
