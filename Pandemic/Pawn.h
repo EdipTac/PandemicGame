@@ -16,12 +16,12 @@ public:
 	const Player& owner() const;
 
 	// The city the pawn is in
-	const City& position() const;
+	City& position();
 
 	// Sets the pawn to a new position
-	Pawn& setPosition(const City& position);
+	Pawn& setPosition(City& position);
 
 private:
-	const City* _position;
+	City* _position;
 	const Player& _owner;
 };

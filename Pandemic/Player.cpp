@@ -43,9 +43,9 @@ void Player::displayCards() {
 	}
 }
 
-bool Player::hasPositionCard() const
+bool Player::hasPositionCard()
 {
-	const auto& position = _pawn.position();
+	auto& position = _pawn.position();
 	const auto& isPositionCard = [&position](const PlayerCityCard* card)
 	{
 		return card->city() == position;

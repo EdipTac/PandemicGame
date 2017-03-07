@@ -175,7 +175,7 @@ bool driveOrFerry()
 		std::cout << "\t" << connection->name() << "\n";
 	}
 
-	const auto& newPosition = solicitConnection(position);
+	auto& newPosition = solicitConnection(position);
 	player.pawn().setPosition(newPosition);
 
 	return true;
@@ -202,6 +202,8 @@ bool directFlight()
 
 bool charterFlight()
 {
+	// INCOMPLETE
+
 	auto& player = game->currentPlayer();
 	auto& pawn = player.pawn();
 
@@ -211,10 +213,10 @@ bool charterFlight()
 		return false;
 	}
 
-	const auto& target = solicitCity();
+	auto& target = solicitCity();
 	pawn.setPosition(target);
 
-	// Must still remove card!
+	// TODO - Discard card
 
 	return true;
 }
@@ -243,13 +245,34 @@ bool shuttleFlight()
 		std::cout << "There are no other cities with research stations.\n";
 		return false;
 	}
+
+	// TODO - Discard card
 	
 	return true;
 }
 
 bool buildResearchStation()
 {
-	return false;
+	// INCOMPLETE
+	auto& player = game->currentPlayer();
+	if (!player.hasPositionCard())
+	{
+		std::cout << "No city card which matches our current position.\n";
+		return false;
+	}
+
+	if (!game->hasResearchStation())
+	{
+		std::cout << "No research stations left to build.\n";
+		return false;
+	}
+
+	// TODO - Implement stealing from other cities with research stations
+
+	// TODO - Discard card
+
+	player.pawn().position().giveResearchStation(*game);
+	return true;
 }
 
 void quit()
