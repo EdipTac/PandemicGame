@@ -6,7 +6,9 @@
 #include <string>
 
 // PlayerCityCard class - represents PlayerCards of type City.
-class PlayerCityCard : public PlayerCard, CityCard {
+class PlayerCityCard
+	: public PlayerCard, CityCard
+{
 public:
 	// Default Constructor
 	//PlayerCityCard();
@@ -15,6 +17,12 @@ public:
 
 	~PlayerCityCard() override;
 
+	bool isCityCard() const override;
+
 	// Custom implementation of the inherited virtual function from PlayerCard
 	std::string toString();
+
+	// Inherited via PlayerCard
+	virtual std::string name() const override;
+	virtual std::string description() const override;
 };

@@ -10,6 +10,11 @@ PlayerCard::PlayerCard()
 
 PlayerCard::~PlayerCard() {}
 
+bool PlayerCard::isCityCard() const
+{
+	return false;
+}
+
 // virtual function that converts a PlayerCard object into an informative string.
 std::string PlayerCard::toString()
 {

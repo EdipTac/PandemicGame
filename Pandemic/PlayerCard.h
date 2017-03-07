@@ -12,6 +12,7 @@ public:
 	// Default Constructor
 	PlayerCard();
 	virtual ~PlayerCard() override;
+	virtual bool isCityCard() const;
 
 	// virtual function that converts a PlayerCard object into an informative string.
 	virtual std::string toString();

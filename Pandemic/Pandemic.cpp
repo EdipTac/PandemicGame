@@ -30,6 +30,7 @@
 #include "City.h"
 #include "GameState.h"
 #include "Player.h"
+#include "PlayerCityCard.h"
 #include "Map.h"
 #include "Menu.h"
 #include "Serialization.h"
@@ -43,6 +44,7 @@ void loadGame();
 void waitForExit();
 void performAction();
 void driveOrFerry();
+void directFlight();
 std::string solicitFileName();
 City& solicitCity(const Map& map);
 City& solicitConnection(const Map& map, const City& source);
@@ -77,8 +79,9 @@ const Menu turnMenu
 const Menu actionMenu
 {
 	{
-		{ "Drive/Ferry", driveOrFerry			},
-		{ "Quit Game",	 []() { game->quit(); } }
+		{ "Drive/Ferry",	driveOrFerry			},
+		{ "Direct Flight",	directFlight			},
+		{ "Quit Game",		[]() { game->quit(); }	}
 	}
 };
 
@@ -154,11 +157,28 @@ void driveOrFerry()
 	std::cout << "You can move to\n";
 	for (const auto& connection : position.connections())
 	{
-		std::cout << "\t" << connection->name();
+		std::cout << "\t" << connection->name() << "\n";
 	}
 
 	const auto& newPosition = solicitConnection(game->map(), position);
 	player.pawn().setPosition(newPosition);
+}
+
+void directFlight()
+{
+	const auto& cards = game->currentPlayer().cityCards();
+	
+	if (cards.empty())
+	{
+		std::cout << "You have no city cards.\n";
+		return;
+	}
+
+	std::cout << "City cards: \n";
+	for (const auto& card : cards)
+	{
+		std::cout << "\t" << card->name() << "\n";
+	}
 }
 
 std::string solicitFileName()
