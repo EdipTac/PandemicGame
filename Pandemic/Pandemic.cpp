@@ -73,6 +73,7 @@ constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
 constexpr size_t actionsPerTurn = 4;
 
+// Global state is evil :( Need better solution
 std::unique_ptr<GameState> game;
 
 const GeneralMenu mainMenu
