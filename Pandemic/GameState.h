@@ -27,6 +27,8 @@ public:
 	unsigned researchStations() const;
 	void removeResearchStation();
 	bool hasResearchStation() const;
+	void cure(const Colour& colour);
+	bool isCured(const Colour& colour) const;
 
 private:
 	bool _shouldQuit = false;
@@ -34,6 +36,7 @@ private:
 	std::vector<std::unique_ptr<Player>> _players;
 	size_t _currentPlayerIdx = std::numeric_limits<size_t>::max();
 	CubePool _cubePool;
+	std::map<Colour, bool> _cured;
 	unsigned _outbreakCounter;
 	unsigned _researchStations = 6;
 };

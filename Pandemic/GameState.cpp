@@ -2,7 +2,12 @@
 
 GameState::GameState()
 	: _cubePool { 96 / 4 }
-{}
+{
+	for (const auto& colour : colours())
+	{
+		_cured[colour] = false;
+	}
+}
 
 const std::vector<std::unique_ptr<Player>>& GameState::players() const
 {
@@ -71,4 +76,14 @@ void GameState::removeResearchStation()
 bool GameState::hasResearchStation() const
 {
 	return _researchStations > 0;
+}
+
+void GameState::cure(const Colour& colour)
+{
+	_cured[colour] = true;
+}
+
+bool GameState::isCured(const Colour& colour) const
+{
+	return _cured.at(colour);
 }

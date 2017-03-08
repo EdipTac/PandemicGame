@@ -40,10 +40,17 @@
 #include "Serialization.h"
 #include "Util.h"
 
+// Possibly TODO - factor options into separate file
+// Note - May need to pass GameState& parameter in this case
+
+// Main menu options
 void newGame();
 void loadGame();
 void waitForExit();
 void performAction();
+void quit();
+
+// Action menu options
 bool driveOrFerry();
 bool directFlight();
 bool charterFlight();
@@ -51,8 +58,9 @@ bool shuttleFlight();
 bool buildResearchStation();
 bool treatDisease();
 bool shareKnowledge();
-void quit();
+bool cureDisease();
 bool actionQuit();
+
 void showCity(std::unique_ptr<City>&);
 void displayCities();
 std::string solicitFileName();
@@ -94,6 +102,7 @@ const ActionMenu actionMenu
 		{ "Build a Research Station",	buildResearchStation	},
 		{ "Treat Disease",				treatDisease			},
 		{ "Share Knowledge",			shareKnowledge			},
+		{ "Cure Disease",				cureDisease				},
 		{ "Quit Game",					actionQuit				}
 	}
 };
@@ -337,6 +346,19 @@ bool shareKnowledge()
 	}
 
 	// TODO
+
+	return true;
+}
+
+bool cureDisease()
+{
+	auto& player = game->currentPlayer();
+	if (!player.pawn().position().hasResearchStation())
+	{
+		std::cout << "No research station in this city.\n";
+		return false;
+	}
+	//auto cityCards = game->currentPlayer().cityCards();
 
 	return true;
 }
