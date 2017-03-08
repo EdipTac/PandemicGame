@@ -25,8 +25,6 @@
 #include <string>
 #include <vector>
 
-
-
 // Project file inclusions
 #include "Card.h"
 #include "City.h"
@@ -39,6 +37,7 @@
 #include "PlayerCityCard.h"
 #include "Serialization.h"
 #include "Util.h"
+
 
 // Possibly TODO - factor options into separate file
 // Note - May need to pass GameState& parameter in this case
@@ -61,7 +60,7 @@ bool shareKnowledge();
 bool cureDisease();
 bool actionQuit();
 
-void showCity(std::unique_ptr<City>&);
+void showCity(const City& city);
 void displayCities();
 std::string solicitFileName();
 City& solicitCity();
@@ -320,7 +319,7 @@ bool shareKnowledge()
 	ActionMenu
 	{
 		{
-			{ " Give Knowledge", [](){ return false; } },
+			{ " Give Knowledge", [](){ return false; } }, // Placeholder
 			{ " Take Knowledge", [](){ return false; } },
 		}
 	}.solicitInput();
@@ -459,27 +458,17 @@ size_t solicitSize(size_t min, size_t max)
 	return size;
 }
 
-void showCity(std::unique_ptr <City> const &city) {
-	std::cout << city->name() << " Colour: " << colourAbbreviation(city->colour()) << "\n" <<
-		"Infection status: " << "\n" << "Blue Cube: " << city->diseaseCubes(Colour::Blue) << "\n"
-		"Black Cube: " << city->diseaseCubes(Colour::Black) << "\n" << "Red Cube: " << city->diseaseCubes(Colour::Red)
-		<< "\n" << "Yellow Cube: " << city->diseaseCubes(Colour::Yellow) << "\n" << "Is quarantined: " << city->quarantined() << "\n"
-		<< "Has research station ? " << city->hasResearchStation() << "\n" << "Outbreak status: \n" <<
-		"Blue disease outbreak: " << city->diseaseOutbreak(Colour::Blue) << "\n"
-		"Black disease outbreak: " << city->diseaseOutbreak(Colour::Black) << "\n" << "Red Cube: " << city->diseaseOutbreak(Colour::Red)
-		<< "\n" << "Yellow Cube: " << city->diseaseOutbreak(Colour::Yellow) << std::endl;
+void showCity(const City& city)
+{
+	std::cout << city.name() << " Colour: " << colourAbbreviation(city.colour()) << "\n" <<
+		"Infection status: " << "\n" << "Blue Cube: " << city.diseaseCubes(Colour::Blue) << "\n"
+		"Black Cube: " << city.diseaseCubes(Colour::Black) << "\n" << "Red Cube: " << city.diseaseCubes(Colour::Red)
+		<< "\n" << "Yellow Cube: " << city.diseaseCubes(Colour::Yellow) << "\n" << "Is quarantined: " << city.quarantined() << "\n"
+		<< "Has research station ? " << city.hasResearchStation() << "\n" << "Outbreak status: \n" <<
+		"Blue disease outbreak: " << city.diseaseOutbreak(Colour::Blue) << "\n"
+		"Black disease outbreak: " << city.diseaseOutbreak(Colour::Black) << "\n" << "Red Cube: " << city.diseaseOutbreak(Colour::Red)
+		<< "\n" << "Yellow Cube: " << city.diseaseOutbreak(Colour::Yellow) << std::endl;
 }
-void showCity(City* city) {
-	std::cout << city->name() << " Colour: " << colourAbbreviation(city->colour()) << "\n" <<
-		"Infection status: " << "\n" << "Blue Cube: " << city->diseaseCubes(Colour::Blue) << "\n"
-		"Black Cube: " << city->diseaseCubes(Colour::Black) << "\n" << "Red Cube: " << city->diseaseCubes(Colour::Red)
-		<< "\n" << "Yellow Cube: " << city->diseaseCubes(Colour::Yellow) << "\n" << "Is quarantined: " << city->quarantined() << "\n"
-		<< "Has research station ? " << city->hasResearchStation() << "\n" << "Outbreak status: \n" <<
-		"Blue disease outbreak: " << city->diseaseOutbreak(Colour::Blue) << "\n"
-		"Black disease outbreak: " << city->diseaseOutbreak(Colour::Black) << "\n" << "Red Cube: " << city->diseaseOutbreak(Colour::Red)
-		<< "\n" << "Yellow Cube: " << city->diseaseOutbreak(Colour::Yellow) << std::endl;
-}
-
 
 void displayCities() {
 	auto& player = game->currentPlayer();
@@ -496,7 +485,7 @@ void displayCities() {
 			for (const auto& city : game->map().cities())
 			{
 				std::cout << "City_Index_" << index << ":\n";
-				showCity(city);
+				showCity(*city);
 				index++;
 			}
 		}
@@ -508,14 +497,14 @@ void displayCities() {
 				std::cin >> op;
 				if (op == 'A' || op == 'a') {
 					std::cin >> index;
-					showCity(game->map().cities()[index]);
+					showCity(*game->map().cities()[index]);
 			     
 				}
 				else if (op == 'B' || op == 'b') {
 					std::cin >> cityName;
 					for (const auto& city : game->map().cities()) {
 						if (lowercaseEquals(city->name(),cityName)) {
-							showCity(city);
+							showCity(*city);
 						}
 					}
 				}
@@ -526,7 +515,7 @@ void displayCities() {
 				if(op == 'Y' || op == 'y') {
 					for (const auto& city : game->map().cities()[index]->connections())
 					{
-						showCity(city);
+						showCity(*city);
 						
 					}
 				}
@@ -538,7 +527,7 @@ void displayCities() {
 			std::cout << "In one action, you can move to\n";
 			for (const auto& city : position.connections())
 			{
-				showCity(city);
+				showCity(*city);
 			}
 
 		}

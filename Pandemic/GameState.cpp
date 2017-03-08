@@ -1,3 +1,7 @@
+#include <algorithm>
+#include <vector>
+#include <memory>
+
 #include "GameState.h"
 
 GameState::GameState()
@@ -86,4 +90,27 @@ void GameState::cure(const Colour& colour)
 bool GameState::isCured(const Colour& colour) const
 {
 	return _cured.at(colour);
+}
+
+void GameState::advanceInfectionCounter()
+{
+	_infectionCounter = std::min(_infectionCounter + 1, 7u);
+}
+
+unsigned GameState::infectionRate() const
+{
+	const auto& c = _infectionCounter; // Alias
+	return	(1 <= c && c <= 3)	? 2 :
+			(4 <= c && c <= 5)	? 3 :
+								  4 ;
+}
+
+void GameState::advanceOutbreakCounter()
+{
+	++_outbreakCounter;
+	if (_outbreakCounter >= 8)
+	{
+		std::cout << "You lose! 8 outbreaks.\n";
+		quit();
+	}
 }

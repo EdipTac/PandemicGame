@@ -30,14 +30,20 @@ public:
 	void cure(const Colour& colour);
 	bool isCured(const Colour& colour) const;
 
+	void advanceInfectionCounter();
+	unsigned infectionRate() const;
+
+	void advanceOutbreakCounter();
+
 private:
-	bool _shouldQuit = false;
 	std::unique_ptr<Map> _map;
 	std::vector<std::unique_ptr<Player>> _players;
 	size_t _currentPlayerIdx = std::numeric_limits<size_t>::max();
 	CubePool _cubePool;
 	std::map<Colour, bool> _cured;
-	unsigned _outbreakCounter;
+	unsigned _infectionCounter = 1;
+	unsigned _outbreakCounter = 0;
+	bool _shouldQuit = false;
 	unsigned _researchStations = 6;
 };
 
