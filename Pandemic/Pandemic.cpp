@@ -50,6 +50,7 @@ bool charterFlight();
 bool shuttleFlight();
 bool buildResearchStation();
 bool treatDisease();
+bool shareKnowledge();
 void quit();
 bool actionQuit();
 void showCity(std::unique_ptr<City>&);
@@ -92,6 +93,7 @@ const ActionMenu actionMenu
 		{ "Shuttle Flight",				shuttleFlight			},
 		{ "Build a Research Station",	buildResearchStation	},
 		{ "Treat Disease",				treatDisease			},
+		{ "Share Knowledge",			shareKnowledge			},
 		{ "Quit Game",					actionQuit				}
 	}
 };
@@ -298,6 +300,44 @@ bool treatDisease()
 	}
 
 	// TODO - Add selection mechanism
+	return true;
+}
+
+bool shareKnowledge()
+{
+	// TODO
+
+	ActionMenu
+	{
+		{
+			{ " Give Knowledge", [](){ return false; } },
+			{ " Take Knowledge", [](){ return false; } },
+		}
+	}.solicitInput();
+
+
+	// Factor into separate function
+	auto& currentPlayer = game->currentPlayer();
+	const auto& position = currentPlayer.pawn().position();
+	const auto& players = game->players();
+	
+	std::vector<std::reference_wrapper<Player>> others;
+	for (const auto& player : players)
+	{
+		if (player.get() != &currentPlayer && player->pawn().position() == position)
+		{
+			others.push_back(*player);
+		}
+	}
+
+	if (others.empty())
+	{
+		std::cout << "No other players in your city.\n";
+		return false;
+	}
+
+	// TODO
+
 	return true;
 }
 
