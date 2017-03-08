@@ -103,6 +103,19 @@ void City::giveResearchStation(GameState& game)
 	_hasResearchStation = true;
 }
 
+std::vector<Colour> City::diseases() const
+{
+	std::vector<Colour> d;
+	for (const auto& colour : colours())
+	{
+		if (_diseaseCubes[colour] > 0)
+		{
+			d.push_back(colour);
+		}
+	}
+	return d;
+}
+
 bool operator==(const City& lhs, const City& rhs)
 {
 	return lhs._name == rhs._name;

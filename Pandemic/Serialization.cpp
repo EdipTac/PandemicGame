@@ -80,6 +80,7 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 	return std::move(map);
 }
 
+/*
 void writeMapToFile(const Map& map, const std::string& fileName)
 {
 	//throw std::logic_error { "Not implemented." };
@@ -119,6 +120,7 @@ void writeMapToFile(const Map& map, const std::string& fileName)
 		}
 	}
 }
+*/
 
 //std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 //{}

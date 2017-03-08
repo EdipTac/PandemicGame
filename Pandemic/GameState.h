@@ -22,10 +22,11 @@ public:
 	void quit();
 
 	Player& nextPlayer();
-	Player& currentPlayer() const;
+	Player& currentPlayer();
 
 	unsigned researchStations() const;
 	void removeResearchStation();
+	bool hasResearchStation() const;
 
 private:
 	bool _shouldQuit = false;

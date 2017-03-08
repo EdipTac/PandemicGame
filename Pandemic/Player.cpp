@@ -43,6 +43,16 @@ void Player::displayCards() {
 	}
 }
 
+bool Player::hasPositionCard()
+{
+	auto& position = _pawn.position();
+	const auto& isPositionCard = [&position](const PlayerCityCard* card)
+	{
+		return card->city() == position;
+	};
+	return !std::any_of(cityCards().begin(), cityCards().end(), isPositionCard);
+}
+
 std::vector<PlayerCityCard*> Player::cityCards() const
 {
 	std::vector<PlayerCityCard*> cards;

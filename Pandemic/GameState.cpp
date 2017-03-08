@@ -48,7 +48,7 @@ Player& GameState::nextPlayer()
 	return currentPlayer();
 }
 
-Player& GameState::currentPlayer() const
+Player& GameState::currentPlayer()
 {
 	return *_players[_currentPlayerIdx];
 }
@@ -66,4 +66,9 @@ void GameState::removeResearchStation()
 	}
 
 	--_researchStations;
+}
+
+bool GameState::hasResearchStation() const
+{
+	return _researchStations > 0;
 }

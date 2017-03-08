@@ -23,14 +23,6 @@ City& Map::addCity(CityPtr city)
 	return *_cities.back().get();
 }
 
-Player& Map::addPlayer(const std::string& name)
-{
-	_players.push_back(std::make_unique<Player>());
-	auto& player = *_players.back();
-	player.setName(name);
-	return player;
-}
-
 City& Map::city(const std::string& name) const
 {
 	const auto it = std::find_if(_cities.begin(), _cities.end(), [&](const std::unique_ptr<City>& cityPtr) -> bool
@@ -42,6 +34,16 @@ City& Map::city(const std::string& name) const
 		throw std::out_of_range { "No city of that name exits." };
 	}
 	return *it->get();
+}
+
+City* Map::findCityIfContained(const std::string& name) const
+{
+	City* p = nullptr;
+	if (contains(name))
+	{
+		p = &city(name);
+	}
+	return p;
 }
 
 bool Map::contains(const std::string& name) const
@@ -60,9 +62,4 @@ City& Map::startingCity() const
 const std::vector<Map::CityPtr>& Map::cities() const
 {
 	return _cities;
-}
-
-const std::vector<Map::PlayerPtr>& Map::players() const
-{
-	return _players;
 }

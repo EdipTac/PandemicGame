@@ -12,12 +12,12 @@ const Player& Pawn::owner() const
 	return _owner;
 }
 
-const City& Pawn::position() const
+City& Pawn::position()
 {
 	return *_position;
 }
 
-Pawn& Pawn::setPosition(const City & position)
+Pawn& Pawn::setPosition(City & position)
 {
 	_position = &position;
 	return *this;

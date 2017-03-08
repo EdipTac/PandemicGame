@@ -3,16 +3,19 @@
 
 #include "Menu.h"
 
-Menu::Menu(const std::vector<MenuOption>& options)
-	: _options { options }
+template <typename T>
+Menu<T>::Menu(const std::vector<MenuOption<T>>& options)
+	: _options { std::move(options) }
 {}
 
-void Menu::addOption(const MenuOption& option)
+template <typename T>
+void Menu<T>::addOption(const MenuOption<T>& option)
 {
 	_options.push_back(option);
 }
 
-void Menu::solicitInput() const
+template <typename T>
+T Menu<T>::solicitInput() const
 {
 	std::cout << string();
 	int idx;
@@ -27,10 +30,11 @@ void Menu::solicitInput() const
 		}
 		std::cout << "Not a valid option.\n";
 	}
-	_options[idx].action();
+	return _options[idx].action();
 }
 
-std::string Menu::string() const
+template <typename T>
+std::string Menu<T>::string() const
 {
 	std::stringstream ss;
 	ss << "Please select an option:\n";
@@ -41,3 +45,6 @@ std::string Menu::string() const
 	ss << ": ";
 	return ss.str();
 }
+
+template class Menu<void>;
+template class Menu<bool>;
