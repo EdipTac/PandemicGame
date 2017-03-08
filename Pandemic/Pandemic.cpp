@@ -1,4 +1,4 @@
-// Pandemic - Build 1
+//  Pandemic - Build 1
 //
 //					Authors
 //		============================
@@ -7,11 +7,11 @@
 //		Edip Tac		-	
 //		Kechun Ye		-	25654688
 //
-// Submitted 15/03/2017
+//  Submitted 15/03/2017
 //
-// Build 1 of project.
+//  Build 1 of project.
 //
-// An implementation of the board game "Pandemic" by Z-Man Games.
+//  An implementation of the board game "Pandemic" by Z-Man Games.
 
 // Disable static initialization warning
 #pragma warning (disable: 4592)
@@ -28,6 +28,7 @@
 // Project file inclusions
 #include "Card.h"
 #include "City.h"
+#include "EventCard.h"
 #include "GameState.h"
 #include "InfectionCard.h"
 #include "InfectionCardDeck.h"
@@ -42,14 +43,14 @@
 // Possibly TODO - factor options into separate file
 // Note - May need to pass GameState& parameter in this case
 
-// Main menu options
+//  ----  Main menu options  ----  //
 void newGame();
 void loadGame();
 void waitForExit();
 void performAction();
 void quit();
 
-// Action menu options
+//  ----  Action menu options  ----  //
 bool driveOrFerry();
 bool directFlight();
 bool charterFlight();
@@ -97,7 +98,7 @@ const ActionMenu actionMenu
 	{
 		{ "Drive/Ferry",				driveOrFerry			},
 		{ "Direct Flight",				directFlight			},
-		{ "Charter Flight",				directFlight			},
+		{ "Charter Flight",				charterFlight			},
 		{ "Shuttle Flight",				shuttleFlight			},
 		{ "Build a Research Station",	buildResearchStation	},
 		{ "Treat Disease",				treatDisease			},
@@ -173,6 +174,7 @@ void performAction()
 	}
 }
 
+// The player moves their pawn from its current position to another directly connected city.
 bool driveOrFerry()
 {
 	auto& player = game->currentPlayer();
@@ -183,7 +185,7 @@ bool driveOrFerry()
 
 	if (connections.empty())
 	{
-		std::cout << "Nowhere you can drive/ferry.\n";
+		std::cout << "Nowhere you can drive/ferry to.\n";
 		return false;
 	}
 
@@ -199,6 +201,7 @@ bool driveOrFerry()
 	return true;
 }
 
+// The player discards a city card to move to the indicated city.
 bool directFlight()
 {
 	const auto& cards = game->currentPlayer().cityCards();
