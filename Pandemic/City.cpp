@@ -9,7 +9,13 @@ City::City(const std::string& name, const Colour& colour)
 	: _name { name }
 	, _colour { colour }
 	, _diseaseCubes { 0 }
-	/*, _outbreaks {false}*/
+    , _outbreaks
+{
+	{ Colour::Black,false},
+	{ Colour::Blue,false},
+	{ Colour::Red,false },
+	{ Colour::Yellow,false}
+}
 	, _quarantined {false}
 {
 	// Empty
@@ -38,6 +44,11 @@ bool City::isConnectedTo(const City& target) const
 unsigned int City::diseaseCubes(const Colour& colour) const
 {
 	return _diseaseCubes[colour];
+}
+
+bool City::diseaseOutbreak(const Colour& colour) const
+{
+	return _outbreaks[colour];
 }
 
 void City::name(const std::string& name)

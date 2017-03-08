@@ -36,6 +36,8 @@ public:
 
 	// The number of disease cubes of a given colour the city has
 	unsigned int diseaseCubes(const Colour& colour) const;
+	// The outbreak status of each disease
+	bool diseaseOutbreak(const Colour& colour) const;
 
 	//    ----  Mutators  ----
 
@@ -61,6 +63,7 @@ public:
 	void setQuarantined() {
 		_quarantined = true;
 	}
+	
 
 	bool hasResearchStation() const;
 	void giveResearchStation(GameState& game);

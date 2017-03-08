@@ -5,7 +5,7 @@
 //		Michael Deom	-	29549641
 //		Jonny Linton	-	
 //		Edip Tac		-	
-//		Kechun Ye		-	
+//		Kechun Ye		-	25654688
 //
 // Submitted 15/03/2017
 //
@@ -24,6 +24,8 @@
 #include <sstream>
 #include <string>
 #include <vector>
+
+
 
 // Project file inclusions
 #include "Card.h"
@@ -47,6 +49,8 @@ void directFlight();
 void charterFlight();
 void shuttleFlight();
 void quit();
+void showCity(std::unique_ptr<City>&);
+void displayCities();
 std::string solicitFileName();
 City& solicitCity();
 City& solicitConnection(const City& source);
@@ -317,4 +321,105 @@ size_t solicitSize(size_t min, size_t max)
 		std::cout << "Not a valid number.\n";
 	}
 	return size;
+}
+void showCity(std::unique_ptr <City> const &city) {
+	std::cout << city->name() << " Colour: " << colourAbbreviation(city->colour()) << "\n" <<
+		"Infection status: " << "\n" << "Blue Cube: " << city->diseaseCubes(Colour::Blue) << "\n"
+		"Black Cube: " << city->diseaseCubes(Colour::Black) << "\n" << "Red Cube: " << city->diseaseCubes(Colour::Red)
+		<< "\n" << "Yellow Cube: " << city->diseaseCubes(Colour::Yellow) << "\n" << "Is quarantined: " << city->quarantined() << "\n"
+		<< "Has research station ? " << city->hasResearchStation() << "\n" << "Outbreak status: \n" <<
+		"Blue disease outbreak: " << city->diseaseOutbreak(Colour::Blue) << "\n"
+		"Black disease outbreak: " << city->diseaseOutbreak(Colour::Black) << "\n" << "Red Cube: " << city->diseaseOutbreak(Colour::Red)
+		<< "\n" << "Yellow Cube: " << city->diseaseOutbreak(Colour::Yellow) << std::endl;
+}
+void showCity(City* city) {
+	std::cout << city->name() << " Colour: " << colourAbbreviation(city->colour()) << "\n" <<
+		"Infection status: " << "\n" << "Blue Cube: " << city->diseaseCubes(Colour::Blue) << "\n"
+		"Black Cube: " << city->diseaseCubes(Colour::Black) << "\n" << "Red Cube: " << city->diseaseCubes(Colour::Red)
+		<< "\n" << "Yellow Cube: " << city->diseaseCubes(Colour::Yellow) << "\n" << "Is quarantined: " << city->quarantined() << "\n"
+		<< "Has research station ? " << city->hasResearchStation() << "\n" << "Outbreak status: \n" <<
+		"Blue disease outbreak: " << city->diseaseOutbreak(Colour::Blue) << "\n"
+		"Black disease outbreak: " << city->diseaseOutbreak(Colour::Black) << "\n" << "Red Cube: " << city->diseaseOutbreak(Colour::Red)
+		<< "\n" << "Yellow Cube: " << city->diseaseOutbreak(Colour::Yellow) << std::endl;
+}
+
+
+void displayCities() {
+	auto& player = game->currentPlayer();
+	const auto& position = player.pawn().position();
+	std::cout << "You are currently in " << position.name() << "\n";
+	while (true) {
+		int index = 0;
+		char op;
+		
+		std::cout <<"Press A,B,C,D to choose: \n" << "A) Dispaly all cities on the map " << "\n" << "B) Display specific city " << "\n"
+			<< "C) See direct connection cities with your current city" << "\n"<< "D) Quit" <<"\n";
+		std::cin >> op;
+		if (op == 'A' || op == 'a') {
+			for (const auto& city : game->map().cities())
+			{
+				std::cout << "City_Index_" << index << ":\n";
+				showCity(city);
+				index++;
+			}
+		}
+		else if (op == 'B' || op == 'b') {
+			
+				std::string cityName;
+				
+				std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
+				std::cin >> op;
+				if (op == 'A' || op == 'a') {
+					std::cin >> index;
+					showCity(game->map().cities()[index]);
+			     
+				}
+				else if (op == 'B' || op == 'b') {
+					std::cin >> cityName;
+					for (const auto& city : game->map().cities()) {
+						if (iequals(city->name(),cityName)) {
+							showCity(city);
+						}
+					}
+				}
+
+				std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
+				std::cin >> op;
+
+				if(op == 'Y' || op == 'y') {
+					for (const auto& city : game->map().cities()[index]->connections())
+					{
+						showCity(city);
+						
+					}
+				}
+
+
+		}
+		else if (op == 'C' || op == 'c') {
+
+			std::cout << "In one action, you can move to\n";
+			for (const auto& city : position.connections())
+			{
+				showCity(city);
+			}
+
+		}
+		else if (op == 'D' || op == 'd') {
+			break;
+		}
+
+	}
+	
+}
+
+bool iequals(const std::string& a, const std::string& b)
+{
+	unsigned int sz = a.size();
+	if (b.size() != sz)
+		return false;
+	for (unsigned int i = 0; i < sz; ++i)
+		if (tolower(a[i]) != tolower(b[i]))
+			return false;
+	return true;
 }
