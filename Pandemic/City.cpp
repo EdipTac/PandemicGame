@@ -48,7 +48,7 @@ unsigned int City::diseaseCubes(const Colour& colour) const
 
 bool City::diseaseOutbreak(const Colour& colour) const
 {
-	return _outbreaks[colour];
+	return _outbreaks.at(colour);
 }
 
 void City::name(const std::string& name)

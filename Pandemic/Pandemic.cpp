@@ -395,6 +395,7 @@ size_t solicitSize(size_t min, size_t max)
 	}
 	return size;
 }
+
 void showCity(std::unique_ptr <City> const &city) {
 	std::cout << city->name() << " Colour: " << colourAbbreviation(city->colour()) << "\n" <<
 		"Infection status: " << "\n" << "Blue Cube: " << city->diseaseCubes(Colour::Blue) << "\n"
@@ -450,7 +451,7 @@ void displayCities() {
 				else if (op == 'B' || op == 'b') {
 					std::cin >> cityName;
 					for (const auto& city : game->map().cities()) {
-						if (iequals(city->name(),cityName)) {
+						if (lowercaseEquals(city->name(),cityName)) {
 							showCity(city);
 						}
 					}
@@ -483,16 +484,4 @@ void displayCities() {
 		}
 
 	}
-	
-}
-
-bool iequals(const std::string& a, const std::string& b)
-{
-	unsigned int sz = a.size();
-	if (b.size() != sz)
-		return false;
-	for (unsigned int i = 0; i < sz; ++i)
-		if (tolower(a[i]) != tolower(b[i]))
-			return false;
-	return true;
 }
