@@ -229,6 +229,7 @@ bool driveOrFerry()
 	// Get target from player and move there
 	auto& newPosition = solicitConnection(position);
 	player.pawn().setPosition(newPosition);
+
 	return true;
 }
 
@@ -246,12 +247,10 @@ bool directFlight()
 		return false;
 	}
 
-	// List cards
+	// List cards, get player target, discard card, and move
 	std::cout << "City cards: \n";
 	list(cards);
-
 	auto& targetCard = *validateInput(cards, "You have no city card of that name.\n");
-
 	player.pawn().setPosition(targetCard.city());
 	player.removeCardByName(targetCard.name());
 
@@ -261,15 +260,18 @@ bool directFlight()
 // Player discards a city card matching the city they are in to fly to any city.
 bool charterFlight()
 {
+	// Aliases
 	auto& player = game->currentPlayer();
 	auto& pawn = player.pawn();
 
+	// Without cards you can't discard
 	if (!player.hasPositionCard())
 	{
 		std::cout << "You don't have any city cards that match your position.\n";
 		return false;
 	}
 
+	// Get city choice from player, move, and discard card
 	auto& target = solicitCity();
 	pawn.setPosition(target);
 	player.removeCardByName(player.pawn().position().name());
@@ -280,29 +282,30 @@ bool charterFlight()
 // Player moves from a city to a research station to any other city with a research station
 bool shuttleFlight()
 {
-	auto& player = game->currentPlayer();
+	auto& player = game->currentPlayer(); // Alias
+
+	// Not applicable if you have no research station in your city
 	if (!player.pawn().position().hasResearchStation())
 	{
 		std::cout << "Your city does not have a research station.\n";
 		return false;
 	}
 
-	const auto& stations = game->map().stations();
+	const auto& stations = game->map().stations(); // Alias
 
+	// If there are no other cities with stations, you can't move anywhere
 	if (stations.empty())
 	{
 		std::cout << "There are no other cities with research stations.\n";
 		return false;
 	}
 
+	// List stations, get target, and move
 	std::cout << "Where do you want to fly?\n";
-	for (const auto& city : stations)
-	{
-		std::cout << "\t" << city->name() << "\n";
-	}
-
+	list(stations);
 	auto& target = *validateInput(stations, "No city of that name has a research station.\n");
 	player.pawn().setPosition(target);
+
 	return true;
 }
 
