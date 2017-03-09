@@ -68,6 +68,7 @@ City& solicitCity();
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
 size_t solicitSize(size_t min, size_t max);
+template <typename T> T validateInput(const std::map<std::string, T>& validInputs, const std::string& errMsg);
 
 constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
@@ -109,6 +110,19 @@ const ActionMenu actionMenu
 };
 
 //	----    Program entry point    ----  //
+//#define TEST
+#ifdef TEST
+void main()
+{
+	std::map<std::string, int> m
+	{
+		{ "Hello",		1	},
+		{ "Goodbye",	2	}
+	};
+	std::cout << validateInput(m, "Yoooo\n") << std::endl;
+	waitForExit();
+}
+#else
 void main()
 {
 	// Title display
@@ -124,6 +138,7 @@ void main()
 
 	waitForExit();
 }
+#endif
 
 void newGame()
 {
@@ -462,18 +477,8 @@ std::string solicitFileName()
 
 City& solicitCity()
 {
-	std::cout << "Where would you like to place your pawn? ";
-	std::string cityName;
-	while (true)
-	{
-		std::cin >> cityName;
-		if (game->map().contains(cityName))
-		{
-			break;
-		}
-		std::cout << "No city of that name exists.\n";
-	}
-	return game->map().findCityByName(cityName);
+	std::cout << "Where would you like to fly to? ";
+	return *validateInput(game->map().nameMap(), "No city of that name exists.\n");
 }
 
 City& solicitConnection(const City& source)
@@ -605,4 +610,23 @@ void displayCities() {
 		}
 
 	}
+}
+
+template<typename T>
+T validateInput(const std::map<std::string, T>& valid, const std::string& errMsg)
+{
+	std::string input;
+	decltype(valid.find(input)) it;
+	while (true)
+	{
+		std::cin >> input;
+		std::cin.get();
+		it = valid.find(input);
+		if (it != valid.end())
+		{
+			break;
+		}
+		std::cout << errMsg;
+	}
+	return it->second;
 }
