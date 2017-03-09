@@ -127,18 +127,15 @@ void readGameFromFile(const std::string & fileName)
 	json j;
 	fs >> j;
 
-	//std::unique_ptr<GameState> gameState;
+	std::unique_ptr<GameState> gameState;
 
-	//// read and store the map information
-	//gameState->setMap(readMapFromFile(j["map"].get<std::string>()));
-	
+	// read and store the map information
+	std::string mapFilePath = j["map"].get<std::string>();
+	//gameState->setMap(readMapFromFile(mapFilePath)); // causing some memory error...
+
+
+	// PLAYER INITIALIZATION:
 	std::vector<json> playerListJSON = j["players"];
-	std::vector<std::unique_ptr<Player>> players;
-
-	//for (auto i = playerListJSON.begin(); i != playerListJSON.end(); ++i) {
-	//	//players.push_back(std::make_unique<Player>(*i));
-	//	std::cout << *i << "\n";
-	//}
 
 	for (int i=0; i < playerListJSON.size(); i++) {
 		//std::cout << playerListJSON.at(i)["name"].get<std::string>() << "\n";
@@ -146,28 +143,50 @@ void readGameFromFile(const std::string & fileName)
 		std::unique_ptr<Player> player;
 
 		// parse and set the player's name
-		player->setName(playerJSON["name"].get<std::string>());
+		std::string playerName = playerJSON["name"].get<std::string>();
+		//player->setName(playerName); // causing a error for some reason...
 
 		// parse and set the player's position
-		
-
+		std::string cityName = playerJSON["position"].get<std::string>();
+		//player->pawn().setPosition(std::make_unique<City>(cityName, "color"));
 
 		// parse and set the player's role
-		auto roleName = playerJSON["role"].get<std::string>();
+		std::string roleName = playerJSON["role"].get<std::string>();
+		//player->setRole(std::make_unique<RoleCard>(roleName, "description", "color"));
 
-		// search the hardcoded roles to find appropriate RoleCard
-		//RoleCard::getRoleWithName(roleName);
+		// loop through all of the cards in the hand list
+		std::vector<json> playerHandJSON = playerJSON["hand"];
+		for (int j = 0; j < playerHandJSON.size(); j++) {
+			// parse and set the player's hand (of PlayerCards)
+			std::string cardName = playerHandJSON.at(j).get<std::string>();
+
+			// some way of determining if it is a Event or a City card?
+			/*
+			if (EventCard) {
+				player->addCard(std::make_unique<EventCard>());
+			}
+			else if (PlayerCityCard) {
+				player->addCard(std::make_unique<PlayerCityCard>());
+			}
+			*/
+		}
 
 
-		// parse and set the player's hand (of PlayerCards)
 
-
-
-		// store this player into the vector of players
-		//players.push_back(std::move(player));
+		// store this player into the gameState
+		// also set current/next player?
+		//gameState->addPlayer(std::move(player));
 	}
-
 	
+	// CITIES INITIALIZATION:
+	std::vector<json> cityListJSON = j["cities"];
+
+	for (int i = 0; i < cityListJSON.size(); i++) {
+		auto cityJSON = cityListJSON.at(i);
+
+		auto cityName = cityJSON["name"].get<std::string>();
+
+	}
 
 
 }

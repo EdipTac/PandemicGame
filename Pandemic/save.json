@@ -27,7 +27,8 @@
 	],		
 	"cities": [
 		{
-			"Montreal": {
+			"name": "Montreal",
+      "diseaseCubes": {
 				"B": 1,
 				"Y": 2,
 				"K": 0,
@@ -36,7 +37,8 @@
 			"researchStation": true
 		},
 		{
-			"Toronto": {
+			"name": "Toronto",
+      "diseaseCubes": {
 				"B": 0,
 				"Y": 0,
 				"K": 0,
@@ -45,7 +47,8 @@
 			"researchStation": false
 		},
 		{
-			"London": {
+			"name": "London",
+      "diseaseCubes": {
 				"B": 0,
 				"Y": 0,
 				"K": 2,
