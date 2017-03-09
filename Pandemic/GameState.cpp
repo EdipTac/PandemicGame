@@ -119,3 +119,8 @@ void GameState::advanceOutbreakCounter()
 		quit();
 	}
 }
+
+CubePool& GameState::cubePool()
+{
+	return _cubePool;
+}

@@ -35,6 +35,7 @@ public:
 	unsigned infectionRate() const;
 
 	void advanceOutbreakCounter();
+	CubePool& cubePool();
 
 private:
 	std::unique_ptr<Map> _map;

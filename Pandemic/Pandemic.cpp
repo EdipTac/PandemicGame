@@ -346,7 +346,7 @@ bool buildResearchStation()
 
 bool treatDisease()
 {
-	const auto& position = game->currentPlayer().pawn().position();
+	auto& position = game->currentPlayer().pawn().position();
 	const auto& diseases = position.diseases();
 	if (diseases.empty())
 	{
@@ -356,10 +356,28 @@ bool treatDisease()
 	std::cout << "Select a disease:\n";
 	for (const auto& disease : diseases)
 	{
-		std::cout << "\t" << colourName(disease) << ": " << position.diseaseCubes(disease) << " cubes\n";
+		std::cout << "\t" << colourName(disease) << "(" << colourAbbreviation(disease) << "): " << position.diseaseCubes(disease) << " cubes\n";
 	}
 
-	// TODO - Add selection mechanism
+	std::string diseaseName;
+	while (true)
+	{
+		std::getline(std::cin >> std::ws, diseaseName);
+		const auto& it = std::find_if(colours().begin(), colours().end(), [&](const auto& c) { return colourName(c) == diseaseName; });
+		if (it != colours().end())
+		{
+			position.removeDiseaseCubes(*it, 1, game->cubePool());
+			break;
+		}
+		std::cout << "Not a disease.\n";
+	}
+
+	std::cout << "Disease report\n";
+	for (const auto& disease : diseases)
+	{
+		std::cout << "\t" << colourName(disease) << "(" << colourAbbreviation(disease) << "): " << position.diseaseCubes(disease) << " cubes\n";
+	}
+
 	return true;
 }
 
