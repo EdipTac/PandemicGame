@@ -69,6 +69,7 @@ City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
 size_t solicitSize(size_t min, size_t max);
 template <typename T> T validateInput(const std::map<std::string, T>& validInputs, const std::string& errMsg);
+template <typename T> T validateInput(const std::vector<T>& valid, const std::string& errMsg);
 
 constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
@@ -234,8 +235,7 @@ bool directFlight()
 		std::cout << "\t" << card->name() << "\n";
 	}
 
-	const auto& valid = makeNameMap(cards);
-	auto& targetCard = *validateInput(valid, "You have no city card of that name.\n");
+	auto& targetCard = *validateInput(cards, "You have no city card of that name.\n");
 
 	player.pawn().setPosition(targetCard.city());
 	player.removeCardByName(targetCard.name());
@@ -272,15 +272,7 @@ bool shuttleFlight()
 		return false;
 	}
 
-	std::vector<City*> stations;
-
-	for (const auto& city : game->map().cities())
-	{
-		if (city->hasResearchStation())
-		{
-			stations.push_back(city.get());
-		}
-	}
+	const auto& stations = game->map().stations();
 
 	if (stations.empty())
 	{
@@ -288,19 +280,14 @@ bool shuttleFlight()
 		return false;
 	}
 
-	std::string cityName;
-	while (true)
+	std::cout << "Where do you want to fly?\n";
+	for (const auto& city : stations)
 	{
-		std::cin >> cityName;
-		if (std::any_of(stations.begin(), stations.end(), [&](const auto& city) { return city->name() == cityName; }))
-		{
-			break;
-		}
-		std::cout << "No city of that name has a research station.\n";
+		std::cout << "\t" << city->name() << "\n";
 	}
 
-	player.pawn().setPosition(game->map().findCityByName(cityName));
-	
+	auto& target = *validateInput(stations, "No city of that name has a research station.\n");
+	player.pawn().setPosition(target);
 	return true;
 }
 
@@ -475,8 +462,7 @@ City& solicitCity()
 City& solicitConnection(const City& source)
 {
 	std::cout << "Where would you like to move to? ";
-	const auto& valid = makeNameMap(source.connections());
-	return *validateInput(valid, "No connected city of that name.\n");
+	return *validateInput(source.connections(), "No connected city of that name.\n");
 }
 
 std::string solicitPlayerName(const size_t number)
@@ -609,4 +595,10 @@ T validateInput(const std::map<std::string, T>& valid, const std::string& errMsg
 		std::cout << errMsg;
 	}
 	return it->second;
+}
+
+template<typename T>
+T validateInput(const std::vector<T>& valid, const std::string& errMsg)
+{
+	return validateInput(makeNameMap(valid), errMsg);
 }
