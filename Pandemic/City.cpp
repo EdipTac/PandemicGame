@@ -38,7 +38,7 @@ const std::vector<City*>& City::connections() const
 
 bool City::isConnectedTo(const City& target) const
 {
-	return std::any_of(_connections.begin(), _connections.end(), [&](const City* city) -> bool { return city == &target; });
+	return std::any_of(_connections.begin(), _connections.end(), [&](const auto& city) { return city == &target; });
 }
 
 unsigned int City::diseaseCubes(const Colour& colour) const

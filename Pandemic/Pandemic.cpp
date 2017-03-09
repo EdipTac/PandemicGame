@@ -204,7 +204,8 @@ bool driveOrFerry()
 // The player discards a city card to move to the indicated city.
 bool directFlight()
 {
-	const auto& cards = game->currentPlayer().cityCards();
+	auto& player = game->currentPlayer();
+	const auto& cards = player.cityCards();
 	
 	if (cards.empty())
 	{
@@ -218,13 +219,27 @@ bool directFlight()
 		std::cout << "\t" << card->name() << "\n";
 	}
 
+	std::string cardName;
+	while (true)
+	{
+		std::cin >> cardName;
+		const auto it = std::find_if(cards.begin(), cards.end(), [&](const auto& card) { return card->name() == cardName; });
+		if (it != cards.end())
+		{
+			break;
+		}
+		std::cout << "You have no city card of that name.\n";
+	}
+
+	player.pawn().setPosition(game->map().findCityByName(cardName));
+	player.removeCardByName(cardName);
+
 	return true;
 }
 
+// Player discards a city card matching the city they are in to fly to any city.
 bool charterFlight()
 {
-	// INCOMPLETE
-
 	auto& player = game->currentPlayer();
 	auto& pawn = player.pawn();
 
@@ -236,16 +251,16 @@ bool charterFlight()
 
 	auto& target = solicitCity();
 	pawn.setPosition(target);
-
-	// TODO - Discard card
+	player.removeCardByName(player.pawn().position().name());
 
 	return true;
 }
 
+// Player moves from a city to a research station to any other city with a research station
 bool shuttleFlight()
 {
-	// INCOMPLETE
-	if (!game->currentPlayer().pawn().position().hasResearchStation())
+	auto& player = game->currentPlayer();
+	if (!player.pawn().position().hasResearchStation())
 	{
 		std::cout << "Your city does not have a research station.\n";
 		return false;
@@ -267,7 +282,18 @@ bool shuttleFlight()
 		return false;
 	}
 
-	// TODO - Discard card
+	std::string cityName;
+	while (true)
+	{
+		std::cin >> cityName;
+		if (std::any_of(stations.begin(), stations.end(), [&](const auto& city) { return city->name() == cityName; }))
+		{
+			break;
+		}
+		std::cout << "No city of that name has a research station.\n";
+	}
+
+	player.pawn().setPosition(game->map().findCityByName(cityName));
 	
 	return true;
 }
@@ -407,7 +433,7 @@ City& solicitCity()
 		}
 		std::cout << "No city of that name exists.\n";
 	}
-	return game->map().city(cityName);
+	return game->map().findCityByName(cityName);
 }
 
 City& solicitConnection(const City& source)

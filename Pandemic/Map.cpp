@@ -23,7 +23,7 @@ City& Map::addCity(CityPtr city)
 	return *_cities.back().get();
 }
 
-City& Map::city(const std::string& name) const
+City& Map::findCityByName(const std::string& name) const
 {
 	const auto it = std::find_if(_cities.begin(), _cities.end(), [&](const std::unique_ptr<City>& cityPtr) -> bool
 	{
@@ -41,17 +41,14 @@ City* Map::findCityIfContained(const std::string& name) const
 	City* p = nullptr;
 	if (contains(name))
 	{
-		p = &city(name);
+		p = &findCityByName(name);
 	}
 	return p;
 }
 
 bool Map::contains(const std::string& name) const
 {
-	return std::any_of(_cities.begin(), _cities.end(), [&](const std::unique_ptr<City>& cityPtr) -> bool
-	{
-		return cityPtr->name() == name;
-	});
+	return std::any_of(_cities.begin(), _cities.end(), [&](const auto& city) { return city->name() == name; });
 }
 
 City& Map::startingCity() const

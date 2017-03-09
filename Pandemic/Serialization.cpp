@@ -60,7 +60,7 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 	{
 		for (const auto& targetName : list.second)
 		{
-			auto& target = map->city(targetName);
+			auto& target = map->findCityByName(targetName);
 			list.first->connectTo(target);
 		}
 	}
