@@ -26,6 +26,7 @@ public:
 
 	unsigned researchStations() const;
 	void removeResearchStation();
+	void returnResearchStation();
 	bool hasResearchStation() const;
 	void cure(const Colour& colour);
 	bool isCured(const Colour& colour) const;

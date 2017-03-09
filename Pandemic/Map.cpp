@@ -23,12 +23,22 @@ City& Map::addCity(CityPtr city)
 	return *_cities.back().get();
 }
 
+std::vector<City*> Map::stations() const
+{
+	std::vector<City*> list;
+	for (const auto& city : _cities)
+	{
+		if (city->hasResearchStation())
+		{
+			list.push_back(city.get());
+		}
+	}
+	return list;
+}
+
 City& Map::findCityByName(const std::string& name) const
 {
-	const auto it = std::find_if(_cities.begin(), _cities.end(), [&](const std::unique_ptr<City>& cityPtr) -> bool
-	{
-		return cityPtr->name() == name;
-	});
+	const auto it = std::find_if(_cities.begin(), _cities.end(), [&](const std::unique_ptr<City>& city) { return city->name() == name; });
 	if (it == _cities.end())
 	{
 		throw std::out_of_range { "No city of that name exits." };

@@ -77,6 +77,11 @@ void GameState::removeResearchStation()
 	--_researchStations;
 }
 
+void GameState::returnResearchStation()
+{
+	++_researchStations;
+}
+
 bool GameState::hasResearchStation() const
 {
 	return _researchStations > 0;

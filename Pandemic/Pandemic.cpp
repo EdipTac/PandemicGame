@@ -309,16 +309,36 @@ bool buildResearchStation()
 
 	if (!game->hasResearchStation())
 	{
+		auto stations = game->map().stations();
+		{
+			const auto& it = std::find_if(stations.begin(), stations.end(), [&](const auto& c) { return *c == player.pawn().position(); });
+			stations.erase(it);
+		}
 
-		std::cout << "No research stations left to build.\n";
-		return false;
+		if (stations.empty())
+		{
+			std::cout << "No research stations left to build.\n";
+			return false;
+		}
+
+		std::string cityName;
+		while (true)
+		{
+			std::cout << "Select a city to steal from: ";
+			std::getline(std::cin >> std::ws, cityName);
+			const auto& it = std::find_if(stations.begin(), stations.end(), [&](const auto& c) { return c->name() == cityName; });
+			if (it != stations.end())
+			{
+				break;
+			}
+			std::cout << "No city of that name has a research station.\n";
+		}
+		game->map().findCityByName(cityName).removeResearchStation(*game);
 	}
-
-	// TODO - Implement stealing from other cities with research stations
 
 	auto& cards = player.cards();
 	const auto& positionName = player.pawn().position().name();
-	auto it = std::find_if(cards.begin(), cards.end(), [&](const auto& card) { return card->name() == positionName });
+	auto it = std::find_if(cards.begin(), cards.end(), [&](const auto& card) { return card->name() == positionName; });
 	player.removeCardByName((*it)->name());
 	player.pawn().position().giveResearchStation(*game);
 	return true;

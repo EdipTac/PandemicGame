@@ -38,6 +38,9 @@ public:
 	// Add a city
 	City& addCity(CityPtr city);
 
+	// List of all cities with a research station
+	std::vector<City*> stations() const;
+
 private:
 	std::string _name;
 	std::vector<CityPtr> _cities;

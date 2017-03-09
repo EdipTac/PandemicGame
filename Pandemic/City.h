@@ -67,6 +67,7 @@ public:
 
 	bool hasResearchStation() const;
 	void giveResearchStation(GameState& game);
+	void removeResearchStation(GameState& game);
 
 	std::vector<Colour> diseases() const;
 

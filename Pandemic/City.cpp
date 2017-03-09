@@ -103,6 +103,12 @@ void City::giveResearchStation(GameState& game)
 	_hasResearchStation = true;
 }
 
+void City::removeResearchStation(GameState& game)
+{
+	game.returnResearchStation();
+	_hasResearchStation = false;
+}
+
 std::vector<Colour> City::diseases() const
 {
 	std::vector<Colour> d;
