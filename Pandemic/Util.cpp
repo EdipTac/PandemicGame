@@ -52,3 +52,13 @@ std::string toLower(const std::string& original)
 {
 	return stringTransform(original, ::tolower);
 }
+
+std::map<std::string, City*> makeCityNameMap(const std::vector<City*>& cities)
+{
+	std::map<std::string, City*> map;
+	for (const auto& city : cities)
+	{
+		map[city->name()] = city;
+	}
+	return map;
+}
