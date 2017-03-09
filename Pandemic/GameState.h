@@ -16,7 +16,7 @@ public:
 	Map& map() const;
 	void addPlayer(std::unique_ptr<Player> player);
 	void setMap(std::unique_ptr<Map> map);
-	bool shouldQuit() const;
+	virtual bool shouldQuit() const;
 
 	// Quits at the end of the current action frame.
 	void quit();
@@ -49,3 +49,4 @@ private:
 	unsigned _researchStations = 6;
 };
 
+std::unique_ptr<GameState> quitState();

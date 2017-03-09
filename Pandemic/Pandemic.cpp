@@ -442,7 +442,7 @@ bool cureDisease()
 
 void quit()
 {
-	game->quit();
+	game = quitState();
 }
 
 bool actionQuit()

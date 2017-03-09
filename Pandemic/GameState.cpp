@@ -124,3 +124,17 @@ CubePool& GameState::cubePool()
 {
 	return _cubePool;
 }
+
+class QuitState
+	: public GameState
+{
+	bool shouldQuit() const override
+	{
+		return true;
+	}
+};
+
+std::unique_ptr<GameState> quitState()
+{
+	return std::make_unique<QuitState>();
+}
