@@ -70,6 +70,7 @@ std::string solicitPlayerName(const size_t number);
 size_t solicitSize(size_t min, size_t max);
 template <typename T> T validateInput(const std::map<std::string, T>& validInputs, const std::string& errMsg);
 template <typename T> T validateInput(const std::vector<T>& valid, const std::string& errMsg);
+template <typename T> void list(const T& collection);
 
 constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
@@ -141,47 +142,60 @@ void main()
 }
 #endif
 
+// The player wants to start a new game
 void newGame()
 {
 	std::cout << "\n    --------    N E W   G A M E    --------    \n\n";
 
+	// Initialize game state
 	game = std::make_unique<GameState>();
 
+	// Get map file name and load it
 	const auto& fileName = solicitFileName();
 	std::cout << "\nLoading map \"" << fileName << "\"...\n";
 	game->setMap(readMapFromFile(fileName));
 	std::cout << "Map \"" << fileName << "\" loaded!\n\n";
 
+	// Create players
 	std::cout << "How many players? ";
 	const auto& numPlayers = solicitSize(minPlayers, maxPlayers);
-	const auto& map = game->map();
+	const auto& map = game->map();	// alias
 	for (auto i = 1; i <= numPlayers; ++i)
 	{
+		// For each player - get name, set position to starting city, give to game state
 		const auto& playerName = solicitPlayerName(i);
 		auto player = std::make_unique<Player>();
 		player->setName(playerName);
 		player->pawn().setPosition(map.startingCity());
 		game->addPlayer(std::move(player));
 	}
+
+	// Other initializtion here - cards, etc
+	// Place first research station
+	map.startingCity().giveResearchStation(*game);
 }
 
+// TODO
 void loadGame()
 {
 	std::cout << "Load game...\n";
 }
 
+// The player wants to quit
 void waitForExit()
 {
 	std::cout << "Press any key to continue...\n";
 	std::cin.get();
 }
 
+// On a player's turn, allow four actions
 void performAction()
 {
-	auto actions = actionsPerTurn;
-	while (!game->shouldQuit() && actions > 0)
+	auto actions = actionsPerTurn;	// Counter
+	while (!game->shouldQuit() && actions > 0)	// To check game loss/win state between actions
 	{
 		std::cout << "You have " << actions << " actions remaining.\n";
+		// Sometimes actions cannot be completed - these do not count towards your limit of four!
 		const auto& actionCompleted = actionMenu.solicitInput();
 		if (actionCompleted)
 		{
@@ -191,49 +205,50 @@ void performAction()
 }
 
 // The player moves their pawn from its current position to another directly connected city.
+// An action: Returns true iff the drive/ferry was completed
 bool driveOrFerry()
 {
+	// Aliases
 	auto& player = game->currentPlayer();
 	const auto& position = player.pawn().position();
 	const auto& connections = position.connections();
 	
 	std::cout << "You are currently in " << position.name() << "\n";
 
+	// Check if there are no connections - should not happen in a well-formed map
 	if (connections.empty())
 	{
 		std::cout << "Nowhere you can drive/ferry to.\n";
 		return false;
 	}
 
+	// List connections
 	std::cout << "You can move to\n";
-	for (const auto& connection : position.connections())
-	{
-		std::cout << "\t" << connection->name() << "\n";
-	}
+	list(position.connections());
 
+	// Get target from player and move there
 	auto& newPosition = solicitConnection(position);
 	player.pawn().setPosition(newPosition);
-
 	return true;
 }
 
 // The player discards a city card to move to the indicated city.
 bool directFlight()
 {
+	// Aliases
 	auto& player = game->currentPlayer();
 	const auto& cards = player.cityCards();
 	
+	// You can't discard a card if you have none!
 	if (cards.empty())
 	{
 		std::cout << "You have no city cards.\n";
 		return false;
 	}
 
+	// List cards
 	std::cout << "City cards: \n";
-	for (const auto& card : cards)
-	{
-		std::cout << "\t" << card->name() << "\n";
-	}
+	list(cards);
 
 	auto& targetCard = *validateInput(cards, "You have no city card of that name.\n");
 
@@ -578,7 +593,7 @@ void displayCities() {
 	}
 }
 
-template<typename T>
+template <typename T>
 T validateInput(const std::map<std::string, T>& valid, const std::string& errMsg)
 {
 	std::string input;
@@ -597,8 +612,17 @@ T validateInput(const std::map<std::string, T>& valid, const std::string& errMsg
 	return it->second;
 }
 
-template<typename T>
+template <typename T>
 T validateInput(const std::vector<T>& valid, const std::string& errMsg)
 {
 	return validateInput(makeNameMap(valid), errMsg);
+}
+
+template <typename T>
+void list(const T& collection)
+{
+	for (const auto& e : collection)
+	{
+		std::cout << "\t" << e->name() << "\n";
+	}
 }
