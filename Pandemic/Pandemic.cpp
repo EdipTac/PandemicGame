@@ -234,20 +234,11 @@ bool directFlight()
 		std::cout << "\t" << card->name() << "\n";
 	}
 
-	std::string cardName;
-	while (true)
-	{
-		std::cin >> cardName;
-		const auto it = std::find_if(cards.begin(), cards.end(), [&](const auto& card) { return card->name() == cardName; });
-		if (it != cards.end())
-		{
-			break;
-		}
-		std::cout << "You have no city card of that name.\n";
-	}
+	const auto& valid = makeNameMap(cards);
+	auto& targetCard = *validateInput(valid, "You have no city card of that name.\n");
 
-	player.pawn().setPosition(game->map().findCityByName(cardName));
-	player.removeCardByName(cardName);
+	player.pawn().setPosition(targetCard.city());
+	player.removeCardByName(targetCard.name());
 
 	return true;
 }
@@ -484,7 +475,7 @@ City& solicitCity()
 City& solicitConnection(const City& source)
 {
 	std::cout << "Where would you like to move to? ";
-	const auto& valid = makeCityNameMap(source.connections());
+	const auto& valid = makeNameMap(source.connections());
 	return *validateInput(valid, "No connected city of that name.\n");
 }
 

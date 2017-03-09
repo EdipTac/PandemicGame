@@ -21,4 +21,13 @@ bool lowercaseEquals(const std::string& a, const std::string& b);
 
 std::string toLower(const std::string& s);
 
-std::map<std::string, City*> makeCityNameMap(const std::vector<City*>& cities);
+template<typename T>
+std::map<std::string, T*> makeNameMap(const std::vector<T*>& entities)
+{
+	std::map<std::string, T*> map;
+	for (const auto& e : entities)
+	{
+		map[e->name()] = e;
+	}
+	return map;
+}
