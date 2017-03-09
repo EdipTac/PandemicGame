@@ -12,18 +12,6 @@ using json = nlohmann::json; // for convenience
 #include "Serialization.h"
 #include "Util.h"
 
-bool fileExists(const std::string& fileName)
-{
-	return std::fstream { fileName }.good();
-}
-
-std::string getline(std::ifstream& fs)
-{
-	std::string line;
-	std::getline(fs, line);
-	return line;
-}
-
 std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 {
 	std::ifstream fs { fileName };
@@ -75,7 +63,7 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 	{
 		for (const auto& targetName : list.second)
 		{
-			auto& target = map->city(targetName);
+			auto& target = map->findCityByName(targetName);
 			list.first->connectTo(target);
 		}
 	}

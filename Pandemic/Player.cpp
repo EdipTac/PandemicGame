@@ -24,11 +24,21 @@ std::string Player::name() const
 }
 
 // Accessors and Mutators
-const std::vector<std::unique_ptr<PlayerCard>>& Player::getCards() const{
+const std::vector<std::unique_ptr<PlayerCard>>& Player::cards() const{
 	return _cards;
 }
 void Player::addCard(std::unique_ptr<PlayerCard> card) {
 	_cards.push_back(std::move(card));
+}
+// Should return to deck!
+void Player::removeCardByName(const std::string& name)
+{
+	auto it = std::find_if(_cards.begin(), _cards.end(), [&](const auto& card) { return card->name() == name; });
+	if (it == _cards.end())
+	{
+		return;
+	}
+	_cards.erase(it);
 }
 
 std::ostream& operator<<(std::ostream& os, PlayerCard& card)
@@ -46,10 +56,7 @@ void Player::displayCards() {
 bool Player::hasPositionCard()
 {
 	auto& position = _pawn.position();
-	const auto& isPositionCard = [&position](const PlayerCityCard* card)
-	{
-		return card->city() == position;
-	};
+	const auto& isPositionCard = [&](const auto& card) { return card->city() == position; };
 	return !std::any_of(cityCards().begin(), cityCards().end(), isPositionCard);
 }
 

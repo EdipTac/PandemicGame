@@ -11,27 +11,23 @@
 #include "RoleCard.h"
 
 class PlayerCityCard;
-//class Pawn;
 
-class Player {
-private:
-	std::string _name;
-	Pawn _pawn;
-	// Must be a vector of pointers to PlayerCard to allow for use of derived classes (PlayerCityCard, Event, Epidemic)
-	std::vector<std::unique_ptr<PlayerCard>> _cards;
-	std::unique_ptr<RoleCard> _role;
+// A player of the game
+class Player
+{
 public:
 	// Default Constructor
 	Player();
+
 	// Constructor
 	Player(const std::string name, const Pawn& pawn, std::vector<std::unique_ptr<PlayerCard>>& cards, std::unique_ptr<RoleCard> role);
 
 	std::string name() const;
 
 	// Accessors and Mutators
-	const std::vector<std::unique_ptr<PlayerCard>>& getCards() const;
+	const std::vector<std::unique_ptr<PlayerCard>>& cards() const;
 	void addCard(std::unique_ptr<PlayerCard> card);
-	//void removeCard(std::unique_ptr<PlayerCard> card);
+	void removeCardByName(const std::string& name);
 
 	std::vector<PlayerCityCard*> cityCards() const;
 
@@ -51,4 +47,11 @@ public:
 
 	// True iff the player has a city card matching their pawn's position
 	bool hasPositionCard();
+
+private:
+	std::string _name;
+	Pawn _pawn;
+	// Must be a vector of pointers to PlayerCard to allow for use of derived classes (PlayerCityCard, Event, Epidemic)
+	std::vector<std::unique_ptr<PlayerCard>> _cards;
+	std::unique_ptr<RoleCard> _role;
 };

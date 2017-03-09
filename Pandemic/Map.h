@@ -21,7 +21,7 @@ public:
 	std::string name() const;
 
 	// Find a city by name
-	City& city(const std::string& name) const;
+	City& findCityByName(const std::string& name) const;
 
 	// Find a city by name. Returns nullptr if not found.
 	City* findCityIfContained(const std::string& name) const;
@@ -37,6 +37,12 @@ public:
 
 	// Add a city
 	City& addCity(CityPtr city);
+
+	// List of all cities with a research station
+	std::vector<City*> stations() const;
+
+	// Returns a map of city names and the associated cities
+	std::map<std::string, City*> nameMap() const;
 
 private:
 	std::string _name;

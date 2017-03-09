@@ -1,8 +1,17 @@
+#include <algorithm>
+#include <vector>
+#include <memory>
+
 #include "GameState.h"
 
 GameState::GameState()
 	: _cubePool { 96 / 4 }
-{}
+{
+	for (const auto& colour : colours())
+	{
+		_cured[colour] = false;
+	}
+}
 
 const std::vector<std::unique_ptr<Player>>& GameState::players() const
 {
@@ -68,7 +77,64 @@ void GameState::removeResearchStation()
 	--_researchStations;
 }
 
+void GameState::returnResearchStation()
+{
+	++_researchStations;
+}
+
 bool GameState::hasResearchStation() const
 {
 	return _researchStations > 0;
+}
+
+void GameState::cure(const Colour& colour)
+{
+	_cured[colour] = true;
+}
+
+bool GameState::isCured(const Colour& colour) const
+{
+	return _cured.at(colour);
+}
+
+void GameState::advanceInfectionCounter()
+{
+	_infectionCounter = std::min(_infectionCounter + 1, 7u);
+}
+
+unsigned GameState::infectionRate() const
+{
+	const auto& c = _infectionCounter; // Alias
+	return	(1 <= c && c <= 3)	? 2 :
+			(4 <= c && c <= 5)	? 3 :
+								  4 ;
+}
+
+void GameState::advanceOutbreakCounter()
+{
+	++_outbreakCounter;
+	if (_outbreakCounter >= 8)
+	{
+		std::cout << "You lose! 8 outbreaks.\n";
+		quit();
+	}
+}
+
+CubePool& GameState::cubePool()
+{
+	return _cubePool;
+}
+
+class QuitState
+	: public GameState
+{
+	bool shouldQuit() const override
+	{
+		return true;
+	}
+};
+
+std::unique_ptr<GameState> quitState()
+{
+	return std::make_unique<QuitState>();
 }

@@ -1,17 +1,17 @@
-// Pandemic - Build 1
+//  Pandemic - Build 1
 //
 //					Authors
 //		============================
 //		Michael Deom	-	29549641
 //		Jonny Linton	-	
 //		Edip Tac		-	
-//		Kechun Ye		-	
+//		Kechun Ye		-	25654688
 //
-// Submitted 15/03/2017
+//  Submitted 15/03/2017
 //
-// Build 1 of project.
+//  Build 1 of project.
 //
-// An implementation of the board game "Pandemic" by Z-Man Games.
+//  An implementation of the board game "Pandemic" by Z-Man Games.
 
 // Disable static initialization warning
 #pragma warning (disable: 4592)
@@ -28,6 +28,7 @@
 // Project file inclusions
 #include "Card.h"
 #include "City.h"
+#include "EventCard.h"
 #include "GameState.h"
 #include "InfectionCard.h"
 #include "InfectionCardDeck.h"
@@ -38,28 +39,43 @@
 #include "Serialization.h"
 #include "Util.h"
 
+
+// Possibly TODO - factor options into separate file
+// Note - May need to pass GameState& parameter in this case
+
+//  ----  Main menu options  ----  //
 void newGame();
 void loadGame();
 void waitForExit();
 void performAction();
+void quit();
+
+//  ----  Action menu options  ----  //
 bool driveOrFerry();
 bool directFlight();
 bool charterFlight();
 bool shuttleFlight();
 bool buildResearchStation();
 bool treatDisease();
-void quit();
+bool shareKnowledge();
+bool cureDisease();
 bool actionQuit();
+
+void showCity(const City& city);
+void displayCities();
 std::string solicitFileName();
-City& solicitCity();
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
 size_t solicitSize(size_t min, size_t max);
+template <typename T> T validateInput(const std::map<std::string, T>& validInputs, const std::string& errMsg);
+template <typename T> T validateInput(const std::vector<T>& valid, const std::string& errMsg);
+template <typename T> void list(const T& collection);
 
 constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
 constexpr size_t actionsPerTurn = 4;
 
+// Global state is evil :( Need better solution
 std::unique_ptr<GameState> game;
 
 const GeneralMenu mainMenu
@@ -84,15 +100,30 @@ const ActionMenu actionMenu
 	{
 		{ "Drive/Ferry",				driveOrFerry			},
 		{ "Direct Flight",				directFlight			},
-		{ "Charter Flight",				directFlight			},
+		{ "Charter Flight",				charterFlight			},
 		{ "Shuttle Flight",				shuttleFlight			},
 		{ "Build a Research Station",	buildResearchStation	},
 		{ "Treat Disease",				treatDisease			},
+		{ "Share Knowledge",			shareKnowledge			},
+		{ "Cure Disease",				cureDisease				},
 		{ "Quit Game",					actionQuit				}
 	}
 };
 
 //	----    Program entry point    ----  //
+//#define TEST
+#ifdef TEST
+void main()
+{
+	std::map<std::string, int> m
+	{
+		{ "Hello",		1	},
+		{ "Goodbye",	2	}
+	};
+	std::cout << validateInput(m, "Yoooo\n") << std::endl;
+	waitForExit();
+}
+#else
 void main()
 {
 	// Title display
@@ -108,48 +139,62 @@ void main()
 
 	waitForExit();
 }
+#endif
 
+// The player wants to start a new game
 void newGame()
 {
 	std::cout << "\n    --------    N E W   G A M E    --------    \n\n";
 
+	// Initialize game state
 	game = std::make_unique<GameState>();
 
+	// Get map file name and load it
 	const auto& fileName = solicitFileName();
 	std::cout << "\nLoading map \"" << fileName << "\"...\n";
 	game->setMap(readMapFromFile(fileName));
 	std::cout << "Map \"" << fileName << "\" loaded!\n\n";
 
+	// Create players
 	std::cout << "How many players? ";
 	const auto& numPlayers = solicitSize(minPlayers, maxPlayers);
-	const auto& map = game->map();
+	const auto& map = game->map();	// alias
 	for (auto i = 1; i <= numPlayers; ++i)
 	{
+		// For each player - get name, set position to starting city, give to game state
 		const auto& playerName = solicitPlayerName(i);
 		auto player = std::make_unique<Player>();
 		player->setName(playerName);
 		player->pawn().setPosition(map.startingCity());
 		game->addPlayer(std::move(player));
 	}
+
+	// Other initializtion here - cards, etc
+	// Place first research station
+	map.startingCity().giveResearchStation(*game);
 }
 
+// TODO
 void loadGame()
 {
 	std::cout << "Load game...\n";
 }
 
+// The player wants to quit
 void waitForExit()
 {
 	std::cout << "Press any key to continue...\n";
 	std::cin.get();
 }
 
+// On a player's turn, allow four actions
 void performAction()
 {
-	auto actions = actionsPerTurn;
-	while (!game->shouldQuit() && actions > 0)
+	auto actions = actionsPerTurn;	// Counter
+	while (!game->shouldQuit() && actions > 0)	// To check game loss/win state between actions
 	{
 		std::cout << "You have " << actions << " actions remaining.\n";
+		// Sometimes actions cannot be completed - these do not count towards your limit of four!
 		const auto& actionCompleted = actionMenu.solicitInput();
 		if (actionCompleted)
 		{
@@ -158,129 +203,158 @@ void performAction()
 	}
 }
 
+// The player moves their pawn from its current position to another directly connected city.
+// An action: Returns true iff the drive/ferry was completed
 bool driveOrFerry()
 {
+	// Aliases
 	auto& player = game->currentPlayer();
 	const auto& position = player.pawn().position();
 	const auto& connections = position.connections();
 	
 	std::cout << "You are currently in " << position.name() << "\n";
 
+	// Check if there are no connections - should not happen in a well-formed map
 	if (connections.empty())
 	{
-		std::cout << "Nowhere you can drive/ferry.\n";
+		std::cout << "Nowhere you can drive/ferry to.\n";
 		return false;
 	}
 
+	// List connections
 	std::cout << "You can move to\n";
-	for (const auto& connection : position.connections())
-	{
-		std::cout << "\t" << connection->name() << "\n";
-	}
+	list(position.connections());
 
+	// Get target from player and move there
 	auto& newPosition = solicitConnection(position);
 	player.pawn().setPosition(newPosition);
 
 	return true;
 }
 
+// The player discards a city card to move to the indicated city.
 bool directFlight()
 {
-	const auto& cards = game->currentPlayer().cityCards();
+	// Aliases
+	auto& player = game->currentPlayer();
+	const auto& cards = player.cityCards();
 	
+	// You can't discard a card if you have none!
 	if (cards.empty())
 	{
 		std::cout << "You have no city cards.\n";
 		return false;
 	}
 
+	// List cards, get player target, discard card, and move
 	std::cout << "City cards: \n";
-	for (const auto& card : cards)
-	{
-		std::cout << "\t" << card->name() << "\n";
-	}
+	list(cards);
+	auto& targetCard = *validateInput(cards, "You have no city card of that name.\n");
+	player.pawn().setPosition(targetCard.city());
+	player.removeCardByName(targetCard.name());
 
 	return true;
 }
 
+// Player discards a city card matching the city they are in to fly to any city.
 bool charterFlight()
 {
-	// INCOMPLETE
-
+	// Aliases
 	auto& player = game->currentPlayer();
 	auto& pawn = player.pawn();
 
+	// Without cards you can't discard
 	if (!player.hasPositionCard())
 	{
 		std::cout << "You don't have any city cards that match your position.\n";
 		return false;
 	}
 
-	auto& target = solicitCity();
+	// Get city choice from player, move, and discard card
+	std::cout << "Where would you like to fly to? ";
+	auto& target = *validateInput(game->map().nameMap(), "No city of that name exists.\n");
 	pawn.setPosition(target);
-
-	// TODO - Discard card
+	player.removeCardByName(player.pawn().position().name());
 
 	return true;
 }
 
+// Player moves from a city to a research station to any other city with a research station
 bool shuttleFlight()
 {
-	// INCOMPLETE
-	if (!game->currentPlayer().pawn().position().hasResearchStation())
+	auto& player = game->currentPlayer(); // Alias
+
+	// Not applicable if you have no research station in your city
+	if (!player.pawn().position().hasResearchStation())
 	{
 		std::cout << "Your city does not have a research station.\n";
 		return false;
 	}
 
-	std::vector<City*> stations;
+	const auto& stations = game->map().stations(); // Alias
 
-	for (const auto& city : game->map().cities())
-	{
-		if (city->hasResearchStation())
-		{
-			stations.push_back(city.get());
-		}
-	}
-
+	// If there are no other cities with stations, you can't move anywhere
 	if (stations.empty())
 	{
 		std::cout << "There are no other cities with research stations.\n";
 		return false;
 	}
 
-	// TODO - Discard card
-	
+	// List stations, get target, and move
+	std::cout << "Where do you want to fly?\n";
+	list(stations);
+	auto& target = *validateInput(stations, "No city of that name has a research station.\n");
+	player.pawn().setPosition(target);
+
 	return true;
 }
 
+// Player discards a card matching the city they are in to build a research station
 bool buildResearchStation()
 {
-	// INCOMPLETE
-	auto& player = game->currentPlayer();
+	auto& player = game->currentPlayer(); // Alias
+
+	// No cards, no discard
 	if (!player.hasPositionCard())
 	{
 		std::cout << "No city card which matches our current position.\n";
 		return false;
 	}
 
+	// If there are no remaining research stations, we have to steal from another city
 	if (!game->hasResearchStation())
 	{
-		std::cout << "No research stations left to build.\n";
-		return false;
+		auto stations = game->map().stations(); // Alias
+		{
+			// Remove your current city from the list of potential targets
+			stations.erase(std::find_if(stations.begin(), stations.end(), [&](const auto& c) { return *c == player.pawn().position(); }));
+		}
+
+		// No targets
+		if (stations.empty())
+		{
+			std::cout << "No research stations left to build.\n";
+			return false;
+		}
+
+		// Choose city and eradicate station
+		auto& target = *validateInput(stations, "No city of that name has a research station.\n");
+		target.removeResearchStation(*game);
 	}
 
-	// TODO - Implement stealing from other cities with research stations
-
-	// TODO - Discard card
-
+	// Remove card, place station
+	auto& cards = player.cards();
+	const auto& positionName = player.pawn().position().name();
+	auto it = std::find_if(cards.begin(), cards.end(), [&](const auto& card) { return card->name() == positionName; });
+	player.removeCardByName((*it)->name());
 	player.pawn().position().giveResearchStation(*game);
+
 	return true;
 }
 
 bool treatDisease()
 {
-	const auto& position = game->currentPlayer().pawn().position();
+	auto& position = game->currentPlayer().pawn().position();
 	const auto& diseases = position.diseases();
 	if (diseases.empty())
 	{
@@ -290,16 +364,85 @@ bool treatDisease()
 	std::cout << "Select a disease:\n";
 	for (const auto& disease : diseases)
 	{
-		std::cout << "\t" << colourName(disease) << ": " << position.diseaseCubes(disease) << " cubes\n";
+		std::cout << "\t" << colourName(disease) << "(" << colourAbbreviation(disease) << "): " << position.diseaseCubes(disease) << " cubes\n";
 	}
 
-	// TODO - Add selection mechanism
+	std::string diseaseName;
+	while (true)
+	{
+		std::getline(std::cin >> std::ws, diseaseName);
+		const auto& it = std::find_if(colours().begin(), colours().end(), [&](const auto& c) { return colourName(c) == diseaseName; });
+		if (it != colours().end())
+		{
+			position.removeDiseaseCubes(*it, 1, game->cubePool());
+			break;
+		}
+		std::cout << "Not a disease.\n";
+	}
+
+	std::cout << "Disease report\n";
+	for (const auto& disease : diseases)
+	{
+		std::cout << "\t" << colourName(disease) << "(" << colourAbbreviation(disease) << "): " << position.diseaseCubes(disease) << " cubes\n";
+	}
+
+	return true;
+}
+
+bool shareKnowledge()
+{
+	// TODO
+
+	ActionMenu
+	{
+		{
+			{ " Give Knowledge", [](){ return false; } }, // Placeholder
+			{ " Take Knowledge", [](){ return false; } },
+		}
+	}.solicitInput();
+
+
+	// Factor into separate function
+	auto& currentPlayer = game->currentPlayer();
+	const auto& position = currentPlayer.pawn().position();
+	const auto& players = game->players();
+	
+	std::vector<std::reference_wrapper<Player>> others;
+	for (const auto& player : players)
+	{
+		if (player.get() != &currentPlayer && player->pawn().position() == position)
+		{
+			others.push_back(*player);
+		}
+	}
+
+	if (others.empty())
+	{
+		std::cout << "No other players in your city.\n";
+		return false;
+	}
+
+	// TODO
+
+	return true;
+}
+
+bool cureDisease()
+{
+	auto& player = game->currentPlayer();
+	if (!player.pawn().position().hasResearchStation())
+	{
+		std::cout << "No research station in this city.\n";
+		return false;
+	}
+	//auto cityCards = game->currentPlayer().cityCards();
+
 	return true;
 }
 
 void quit()
 {
-	game->quit();
+	game = quitState();
 }
 
 bool actionQuit()
@@ -325,38 +468,10 @@ std::string solicitFileName()
 	return fileName;
 }
 
-City& solicitCity()
-{
-	std::cout << "Where would you like to place your pawn? ";
-	std::string cityName;
-	while (true)
-	{
-		std::cin >> cityName;
-		if (game->map().contains(cityName))
-		{
-			break;
-		}
-		std::cout << "No city of that name exists.\n";
-	}
-	return game->map().city(cityName);
-}
-
 City& solicitConnection(const City& source)
 {
 	std::cout << "Where would you like to move to? ";
-	std::string targetName;
-	City* target = nullptr;
-	while (true)
-	{
-		std::cin >> targetName;
-		target = game->map().findCityIfContained(targetName);
-		if (target && source.isConnectedTo(*target))
-		{
-			break;
-		}
-		std::cout << "No city of that name connected to " << targetName << ".\n";
-	}
-	return *target;
+	return *validateInput(source.connections(), "No connected city of that name.\n");
 }
 
 std::string solicitPlayerName(const size_t number)
@@ -390,4 +505,118 @@ size_t solicitSize(size_t min, size_t max)
 		std::cout << "Not a valid number.\n";
 	}
 	return size;
+}
+
+void showCity(const City& city)
+{
+	std::cout << city.name() << " Colour: " << colourAbbreviation(city.colour()) << "\n" <<
+		"Infection status: " << "\n" << "Blue Cube: " << city.diseaseCubes(Colour::Blue) << "\n"
+		"Black Cube: " << city.diseaseCubes(Colour::Black) << "\n" << "Red Cube: " << city.diseaseCubes(Colour::Red)
+		<< "\n" << "Yellow Cube: " << city.diseaseCubes(Colour::Yellow) << "\n" << "Is quarantined: " << city.quarantined() << "\n"
+		<< "Has research station ? " << city.hasResearchStation() << "\n" << "Outbreak status: \n" <<
+		"Blue disease outbreak: " << city.diseaseOutbreak(Colour::Blue) << "\n"
+		"Black disease outbreak: " << city.diseaseOutbreak(Colour::Black) << "\n" << "Red Cube: " << city.diseaseOutbreak(Colour::Red)
+		<< "\n" << "Yellow Cube: " << city.diseaseOutbreak(Colour::Yellow) << std::endl;
+}
+
+void displayCities() {
+	auto& player = game->currentPlayer();
+	const auto& position = player.pawn().position();
+	std::cout << "You are currently in " << position.name() << "\n";
+	while (true) {
+		int index = 0;
+		char op;
+		
+		std::cout <<"Press A,B,C,D to choose: \n" << "A) Dispaly all cities on the map " << "\n" << "B) Display specific city " << "\n"
+			<< "C) See direct connection cities with your current city" << "\n"<< "D) Quit" <<"\n";
+		std::cin >> op;
+		if (op == 'A' || op == 'a') {
+			for (const auto& city : game->map().cities())
+			{
+				std::cout << "City_Index_" << index << ":\n";
+				showCity(*city);
+				index++;
+			}
+		}
+		else if (op == 'B' || op == 'b') {
+			
+				std::string cityName;
+				
+				std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
+				std::cin >> op;
+				if (op == 'A' || op == 'a') {
+					std::cin >> index;
+					showCity(*game->map().cities()[index]);
+			     
+				}
+				else if (op == 'B' || op == 'b') {
+					std::cin >> cityName;
+					for (const auto& city : game->map().cities()) {
+						if (lowercaseEquals(city->name(),cityName)) {
+							showCity(*city);
+						}
+					}
+				}
+
+				std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
+				std::cin >> op;
+
+				if(op == 'Y' || op == 'y') {
+					for (const auto& city : game->map().cities()[index]->connections())
+					{
+						showCity(*city);
+						
+					}
+				}
+
+
+		}
+		else if (op == 'C' || op == 'c') {
+
+			std::cout << "In one action, you can move to\n";
+			for (const auto& city : position.connections())
+			{
+				showCity(*city);
+			}
+
+		}
+		else if (op == 'D' || op == 'd') {
+			break;
+		}
+
+	}
+}
+
+template <typename T>
+T validateInput(const std::map<std::string, T>& valid, const std::string& errMsg)
+{
+	std::string input;
+	decltype(valid.find(input)) it;
+	while (true)
+	{
+		std::cin >> input;
+		std::cin.get();
+		it = valid.find(input);
+		if (it != valid.end())
+		{
+			break;
+		}
+		std::cout << errMsg;
+	}
+	return it->second;
+}
+
+template <typename T>
+T validateInput(const std::vector<T>& valid, const std::string& errMsg)
+{
+	return validateInput(makeNameMap(valid), errMsg);
+}
+
+template <typename T>
+void list(const T& collection)
+{
+	for (const auto& e : collection)
+	{
+		std::cout << "\t" << e->name() << "\n";
+	}
 }
