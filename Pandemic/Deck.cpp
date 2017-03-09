@@ -1,41 +1,71 @@
 #include "Deck.h"
+#include <vector>
+#include <memory>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <algorithm> //std::random_shuffle
+Deck::~Deck() {}
 
 
+void Deck::shuffleDeck() {
+	std::vector < std::unique_ptr<Card> >temp;
+	temp.reserve(deckOfCards.size());
+	while (!deckOfCards.empty()) {
+		int i = (rand()) % (deckOfCards.size());
+		temp.push_back(std::move(deckOfCards[i]));
+		deckOfCards.erase(deckOfCards.begin() + i);
+	}
+	deckOfCards = move(temp);
+}
 
-//Deck::~Deck() {}
+void Deck::shuffleDiscards() {
+	std::vector < std::unique_ptr<Card> >temp;
+	temp.reserve(discardDeck.size());
+	while (!discardDeck.empty()) {
+		int i = (rand()) % (discardDeck.size());
+		temp.push_back(std::move(discardDeck[i]));
+		discardDeck.erase(deckOfCards.begin() + i);
+	}
+	deckOfCards = move(temp);
+}
 
-//EDIP -- fix this.
+
+//alternate implementation of shuffle
 //void Deck::shuffleDeck() {
-//	srand(time(0));
-//	int index;
-//	Card* temp; //we need to make a copy constructor for Card
-//	for (unsigned int i = 0; i < deckOfCards.size(); i++) {
-//		index = rand() % deckOfCards.size();
-//		temp = deckOfCards[i];
-//		deckOfCards[i] = deckOfCards[index];
-//		deckOfCards[index] = temp;
-//	}
-//
+//	std::random_shuffle(deckOfCards.begin(), deckOfCards.end());
 //}
-//
-//void Deck::printDeck(std::vector<Card*> deckToPrint) {
+
+
+
+// the << deckofCards[i] seems to be an issue and wont compile
+//void Deck::printDeck() {
 //	std::cout << "The cards within the deck are as follows:\n" << std::endl;
-//	for (unsigned int i = 0; i < deckToPrint.size(); i++) {
-//		std::cout << deckToPrint[i] << std::endl;
+//	for (unsigned int i = 0; i < deckOfCards.size(); i++) {
+//		std::cout << deckOfCards[i] << std::endl;
 //	}
 //}
-//
-//std::unique_ptr<Card*>  Deck::drawCard(std::vector <Card*> deckToDrawFrom) {
-//	
-//	
-//	if (deckToDrawFrom.size() != 0) {
-//		auto temp = (*(deckToDrawFrom[0]));
-//		deckToDrawFrom.erase(deckToDrawFrom[0]);
-//		return temp;
-//
-//	}
-//	else {
-//		std::cout << "The deck is empty!" << std::endl;
-//		return NULL;
-//	}
-//}
+
+std::unique_ptr<Card>  Deck::drawCard() {
+	
+	
+	if (deckOfCards.size() != 0) {
+		std::unique_ptr<Card> temp = move(deckOfCards[0]);
+		deckOfCards.erase(deckOfCards.begin());
+		return temp;
+
+	}
+	else {
+		std::cout << "The deck is empty!" << std::endl;
+		return NULL;
+	}
+}
+
+
+void Deck::addToDeck(std::unique_ptr<Card> cardToAdd) {
+	deckOfCards.push_back(move(cardToAdd));
+}
+
+void Deck::addToDiscard(std::unique_ptr<Card> cardToDiscard) {
+	discardDeck.push_back(move(cardToDiscard));
+}
