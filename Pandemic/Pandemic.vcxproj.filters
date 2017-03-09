@@ -103,6 +103,9 @@
     <ClInclude Include="MenuOption.h">
       <Filter>Menus\header</Filter>
     </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -182,7 +185,7 @@
     <None Include="earth.map">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="game.save">
+    <None Include="save.json">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

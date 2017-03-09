@@ -1,8 +1,6 @@
 {
 	"map": "earth.map",
-	"players": {
-		"numberOfPlayers": 3,
-		"playerList": [
+	"players": [
 			{
 				"name": "Wishe",
 				"position": "Montreal",
@@ -26,8 +24,7 @@
 				"role": "Contigency Planner",
 				"hand": []
 			}
-		]
-	},		
+	],		
 	"cities": [
 		{
 			"Montreal": {

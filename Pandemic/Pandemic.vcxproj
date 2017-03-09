@@ -123,6 +123,7 @@
     <ClInclude Include="GameState.h" />
     <ClInclude Include="InfectionCard.h" />
     <ClInclude Include="InfectionCardDeck.h" />
+    <ClInclude Include="json.hpp" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuOption.h" />
@@ -165,7 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map" />
-    <None Include="game.save" />
+    <None Include="save.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

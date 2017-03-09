@@ -5,6 +5,9 @@
 #include <stdexcept>
 #include <tuple>
 
+#include "json.hpp"
+using json = nlohmann::json; // for convenience
+
 #include "Colour.h"
 #include "Serialization.h"
 #include "Util.h"
@@ -122,5 +125,67 @@ void writeMapToFile(const Map& map, const std::string& fileName)
 }
 */
 
-//std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
-//{}
+void readGameFromFile(const std::string & fileName)
+{
+	
+	
+	std::ifstream fs{ fileName };
+	if (!fs)
+	{
+		throw std::runtime_error{ "File not found!" };
+	}
+
+	// parse the file as a JSON object
+	json j;
+	fs >> j;
+
+	//std::unique_ptr<GameState> gameState;
+
+	//// read and store the map information
+	//gameState->setMap(readMapFromFile(j["map"].get<std::string>()));
+	
+	std::vector<json> playerListJSON = j["players"];
+	std::vector<std::unique_ptr<Player>> players;
+
+	//for (auto i = playerListJSON.begin(); i != playerListJSON.end(); ++i) {
+	//	//players.push_back(std::make_unique<Player>(*i));
+	//	std::cout << *i << "\n";
+	//}
+
+	for (int i=0; i < playerListJSON.size(); i++) {
+		//std::cout << playerListJSON.at(i)["name"].get<std::string>() << "\n";
+		auto playerJSON = playerListJSON.at(i);
+		std::unique_ptr<Player> player;
+
+		// parse and set the player's name
+		player->setName(playerJSON["name"].get<std::string>());
+
+		// parse and set the player's position
+		
+
+
+		// parse and set the player's role
+		auto roleName = playerJSON["role"].get<std::string>();
+
+		// search the hardcoded roles to find appropriate RoleCard
+		//RoleCard::getRoleWithName(roleName);
+
+
+		// parse and set the player's hand (of PlayerCards)
+
+
+
+		// store this player into the vector of players
+		//players.push_back(std::move(player));
+	}
+
+	
+
+
+}
+
+int main() {
+	readGameFromFile("save.json");
+	system("pause");
+
+}
