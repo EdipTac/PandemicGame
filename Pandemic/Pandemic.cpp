@@ -64,7 +64,6 @@ bool actionQuit();
 void showCity(const City& city);
 void displayCities();
 std::string solicitFileName();
-City& solicitCity();
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
 size_t solicitSize(size_t min, size_t max);
@@ -272,7 +271,8 @@ bool charterFlight()
 	}
 
 	// Get city choice from player, move, and discard card
-	auto& target = solicitCity();
+	std::cout << "Where would you like to fly to? ";
+	auto& target = *validateInput(game->map().nameMap(), "No city of that name exists.\n");
 	pawn.setPosition(target);
 	player.removeCardByName(player.pawn().position().name());
 
@@ -309,49 +309,46 @@ bool shuttleFlight()
 	return true;
 }
 
+// Player discards a card matching the city they are in to build a research station
 bool buildResearchStation()
 {
-	auto& player = game->currentPlayer();
+	auto& player = game->currentPlayer(); // Alias
+
+	// No cards, no discard
 	if (!player.hasPositionCard())
 	{
 		std::cout << "No city card which matches our current position.\n";
 		return false;
 	}
 
+	// If there are no remaining research stations, we have to steal from another city
 	if (!game->hasResearchStation())
 	{
-		auto stations = game->map().stations();
+		auto stations = game->map().stations(); // Alias
 		{
-			const auto& it = std::find_if(stations.begin(), stations.end(), [&](const auto& c) { return *c == player.pawn().position(); });
-			stations.erase(it);
+			// Remove your current city from the list of potential targets
+			stations.erase(std::find_if(stations.begin(), stations.end(), [&](const auto& c) { return *c == player.pawn().position(); }));
 		}
 
+		// No targets
 		if (stations.empty())
 		{
 			std::cout << "No research stations left to build.\n";
 			return false;
 		}
 
-		std::string cityName;
-		while (true)
-		{
-			std::cout << "Select a city to steal from: ";
-			std::getline(std::cin >> std::ws, cityName);
-			const auto& it = std::find_if(stations.begin(), stations.end(), [&](const auto& c) { return c->name() == cityName; });
-			if (it != stations.end())
-			{
-				break;
-			}
-			std::cout << "No city of that name has a research station.\n";
-		}
-		game->map().findCityByName(cityName).removeResearchStation(*game);
+		// Choose city and eradicate station
+		auto& target = *validateInput(stations, "No city of that name has a research station.\n");
+		target.removeResearchStation(*game);
 	}
 
+	// Remove card, place station
 	auto& cards = player.cards();
 	const auto& positionName = player.pawn().position().name();
 	auto it = std::find_if(cards.begin(), cards.end(), [&](const auto& card) { return card->name() == positionName; });
 	player.removeCardByName((*it)->name());
 	player.pawn().position().giveResearchStation(*game);
+
 	return true;
 }
 
@@ -469,12 +466,6 @@ std::string solicitFileName()
 		std::cout << "File not found.\n";
 	}
 	return fileName;
-}
-
-City& solicitCity()
-{
-	std::cout << "Where would you like to fly to? ";
-	return *validateInput(game->map().nameMap(), "No city of that name exists.\n");
 }
 
 City& solicitConnection(const City& source)
