@@ -77,6 +77,11 @@ void GameState::removeResearchStation()
 	--_researchStations;
 }
 
+void GameState::returnResearchStation()
+{
+	++_researchStations;
+}
+
 bool GameState::hasResearchStation() const
 {
 	return _researchStations > 0;
@@ -113,4 +118,9 @@ void GameState::advanceOutbreakCounter()
 		std::cout << "You lose! 8 outbreaks.\n";
 		quit();
 	}
+}
+
+CubePool& GameState::cubePool()
+{
+	return _cubePool;
 }

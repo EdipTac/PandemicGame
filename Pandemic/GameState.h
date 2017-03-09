@@ -26,6 +26,7 @@ public:
 
 	unsigned researchStations() const;
 	void removeResearchStation();
+	void returnResearchStation();
 	bool hasResearchStation() const;
 	void cure(const Colour& colour);
 	bool isCured(const Colour& colour) const;
@@ -34,6 +35,7 @@ public:
 	unsigned infectionRate() const;
 
 	void advanceOutbreakCounter();
+	CubePool& cubePool();
 
 private:
 	std::unique_ptr<Map> _map;
