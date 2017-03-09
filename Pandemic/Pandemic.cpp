@@ -300,7 +300,6 @@ bool shuttleFlight()
 
 bool buildResearchStation()
 {
-	// INCOMPLETE
 	auto& player = game->currentPlayer();
 	if (!player.hasPositionCard())
 	{
@@ -310,14 +309,17 @@ bool buildResearchStation()
 
 	if (!game->hasResearchStation())
 	{
+
 		std::cout << "No research stations left to build.\n";
 		return false;
 	}
 
 	// TODO - Implement stealing from other cities with research stations
 
-	// TODO - Discard card
-
+	auto& cards = player.cards();
+	const auto& positionName = player.pawn().position().name();
+	auto it = std::find_if(cards.begin(), cards.end(), [&](const auto& card) { return card->name() == positionName });
+	player.removeCardByName((*it)->name());
 	player.pawn().position().giveResearchStation(*game);
 	return true;
 }
