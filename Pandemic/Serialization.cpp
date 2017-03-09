@@ -172,8 +172,8 @@ void readGameFromFile(const std::string & fileName)
 
 }
 
-int main() {
-	readGameFromFile("save.json");
-	system("pause");
-
-}
+//int main() {
+//	readGameFromFile("save.json");
+//	system("pause");
+//
+//}
