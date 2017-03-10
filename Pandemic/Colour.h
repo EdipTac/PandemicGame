@@ -2,6 +2,7 @@
 
 #include <array>
 #include <string>
+#include <map>
 
 // Represents a colour of disease
 enum class Colour
