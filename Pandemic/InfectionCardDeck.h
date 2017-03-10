@@ -44,11 +44,11 @@ public:
 private:
 	//Member variables
 	int infectionRate; // infection rate
-	const unsigned int outbreakTracker[7] = { 2,2,2,3,3,4,4 };// outbreak marker tracker
+	const unsigned outbreakTracker[7] = { 2,2,2,3,3,4,4 };// outbreak marker tracker
 	int outbreakMarker = 0;
 	std::vector <std::unique_ptr<InfectionCard>> deck; // vector holds all unused infection cards
 	std::vector <std::unique_ptr<InfectionCard>> discardPile;// vector holds all used infection cards
-	unsigned int const CUBE_NORMAL_INFECTION = 1;
-	unsigned int const CUBE_EPIDEMIC_INFECTION = 3;
+	unsigned const CUBE_NORMAL_INFECTION = 1;
+	unsigned const CUBE_EPIDEMIC_INFECTION = 3;
 	
 };

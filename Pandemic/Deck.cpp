@@ -41,7 +41,7 @@ void Deck::shuffleDiscards() {
  //the << deckofCards[i] seems to be an issue and wont compile
 void Deck::printDeck() {
 	std::cout << "The cards within the deck are as follows:\n" << std::endl;
-	for (unsigned int i = 0; i < deckOfCards.size(); i++) {
+	for (auto i = 0u; i < deckOfCards.size(); i++) {
 		std::cout << deckOfCards[i]->name() << std::endl;
 	}
 }

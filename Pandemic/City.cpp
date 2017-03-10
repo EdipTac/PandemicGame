@@ -41,7 +41,7 @@ bool City::isConnectedTo(const City& target) const
 	return std::any_of(_connections.begin(), _connections.end(), [&](const auto& city) { return city == &target; });
 }
 
-unsigned int City::diseaseCubes(const Colour& colour) const
+unsigned City::diseaseCubes(const Colour& colour) const
 {
 	return _diseaseCubes[colour];
 }
@@ -69,7 +69,7 @@ void City::connectTo(City &target)
 	}
 }
 
-void City::addDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source, InfectionCardDeck& infectionDeck)
+void City::addDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& source, InfectionCardDeck& infectionDeck)
 {
 	if (!_outbreaks[colour] && !_quarantined && ! source.isEradicated(colour)) {
 		_diseaseCubes.takeFrom(colour, amount, source);
@@ -87,7 +87,7 @@ void City::addDiseaseCubes(const Colour& colour, const unsigned int amount, Cube
 
 }
 
-void City::removeDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source)
+void City::removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& source)
 {
 	_diseaseCubes.giveTo(colour, amount, source);
 }

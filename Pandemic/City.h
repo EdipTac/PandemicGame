@@ -35,7 +35,7 @@ public:
 	bool isConnectedTo(const City& target) const;
 
 	// The number of disease cubes of a given colour the city has
-	unsigned int diseaseCubes(const Colour& colour) const;
+	unsigned diseaseCubes(const Colour& colour) const;
 	// The outbreak status of each disease
 	bool diseaseOutbreak(const Colour& colour) const;
 
@@ -51,10 +51,10 @@ public:
 	void connectTo(City& target);
 
 	// Adds disease cubes of a given colour from a given source
-	void addDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source, InfectionCardDeck& infectionDeck);
+	void addDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& source, InfectionCardDeck& infectionDeck);
 
 	// Removes disease cubes of a given colour from a given source
-	void removeDiseaseCubes(const Colour& colour, const unsigned int amount, CubePool& source);
+	void removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& source);
 	
 	// True iff quarantine specialist locates at this city or at cities with direct connection with this city
 	bool quarantined() const {
@@ -83,8 +83,8 @@ private:
 	//Whether the city is quarantined
 	bool _quarantined;
 	// Maximum cuber per colour each city can hold
-	unsigned int const MAX_CUBE_PER_DISEASE = 3;
+	unsigned const MAX_CUBE_PER_DISEASE = 3;
 	// Place one cube for each infection
-	unsigned int const CUBE_PER_INFECTION = 1;
+	unsigned const CUBE_PER_INFECTION = 1;
 	bool _hasResearchStation = false;
 };
