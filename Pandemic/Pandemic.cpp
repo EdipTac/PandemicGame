@@ -111,17 +111,10 @@ const ActionMenu actionMenu
 };
 
 //	----    Program entry point    ----  //
-//#define TEST
+//#define TEST	// Uncomment to use "test" main()
 #ifdef TEST
 void main()
 {
-	std::map<std::string, int> m
-	{
-		{ "Hello",		1	},
-		{ "Goodbye",	2	}
-	};
-	std::cout << validateInput(m, "Yoooo\n") << std::endl;
-	waitForExit();
 }
 #else
 void main()
@@ -352,6 +345,7 @@ bool buildResearchStation()
 	return true;
 }
 
+// The player removes a disease cube of a given colour from a city
 bool treatDisease()
 {
 	auto& position = game->currentPlayer().pawn().position();
@@ -367,18 +361,8 @@ bool treatDisease()
 		std::cout << "\t" << colourName(disease) << "(" << colourAbbreviation(disease) << "): " << position.diseaseCubes(disease) << " cubes\n";
 	}
 
-	std::string diseaseName;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, diseaseName);
-		const auto& it = std::find_if(colours().begin(), colours().end(), [&](const auto& c) { return colourName(c) == diseaseName; });
-		if (it != colours().end())
-		{
-			position.removeDiseaseCubes(*it, 1, game->cubePool());
-			break;
-		}
-		std::cout << "Not a disease.\n";
-	}
+	const auto& colour = validateInput(colourNameMap(), "Not a disease.\n");
+	position.removeDiseaseCubes(colour, 1, game->cubePool());
 
 	std::cout << "Disease report\n";
 	for (const auto& disease : diseases)

@@ -65,3 +65,13 @@ Colour colourFromAbbreviation(const std::string& abbreviation)
 {
 	return _colourFromField(&ColourData::abbreviation, abbreviation);
 }
+
+std::map<std::string, Colour> colourNameMap()
+{
+	std::map<std::string, Colour> map;
+	for (const auto& d : _colourData)
+	{
+		map[d.second.name] = d.first;
+	}
+	return map;
+}

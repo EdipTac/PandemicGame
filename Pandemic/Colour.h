@@ -26,3 +26,5 @@ Colour colourFromName(const std::string& name);
 
 // Make colour from abbreviation
 Colour colourFromAbbreviation(const std::string& abbreviation);
+
+std::map<std::string, Colour> colourNameMap();
