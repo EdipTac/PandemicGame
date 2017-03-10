@@ -115,6 +115,8 @@ const ActionMenu actionMenu
 #ifdef TEST
 void main()
 {
+		readGameFromFile("save.json");
+		system("pause");
 }
 #else
 void main()
