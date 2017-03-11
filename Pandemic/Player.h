@@ -45,8 +45,10 @@ public:
 
 	void displayCards();
 
-	// True iff the player has a city card matching their pawn's position
 	bool hasPositionCard();
+
+	// True iff the player has a city card matching their pawn's position
+	PlayerCard* positionCard();
 
 	void giveCard(const PlayerCard& card, Player& recipient);
 

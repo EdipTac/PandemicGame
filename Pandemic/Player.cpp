@@ -62,8 +62,23 @@ void Player::displayCards() {
 bool Player::hasPositionCard()
 {
 	auto& position = _pawn.position();
-	const auto& isPositionCard = [&](const auto& card) { return card->city() == position; };
+	const auto& isPositionCard = [&](const auto& card)
+	{
+		return card->city() == position;
+	};
 	return !std::any_of(cityCards().begin(), cityCards().end(), isPositionCard);
+}
+
+PlayerCard* Player::positionCard()
+{
+	auto& position = _pawn.position();
+	const auto& isPositionCard = [&](const auto& card)
+	{
+		return card->city() == position;
+	};
+	const auto& cards = cityCards();
+	const auto& it = std::find_if(cards.begin(), cards.end(), isPositionCard);
+	return it == cards.end() ? nullptr : *it;
 }
 
 void Player::giveCard(const PlayerCard& card, Player& recipient)

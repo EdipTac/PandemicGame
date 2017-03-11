@@ -411,16 +411,15 @@ bool treatDisease()
 	return true;
 }
 
+// Give or take a card mathcing the city you are in from another player
 bool shareKnowledge()
 {
-	// TODO
-
-
-	// Factor into separate function
+	// Aliases
 	auto& currentPlayer = game->currentPlayer();
 	const auto& position = currentPlayer.pawn().position();
 	const auto& players = game->players();
 
+	// Select another player in your city
 	std::vector<Player*> others;
 	for (const auto& player : players)
 	{
@@ -443,6 +442,7 @@ bool shareKnowledge()
 	}
 	auto& target = *validateInput(others, "Not a player in this city.\n");
 
+	// Give or take?
 	return ActionMenu
 	{
 		{
@@ -452,41 +452,31 @@ bool shareKnowledge()
 	}.solicitInput();
 }
 
+// Give your city card to another player
 bool giveKnowledge(Player& target)
 {
 	auto& player = game->currentPlayer();
-	const auto& cards = player.cards();
-	if (cards.empty())
+	const auto& positionCard = player.positionCard();
+	if (!positionCard)
 	{
-		std::cout << "You have no cards to give.\n";
+		std::cout << "No matching city card to give!\n";
 		return false;
 	}
-	std::cout << "Which card to give?\n";
-	for (const auto& card : cards)
-	{
-		std::cout << "\t" << card->name() << "\n";
-	}
-	const auto& donation = *validateInput(cards, "Not a card in your hand.");
-	player.giveCard(donation, target);
+	player.giveCard(*positionCard, target);
 
 	return true;
 }
 
+// Take the city card from another player
 bool takeKnowledge(Player& target)
 {
-	const auto& cards = target.cards();
-	if (cards.empty())
+	const auto& positionCard = target.positionCard();
+	if (!positionCard)
 	{
-		std::cout << "You have no cards to take.\n";
+		std::cout << "No matching city card to take!\n";
 		return false;
 	}
-	std::cout << "Which card to take?\n";
-	for (const auto& card : cards)
-	{
-		std::cout << "\t" << card->name() << "\n";
-	}
-	const auto& plunder = *validateInput(cards, "Not a card in your target's hand.");
-	target.giveCard(plunder, game->currentPlayer());
+	target.giveCard(*positionCard, game->currentPlayer());
 
 	return true;
 }
