@@ -29,6 +29,7 @@ public:
 
 	// The colour of the referenced city
 	Colour colour() const;
+	
 
 private:
 	City& _city;
