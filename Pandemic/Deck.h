@@ -26,10 +26,10 @@ public:
 	std::unique_ptr<T> drawCard();
 
 	// Inserts a card into the draw pile
-	void addToDeck(std::unique_ptr<T> cardToAdd);
+	void addToDeck(std::unique_ptr<T> card);
 
 	// Discards a card
-	void addToDiscard(std::unique_ptr<T> cardToDiscard);
+	void addToDiscard(std::unique_ptr<T> card);
 
 protected:
 	std::vector<std::unique_ptr<T>> _drawPile;

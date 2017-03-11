@@ -69,15 +69,15 @@ std::unique_ptr<T> Deck<T>::drawCard()
 }
 
 template <typename T>
-void Deck<T>::addToDeck(std::unique_ptr<T> cardToAdd)
+void Deck<T>::addToDeck(std::unique_ptr<T> card)
 {
-	_drawPile.push_back(move(cardToAdd));
+	_drawPile.push_back(move(card));
 }
 
 template <typename T>
-void Deck<T>::addToDiscard(std::unique_ptr<T> cardToDiscard)
+void Deck<T>::addToDiscard(std::unique_ptr<T> card)
 {
-	_discardPile.push_back(move(cardToDiscard));
+	_discardPile.push_back(move(card));
 }
 
 template class Deck<PlayerCard>;
