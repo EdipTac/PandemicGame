@@ -4,6 +4,8 @@ Author: Ke chun Ye
 Version: 1.0
 Data: 20170209*/
 
+#pragma warning(disable : 4100)	// To be removed
+
 #include <iostream>
 #include <string>
 

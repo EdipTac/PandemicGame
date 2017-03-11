@@ -1,3 +1,5 @@
+#pragma warning(disable : 4100)	// To be removed
+
 #include <string>
 #include <iostream>
 #include "RoleCard.h"

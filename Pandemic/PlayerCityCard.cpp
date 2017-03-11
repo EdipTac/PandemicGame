@@ -1,3 +1,5 @@
+#pragma warning(disable : 4100)	// To be removed
+
 #include "PlayerCityCard.h"
 
 // Default Constructor
