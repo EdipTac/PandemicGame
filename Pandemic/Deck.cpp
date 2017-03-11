@@ -5,6 +5,9 @@
 #include <ctime>
 #include <iostream>
 #include <algorithm> //std::random_shuffle
+
+Deck::Deck() {};
+
 Deck::~Deck() {}
 
 
