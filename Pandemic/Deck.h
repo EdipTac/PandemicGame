@@ -24,7 +24,10 @@ public:
 	bool empty() const;
 
 	// Returns the top card of the deck
-	std::unique_ptr<T> drawCard();
+	std::unique_ptr<T> drawTopCard();
+
+	// Returns the bottom card of the deck
+	std::unique_ptr<T> drawBottomCard();
 
 	// Inserts a card into the draw pile
 	void addToDeck(std::unique_ptr<T> card);

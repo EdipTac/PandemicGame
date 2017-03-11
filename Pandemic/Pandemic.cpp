@@ -178,7 +178,7 @@ void newGame()
 	{
 		for (auto i = 0u; !game->playerDeck().empty() && i < cardsPerPlayer; ++i)
 		{
-			player->addCard(std::move(game->playerDeck().drawCard()));
+			player->addCard(std::move(game->playerDeck().drawTopCard()));
 		}
 	}
 
