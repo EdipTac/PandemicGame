@@ -12,8 +12,6 @@ using json = nlohmann::json; // for convenience
 #include "Serialization.h"
 #include "Util.h"
 
-#pragma warning (disable : 4456)
-
 std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 {
 	std::ifstream fs { fileName };
