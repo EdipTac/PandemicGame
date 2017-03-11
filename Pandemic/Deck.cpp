@@ -20,7 +20,7 @@ void Deck<T>::shuffleDeck()
 		temp.push_back(std::move(_drawPile[i]));
 		_drawPile.erase(_drawPile.begin() + i);
 	}
-	_drawPile = move(temp);
+	_drawPile = std::move(temp);
 }
 
 template <typename T>
