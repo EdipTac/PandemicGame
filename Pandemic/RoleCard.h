@@ -25,6 +25,7 @@ public:
 	~RoleCard() override;
 
 	void printRole();
+	void onDraw(GameState& state) override;
 
 private:
 	std::string _color;

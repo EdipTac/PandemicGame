@@ -17,4 +17,6 @@ public:
 
 	// Custom implementation of the inherited virtual function from PlayerCard
 	std::string toString();
+
+	void onDraw(GameState& state) override;
 };

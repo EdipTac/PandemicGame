@@ -17,4 +17,5 @@ class InfectionCard
 public:
 	// Constructs an infection card for infecting a given city
 	InfectionCard(City& city);
+	void onDraw(GameState& state);
 };

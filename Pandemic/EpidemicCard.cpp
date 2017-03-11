@@ -19,3 +19,5 @@ std::string EpidemicCard::toString()
 {
 	return "Epidemic\n" + PlayerCard::toString() + ", Description: \n" + EPIDEMIC_DESCRIPTION;
 }
+
+void EpidemicCard::onDraw(GameState& state){}

@@ -13,3 +13,5 @@ Data: 20170209*/
 InfectionCard::InfectionCard(City& city)
 	: CityCard { city }
 {}
+
+void InfectionCard::onDraw(GameState& state) {}
