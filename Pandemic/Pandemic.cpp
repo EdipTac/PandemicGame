@@ -58,6 +58,7 @@ bool shuttleFlight();
 bool buildResearchStation();
 bool treatDisease();
 bool shareKnowledge();
+bool giveKnowledge(Player& target);
 bool cureDisease();
 bool actionQuit();
 
@@ -369,7 +370,7 @@ bool buildResearchStation()
 	}
 
 	// Remove card, place station
-	auto& cards = player.cards();
+	const auto& cards = player.cards();
 	const auto& positionName = player.pawn().position().name();
 	auto it = std::find_if(cards.begin(), cards.end(), [&](const auto& card)
 	{
@@ -413,26 +414,18 @@ bool shareKnowledge()
 {
 	// TODO
 
-	ActionMenu
-	{
-		{
-			{ " Give Knowledge", [](){ return false; } }, // Placeholder
-			{ " Take Knowledge", [](){ return false; } },
-		}
-	}.solicitInput();
-
 
 	// Factor into separate function
 	auto& currentPlayer = game->currentPlayer();
 	const auto& position = currentPlayer.pawn().position();
 	const auto& players = game->players();
 
-	std::vector<std::reference_wrapper<Player>> others;
+	std::vector<Player*> others;
 	for (const auto& player : players)
 	{
 		if (player.get() != &currentPlayer && player->pawn().position() == position)
 		{
-			others.push_back(*player);
+			others.push_back(player.get());
 		}
 	}
 
@@ -442,7 +435,42 @@ bool shareKnowledge()
 		return false;
 	}
 
+	std::cout << "Who to trade with?\n";
+	for (const auto& player : others)
+	{
+		std::cout << "\t" << player->name() << "\n";
+	}
+	auto& target = *validateInput(others, "Not a player in this city.\n");
+
+	ActionMenu
+	{
+		{
+			{ "Give Knowledge", [&](){ return giveKnowledge(target); } },
+			{ "Take Knowledge", [](){ return false; } }, // Placeholder
+		}
+	}.solicitInput();
+
 	// TODO
+
+	return true;
+}
+
+bool giveKnowledge(Player& target)
+{
+	auto& player = game->currentPlayer();
+	const auto& cards = player.cards();
+	if (cards.empty())
+	{
+		std::cout << "You have no cards to give.\n";
+		return false;
+	}
+	std::cout << "Which card to give?\n";
+	for (const auto& card : cards)
+	{
+		std::cout << "\t" << card->name() << "\n";
+	}
+	const auto& donation = *validateInput(cards, "Not a card in your hand.");
+	player.giveCard(donation, target);
 
 	return true;
 }
