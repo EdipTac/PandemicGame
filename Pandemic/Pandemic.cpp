@@ -63,6 +63,7 @@ bool actionQuit();
 
 void showCity(const City& city);
 void displayCities();
+void flipAndInfect(InfectionCardDeck&, GameState& );
 std::string solicitFileName();
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
@@ -83,32 +84,32 @@ std::unique_ptr<GameState> game;
 const GeneralMenu mainMenu
 {
 	{
-		{ "New Game",  newGame },
-		{ "Load Game", loadGame },
-		{ "Exit",	   quit }
+		{ "New Game",  newGame	},
+		{ "Load Game", loadGame	},
+		{ "Exit",	   quit		}
 	}
 };
 
 const GeneralMenu turnMenu
 {
 	{
-		{ "Perform Action",	performAction },
-		{ "Quit Game",		quit }
+		{ "Perform Action",	performAction	},
+		{ "Quit Game",		quit			}
 	}
 };
 
 const ActionMenu actionMenu
 {
 	{
-		{ "Drive/Ferry",				driveOrFerry },
-		{ "Direct Flight",				directFlight },
-		{ "Charter Flight",				charterFlight },
-		{ "Shuttle Flight",				shuttleFlight },
-		{ "Build a Research Station",	buildResearchStation },
-		{ "Treat Disease",				treatDisease },
-		{ "Share Knowledge",			shareKnowledge },
-		{ "Cure Disease",				cureDisease },
-		{ "Quit Game",					actionQuit }
+		{ "Drive/Ferry",				driveOrFerry			},
+		{ "Direct Flight",				directFlight			},
+		{ "Charter Flight",				charterFlight			},
+		{ "Shuttle Flight",				shuttleFlight			},
+		{ "Build a Research Station",	buildResearchStation	},
+		{ "Treat Disease",				treatDisease			},
+		{ "Share Knowledge",			shareKnowledge			},
+		{ "Cure Disease",				cureDisease				},
+		{ "Quit Game",					actionQuit				}
 	}
 };
 
@@ -116,7 +117,8 @@ const ActionMenu actionMenu
 //#define TEST	// Uncomment to use "test" main()
 #ifdef TEST
 void main()
-{}
+{
+}
 #else
 void main()
 {
@@ -414,14 +416,8 @@ bool shareKnowledge()
 	ActionMenu
 	{
 		{
-			{ " Give Knowledge", []()
-	{
-		return false;
-	} }, // Placeholder
-	{ " Take Knowledge", []()
-	{
-		return false;
-	} },
+			{ " Give Knowledge", [](){ return false; } }, // Placeholder
+			{ " Take Knowledge", [](){ return false; } },
 		}
 	}.solicitInput();
 
@@ -690,4 +686,13 @@ std::string titleFont(const std::string& original)
 	ornament();
 
 	return ss.str();
+}
+void flipAndInfect(InfectionCardDeck& deck, GameState& state) {// normal one infectio after each turn
+	std::cout << "Flip an infection card: " << std::endl;
+	std::unique_ptr<InfectionCard> temp = deck.drawTopCard();
+	City& city = temp->city();
+	std::cout << "Infection card :" << temp->name() << " with the colour of: " << colourAbbreviation(temp->colour()) << "\n" <<
+		"infects the city " << temp->name() << " one time " << std::endl;
+	city.addDiseaseCubes(city.colour(), city.CUBE_PER_INFECTION, state);
+
 }
