@@ -25,7 +25,7 @@ public:
 	std::string name() const override;
 
 	// The card's description
-	std::string description() const override;
+	virtual std::string description() const override;
 
 	// The colour of the referenced city
 	Colour colour() const;

@@ -3,6 +3,7 @@
 #include <string>
 
 #include "PlayerCard.h"
+#include "Deck.h"
 
 // Represents an epidemic player card.
 class EpidemicCard
@@ -19,4 +20,6 @@ public:
 	std::string toString();
 
 	void onDraw(GameState& state) override;
+
+	//void epidemicInfect(&, GameState&);
 };
