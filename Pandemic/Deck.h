@@ -32,6 +32,6 @@ public:
 	void addToDiscard(std::unique_ptr<T> cardToDiscard);
 
 protected:
-	std::vector<std::unique_ptr<T>> deckOfCards; //deck of our actual cards
-	std::vector<std::unique_ptr<T>> discardDeck;//the respective discard pile for our deck
+	std::vector<std::unique_ptr<T>> _drawPile;
+	std::vector<std::unique_ptr<T>> _discardPile;
 };

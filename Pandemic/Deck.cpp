@@ -13,47 +13,47 @@ template <typename T>
 void Deck<T>::shuffleDeck()
 {
 	std::vector<std::unique_ptr<T>> temp;
-	temp.reserve(deckOfCards.size());
-	while (!deckOfCards.empty())
+	temp.reserve(_drawPile.size());
+	while (!_drawPile.empty())
 	{
-		int i = (rand()) % (deckOfCards.size());
-		temp.push_back(std::move(deckOfCards[i]));
-		deckOfCards.erase(deckOfCards.begin() + i);
+		int i = (rand()) % (_drawPile.size());
+		temp.push_back(std::move(_drawPile[i]));
+		_drawPile.erase(_drawPile.begin() + i);
 	}
-	deckOfCards = move(temp);
+	_drawPile = move(temp);
 }
 
 template <typename T>
 void Deck<T>::shuffleDiscards()
 {
 	std::vector<std::unique_ptr<T>> temp;
-	temp.reserve(discardDeck.size());
-	while (!discardDeck.empty())
+	temp.reserve(_discardPile.size());
+	while (!_discardPile.empty())
 	{
-		int i = (rand()) % (discardDeck.size());
-		temp.push_back(std::move(discardDeck[i]));
-		discardDeck.erase(deckOfCards.begin() + i);
+		int i = (rand()) % (_discardPile.size());
+		temp.push_back(std::move(_discardPile[i]));
+		_discardPile.erase(_drawPile.begin() + i);
 	}
-	deckOfCards = move(temp);
+	_drawPile = move(temp);
 }
 
 
 template <typename T>
 void Deck<T>::printDeck() {
 	std::cout << "The cards within the deck are as follows:\n" << std::endl;
-	for (auto i = 0u; i < deckOfCards.size(); i++)
+	for (auto i = 0u; i < _drawPile.size(); i++)
 	{
-		std::cout << deckOfCards[i]->name() << std::endl;
+		std::cout << _drawPile[i]->name() << std::endl;
 	}
 }
 
 template <typename T>
 std::unique_ptr<T> Deck<T>::drawCard()
 {
-	if (deckOfCards.size() != 0)
+	if (_drawPile.size() != 0)
 	{
-		std::unique_ptr<T> temp = move(deckOfCards[0]);
-		deckOfCards.erase(deckOfCards.begin());
+		std::unique_ptr<T> temp = move(_drawPile[0]);
+		_drawPile.erase(_drawPile.begin());
 		return temp;
 
 	}
@@ -67,13 +67,13 @@ std::unique_ptr<T> Deck<T>::drawCard()
 template <typename T>
 void Deck<T>::addToDeck(std::unique_ptr<T> cardToAdd)
 {
-	deckOfCards.push_back(move(cardToAdd));
+	_drawPile.push_back(move(cardToAdd));
 }
 
 template <typename T>
 void Deck<T>::addToDiscard(std::unique_ptr<T> cardToDiscard)
 {
-	discardDeck.push_back(move(cardToDiscard));
+	_discardPile.push_back(move(cardToDiscard));
 }
 
 template class Deck<PlayerCard>;
