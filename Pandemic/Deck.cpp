@@ -8,33 +8,18 @@
 #include "InfectionCard.h"
 
 size_t randSize(size_t max);
+template <typename T> void shuffle(std::vector<std::unique_ptr<T>>& cards);
 
 template <typename T>
 void Deck<T>::shuffleDeck()
 {
-	std::vector<std::unique_ptr<T>> temp;
-	temp.reserve(_drawPile.size());
-	while (!_drawPile.empty())
-	{
-		const auto i = randSize(_drawPile.size());
-		temp.push_back(std::move(_drawPile[i]));
-		_drawPile.erase(_drawPile.begin() + i);
-	}
-	_drawPile = std::move(temp);
+	shuffle(_drawPile);
 }
 
 template <typename T>
 void Deck<T>::shuffleDiscards()
 {
-	std::vector<std::unique_ptr<T>> temp;
-	temp.reserve(_discardPile.size());
-	while (!_discardPile.empty())
-	{
-		int i = (rand()) % (_discardPile.size());
-		temp.push_back(std::move(_discardPile[i]));
-		_discardPile.erase(_drawPile.begin() + i);
-	}
-	_drawPile = move(temp);
+	shuffle(_discardPile);
 }
 
 
@@ -86,4 +71,18 @@ size_t randSize(size_t max)
 	static std::uniform_int_distribution<size_t> dis;
 	dis.param(std::uniform_int_distribution<size_t>::param_type { 0, max });
 	return dis(gen);
+}
+
+template <typename T>
+void shuffle(std::vector<std::unique_ptr<T>>& cards)
+{
+	std::vector<std::unique_ptr<T>> temp;
+	temp.reserve(cards.size());
+	while (!cards.empty())
+	{
+		const auto i = randSize(cards.size());
+		temp.push_back(std::move(cards[i]));
+		cards.erase(cards.begin() + i);
+	}
+	cards = std::move(temp);
 }
