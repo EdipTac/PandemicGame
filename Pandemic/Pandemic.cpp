@@ -59,6 +59,7 @@ bool buildResearchStation();
 bool treatDisease();
 bool shareKnowledge();
 bool giveKnowledge(Player& target);
+bool takeKnowledge(Player& target);
 bool cureDisease();
 bool actionQuit();
 
@@ -442,17 +443,13 @@ bool shareKnowledge()
 	}
 	auto& target = *validateInput(others, "Not a player in this city.\n");
 
-	ActionMenu
+	return ActionMenu
 	{
 		{
 			{ "Give Knowledge", [&](){ return giveKnowledge(target); } },
-			{ "Take Knowledge", [](){ return false; } }, // Placeholder
+			{ "Take Knowledge", [&](){ return takeKnowledge(target); } },
 		}
 	}.solicitInput();
-
-	// TODO
-
-	return true;
 }
 
 bool giveKnowledge(Player& target)
@@ -471,6 +468,25 @@ bool giveKnowledge(Player& target)
 	}
 	const auto& donation = *validateInput(cards, "Not a card in your hand.");
 	player.giveCard(donation, target);
+
+	return true;
+}
+
+bool takeKnowledge(Player& target)
+{
+	const auto& cards = target.cards();
+	if (cards.empty())
+	{
+		std::cout << "You have no cards to take.\n";
+		return false;
+	}
+	std::cout << "Which card to take?\n";
+	for (const auto& card : cards)
+	{
+		std::cout << "\t" << card->name() << "\n";
+	}
+	const auto& plunder = *validateInput(cards, "Not a card in your target's hand.");
+	target.giveCard(plunder, game->currentPlayer());
 
 	return true;
 }
