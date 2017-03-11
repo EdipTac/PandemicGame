@@ -1,6 +1,7 @@
 #include <iostream>
 #include <memory>
 #include <random>
+#include <stdexcept>
 #include <vector>
 
 #include "Deck.h"
@@ -36,18 +37,14 @@ void Deck<T>::printDeck()
 template <typename T>
 std::unique_ptr<T> Deck<T>::drawCard()
 {
-	if (_drawPile.size() != 0)
+	if (_drawPile.empty())
 	{
-		std::unique_ptr<T> temp = move(_drawPile.back());
-		_drawPile.pop_back();
-		return temp;
+		throw std::logic_error { "Trying to draw from an empty deck." };
+	}
 
-	}
-	else
-	{
-		std::cout << "The deck is empty!" << std::endl;
-		return NULL;
-	}
+	auto temp = move(_drawPile.back());
+	_drawPile.pop_back();
+	return temp;
 }
 
 template <typename T>
