@@ -10,7 +10,6 @@ class Deck {
 
 public:
 	
-	Deck();
 	virtual ~Deck();
 	virtual void shuffleDeck(); //shuffles the actual deck
 	virtual void shuffleDiscards(); //shuffles the discard pile

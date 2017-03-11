@@ -4,6 +4,7 @@
 #include <memory>
 
 #include "CubePool.h"
+#include "Deck.h"
 #include "Map.h"
 #include "Player.h"
 
@@ -37,6 +38,9 @@ public:
 	void advanceOutbreakCounter();
 	CubePool& cubePool();
 
+	Deck& playerDeck();
+	Deck& infectionDeck();
+
 private:
 	std::unique_ptr<Map> _map;
 	std::vector<std::unique_ptr<Player>> _players;
@@ -47,6 +51,8 @@ private:
 	unsigned _outbreakCounter = 0;
 	bool _shouldQuit = false;
 	unsigned _researchStations = 6;
+	Deck _playerDeck;
+	Deck _infectionDeck;
 };
 
 std::unique_ptr<GameState> quitState();

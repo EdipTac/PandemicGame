@@ -164,7 +164,16 @@ void newGame()
 	}
 
 	// Other initializtion here - cards, etc
-	// Place first research station
+	for (const auto& city : game->map().cities())
+	{
+		game->playerDeck().addToDeck(std::make_unique<PlayerCityCard>(*city));
+		game->infectionDeck().addToDeck(std::make_unique<InfectionCard>(*city));
+	}
+	// TODO - Add EventCards
+	
+	game->playerDeck().shuffleDeck();
+
+	//Place first research station
 	map.startingCity().giveResearchStation(*game);
 }
 

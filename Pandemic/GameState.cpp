@@ -125,6 +125,16 @@ CubePool& GameState::cubePool()
 	return _cubePool;
 }
 
+Deck& GameState::playerDeck()
+{
+	return _playerDeck;
+}
+
+Deck& GameState::infectionDeck()
+{
+	return _infectionDeck;
+}
+
 class QuitState
 	: public GameState
 {
