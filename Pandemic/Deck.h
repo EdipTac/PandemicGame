@@ -28,13 +28,14 @@ public:
 	virtual void shuffleDeck(); //shuffles the actual deck
 	virtual void shuffleDiscards(); //shuffles the discard pile
 	virtual void printDeck();
+	virtual std::unique_ptr<Card> drawTopCard(); //this is to draw a card from the top of the deck
+	virtual std::unique_ptr<Card> drawBottomCard(); //this is to draw a card from the bottom of the deck
 	virtual void addToDeck(std::unique_ptr<Card> cardToAdd); //this is so we can re-add the cards back to the deck
 	virtual void addToDiscard(std::unique_ptr<Card> cardToDiscard); //this is so we can discard the cards
 
 	// Returns the top card of the deck
-	std::unique_ptr<T> drawTopCard();
-	// Returns the bottom card of the deck
-	std::unique_ptr<T> drawBottomCard();
+	std::unique_ptr<T> drawCard();
+
 	// Inserts a card into the draw pile
 	void addToDeck(std::unique_ptr<T> card);
 

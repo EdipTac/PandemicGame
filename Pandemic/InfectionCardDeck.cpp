@@ -33,12 +33,12 @@ InfectionCardDeck::~InfectionCardDeck() {
 }
 
 void InfectionCardDeck::printDeck() {
-	for (const auto& infectionCard : _drawPile) {
+	for (const auto& infectionCard : deckOfCards) {
 		std::cout << "Infection cards on deck : " << infectionCard->description() << std::endl;
 	}
 }
 void InfectionCardDeck::checkInfectionCardHistory() {
-	for (const auto& infectionCard : _discardPile) {
+	for (const auto& infectionCard : discardDeck) {
 		std::cout << "Infection cards on discard pile: " << infectionCard->description()<< std::endl;
 	}
 	}
@@ -47,8 +47,8 @@ void InfectionCardDeck::checkInfectionCardHistory() {
 
 void InfectionCardDeck::reshuffleAndputback() {
 	shuffleDiscards();
-	for ( const auto& infectionCard : _discardPile ) {
-		    addToDeck(infectionCard);
+	for ( const auto& infectionCard : discardDeck ) {
+		deckOfCards.push_back(move(infectionCard));
 	}
-	discardPile.clear();
+	discardDeck.clear();
 }
