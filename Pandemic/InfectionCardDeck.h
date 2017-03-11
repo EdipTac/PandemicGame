@@ -8,10 +8,14 @@
 
 #include <iostream>
 #include <vector>
+
+#include "Deck.h"
 #include "InfectionCard.h"
 #include "Serialization.h"
 
-class InfectionCardDeck {
+class InfectionCardDeck
+	: public Deck<InfectionCard>
+{
 public:
 	//Default constructor
 	InfectionCardDeck(std::string fileName);
@@ -46,8 +50,8 @@ private:
 	int infectionRate; // infection rate
 	const unsigned outbreakTracker[7] = { 2,2,2,3,3,4,4 };// outbreak marker tracker
 	int outbreakMarker = 0;
-	std::vector <std::unique_ptr<InfectionCard>> deck; // vector holds all unused infection cards
-	std::vector <std::unique_ptr<InfectionCard>> discardPile;// vector holds all used infection cards
+	//std::vector <std::unique_ptr<InfectionCard>> deck; // vector holds all unused infection cards
+	//std::vector <std::unique_ptr<InfectionCard>> discardPile;// vector holds all used infection cards
 	unsigned const CUBE_NORMAL_INFECTION = 1;
 	unsigned const CUBE_EPIDEMIC_INFECTION = 3;
 	

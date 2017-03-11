@@ -18,10 +18,10 @@ InfectionCardDeck::InfectionCardDeck(std::string fileName)
 
 	for (const auto& city : map->cities())
 	{
-		deck.push_back(std::make_unique<InfectionCard>(*city));
+		Deck<InfectionCard>::addToDeck(std::make_unique<InfectionCard>(*city));
 	}
 
-    shuffle(deck);// shuffle infection cards on deck/
+	Deck<InfectionCard>::shuffleDeck();// shuffle infection cards on deck/
 }
 #pragma warning (push)
 #pragma warning (disable: 4100) // S since cards isn't used
@@ -36,28 +36,23 @@ InfectionCardDeck::~InfectionCardDeck() {
 
 }
 
-void InfectionCardDeck::print() {
-	for (const auto& infectionCard : deck) {
-		std::cout << "Infection cards on deck : " << infectionCard->name() <<" with the colour of: " << colourAbbreviation(infectionCard->colour()) << std::endl;
-	}
-}
 void InfectionCardDeck::checkInfectionCardHistory() {
-	for (const auto& infectionCard : discardPile) {
+	for (const auto& infectionCard : _discardPile) {
 		std::cout << "Infection cards on discard pile: " << infectionCard->name() << " with the colour of: " << colourAbbreviation(infectionCard->colour()) << std::endl;
 	}
 }
 void InfectionCardDeck::flipInfectionCard(CubePool& pool) {
-	if (deck.size() < 1) {
+	if (_drawPile.size() < 1) {
 		std::cout << "There is no more infection cards to draw " << std::endl;
 
 	}
 	else {
 
-		auto temp = move(deck[deck.size() -1]);
+		auto temp = std::move(_drawPile[_drawPile.size() -1]);
 		(temp->city()).addDiseaseCubes(temp->colour(), CUBE_NORMAL_INFECTION, pool, *this);
-		deck.pop_back();
-		deck.shrink_to_fit();
-		discardPile.push_back(move(temp));
+		_drawPile.pop_back();
+		_drawPile.shrink_to_fit();
+		_discardPile.push_back(move(temp));
 
 	}
 }
@@ -75,18 +70,18 @@ void InfectionCardDeck::moveOutbreakMarker() {
 }
 
 void InfectionCardDeck::pullBottomInfectionCard(CubePool& pool) {
-	(deck[0]->city()).addDiseaseCubes(deck[0]->colour(), CUBE_EPIDEMIC_INFECTION, pool, *this);
-	discardPile.push_back(move(deck[0]));
-   deck[0].reset(nullptr);
-   deck.erase(deck.begin());
-	deck.shrink_to_fit();
+	(_drawPile[0]->city()).addDiseaseCubes(_drawPile[0]->colour(), CUBE_EPIDEMIC_INFECTION, pool, *this);
+	_discardPile.push_back(std::move(_drawPile[0]));
+	_drawPile[0].reset(nullptr);
+	_drawPile.erase(_drawPile.begin());
+	_drawPile.shrink_to_fit();
 
 }
 void InfectionCardDeck::reshuffleAndputback() {
-	shuffle(discardPile);
-	const auto k = discardPile.size();
+	shuffle(_discardPile);
+	const auto k = _discardPile.size();
 	for (auto i = 0; i < k; i++) {
-		deck.push_back(move(discardPile[i]));
+		_drawPile.push_back(std::move(_discardPile[i]));
 	}
-	discardPile.clear();
+	_discardPile.clear();
 }
