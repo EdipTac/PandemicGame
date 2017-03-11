@@ -20,6 +20,9 @@ public:
 	// Prints the deck
 	void printDeck();
 
+	// True iff draw pile is empty
+	bool empty() const;
+
 	// Returns the top card of the deck
 	std::unique_ptr<T> drawCard();
 

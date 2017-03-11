@@ -34,6 +34,12 @@ void Deck<T>::printDeck()
 	}
 }
 
+template<typename T>
+bool Deck<T>::empty() const
+{
+	return _drawPile.empty();
+}
+
 template <typename T>
 std::unique_ptr<T> Deck<T>::drawCard()
 {
@@ -66,7 +72,7 @@ size_t randSize(const size_t max)
 {
 	static std::mt19937 gen { std::random_device {}() };
 	static std::uniform_int_distribution<size_t> dis;
-	dis.param(std::uniform_int_distribution<size_t>::param_type { 0, max });
+	dis.param(std::uniform_int_distribution<size_t>::param_type { 0, max - 1 });
 	return dis(gen);
 }
 

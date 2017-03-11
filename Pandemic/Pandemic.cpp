@@ -177,9 +177,18 @@ void newGame()
 	// Distribute cards to players
 	for (const auto& player : game->players())
 	{
-		for (auto i = 0u; i < cardsPerPlayer; ++i)
+		for (auto i = 0u; !game->playerDeck().empty() && i < cardsPerPlayer; ++i)
 		{
 			player->addCard(std::move(game->playerDeck().drawCard()));
+		}
+	}
+
+	for (const auto& player : game->players())
+	{
+		std::cout << "Player " << player->name() << " has\n";
+		for (const auto& card : player->cards())
+		{
+			std::cout << "\t" << card->name() << "\n";
 		}
 	}
 
