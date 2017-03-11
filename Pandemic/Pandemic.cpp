@@ -63,7 +63,7 @@ bool actionQuit();
 
 void showCity(const City& city);
 void displayCities();
-void flipAndInfect(InfectionCardDeck&, GameState& );
+
 std::string solicitFileName();
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
