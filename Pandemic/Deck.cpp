@@ -38,8 +38,8 @@ std::unique_ptr<T> Deck<T>::drawCard()
 {
 	if (_drawPile.size() != 0)
 	{
-		std::unique_ptr<T> temp = move(_drawPile[0]);
-		_drawPile.erase(_drawPile.begin());
+		std::unique_ptr<T> temp = move(_drawPile.back());
+		_drawPile.pop_back();
 		return temp;
 
 	}
