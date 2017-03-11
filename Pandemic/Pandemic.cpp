@@ -173,6 +173,12 @@ void newGame()
 	
 	game->playerDeck().shuffleDeck();
 
+	// Distribute cards to players
+	//for (const auto& player : game->players())
+	//{
+		//player->addCard(std::move(dynamic_cast<std::unique_ptr<PlayerCard>>(game->playerDeck().drawCard())));
+	//}
+
 	//Place first research station
 	map.startingCity().giveResearchStation(*game);
 }

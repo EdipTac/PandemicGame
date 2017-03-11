@@ -5,8 +5,10 @@
 
 #include "CubePool.h"
 #include "Deck.h"
+#include "InfectionCard.h"
 #include "Map.h"
 #include "Player.h"
+#include "PlayerCard.h"
 
 // Represents the state of the game
 class GameState
@@ -38,8 +40,8 @@ public:
 	void advanceOutbreakCounter();
 	CubePool& cubePool();
 
-	Deck& playerDeck();
-	Deck& infectionDeck();
+	Deck<PlayerCard>& playerDeck();
+	Deck<InfectionCard>& infectionDeck();
 
 private:
 	std::unique_ptr<Map> _map;
@@ -51,8 +53,8 @@ private:
 	unsigned _outbreakCounter = 0;
 	bool _shouldQuit = false;
 	unsigned _researchStations = 6;
-	Deck _playerDeck;
-	Deck _infectionDeck;
+	Deck<PlayerCard> _playerDeck;
+	Deck<InfectionCard> _infectionDeck;
 };
 
 std::unique_ptr<GameState> quitState();

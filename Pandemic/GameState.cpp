@@ -125,12 +125,12 @@ CubePool& GameState::cubePool()
 	return _cubePool;
 }
 
-Deck& GameState::playerDeck()
+Deck<PlayerCard>& GameState::playerDeck()
 {
 	return _playerDeck;
 }
 
-Deck& GameState::infectionDeck()
+Deck<InfectionCard>& GameState::infectionDeck()
 {
 	return _infectionDeck;
 }
