@@ -1,3 +1,5 @@
+#pragma warning(disable : 4100)	// To be removed
+
 #include "PlayerCityCard.h"
 
 // Default Constructor
@@ -31,3 +33,5 @@ std::string PlayerCityCard::description() const
 {
 	return CityCard::description();
 }
+
+void PlayerCityCard::onDraw(GameState& state) {}

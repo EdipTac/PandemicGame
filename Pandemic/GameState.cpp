@@ -105,9 +105,9 @@ void GameState::advanceInfectionCounter()
 unsigned GameState::infectionRate() const
 {
 	const auto& c = _infectionCounter; // Alias
-	return	(1 <= c && c <= 3)	? 2 :
-			(4 <= c && c <= 5)	? 3 :
-								  4 ;
+	return	(1 <= c && c <= 3) ? 2 :
+		(4 <= c && c <= 5) ? 3 :
+		4;
 }
 
 void GameState::advanceOutbreakCounter()
@@ -123,6 +123,16 @@ void GameState::advanceOutbreakCounter()
 CubePool& GameState::cubePool()
 {
 	return _cubePool;
+}
+
+Deck<PlayerCard>& GameState::playerDeck()
+{
+	return _playerDeck;
+}
+
+Deck<InfectionCard>& GameState::infectionDeck()
+{
+	return _infectionDeck;
 }
 
 class QuitState
