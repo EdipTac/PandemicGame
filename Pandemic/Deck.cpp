@@ -3,11 +3,14 @@
 #include <ctime>
 #include <iostream>
 #include <memory>
+#include <random>
 #include <vector>
 
 #include "Deck.h"
 #include "PlayerCard.h"
 #include "InfectionCard.h"
+
+size_t randSize(size_t max);
 
 template <typename T>
 void Deck<T>::shuffleDeck()
@@ -16,7 +19,7 @@ void Deck<T>::shuffleDeck()
 	temp.reserve(_drawPile.size());
 	while (!_drawPile.empty())
 	{
-		int i = (rand()) % (_drawPile.size());
+		const auto i = randSize(_drawPile.size());
 		temp.push_back(std::move(_drawPile[i]));
 		_drawPile.erase(_drawPile.begin() + i);
 	}
@@ -78,3 +81,11 @@ void Deck<T>::addToDiscard(std::unique_ptr<T> cardToDiscard)
 
 template class Deck<PlayerCard>;
 template class Deck<InfectionCard>;
+
+size_t randSize(size_t max)
+{
+	static std::mt19937 gen { std::random_device {}() };
+	static std::uniform_int_distribution<size_t> dis;
+	dis.param(std::uniform_int_distribution<size_t>::param_type { 0, max });
+	return dis(gen);
+}
