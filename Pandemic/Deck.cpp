@@ -4,6 +4,7 @@
 #include <iostream>
 #include <memory>
 #include <random>
+#include <stdexcept>
 #include <vector>
 
 #include "Deck.h"
@@ -55,28 +56,26 @@ std::unique_ptr<T> Deck<T>::drawCard()
 {
 	if (_drawPile.size() != 0)
 	{
-		std::unique_ptr<T> temp = move(_drawPile[0]);
-		_drawPile.erase(_drawPile.begin());
+		std::unique_ptr<T> temp = move(_drawPile.back());
+		_drawPile.pop_back();
 		return temp;
-
 	}
 	else
 	{
-		std::cout << "The deck is empty!" << std::endl;
-		return NULL;
+		throw std:logic_error { "Trying to draw from empty draw pile." };
 	}
 }
 
 template <typename T>
-void Deck<T>::addToDeck(std::unique_ptr<T> cardToAdd)
+void Deck<T>::addToDeck(std::unique_ptr<T> card)
 {
-	_drawPile.push_back(move(cardToAdd));
+	_drawPile.push_back(std::move(card));
 }
 
 template <typename T>
-void Deck<T>::addToDiscard(std::unique_ptr<T> cardToDiscard)
+void Deck<T>::addToDiscard(std::unique_ptr<T> card)
 {
-	_discardPile.push_back(move(cardToDiscard));
+	_discardPile.push_back(std::move(card));
 }
 
 template class Deck<PlayerCard>;
