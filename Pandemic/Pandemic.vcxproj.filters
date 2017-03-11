@@ -197,5 +197,8 @@
     <None Include="save.json">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="earth2.map">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
