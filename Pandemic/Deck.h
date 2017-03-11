@@ -10,7 +10,7 @@
 template <typename T>
 class Deck
 {
-	static_assert(std::is_base_of<Card, T>::value, "A Deck must hold Cards");
+	static_assert(std::is_base_of<Card, T>::value, "A Deck must hold Cards.");
 
 public:
 	// Shuffles the draw pile
