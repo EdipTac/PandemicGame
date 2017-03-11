@@ -42,7 +42,8 @@ void Deck<T>::shuffleDiscards()
 
 
 template <typename T>
-void Deck<T>::printDeck() {
+void Deck<T>::printDeck()
+{
 	std::cout << "The cards within the deck are as follows:\n" << std::endl;
 	for (auto i = 0u; i < _drawPile.size(); i++)
 	{
