@@ -63,7 +63,6 @@ bool actionQuit();
 
 void showCity(const City& city);
 void displayCities();
-void flipAndInfect(InfectionCardDeck&, GameState&);
 std::string solicitFileName();
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
@@ -71,10 +70,12 @@ size_t solicitSize(size_t min, size_t max);
 template <typename T> T validateInput(const std::map<std::string, T>& validInputs, const std::string& errMsg);
 template <typename T> T validateInput(const std::vector<T>& valid, const std::string& errMsg);
 template <typename T> void list(const T& collection);
+std::string titleFont(const std::string& original);
 
 constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
 constexpr size_t actionsPerTurn = 4;
+constexpr size_t cardsPerPlayer = 5;
 
 // Global state is evil :( Need better solution
 std::unique_ptr<GameState> game;
@@ -121,7 +122,7 @@ void main()
 void main()
 {
 	// Title display
-	std::cout << "    --------    P A N D E M I C    --------    \n\n\n";
+	std::cout << titleFont("PANDEMIC") << "\n\n\n";
 	mainMenu.solicitInput();
 
 	while (!game->shouldQuit())
@@ -138,7 +139,7 @@ void main()
 // The player wants to start a new game
 void newGame()
 {
-	std::cout << "\n    --------    N E W   G A M E    --------    \n\n";
+	std::cout << titleFont("NEW GAME") << "\n\n";
 
 	// Initialize game state
 	game = std::make_unique<GameState>();
@@ -164,7 +165,34 @@ void newGame()
 	}
 
 	// Other initializtion here - cards, etc
-	// Place first research station
+	for (const auto& city : game->map().cities())
+	{
+		game->playerDeck().addToDeck(std::make_unique<PlayerCityCard>(*city));
+		game->infectionDeck().addToDeck(std::make_unique<InfectionCard>(*city));
+	}
+	// TODO - Add EventCards
+	
+	game->playerDeck().shuffleDeck();
+
+	// Distribute cards to players
+	for (const auto& player : game->players())
+	{
+		for (auto i = 0u; !game->playerDeck().empty() && i < cardsPerPlayer; ++i)
+		{
+			player->addCard(std::move(game->playerDeck().drawCard()));
+		}
+	}
+
+	for (const auto& player : game->players())
+	{
+		std::cout << "Player " << player->name() << " has\n";
+		for (const auto& card : player->cards())
+		{
+			std::cout << "\t" << card->name() << "\n";
+		}
+	}
+
+	//Place first research station
 	map.startingCity().giveResearchStation(*game);
 }
 
@@ -511,9 +539,9 @@ void displayCities() {
 	while (true) {
 		int index = 0;
 		char op;
-
-		std::cout << "Press A,B,C,D to choose: \n" << "A) Dispaly all cities on the map " << "\n" << "B) Display specific city " << "\n"
-			<< "C) See direct connection cities with your current city" << "\n" << "D) Quit" << "\n";
+		
+		std::cout <<"Press A,B,C,D to choose: \n" << "A) Dispaly all cities on the map " << "\n" << "B) Display specific city " << "\n"
+			<< "C) See direct connection cities with your current city" << "\n"<< "D) Quit" <<"\n";
 		std::cin >> op;
 		if (op == 'A' || op == 'a') {
 			for (const auto& city : game->map().cities())
@@ -524,49 +552,51 @@ void displayCities() {
 			}
 		}
 		else if (op == 'B' || op == 'b') {
-
-			std::string cityName;
-
-			std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
-			std::cin >> op;
-			if (op == 'A' || op == 'a') {
-				std::cin >> index;
-				showCity(*game->map().cities()[index]);
-
-			}
-			else if (op == 'B' || op == 'b') {
-				std::cin >> cityName;
-				for (const auto& city : game->map().cities()) {
-					if (lowercaseEquals(city->name(), cityName)) {
-						showCity(*city);
+			
+				std::string cityName;
+				
+				std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
+				std::cin >> op;
+				if (op == 'A' || op == 'a') {
+					std::cin >> index;
+					showCity(*game->map().cities()[index]);
+			     
+				}
+				else if (op == 'B' || op == 'b') {
+					std::cin >> cityName;
+					for (const auto& city : game->map().cities()) {
+						if (lowercaseEquals(city->name(),cityName)) {
+							showCity(*city);
+						}
 					}
 				}
-			}
 
-			std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
-			std::cin >> op;
+				std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
+				std::cin >> op;
 
-			if (op == 'Y' || op == 'y') {
-				int sub_index = 0;
-				for (const auto& city : game->map().cities()[index]->connections())
-				{
-					showCity(*city);
-				}
-			}
-			else if (op == 'C' || op == 'c') {
-
-				std::cout << "In one action, you can move to\n";
-				for (const auto& city : position.connections())
-				{
-					showCity(*city);
+				if(op == 'Y' || op == 'y') {
+					for (const auto& city : game->map().cities()[index]->connections())
+					{
+						showCity(*city);
+						
+					}
 				}
 
-			}
-			else if (op == 'D' || op == 'd') {
-				break;
+
+		}
+		else if (op == 'C' || op == 'c') {
+
+			std::cout << "In one action, you can move to\n";
+			for (const auto& city : position.connections())
+			{
+				showCity(*city);
 			}
 
 		}
+		else if (op == 'D' || op == 'd') {
+			break;
+		}
+
 	}
 }
 
@@ -604,12 +634,38 @@ void list(const T& collection)
 	}
 }
 
-void flipAndInfect(InfectionCardDeck& deck, GameState& state) {// normal one infection after each turn
-	std::cout << "Flip an infection card: " << std::endl;
-	std::unique_ptr<Card> temp = deck.drawTopCard();
-	City& city = dynamic_cast <InfectionCard*> (temp.get())->city();
-	std::cout << "Infection card : " << temp->name() << " with the colour of: " << colourAbbreviation(city.colour()) << std::endl;
-	std::cout << "Infects the city :" << temp->name() <<" one time:" << std::endl;
-	city.addDiseaseCubes(city.colour(), city.CUBE_PER_INFECTION, state);
-}
+std::string titleFont(const std::string& original)
+{
+	std::stringstream ss;
+	const auto& repeat = [&](const char c, const size_t t)
+	{
+		for (size_t i = 0; i < t; ++i)
+		{
+			ss << c;
+		}
+	};
+	const auto& ornament = [&]()
+	{
+		repeat(' ', 4);
+		repeat('-', 8);
+		repeat(' ', 4);
+	};
+	const auto& insertSpaces = [&]()
+	{
+		for (auto it = original.begin(); it != original.end(); ++it)
+		{
+			ss << *it;
+			if (it == original.end() - 1)
+			{
+				break;
+			}
+			ss << ' ';
+		}
+	};
 
+	ornament();
+	insertSpaces();
+	ornament();
+
+	return ss.str();
+}

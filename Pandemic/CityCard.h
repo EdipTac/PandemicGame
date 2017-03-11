@@ -9,7 +9,7 @@ class City;
 
 // Represents a card that references a city.
 class CityCard
-	: public Card
+	: virtual public Card
 {
 public:
 	// Constructs a card referencing a given city
