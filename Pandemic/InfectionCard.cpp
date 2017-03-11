@@ -11,8 +11,13 @@ Data: 20170209*/
 #include "InfectionCard.h"
 
 
+InfectionCard::InfectionCard()
+{}
+
 InfectionCard::InfectionCard(City& city)
 	: CityCard { city }
+{}
+InfectionCard::~InfectionCard()
 {}
 void InfectionCard::cardWork(GameState& state) {
 	city().addDiseaseCubes(colour(), CUBE_NORMAL_INFECTION, state);

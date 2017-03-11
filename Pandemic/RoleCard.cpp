@@ -29,3 +29,6 @@ RoleCard::~RoleCard() {}
 void RoleCard::printRole() {
 	std::cout << name() << std::endl << _color << std::endl << description() << std::endl;
 }
+
+void RoleCard::cardWork(GameState&)
+{}

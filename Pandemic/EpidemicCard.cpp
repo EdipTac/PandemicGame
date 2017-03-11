@@ -1,4 +1,5 @@
 #include "EpidemicCard.h"
+#include "City.h"
 
 const std::string EPIDEMIC_DESCRIPTION =
 	"1-Increase:\nMove the infection rate marker forward 1 space\n"
@@ -29,3 +30,6 @@ void EpidemicCard::epidemicInfect(InfectionCardDeck& deck, GameState& state) {
 	city.addDiseaseCubes(city.colour(), city.MAX_CUBE_PER_DISEASE, state);//infect
 	deck.reshuffleAndputback();// intensify
 }
+
+void EpidemicCard::cardWork(GameState &)
+{}

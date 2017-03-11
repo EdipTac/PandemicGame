@@ -10,6 +10,7 @@ Data: 20170209*/
 #include <string>
 
 #include "InfectionCardDeck.h"
+#include "Serialization.h"
 
 InfectionCardDeck::InfectionCardDeck(std::string fileName)
 {
@@ -18,7 +19,7 @@ InfectionCardDeck::InfectionCardDeck(std::string fileName)
 
 	for (const auto& city : map->cities())
 	{
-		addToDeck(std::make_unique<InfectionCard>(*city));
+		Deck<InfectionCard>::addToDeck(std::make_unique<InfectionCard>(*city));
 	}
 
     shuffleDeck();// shuffle infection cards on deck/
@@ -47,8 +48,8 @@ void InfectionCardDeck::checkInfectionCardHistory() {
 
 void InfectionCardDeck::reshuffleAndputback() {
 	shuffleDiscards();
-	for ( const auto& infectionCard : _discardPile ) {
-		    addToDeck(infectionCard);
+	for (auto& infectionCard : _discardPile ) {
+		Deck<InfectionCard>::addToDeck(std::move(infectionCard));
 	}
-	discardPile.clear();
+	_discardPile.clear();
 }

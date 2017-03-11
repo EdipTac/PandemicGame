@@ -19,4 +19,7 @@ public:
 	// Custom implementation of the inherited virtual function from PlayerCard
 	std::string toString();
 	void epidemicInfect(InfectionCardDeck&, GameState&);
+
+	// Inherited via PlayerCard
+	virtual void cardWork(GameState &) override;
 };

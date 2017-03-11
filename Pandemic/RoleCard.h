@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "Card.h"
+//#include "Card.h"
 #include "TextualCard.h"
 
 /*
@@ -25,7 +25,10 @@ public:
 	~RoleCard() override;
 
 	void printRole();
+	void cardWork(GameState &) override;
 
 private:
 	std::string _color;
+
+	// Inherited via TextualCard
 };

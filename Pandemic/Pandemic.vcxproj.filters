@@ -169,9 +169,6 @@
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="Pandemic.cpp" />
-    <ClCompile Include="Deck.cpp">
-      <Filter>General\src</Filter>
-    </ClCompile>
     <ClCompile Include="DeckofRoles.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
@@ -183,6 +180,9 @@
     </ClCompile>
     <ClCompile Include="Serialization.cpp">
       <Filter>Util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Deck.cpp">
+      <Filter>General\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
