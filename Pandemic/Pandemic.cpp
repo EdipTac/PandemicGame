@@ -63,6 +63,7 @@ bool actionQuit();
 
 void showCity(const City& city);
 void displayCities();
+
 std::string solicitFileName();
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
@@ -668,4 +669,13 @@ std::string titleFont(const std::string& original)
 	ornament();
 
 	return ss.str();
+}
+void flipAndInfect(InfectionCardDeck& deck, GameState& state) {// normal one infectio after each turn
+	std::cout << "Flip an infection card: " << std::endl;
+	std::unique_ptr<InfectionCard> temp = deck.drawTopCard();
+	City& city = temp->city();
+	std::cout << "Infection card :" << temp->name() << " with the colour of: " << colourAbbreviation(temp->colour()) << "\n" <<
+		"infects the city " << temp->name() << " one time " << std::endl;
+	city.addDiseaseCubes(city.colour(), city.CUBE_PER_INFECTION, state);
+
 }
