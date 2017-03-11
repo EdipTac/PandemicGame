@@ -1,94 +1,91 @@
-#include "Deck.h"
-#include <vector>
-#include <memory>
-#include <cstdlib>
-#include <ctime>
 #include <iostream>
-#include <algorithm> //std::random_shuffle
+#include <memory>
+#include <random>
+#include <stdexcept>
+#include <vector>
 
-Deck::Deck() {};
+#include "Deck.h"
+#include "PlayerCard.h"
+#include "InfectionCard.h"
 
-Deck::~Deck() {}
+size_t randSize(const size_t max);
+template <typename T> void shuffle(std::vector<std::unique_ptr<T>>& cards);
 
-
-void Deck::shuffleDeck() {
-	std::vector < std::unique_ptr<Card> >temp;
-	temp.reserve(deckOfCards.size());
-	while (!deckOfCards.empty()) {
-		int i = (rand()) % (deckOfCards.size());
-		temp.push_back(std::move(deckOfCards[i]));
-		deckOfCards.erase(deckOfCards.begin() + i);
-	}
-	deckOfCards = move(temp);
+template <typename T>
+void Deck<T>::shuffleDeck()
+{
+	shuffle(_drawPile);
 }
 
-void Deck::shuffleDiscards() {
-	std::vector < std::unique_ptr<Card> >temp;
-	temp.reserve(discardDeck.size());
-	while (!discardDeck.empty()) {
-		int i = (rand()) % (discardDeck.size());
-		temp.push_back(std::move(discardDeck[i]));
-		discardDeck.erase(deckOfCards.begin() + i);
-	}
-	deckOfCards = move(temp);
+template <typename T>
+void Deck<T>::shuffleDiscards()
+{
+	shuffle(_discardPile);
 }
 
 
-//alternate implementation of shuffle
-//void Deck::shuffleDeck() {
-//	std::random_shuffle(deckOfCards.begin(), deckOfCards.end());
-//}
-
-
-
- //the << deckofCards[i] seems to be an issue and wont compile
-void Deck::printDeck() {
+template <typename T>
+void Deck<T>::printDeck()
+{
 	std::cout << "The cards within the deck are as follows:\n" << std::endl;
-	for (auto i = 0u; i < deckOfCards.size(); i++) {
-		std::cout << deckOfCards[i]->name() << std::endl;
+	for (auto i = 0u; i < _drawPile.size(); i++)
+	{
+		std::cout << _drawPile[i]->name() << std::endl;
 	}
 }
 
-std::unique_ptr<Card>  Deck::drawTopCard()
+template<typename T>
+bool Deck<T>::empty() const
 {
-
-
-	if (deckOfCards.size() != 0)
-	{
-		std::unique_ptr<Card> temp = move(deckOfCards[0]);
-		deckOfCards.erase(deckOfCards.begin());
-		return temp;
-
-	}
-	else
-	{
-		std::cout << "The deck is empty!" << std::endl;
-		return NULL;
-	}
+	return _drawPile.empty();
 }
-std::unique_ptr<Card>  Deck::drawBottomCard()
+
+template <typename T>
+std::unique_ptr<T> Deck<T>::drawCard()
 {
-
-
-	if (deckOfCards.size() != 0)
+	if (_drawPile.empty())
 	{
-		std::unique_ptr<Card> temp = move(deckOfCards[deckOfCards.size() - 1]);
-		deckOfCards.erase(deckOfCards.end());
-		return temp;
+		throw std::logic_error { "Trying to draw from an empty deck." };
+	}
 
-	}
-	else
-	{
-		std::cout << "The deck is empty!" << std::endl;
-		return NULL;
-	}
+	auto temp = move(_drawPile.back());
+	_drawPile.pop_back();
+	return temp;
 }
 
-
-void Deck::addToDeck(std::unique_ptr<Card> cardToAdd) {
-	deckOfCards.push_back(move(cardToAdd));
+template <typename T>
+void Deck<T>::addToDeck(std::unique_ptr<T> card)
+{
+	_drawPile.push_back(move(card));
 }
 
-void Deck::addToDiscard(std::unique_ptr<Card> cardToDiscard) {
-	discardDeck.push_back(move(cardToDiscard));
+template <typename T>
+void Deck<T>::addToDiscard(std::unique_ptr<T> card)
+{
+	_discardPile.push_back(move(card));
+}
+
+template class Deck<PlayerCard>;
+template class Deck<InfectionCard>;
+
+size_t randSize(const size_t max)
+{
+	static std::mt19937 gen { std::random_device {}() };
+	static std::uniform_int_distribution<size_t> dis;
+	dis.param(std::uniform_int_distribution<size_t>::param_type { 0, max - 1 });
+	return dis(gen);
+}
+
+template <typename T>
+void shuffle(std::vector<std::unique_ptr<T>>& cards)
+{
+	std::vector<std::unique_ptr<T>> temp;
+	temp.reserve(cards.size());
+	while (!cards.empty())
+	{
+		const auto i = randSize(cards.size());
+		temp.push_back(std::move(cards[i]));
+		cards.erase(cards.begin() + i);
+	}
+	cards = std::move(temp);
 }
