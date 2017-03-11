@@ -70,10 +70,12 @@ size_t solicitSize(size_t min, size_t max);
 template <typename T> T validateInput(const std::map<std::string, T>& validInputs, const std::string& errMsg);
 template <typename T> T validateInput(const std::vector<T>& valid, const std::string& errMsg);
 template <typename T> void list(const T& collection);
+std::string titleFont(const std::string& original);
 
 constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
 constexpr size_t actionsPerTurn = 4;
+constexpr size_t cardsPerPlayer = 5;
 
 // Global state is evil :( Need better solution
 std::unique_ptr<GameState> game;
@@ -122,7 +124,7 @@ void main()
 void main()
 {
 	// Title display
-	std::cout << "    --------    P A N D E M I C    --------    \n\n\n";
+	std::cout << titleFont("PANDEMIC") << "\n\n\n";
 	mainMenu.solicitInput();
 
 	while (!game->shouldQuit())
@@ -139,7 +141,7 @@ void main()
 // The player wants to start a new game
 void newGame()
 {
-	std::cout << "\n    --------    N E W   G A M E    --------    \n\n";
+	std::cout << titleFont("NEW GAME") << "\n\n";
 
 	// Initialize game state
 	game = std::make_unique<GameState>();
@@ -165,7 +167,34 @@ void newGame()
 	}
 
 	// Other initializtion here - cards, etc
-	// Place first research station
+	for (const auto& city : game->map().cities())
+	{
+		game->playerDeck().addToDeck(std::make_unique<PlayerCityCard>(*city));
+		game->infectionDeck().addToDeck(std::make_unique<InfectionCard>(*city));
+	}
+	// TODO - Add EventCards
+	
+	game->playerDeck().shuffleDeck();
+
+	// Distribute cards to players
+	for (const auto& player : game->players())
+	{
+		for (auto i = 0u; !game->playerDeck().empty() && i < cardsPerPlayer; ++i)
+		{
+			player->addCard(std::move(game->playerDeck().drawCard()));
+		}
+	}
+
+	for (const auto& player : game->players())
+	{
+		std::cout << "Player " << player->name() << " has\n";
+		for (const auto& card : player->cards())
+		{
+			std::cout << "\t" << card->name() << "\n";
+		}
+	}
+
+	//Place first research station
 	map.startingCity().giveResearchStation(*game);
 }
 
@@ -605,4 +634,40 @@ void list(const T& collection)
 	{
 		std::cout << "\t" << e->name() << "\n";
 	}
+}
+
+std::string titleFont(const std::string& original)
+{
+	std::stringstream ss;
+	const auto& repeat = [&](const char c, const size_t t)
+	{
+		for (size_t i = 0; i < t; ++i)
+		{
+			ss << c;
+		}
+	};
+	const auto& ornament = [&]()
+	{
+		repeat(' ', 4);
+		repeat('-', 8);
+		repeat(' ', 4);
+	};
+	const auto& insertSpaces = [&]()
+	{
+		for (auto it = original.begin(); it != original.end(); ++it)
+		{
+			ss << *it;
+			if (it == original.end() - 1)
+			{
+				break;
+			}
+			ss << ' ';
+		}
+	};
+
+	ornament();
+	insertSpaces();
+	ornament();
+
+	return ss.str();
 }
