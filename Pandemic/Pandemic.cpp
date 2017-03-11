@@ -75,6 +75,7 @@ std::string titleFont(const std::string& original);
 constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
 constexpr size_t actionsPerTurn = 4;
+constexpr size_t cardsPerPlayer = 5;
 
 // Global state is evil :( Need better solution
 std::unique_ptr<GameState> game;
@@ -174,10 +175,13 @@ void newGame()
 	game->playerDeck().shuffleDeck();
 
 	// Distribute cards to players
-	//for (const auto& player : game->players())
-	//{
-		//player->addCard(std::move(dynamic_cast<std::unique_ptr<PlayerCard>>(game->playerDeck().drawCard())));
-	//}
+	for (const auto& player : game->players())
+	{
+		for (auto i = 0u; i < cardsPerPlayer; ++i)
+		{
+			player->addCard(std::move(game->playerDeck().drawCard()));
+		}
+	}
 
 	//Place first research station
 	map.startingCity().giveResearchStation(*game);
