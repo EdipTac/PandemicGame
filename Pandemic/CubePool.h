@@ -28,7 +28,6 @@ private:
 	std::map<Colour, unsigned> _diseaseCubes;
 	// Holds the cured boolean of each colour
 	std::map<Colour, bool> _diseasesCured;
-
 	// Holds the eradicated boolean of each colour
 	std::map<Colour, bool> _diseasesEradicated;
 };

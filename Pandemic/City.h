@@ -51,7 +51,7 @@ public:
 	void connectTo(City& target);
 
 	// Adds disease cubes of a given colour from a given source
-	void addDiseaseCubes(const Colour& colour, const unsigned amount, GameState& );
+	void addDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& source, InfectionCardDeck& infectionDeck);
 
 	// Removes disease cubes of a given colour from a given source
 	void removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& source);
@@ -72,10 +72,7 @@ public:
 	std::vector<Colour> diseases() const;
 
 	friend bool operator==(const City& lhs, const City& rhs);
-	// Maximum cuber per colour each city can hold
-	unsigned const MAX_CUBE_PER_DISEASE = 3;
-	// Place one cube for each infection
-	unsigned const CUBE_PER_INFECTION = 1;
+
 private:
 	std::string _name;
 	Colour _colour;
@@ -85,5 +82,9 @@ private:
     std::map < Colour, bool> _outbreaks;
 	//Whether the city is quarantined
 	bool _quarantined;
+	// Maximum cuber per colour each city can hold
+	unsigned const MAX_CUBE_PER_DISEASE = 3;
+	// Place one cube for each infection
+	unsigned const CUBE_PER_INFECTION = 1;
 	bool _hasResearchStation = false;
 };

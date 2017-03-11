@@ -63,7 +63,6 @@ bool actionQuit();
 
 void showCity(const City& city);
 void displayCities();
-void flipAndInfect(InfectionCardDeck&, GameState&);
 std::string solicitFileName();
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
@@ -511,9 +510,9 @@ void displayCities() {
 	while (true) {
 		int index = 0;
 		char op;
-
-		std::cout << "Press A,B,C,D to choose: \n" << "A) Dispaly all cities on the map " << "\n" << "B) Display specific city " << "\n"
-			<< "C) See direct connection cities with your current city" << "\n" << "D) Quit" << "\n";
+		
+		std::cout <<"Press A,B,C,D to choose: \n" << "A) Dispaly all cities on the map " << "\n" << "B) Display specific city " << "\n"
+			<< "C) See direct connection cities with your current city" << "\n"<< "D) Quit" <<"\n";
 		std::cin >> op;
 		if (op == 'A' || op == 'a') {
 			for (const auto& city : game->map().cities())
@@ -524,49 +523,51 @@ void displayCities() {
 			}
 		}
 		else if (op == 'B' || op == 'b') {
-
-			std::string cityName;
-
-			std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
-			std::cin >> op;
-			if (op == 'A' || op == 'a') {
-				std::cin >> index;
-				showCity(*game->map().cities()[index]);
-
-			}
-			else if (op == 'B' || op == 'b') {
-				std::cin >> cityName;
-				for (const auto& city : game->map().cities()) {
-					if (lowercaseEquals(city->name(), cityName)) {
-						showCity(*city);
+			
+				std::string cityName;
+				
+				std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
+				std::cin >> op;
+				if (op == 'A' || op == 'a') {
+					std::cin >> index;
+					showCity(*game->map().cities()[index]);
+			     
+				}
+				else if (op == 'B' || op == 'b') {
+					std::cin >> cityName;
+					for (const auto& city : game->map().cities()) {
+						if (lowercaseEquals(city->name(),cityName)) {
+							showCity(*city);
+						}
 					}
 				}
-			}
 
-			std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
-			std::cin >> op;
+				std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
+				std::cin >> op;
 
-			if (op == 'Y' || op == 'y') {
-				int sub_index = 0;
-				for (const auto& city : game->map().cities()[index]->connections())
-				{
-					showCity(*city);
-				}
-			}
-			else if (op == 'C' || op == 'c') {
-
-				std::cout << "In one action, you can move to\n";
-				for (const auto& city : position.connections())
-				{
-					showCity(*city);
+				if(op == 'Y' || op == 'y') {
+					for (const auto& city : game->map().cities()[index]->connections())
+					{
+						showCity(*city);
+						
+					}
 				}
 
-			}
-			else if (op == 'D' || op == 'd') {
-				break;
+
+		}
+		else if (op == 'C' || op == 'c') {
+
+			std::cout << "In one action, you can move to\n";
+			for (const auto& city : position.connections())
+			{
+				showCity(*city);
 			}
 
 		}
+		else if (op == 'D' || op == 'd') {
+			break;
+		}
+
 	}
 }
 
@@ -603,13 +604,3 @@ void list(const T& collection)
 		std::cout << "\t" << e->name() << "\n";
 	}
 }
-
-void flipAndInfect(InfectionCardDeck& deck, GameState& state) {// normal one infection after each turn
-	std::cout << "Flip an infection card: " << std::endl;
-	std::unique_ptr<Card> temp = deck.drawTopCard();
-	City& city = dynamic_cast <InfectionCard*> (temp.get())->city();
-	std::cout << "Infection card : " << temp->name() << " with the colour of: " << colourAbbreviation(city.colour()) << std::endl;
-	std::cout << "Infects the city :" << temp->name() <<" one time:" << std::endl;
-	city.addDiseaseCubes(city.colour(), city.CUBE_PER_INFECTION, state);
-}
-

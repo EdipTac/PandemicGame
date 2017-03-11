@@ -46,7 +46,7 @@ void Deck::printDeck() {
 	}
 }
 
-std::unique_ptr<Card>  Deck::drawTopCard() {
+std::unique_ptr<Card>  Deck::drawCard() {
 	
 	
 	if (deckOfCards.size() != 0) {
@@ -60,20 +60,7 @@ std::unique_ptr<Card>  Deck::drawTopCard() {
 		return NULL;
 	}
 }
-std::unique_ptr<Card>  Deck::drawBottomCard() {
 
-
-	if (deckOfCards.size() != 0) {
-		std::unique_ptr<Card> temp = move(deckOfCards[deckOfCards.size()-1]);
-		deckOfCards.erase(deckOfCards.end());
-		return temp;
-
-	}
-	else {
-		std::cout << "The deck is empty!" << std::endl;
-		return NULL;
-	}
-}
 
 void Deck::addToDeck(std::unique_ptr<Card> cardToAdd) {
 	deckOfCards.push_back(move(cardToAdd));

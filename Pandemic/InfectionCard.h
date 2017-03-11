@@ -7,7 +7,7 @@
 #pragma once
 
 #include <string>
-#include "GameState.h"
+
 #include "CityCard.h"
 
 // Represents an infection card
@@ -16,9 +16,5 @@ class InfectionCard
 {
 public:
 	// Constructs an infection card for infecting a given city
-	InfectionCard(City& );
-	unsigned const CUBE_NORMAL_INFECTION = 1;
-	unsigned const CUBE_EPIDEMIC_INFECTION = 3;
-	void cardWork(GameState&);
-	std::string description() const override;
+	InfectionCard(City& city);
 };
