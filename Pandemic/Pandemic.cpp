@@ -307,7 +307,7 @@ bool shuttleFlight()
 {
 	auto& player = game->currentPlayer(); // Alias
 
-										  // Not applicable if you have no research station in your city
+	// Not applicable if you have no research station in your city
 	if (!player.pawn().position().hasResearchStation())
 	{
 		std::cout << "Your city does not have a research station.\n";
@@ -316,7 +316,7 @@ bool shuttleFlight()
 
 	const auto& stations = game->map().stations(); // Alias
 
-												   // If there are no other cities with stations, you can't move anywhere
+	// If there are no other cities with stations, you can't move anywhere
 	if (stations.empty())
 	{
 		std::cout << "There are no other cities with research stations.\n";
