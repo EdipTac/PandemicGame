@@ -628,7 +628,7 @@ void displayCities()
 
 void cityReport()
 {
-	int index;
+	int index = 0;
 	char op;
 	std::string cityName;
 	std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
