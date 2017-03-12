@@ -208,6 +208,7 @@ void newGame()
 
 	//Place first research station
 	map.startingCity().giveResearchStation(*game);
+
 }
 
 void loadGame()
