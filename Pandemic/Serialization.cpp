@@ -233,6 +233,7 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			// if the city names match, create an infection card and add it to the deck
 			if ((*itr)->name() == *it) { 
+				// TODO: does this preserve the order?
 				gameState->infectionDeck().addToDeck(std::make_unique<InfectionCard>(**itr));
 			}
 		}
@@ -244,6 +245,7 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			// if the city names match, create an infection card and add it to the DISCARD deck
 			if ((*itr)->name() == *it) {
+				// TODO: does this preserve the order?
 				gameState->infectionDeck().addToDiscard(std::make_unique<InfectionCard>(**itr));
 			}
 		}
@@ -276,6 +278,7 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		// loop through cities, and find the cities that matches the name
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			if ((*itr)->name() == *it) {
+				// TODO: does this preserve the order?
 				gameState->playerDeck().addToDeck(std::make_unique<PlayerCityCard>((**itr)));
 			}
 		}
@@ -289,6 +292,7 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		// loop through cities, and find the cities that matches the name
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			if ((*itr)->name() == *it) {
+				// TODO: does this preserve the order?
 				gameState->playerDeck().addToDiscard(std::make_unique<PlayerCityCard>((**itr)));
 			}
 		}
