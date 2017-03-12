@@ -29,6 +29,7 @@
 #include "Card.h"
 #include "City.h"
 #include "EventCard.h"
+#include "DeckofEvents.h"
 #include "GameState.h"
 #include "InfectionCard.h"
 #include "InfectionCardDeck.h"
@@ -177,7 +178,13 @@ void newGame()
 		game->playerDeck().addToDeck(std::make_unique<PlayerCityCard>(*city));
 		game->infectionDeck().addToDeck(std::make_unique<InfectionCard>(*city));
 	}
-	// TODO - Add EventCards
+	
+	auto eventCards = DeckofEvents {}.deckOfEvents();
+	while (!eventCards.empty())
+	{
+		game->playerDeck().addToDeck(std::move(eventCards.back()));
+		eventCards.pop_back();
+	}
 
 	game->playerDeck().shuffleDeck();
 
