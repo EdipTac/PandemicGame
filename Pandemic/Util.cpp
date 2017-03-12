@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <fstream>
 #include <functional>
+#include <iostream>
 #include <sstream>
 
 #include "Util.h"
@@ -51,4 +52,12 @@ std::string stringTransform(const std::string& original, const std::function<cha
 std::string toLower(const std::string& original)
 {
 	return stringTransform(original, ::tolower);
+}
+
+std::string solicitLine(const std::string& msg)
+{
+	std::cout << msg;
+	std::string string;
+	std::getline(std::cin >> std::ws, string);
+	return string;
 }

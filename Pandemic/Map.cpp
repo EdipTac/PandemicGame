@@ -17,10 +17,23 @@ std::string Map::name() const
 	return _name;
 }
 
+std::string& Map::name()
+{
+	return _name;
+}
+
 City& Map::addCity(CityPtr city)
 {
 	_cities.push_back(std::move(city));
 	return *_cities.back().get();
+}
+
+void Map::removeCity(const City& city)
+{
+	std::remove_if(_cities.begin(), _cities.end(), [&](const auto& c)
+	{
+		return *c == city;
+	});
 }
 
 std::vector<City*> Map::stations() const

@@ -118,6 +118,9 @@
     <ClInclude Include="DeckofEvents.h">
       <Filter>General\header</Filter>
     </ClInclude>
+    <ClInclude Include="MapEditor.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -188,6 +191,9 @@
       <Filter>Util\src</Filter>
     </ClCompile>
     <ClCompile Include="DeckofEventscpp.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditor.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
   </ItemGroup>

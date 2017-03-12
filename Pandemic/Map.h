@@ -15,10 +15,11 @@ class Map
 
 public:
 	// Constructs a map with a given file name
-	Map(const std::string& name, City* const startingCity, std::vector<std::unique_ptr<City>> cities = {});
+	Map(const std::string& name = "", City* const startingCity = nullptr, std::vector<std::unique_ptr<City>> cities = {});
 
 	// Map file name
 	std::string name() const;
+	std::string& name();
 
 	// Find a city by name
 	City& findCityByName(const std::string& name) const;
@@ -37,6 +38,9 @@ public:
 
 	// Add a city
 	City& addCity(CityPtr city);
+
+	// Remove a city
+	void removeCity(const City& city);
 
 	// List of all cities with a research station
 	std::vector<City*> stations() const;

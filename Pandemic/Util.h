@@ -31,3 +31,39 @@ std::map<std::string, T*> makeNameMap(const std::vector<T*>& entities)
 	}
 	return map;
 }
+
+template <typename T>
+T validateInput(const std::map<std::string, T>& valid, const std::string& errMsg)
+{
+	std::string input;
+	decltype(valid.find(input)) it;
+	while (true)
+	{
+		std::cin >> input;
+		std::cin.get();
+		it = valid.find(input);
+		if (it != valid.end())
+		{
+			break;
+		}
+		std::cout << errMsg;
+	}
+	return it->second;
+}
+
+template <typename T>
+T validateInput(const std::vector<T>& valid, const std::string& errMsg)
+{
+	return validateInput(makeNameMap(valid), errMsg);
+}
+
+template <typename T>
+void list(const T& collection)
+{
+	for (const auto& e : collection)
+	{
+		std::cout << "\t" << e->name() << "\n";
+	}
+}
+
+std::string solicitLine(const std::string& msg = "");

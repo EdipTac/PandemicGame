@@ -33,6 +33,7 @@
 #include "InfectionCard.h"
 #include "InfectionCardDeck.h"
 #include "Map.h"
+#include "MapEditor.h"
 #include "Menu.h"
 #include "Player.h"
 #include "PlayerCityCard.h"
@@ -89,9 +90,10 @@ std::unique_ptr<GameState> game;
 const GeneralMenu mainMenu
 {
 	{
-		{ "New Game",  newGame	},
-		{ "Load Game", loadGame	},
-		{ "Exit",	   quit		}
+		{ "New Game",	newGame		},
+		{ "Load Game",	loadGame	},
+		{ "Map Editor",	mapEditor	},
+		{ "Exit",		quit		}
 	}
 };
 
@@ -672,40 +674,6 @@ void directConnectionReport()
 	for (const auto& city : game->currentPlayer().pawn().position().connections())
 	{
 		showCity(*city);
-	}
-}
-
-template <typename T>
-T validateInput(const std::map<std::string, T>& valid, const std::string& errMsg)
-{
-	std::string input;
-	decltype(valid.find(input)) it;
-	while (true)
-	{
-		std::cin >> input;
-		std::cin.get();
-		it = valid.find(input);
-		if (it != valid.end())
-		{
-			break;
-		}
-		std::cout << errMsg;
-	}
-	return it->second;
-}
-
-template <typename T>
-T validateInput(const std::vector<T>& valid, const std::string& errMsg)
-{
-	return validateInput(makeNameMap(valid), errMsg);
-}
-
-template <typename T>
-void list(const T& collection)
-{
-	for (const auto& e : collection)
-	{
-		std::cout << "\t" << e->name() << "\n";
 	}
 }
 
