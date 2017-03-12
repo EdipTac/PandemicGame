@@ -70,7 +70,7 @@ void displayCities();
 void cityReport();
 void directConnectionReport();
 void flipAndInfect(InfectionCardDeck&, GameState& );
-std::string solicitFileName();
+std::string solicitFileName(const std::string& msg);
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
 size_t solicitSize(const size_t min, const size_t max);
@@ -166,7 +166,7 @@ void newGame()
 	game = std::make_unique<GameState>();
 
 	// Get map file name and load it
-	const auto& fileName = solicitFileName();
+	const auto& fileName = solicitFileName("Load map file to start new game: ");
 	std::cout << "\nLoading map \"" << fileName << "\"...\n";
 	game->setMap(readMapFromFile(fileName));
 	std::cout << "Map \"" << fileName << "\" loaded!\n\n";
@@ -221,6 +221,7 @@ void newGame()
 void loadGame()
 {
 	std::cout << "Load game...\n";
+	const auto fileName = solicitFileName("Enter name of game save file: ");
 }
 
 // The player wants to quit
@@ -550,12 +551,12 @@ bool actionQuit()
 	return false;
 }
 
-std::string solicitFileName()
+std::string solicitFileName(const std::string& msg)
 {
 	std::string fileName;
 	while (true)
 	{
-		std::cout << "Load map file to start new game: ";
+		std::cout << msg;
 		std::cin >> fileName;
 		std::cin.get();
 		if (fileExists(fileName))
