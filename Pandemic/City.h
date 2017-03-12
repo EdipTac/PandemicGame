@@ -23,6 +23,11 @@ public:
 	// Constructs a city with a given name, colour, and disease cube count
 	City(const std::string& name = "", const Colour& colour = Colour::Black, const std::map<Colour, size_t>& cubes = {});
 
+	City(const City&) = delete;
+	City(City&&) = default;
+	City& operator=(const City&) = delete;
+	City& operator=(City&&) = default;
+
 	// The city's name
 	std::string name() const;
 	std::string& name();
