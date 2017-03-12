@@ -21,6 +21,6 @@ public:
 	~InfectionCard();
 	unsigned const CUBE_NORMAL_INFECTION = 1;
 	unsigned const CUBE_EPIDEMIC_INFECTION = 3;
-	void cardWork(GameState&) override;
+	void cardWork(GameState&);
 	std::string description() const override;
 };
