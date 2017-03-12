@@ -190,12 +190,12 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 			}
 			
 			// loop through event cards, find the one that matches
-			for (auto it = events.begin(); it != events.end(); ++it) {
-				if ((*it)->name() == cardName) {
-					player->addCard(std::move(*it));
-					events.erase(it);
-				}
-			}
+			//for (auto it = events.begin(); it != events.end(); ++it) {
+			//	if ((*it)->name() == cardName) {
+			//		player->addCard(std::move(*it));
+			//		events.erase(it);
+			//	}
+			//}
 		}
 
 
@@ -297,12 +297,12 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		}
 
 		// loop through event cards, find the one that matches
-		for (auto itr = events.begin(); itr != events.end(); ++itr) {
-			if ((*itr)->name() == *it) {
-				gameState->playerDeck().addToDeck(std::move(*itr));
-				events.erase(itr);
-			}
-		}
+		//for (auto itr = events.begin(); itr != events.end(); ++itr) {
+		//	if ((*itr)->name() == *it) {
+		//		gameState->playerDeck().addToDeck(std::move(*itr));
+		//		events.erase(itr);
+		//	}
+		//}
 	}
 
 	std::vector<std::string> playerCardDiscard = playerCards["discard"].get<std::vector<std::string>>();
@@ -317,12 +317,12 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		}
 
 		// loop through event cards, find the one that matches
-		for (auto itr = events.begin(); itr != events.end(); ++itr) {
-			if ((*itr)->name() == *it) {
-				gameState->playerDeck().addToDiscard(std::move(*itr));
-				events.erase(itr);
-			}
-		}
+		//for (auto itr = events.begin(); itr != events.end(); ++itr) {
+		//	if ((*itr)->name() == *it) {
+		//		gameState->playerDeck().addToDiscard(std::move(*itr));
+		//		events.erase(itr);
+		//	}
+		//}
 	}
 
 	return gameState;
