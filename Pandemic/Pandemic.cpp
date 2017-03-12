@@ -489,9 +489,20 @@ bool cureDisease()
 		std::cout << "No research station in this city.\n";
 		return false;
 	}
-	//auto cityCards = game->currentPlayer().cityCards();
+	const auto& cards = game->currentPlayer().cityCards();
+	std::map<Colour, size_t> colourCount;
+	for (const auto& colour : colours())
+	{
+		colourCount[colour] = 0;
+	}
+	for (const auto& card : cards)
+	{
+		auto& count = colourCount[card->colour()];
+		++count;
+		//if (count >= )
+	}
 
-	return true;
+	return false;
 }
 
 void quit()
