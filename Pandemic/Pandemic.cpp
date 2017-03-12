@@ -41,17 +41,12 @@
 #include "Util.h"
 
 
-// Possibly TODO - factor options into separate file
-// Note - May need to pass GameState& parameter in this case
-
-//  ----  Main menu options  ----  //
+//  ----  Forward declarations  ----  //
 void newGame();
 void loadGame();
 void waitForExit();
 bool performAction();
 void quit();
-
-//  ----  Action menu options  ----  //
 bool driveOrFerry();
 bool directFlight();
 bool charterFlight();
@@ -63,11 +58,9 @@ bool giveKnowledge(Player& target);
 bool takeKnowledge(Player& target);
 bool cureDisease();
 bool actionQuit();
-
 void showCity(const City& city);
 bool report();
 void displayCities();
-//void cityReport();
 void directConnectionReport();
 void flipAndInfect(InfectionCardDeck&, GameState& );
 std::string solicitFileName(const std::string& msg);
@@ -79,14 +72,16 @@ template <typename T> T validateInput(const std::vector<T>& valid, const std::st
 template <typename T> void list(const T& collection);
 std::string titleFont(const std::string& original);
 
+// Game pointer
+std::unique_ptr<GameState> game;
+
+//  ----  Constants  -----  //
 constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
 constexpr size_t actionsPerTurn = 4;
 constexpr size_t cardsPerPlayer = 5;
 
-// Global state is evil :( Need better solution
-std::unique_ptr<GameState> game;
-
+//  ----  Menus  ----  //
 const GeneralMenu mainMenu
 {
 	{
@@ -116,7 +111,6 @@ const GeneralMenu reportMenu
 	}
 };
 
-
 const ActionMenu actionMenu
 {
 	{
@@ -133,14 +127,6 @@ const ActionMenu actionMenu
 };
 
 //	----    Program entry point    ----  //
-//#define TEST	// Uncomment to use "test" main()
-#ifdef TEST
-void main()
-{
-	readGameFromFile("save.json");
-	system("pause");
-}
-#else
 void main()
 {
 	// Title display
@@ -156,7 +142,6 @@ void main()
 
 	waitForExit();
 }
-#endif
 
 // The player wants to start a new game
 void newGame()
