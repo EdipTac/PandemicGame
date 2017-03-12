@@ -12,7 +12,7 @@ DeckofEvents::DeckofEvents() {
 	_deckOfEvents.push_back(std::make_unique<EventCard>("Forecast","Examine the top 6 cards of the Infection Draw Pile, rearrange them in the order of your choice, then place them back on the pile."));
 }
 
-//std::vector<std::unique_ptr<EventCard>> DeckofEvents::deckOfEvents() const
-//{
-//	return _deckOfEvents;
-//}
+std::vector<std::unique_ptr<EventCard>> DeckofEvents::deckOfEvents()
+{
+	return std::move(_deckOfEvents);
+}
