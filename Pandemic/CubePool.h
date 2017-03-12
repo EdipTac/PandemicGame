@@ -20,10 +20,11 @@ public:
 	void takeFrom(const Colour& colour, const size_t amount, CubePool& target);
 
 	// The number of cubes of a given colour
+	size_t operator[](const Colour& colour) const;
 	size_t& operator[](const Colour& colour);
+
 	// The eradication boolean of a given colour
 	bool isEradicated (const Colour& colour) const;
-	
 
 private:
 	// Holds the count of disease cubes of each colour.

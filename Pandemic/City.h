@@ -17,16 +17,18 @@ class InfectionCardDeck;
 class City
 {
 public:
-	// Constructs a city with a given name and colour.
+	// Constructs a city with a given name, colour, and disease cube count
 	City(const std::string& name = "", const Colour& colour = Colour::Black, const std::map<Colour, size_t>& cubes = {});
-
-	//    ----  Accessors  ----
 
 	// The city's name
 	std::string name() const;
+	std::string& name();
+	void name(const std::string& name);
 
 	// The coloured "region" the city belongs to
 	Colour colour() const;
+	Colour& colour();
+	void colour(const Colour& colour);
 
 	// The cities that this city is connected to
 	const std::vector<City*>& connections() const;
@@ -34,22 +36,15 @@ public:
 	// True iff the city is connected to another given city
 	bool isConnectedTo(const City& target) const;
 
+	// Declares that this city is connected to another given city
+	void connectTo(City& target);
+
 	// The number of disease cubes of a given colour the city has
+	size_t diseaseCubes(const Colour& colour) const;
 	size_t& diseaseCubes(const Colour& colour);
 
 	// The outbreak status of each disease
 	bool diseaseOutbreak(const Colour& colour) const;
-
-	//    ----  Mutators  ----
-
-	// Changes the city's name
-	void name(const std::string& name);
-
-	// Changes the city's coloured region
-	void colour(const Colour& colour);
-
-	// Declares that this city is connected to another given city
-	void connectTo(City& target);
 
 	// Adds disease cubes of a given colour from a given source
 	void addDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& source, InfectionCardDeck& infectionDeck);
@@ -58,24 +53,26 @@ public:
 	void removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& source);
 	
 	// True iff quarantine specialist locates at this city or at cities with direct connection with this city
-	bool quarantined() const {
-		return _quarantined;
-	}
-	void setQuarantined() {
-		_quarantined = true;
-	}
-	
+	bool isQuarantined() const;
 
+	// Sets quarantine to true
+	void quarantine();
+	
+	// True iff the city has a research station
 	bool hasResearchStation() const;
+	bool& hasResearchStation();
 	void giveResearchStation(GameState& game);
 	void removeResearchStation(GameState& game);
 
+	// List of all diseases in this city
 	std::vector<Colour> diseases();
 
+	// True iff the two cities share a name
 	friend bool operator==(const City& lhs, const City& rhs);
 
 	unsigned const CUBE_PER_INFECTION = 1;
 
+	// Returns a report on the city
 	std::string string();
 
 	class Builder;

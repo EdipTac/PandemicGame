@@ -25,7 +25,17 @@ std::string City::name() const
 	return _name;
 }
 
+std::string& City::name()
+{
+	return _name;
+}
+
 Colour City::colour() const
+{
+	return _colour;
+}
+
+Colour& City::colour()
 {
 	return _colour;
 }
@@ -38,6 +48,11 @@ const std::vector<City*>& City::connections() const
 bool City::isConnectedTo(const City& target) const
 {
 	return std::any_of(_connections.begin(), _connections.end(), [&](const auto& city) { return city == &target; });
+}
+
+size_t City::diseaseCubes(const Colour& colour) const
+{
+	return _diseaseCubes[colour];
 }
 
 size_t& City::diseaseCubes(const Colour& colour)
@@ -91,7 +106,22 @@ void City::removeDiseaseCubes(const Colour& colour, const unsigned amount, CubeP
 	_diseaseCubes.giveTo(colour, amount, source);
 }
 
+bool City::isQuarantined() const
+{
+	return _quarantined;
+}
+
+void City::quarantine()
+{
+	_quarantined = true;
+}
+
 bool City::hasResearchStation() const
+{
+	return _hasResearchStation;
+}
+
+bool& City::hasResearchStation()
 {
 	return _hasResearchStation;
 }
@@ -131,7 +161,7 @@ std::string City::string()
 	{
 		ss << "\t" << colourName(colour) << ": " << diseaseCubes(colour) << "\n";
 	}
-	ss << "Is quarantined: " << quarantined();
+	ss << "Is quarantined: " << isQuarantined();
 	ss << "\nHas research station: " << hasResearchStation();
 	ss << "\nOutbreak status:\n";
 	for (const auto& colour : colours())

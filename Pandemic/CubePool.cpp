@@ -23,6 +23,12 @@ void CubePool::takeFrom(const Colour& colour, const size_t amount, CubePool& tar
 	_diseaseCubes[colour] += trueAmount;
 }
 
+size_t CubePool::operator[](const Colour& colour) const
+{
+	const auto& it = _diseaseCubes.find(colour);
+	return it == _diseaseCubes.end() ? 0u : it->second;
+}
+
 size_t& CubePool::operator[](const Colour& colour)
 {
 	return _diseaseCubes[colour];
