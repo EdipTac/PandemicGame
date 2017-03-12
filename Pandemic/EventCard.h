@@ -25,4 +25,7 @@ public:
 
 	// Custom implementation of the inherited virtual function from PlayerCard
 	std::string toString();
+
+	// Inherited via TextualCard
+	virtual void onDraw(GameState& state) override;
 };

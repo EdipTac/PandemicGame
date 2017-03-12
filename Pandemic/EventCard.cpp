@@ -21,3 +21,5 @@ std::string EventCard::toString()
 {
 	return "Event\n" + PlayerCard::toString() + ", Description: " + description();
 }
+
+void EventCard::onDraw(GameState& state) {}
