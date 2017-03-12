@@ -63,6 +63,7 @@ void showCity(const City& city);
 bool report();
 void displayCities();
 void directConnectionReport();
+void infect();
 std::string solicitFileName(const std::string& msg);
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
@@ -139,6 +140,7 @@ void main()
 		std::cout << currentPlayer.name() << "'s turn.\n";
 		while (!turnMenu.solicitInput()); // Intentionally empty body
 		game->distributePlayerCards(cardsPerTurn);
+		infect();
 	}
 
 	waitForExit();

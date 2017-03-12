@@ -19,7 +19,7 @@ InfectionCard::~InfectionCard(){}
 void InfectionCard::onDraw(GameState& state)
 {
 	city().addDiseaseCubes(colour(), CUBE_NORMAL_INFECTION, state);
-	std::cout << city().name() << " infected!\n";
+	std::cout << city().name() << " infected with " << colourName(city().colour()) << " disease!\n";
 }
 std::string InfectionCard::description() const
 {
