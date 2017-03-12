@@ -35,7 +35,8 @@ public:
 	bool isConnectedTo(const City& target) const;
 
 	// The number of disease cubes of a given colour the city has
-	unsigned diseaseCubes(const Colour& colour) const;
+	size_t& diseaseCubes(const Colour& colour);
+
 	// The outbreak status of each disease
 	bool diseaseOutbreak(const Colour& colour) const;
 
@@ -69,13 +70,13 @@ public:
 	void giveResearchStation(GameState& game);
 	void removeResearchStation(GameState& game);
 
-	std::vector<Colour> diseases() const;
+	std::vector<Colour> diseases();
 
 	friend bool operator==(const City& lhs, const City& rhs);
 
 	unsigned const CUBE_PER_INFECTION = 1;
 
-	std::string string() const;
+	std::string string();
 
 	class Builder;
 

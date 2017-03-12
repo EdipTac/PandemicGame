@@ -40,7 +40,7 @@ bool City::isConnectedTo(const City& target) const
 	return std::any_of(_connections.begin(), _connections.end(), [&](const auto& city) { return city == &target; });
 }
 
-unsigned City::diseaseCubes(const Colour& colour) const
+size_t& City::diseaseCubes(const Colour& colour)
 {
 	return _diseaseCubes[colour];
 }
@@ -108,7 +108,7 @@ void City::removeResearchStation(GameState& game)
 	_hasResearchStation = false;
 }
 
-std::vector<Colour> City::diseases() const
+std::vector<Colour> City::diseases()
 {
 	std::vector<Colour> d;
 	for (const auto& colour : colours())
@@ -121,7 +121,7 @@ std::vector<Colour> City::diseases() const
 	return d;
 }
 
-std::string City::string() const
+std::string City::string()
 {
 	std::stringstream ss;
 	ss << name();

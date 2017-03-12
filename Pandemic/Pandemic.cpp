@@ -610,7 +610,7 @@ size_t solicitSize(const size_t min, const size_t max)
 	return size;
 }
 
-void showCity(const City& city)
+void showCity(City& city)
 {
 	std::cout << city.string();
 }
