@@ -199,7 +199,7 @@
     <ClCompile Include="Serialization.cpp">
       <Filter>Util\src</Filter>
     </ClCompile>
-    <ClCompile Include="DeckofEventscpp.cpp">
+    <ClCompile Include="DeckofEvents.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="MapEditor.cpp">

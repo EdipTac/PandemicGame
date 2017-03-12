@@ -145,7 +145,7 @@
     <ClCompile Include="Colour.cpp" />
     <ClCompile Include="CubePool.cpp" />
     <ClCompile Include="Deck.cpp" />
-    <ClCompile Include="DeckofEventscpp.cpp" />
+    <ClCompile Include="DeckofEvents.cpp" />
     <ClCompile Include="DeckofRoles.cpp" />
     <ClCompile Include="EpidemicCard.cpp" />
     <ClCompile Include="EventCard.cpp" />

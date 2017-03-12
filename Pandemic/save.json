@@ -27,17 +27,19 @@
 	],		
 	"cities": [
 		{
-			"name": "Montreal",
+      "name": "Montreal",
+      "colour": "Y",
       "diseaseCubes": {
 				"B": 1,
 				"Y": 2,
 				"K": 0,
 				"R": 0
 			},
-			"researchStation": true
+			"researchStation": false
 		},
 		{
-			"name": "Toronto",
+      "name": "Toronto",
+      "colour": "K",
       "diseaseCubes": {
 				"B": 0,
 				"Y": 0,
@@ -47,14 +49,15 @@
 			"researchStation": false
 		},
 		{
-			"name": "London",
+      "name": "London",
+      "colour": "B",
       "diseaseCubes": {
 				"B": 0,
 				"Y": 0,
 				"K": 2,
 				"R": 0
 			},
-			"researchStation": false
+			"researchStation": true
 		}
 	],
 	"infection": {
@@ -81,10 +84,6 @@
 		"discard": [
 			"London",
 			"Resilient Population"
-		],
-		"removed": [
-			"Epidemic",
-			"Forecast"
 		]
 	}
 }
