@@ -11,6 +11,7 @@ void deleteCity();
 void listCities();
 void editCity();
 void cityReport(City& city);
+void addConnection(City& city);
 void createNewMap();
 
 const GeneralMenu mapEditorMainMenu
@@ -64,7 +65,8 @@ void editCity()
 		GeneralMenu
 		{
 			{
-				{ "Report",	[&](){ cityReport(*city); } }
+				{ "Report",			[&]() { cityReport(*city); }	},
+				{ "Add Connection",	[&]() { addConnection(*city); }	}
 			}
 		}.solicitInput();
 	}
@@ -90,4 +92,14 @@ void listCities()
 void cityReport(City& city)
 {
 	std::cout << city.string();
+}
+
+void addConnection(City& city)
+{
+	std::cout << "Where to connect to? ";
+	auto target = solicitCity(*map);
+	if (target)
+	{
+		city.connectTo(*target);
+	}
 }
