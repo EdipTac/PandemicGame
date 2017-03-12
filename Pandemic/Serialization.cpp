@@ -12,6 +12,8 @@ using json = nlohmann::json; // for convenience
 #include "Serialization.h"
 #include "Util.h"
 #include "PlayerCityCard.h"
+#include "DeckofEvents.h"
+#include "EventCard.h"
 
 #pragma warning(disable : 4456)
 
@@ -137,6 +139,7 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 	gameState->setMap(readMapFromFile(mapFilePath));
 
 	auto& cities = gameState->map().cities();
+	//auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
 
 	// PLAYER INITIALIZATION:
 	std::vector<json> playerListJSON = j["players"];
@@ -182,15 +185,18 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 					player->addCard(std::make_unique<PlayerCityCard>((**it)));
 				}
 			}
-
-			// TODO: some way of determining if it is a Event?
 			
+			// loop through event cards, find the one that matches
+			//for (auto it = events.begin(); it != events.end(); ++it) {
+			//	if ((*it)->name() == cardName) {
+			//		player->addCard(std::move(*it));
+			//	}
+			//}
 		}
 
 
 
 		// store this player into the gameState
-		// TODO: also set current/next player?
 		std::cout << "\n" << player->getName() << "\nPosition: " << player->pawn().position().name();
 		player->displayCards();
 		gameState->addPlayer(std::move(player));
@@ -219,8 +225,11 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 					std::cout << "Giving " << cityName << " a research station...\n";
 					(*it)->giveResearchStation(*gameState);
 				}
-				//TODO: set the disease cubes for the city
-				
+				// set the disease cubes for the city
+				(*it)->setDiseaseCubes(Colour::Blue, numOfBlue);
+				(*it)->setDiseaseCubes(Colour::Yellow, numOfYellow);
+				(*it)->setDiseaseCubes(Colour::Red, numOfRed);
+				(*it)->setDiseaseCubes(Colour::Black, numOfBlack);
 			}
 		}
 	}
@@ -283,7 +292,12 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 			}
 		}
 
-		// TODO: identify the event cards
+		// loop through event cards, find the one that matches
+		//for (auto itr = events.begin(); itr != events.end(); ++itr) {
+		//	if ((*itr)->name() == *it) {
+		//		gameState->playerDeck().addToDeck(std::move(*itr));
+		//	}
+		//}
 	}
 
 	std::vector<std::string> playerCardDiscard = playerCards["discard"].get<std::vector<std::string>>();
@@ -296,18 +310,13 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 				gameState->playerDeck().addToDiscard(std::make_unique<PlayerCityCard>((**itr)));
 			}
 		}
-	}
 
-	std::vector<std::string> playerCardsRemoved = playerCards["removed"].get<std::vector<std::string>>();
-	for (auto it = playerCardsRemoved.begin(); it != playerCardsRemoved.end(); ++it) {
-
-		// loop through cities, and find the cities that matches the name
-		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
-			if ((*itr)->name() == *it) {
-				//TODO:
-				//gameState->playerDeck().addToRemoved(std::make_unique<PlayerCityCard>((**itr)));
-			}
-		}
+		// loop through event cards, find the one that matches
+		//for (auto itr = events.begin(); itr != events.end(); ++itr) {
+		//	if ((*itr)->name() == *it) {
+		//		gameState->playerDeck().addToDiscard(std::move(*itr));
+		//	}
+		//}
 	}
 
 	return gameState;

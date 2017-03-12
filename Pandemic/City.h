@@ -51,6 +51,9 @@ public:
 	size_t diseaseCubes(const Colour& colour) const;
 	size_t& diseaseCubes(const Colour& colour);
 
+	// set the number of disease cubes in a City - used for the game loading
+	void setDiseaseCubes(const Colour& colour, int quantity);
+
 	// The outbreak status of each disease
 	bool diseaseOutbreak(const Colour& colour) const;
 
