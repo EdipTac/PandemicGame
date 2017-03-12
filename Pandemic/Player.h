@@ -7,9 +7,11 @@
 #include <algorithm>
 
 #include "Pawn.h"
-#include "PlayerCard.h"
+//#include "PlayerCard.h"
 #include "RoleCard.h"
 
+class RoleCard;
+class PlayerCard;
 class PlayerCityCard;
 
 // A player of the game

@@ -81,7 +81,8 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <TreatWarningAsError>false</TreatWarningAsError>
+      <TreatWarningAsError>true</TreatWarningAsError>
+      <ShowIncludes>true</ShowIncludes>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -117,7 +118,6 @@
     <ClInclude Include="Colour.h" />
     <ClInclude Include="CubePool.h" />
     <ClInclude Include="Deck.h" />
-    <ClInclude Include="DeckofEvents.h" />
     <ClInclude Include="DeckofRoles.h" />
     <ClInclude Include="EpidemicCard.h" />
     <ClInclude Include="EventCard.h" />
@@ -126,7 +126,6 @@
     <ClInclude Include="InfectionCardDeck.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="MapEditor.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuOption.h" />
     <ClInclude Include="Pawn.h" />
@@ -145,7 +144,6 @@
     <ClCompile Include="Colour.cpp" />
     <ClCompile Include="CubePool.cpp" />
     <ClCompile Include="Deck.cpp" />
-    <ClCompile Include="DeckofEvents.cpp" />
     <ClCompile Include="DeckofRoles.cpp" />
     <ClCompile Include="EpidemicCard.cpp" />
     <ClCompile Include="EventCard.cpp" />
@@ -153,7 +151,6 @@
     <ClCompile Include="InfectionCard.cpp" />
     <ClCompile Include="InfectionCardDeck.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapEditor.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Pandemic.cpp" />
     <ClCompile Include="Pawn.cpp" />
@@ -170,7 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map" />
-    <None Include="earth2.map" />
     <None Include="save.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

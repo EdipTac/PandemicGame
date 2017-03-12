@@ -1,5 +1,3 @@
-#pragma warning(disable : 4100)	// To be removed
-
 #include <string>
 #include <iostream>
 #include "RoleCard.h"
@@ -12,11 +10,19 @@ card's initialization process. The printRole function is there in order to displ
 during the game. Each of the cards have their specific role (name) the description of each role, as well as
 the color corresponding to each role that will be used to decide on the color of the pawn for that character.
 */
+RoleCard::RoleCard()
+	: TextualCard { "", ""}
+	, _color { "" }
+{
+
+}
 
 RoleCard::RoleCard(const std::string& role, const std::string& description, const std::string& color)
 	: TextualCard { role, description }
 	, _color { color }
-{}
+{
+	
+}
 
 RoleCard::~RoleCard() {}
 
@@ -24,4 +30,5 @@ void RoleCard::printRole() {
 	std::cout << name() << std::endl << _color << std::endl << description() << std::endl;
 }
 
-void RoleCard::onDraw(GameState& state) {}
+void RoleCard::cardWork(GameState&)
+{}

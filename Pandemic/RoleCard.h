@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "Card.h"
+//#include "Card.h"
 #include "TextualCard.h"
 
 /*
@@ -20,12 +20,15 @@ class RoleCard
 	: public TextualCard
 {
 public:
-	RoleCard(const std::string& role = "", const std::string& description = "", const std::string& color = "");
+	RoleCard();
+	RoleCard(const std::string& role, const std::string& description, const std::string& color);
 	~RoleCard() override;
 
 	void printRole();
-	void onDraw(GameState& state) override;
+	void cardWork(GameState &) override;
 
 private:
 	std::string _color;
+
+	// Inherited via TextualCard
 };

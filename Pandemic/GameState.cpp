@@ -3,6 +3,12 @@
 #include <memory>
 
 #include "GameState.h"
+#include "CubePool.h"
+#include "Deck.h"
+#include "InfectionCard.h"
+#include "Map.h"
+#include "Player.h"
+#include "PlayerCard.h"
 
 GameState::GameState()
 	: _cubePool { 96 / 4 }

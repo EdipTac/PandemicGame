@@ -115,12 +115,6 @@
     <ClInclude Include="json.hpp">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="DeckofEvents.h">
-      <Filter>General\header</Filter>
-    </ClInclude>
-    <ClInclude Include="MapEditor.h">
-      <Filter>General\header</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -175,9 +169,6 @@
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="Pandemic.cpp" />
-    <ClCompile Include="Deck.cpp">
-      <Filter>General\src</Filter>
-    </ClCompile>
     <ClCompile Include="DeckofRoles.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
@@ -190,10 +181,7 @@
     <ClCompile Include="Serialization.cpp">
       <Filter>Util\src</Filter>
     </ClCompile>
-    <ClCompile Include="DeckofEvents.cpp">
-      <Filter>General\src</Filter>
-    </ClCompile>
-    <ClCompile Include="MapEditor.cpp">
+    <ClCompile Include="Deck.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -207,9 +195,6 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="save.json">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="earth2.map">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
