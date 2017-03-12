@@ -715,6 +715,6 @@ void flipAndInfect(InfectionCardDeck& deck, GameState& state) {// normal one inf
 	City& city = temp->city();
 	std::cout << "Infection card :" << temp->name() << " with the colour of: " << colourAbbreviation(temp->colour()) << "\n" <<
 		"infects the city " << temp->name() << " one time " << std::endl;
-	city.addDiseaseCubes(city.colour(), city.cubesPerInfection, state.cubePool(), deck);
+	city.addDiseaseCubes(city.colour(), city.cubesPerInfection, state);
 
 }

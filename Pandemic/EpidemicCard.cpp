@@ -20,6 +20,7 @@ std::string EpidemicCard::toString()
 {
 	return "Epidemic\n" + PlayerCard::toString() + ", Description: \n" + EPIDEMIC_DESCRIPTION;
 }
+/*
 void EpidemicCard::epidemicInfect(InfectionCardDeck& deck, GameState& state) {
 	state.advanceInfectionCounter();//increase
 	std::cout << "Draw for the bottom of the infection card deck: " << std::endl;
@@ -30,6 +31,6 @@ void EpidemicCard::epidemicInfect(InfectionCardDeck& deck, GameState& state) {
 	city.addDiseaseCubes(city.colour(), city.MAX_CUBE_PER_DISEASE, state);//infect
 	deck.reshuffleAndputback();// intensify
 }
-
+*/
 void EpidemicCard::cardWork(GameState &)
 {}
