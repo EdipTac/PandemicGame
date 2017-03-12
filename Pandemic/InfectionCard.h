@@ -16,7 +16,12 @@ class InfectionCard
 {
 public:
 	// Constructs an infection card for infecting a given city
-	InfectionCard(City& city);
+	InfectionCard(City& );
+	~InfectionCard();
+	unsigned const CUBE_NORMAL_INFECTION = 1;
+	unsigned const CUBE_EPIDEMIC_INFECTION = 3;
 	void onDraw(GameState& state);
+	void cardWork(GameState&);
+	std::string description() const override;
 
 };
