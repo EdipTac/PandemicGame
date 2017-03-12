@@ -120,8 +120,14 @@ const ActionMenu actionMenu
 #ifdef TEST
 void main()
 {
-		readGameFromFile("save.json");
-		system("pause");
+	auto city = City::Builder {}
+		.name("Beijing")
+		.colour(Colour::Yellow)
+		.cubes(Colour::Black, 1)
+		.cubes(Colour::Blue, 2)
+		.cubes(Colour::Yellow, 3)
+		.cubes(Colour::Red, 4)
+		.buildUnique();
 }
 #else
 void main()

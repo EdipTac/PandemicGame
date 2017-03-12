@@ -18,7 +18,7 @@ class City
 {
 public:
 	// Constructs a city with a given name and colour.
-	City(const std::string& name = "", const Colour& colour = Colour::Black);
+	City(const std::string& name = "", const Colour& colour = Colour::Black, const std::map<Colour, size_t> cubes = {});
 
 	//    ----  Accessors  ----
 
@@ -78,6 +78,7 @@ public:
 	class Builder;
 
 private:
+
 	std::string _name;
 	Colour _colour;
 	std::vector<City*> _connections;
@@ -90,4 +91,41 @@ private:
 	unsigned const MAX_CUBE_PER_DISEASE = 3;
 	// Place one cube for each infection
 	bool _hasResearchStation = false;
+};
+
+class City::Builder
+{
+public:
+	Builder& name(const std::string& name)
+	{
+		_name = name;
+		return *this;
+	}
+
+	Builder& colour(const Colour& colour)
+	{
+		_colour = colour;
+		return *this;
+	}
+
+	Builder& cubes(const Colour& colour, const size_t count)
+	{
+		_cubes[colour] = count;
+		return *this;
+	}
+
+	City build() const
+	{
+		return { _name, _colour, _cubes };
+	}
+
+	std::unique_ptr<City> buildUnique() const
+	{
+		return std::make_unique<City>(_name, _colour, _cubes);
+	}
+
+private:
+	std::string _name;
+	Colour _colour;
+	std::map<Colour, size_t> _cubes;
 };
