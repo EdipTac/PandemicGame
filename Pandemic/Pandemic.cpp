@@ -77,10 +77,10 @@ std::string titleFont(const std::string& original);
 std::unique_ptr<GameState> game;
 
 //  ----  Constants  -----  //
-constexpr size_t minPlayers = 1;
-constexpr size_t maxPlayers = 4;
-constexpr size_t actionsPerTurn = 4;
-constexpr size_t cardsPerPlayer = 5;
+constexpr size_t minPlayers =		1;
+constexpr size_t maxPlayers =		4;
+constexpr size_t actionsPerTurn	=	4;
+constexpr size_t cardsPerTurn =		2;
 
 //  ----  Menus  ----  //
 const GeneralMenu mainMenu
@@ -139,6 +139,7 @@ void main()
 		auto& currentPlayer = game->nextPlayer();
 		std::cout << currentPlayer.name() << "'s turn.\n";
 		while (!turnMenu.solicitInput()); // Intentionally empty body
+		game->distributePlayerCards(cardsPerTurn);
 	}
 
 	waitForExit();
@@ -191,7 +192,7 @@ void newGame()
 	// Distribute cards to players
 	for (const auto& player : game->players())
 	{
-		for (auto i = 0u; !game->playerDeck().empty() && i < cardsPerPlayer; ++i)
+		for (auto i = 0u; !game->playerDeck().empty() && i < game->initialCards(); ++i)
 		{
 			player->addCard(std::move(game->playerDeck().drawTopCard()));
 		}

@@ -156,6 +156,22 @@ Deck<InfectionCard>& GameState::infectionDeck()
 	return _infectionDeck;
 }
 
+size_t GameState::initialCards() const
+{
+	const auto size = _players.size();
+	return	size <= 2 ? 4 :
+			size == 3 ? 3 :
+						2 ;
+}
+
+void GameState::distributePlayerCards(const size_t count)
+{
+	for (auto i = 0u; i < count; ++i)
+	{
+		currentPlayer().addCard(playerDeck().drawTopCard());
+	}
+}
+
 class QuitState
 	: public GameState
 {

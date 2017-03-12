@@ -45,6 +45,8 @@ public:
 
 	Deck<PlayerCard>& playerDeck();
 	Deck<InfectionCard>& infectionDeck();
+	size_t initialCards() const;
+	void distributePlayerCards(const size_t count);
 
 private:
 	std::unique_ptr<Map> _map;
