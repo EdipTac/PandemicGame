@@ -62,6 +62,12 @@ Player& GameState::currentPlayer()
 	return *_players[_currentPlayerIdx];
 }
 
+Player& GameState::setCurrentPlayer(const size_t idx)
+{
+	_currentPlayerIdx = idx % _players.size();
+	return currentPlayer();
+}
+
 unsigned GameState::researchStations() const
 {
 	return _researchStations;

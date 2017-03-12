@@ -26,6 +26,7 @@ public:
 
 	Player& nextPlayer();
 	Player& currentPlayer();
+	Player& setCurrentPlayer(const size_t idx);
 
 	unsigned researchStations() const;
 	void removeResearchStation();
