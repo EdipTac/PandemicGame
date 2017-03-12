@@ -4,6 +4,7 @@
 
 #include "Card.h"
 #include "TextualCard.h"
+#include "DeckofRoles.h"
 
 /*
 This is the header file for the RoleCards that will be used in the game that indicate the
@@ -20,6 +21,8 @@ class RoleCard
 	: public TextualCard
 {
 public:
+	static const DeckofRoles cards;
+
 	RoleCard();
 	RoleCard(const std::string& role, const std::string& description, const std::string& color);
 	~RoleCard() override;

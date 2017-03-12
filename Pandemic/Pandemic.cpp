@@ -128,6 +128,9 @@ void main()
 		.cubes(Colour::Yellow, 3)
 		.cubes(Colour::Red, 4)
 		.buildUnique();
+
+	auto c = RoleCard::cards;
+	c.drawTopCard();
 }
 #else
 void main()
