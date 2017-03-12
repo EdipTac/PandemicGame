@@ -7,6 +7,7 @@
 #include <map>
 
 #include "City.h"
+#include "Map.h"
 
 void clearStringStream(std::stringstream& ss);
 
@@ -67,3 +68,7 @@ void list(const T& collection)
 }
 
 std::string solicitLine(const std::string& msg = "");
+
+void showCity(City& city);
+
+City* solicitCity(const Map& map);

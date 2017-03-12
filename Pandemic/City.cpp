@@ -88,6 +88,31 @@ void City::connectTo(City &target)
 	}
 }
 
+void City::disconnectFrom(City& target)
+{
+	{
+		auto it = std::find_if(_connections.begin(), _connections.end(), [&](const auto& c)
+		{
+			return *c == target;
+		});
+		if (it != _connections.end())
+		{
+			_connections.erase(it);
+		}
+	}
+	{
+		auto it = std::find_if(target._connections.begin(), target._connections.end(), [&](const auto& c)
+		{
+			return *c == *this;
+		});
+		if (it != target._connections.end())
+		{
+			target._connections.erase(it);
+		}
+	}
+
+}
+
 void City::addDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& source, InfectionCardDeck& infectionDeck)
 {
 	if (!_outbreaks[colour] && !_quarantined && ! source.isEradicated(colour)) {
@@ -171,7 +196,19 @@ std::string City::string()
 	ss << "\nOutbreak status:\n";
 	for (const auto& colour : colours())
 	{
-		ss << "\t" << diseaseOutbreak(colour) << "\n";
+		ss << "\t" << colourName(colour) << ": " << diseaseOutbreak(colour) << "\n";
+	}
+	if (_connections.empty())
+	{
+		ss << "No connections.\n";
+	}
+	else
+	{
+		ss << "Connected to:\n";
+		for (const auto& connection : _connections)
+		{
+			ss << "\t" << connection->_name << "\n";
+		}
 	}
 	ss << std::endl;
 	return ss.str();

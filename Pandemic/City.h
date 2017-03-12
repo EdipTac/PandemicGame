@@ -46,6 +46,7 @@ public:
 
 	// Declares that this city is connected to another given city
 	void connectTo(City& target);
+	void disconnectFrom(City& target);
 
 	// The number of disease cubes of a given colour the city has
 	size_t diseaseCubes(const Colour& colour) const;

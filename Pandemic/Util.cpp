@@ -61,3 +61,29 @@ std::string solicitLine(const std::string& msg)
 	std::getline(std::cin >> std::ws, string);
 	return string;
 }
+
+City* solicitCity(const Map& map)
+{
+	if (map.cities().empty())
+	{
+		std::cout << "No cities.\n";
+		return nullptr;
+	}
+	City* city = nullptr;
+	std::cout << "Enter city name: ";
+	while (true)
+	{
+		city = map.findCityIfContained(solicitLine());
+		if (city)
+		{
+			break;
+		}
+		std::cout << "No city by that name.\n";
+	}
+	return city;
+}
+
+void showCity(City& city)
+{
+	std::cout << city.string();
+}

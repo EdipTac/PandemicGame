@@ -22,7 +22,8 @@ T Menu<T>::solicitInput() const
 	while (true)
 	{
 		std::cin >> idx;
-		std::cin.get();
+		std::cin.clear();
+		std::cin.ignore();
 		--idx;
 		if (idx >= 0 && idx < _options.size())
 		{

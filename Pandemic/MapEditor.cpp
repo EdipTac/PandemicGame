@@ -9,6 +9,10 @@
 void addCity();
 void deleteCity();
 void listCities();
+void editCity();
+void cityReport(City& city);
+void addConnection(City& city);
+void deleteConnection(City& city);
 void createNewMap();
 
 const GeneralMenu mapEditorMainMenu
@@ -23,7 +27,8 @@ const GeneralMenu editMapMenu
 	{
 		{ "Add City",		addCity		},
 		{ "Delete City",	deleteCity	},
-		{ "List Cities",	listCities	}
+		{ "List Cities",	listCities	},
+		{ "Edit City",		editCity	}
 	}
 };
 
@@ -53,25 +58,29 @@ void addCity()
 	map->addCity(std::move(city));
 }
 
+void editCity()
+{
+	const auto& city = solicitCity(*map);
+	if (city)
+	{
+		GeneralMenu
+		{
+			{
+				{ "Report",				[&]() { cityReport(*city);			}	},
+				{ "Add Connection",		[&]() { addConnection(*city);		}	},
+				{ "Delete Connection",	[&]() { deleteConnection(*city);	}	}
+			}
+		}.solicitInput();
+	}
+}
+
 void deleteCity()
 {
-	if (map->cities().empty())
+	const auto city = solicitCity(*map);
+	if (city)
 	{
-		std::cout << "No cities.\n";
-		return;
+		map->removeCity(*city);
 	}
-	City* city = nullptr;
-	std::cout << "Enter city name: ";
-	while (true)
-	{
-		city = map->findCityIfContained(solicitLine());
-		if (city)
-		{
-			break;
-		}
-		std::cout << "No city by that name.\n";
-	}
-	map->removeCity(*city);
 }
 
 void listCities()
@@ -79,5 +88,30 @@ void listCities()
 	for (const auto& city : map->cities())
 	{
 		std::cout << "\t" << city->name() << ": " << colourName(city->colour()) << "\n";
+	}
+}
+
+void cityReport(City& city)
+{
+	std::cout << city.string();
+}
+
+void addConnection(City& city)
+{
+	std::cout << "Where to connect to? ";
+	auto target = solicitCity(*map);
+	if (target)
+	{
+		city.connectTo(*target);
+	}
+}
+
+void deleteConnection(City & city)
+{
+	std::cout << "Which city to disconnect from? ";
+	auto target = solicitCity(*map);
+	if (target)
+	{
+		city.disconnectFrom(*target);
 	}
 }
