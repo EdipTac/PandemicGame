@@ -115,6 +115,9 @@
     <ClInclude Include="json.hpp">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="DeckofEvents.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -183,6 +186,9 @@
     </ClCompile>
     <ClCompile Include="Serialization.cpp">
       <Filter>Util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="DeckofEventscpp.cpp">
+      <Filter>General\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

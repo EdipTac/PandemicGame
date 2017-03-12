@@ -14,7 +14,7 @@ public:
 	// Shuffles the draw pile
 	void shuffleDeck();
 
-	// huffles the draw pile
+	// shuffles the draw pile
 	void shuffleDiscards();
 
 	// Prints the deck

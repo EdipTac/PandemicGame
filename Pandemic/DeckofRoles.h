@@ -3,7 +3,7 @@
 #include <vector>
 #include "RoleCard.h"
 #include <memory>
-
+#include "Deck.h"
 using uniquerolecard = std::unique_ptr < RoleCard >;
 
 /*
@@ -12,10 +12,10 @@ The aim of this code was to create an individual deck that will contain all of t
 and have the player pick his random role card from this deck.
 */
 
-class DeckofRoles{
+class DeckofRoles: public Deck <RoleCard>{
 public: 
 	DeckofRoles(); //constructor
-	uniquerolecard drawRoleCard(); //the act of drawing a card to retun a role card
+	uniquerolecard drawRoleCard(); //this should not be needed since the base class has the drawCard function //the act of drawing a card to retun a role card
 
 
 private:
