@@ -1,25 +1,24 @@
 #include <algorithm>
 #include <stdexcept>
+#include <sstream>
 
 #include "City.h"
 #include "Colour.h"
 #include "InfectionCardDeck.h"
 
-City::City(const std::string & name, const Colour & colour, const std::map<Colour, size_t> cubes)
+City::City(const std::string& name, const Colour& colour, const std::map<Colour, size_t>& cubes)
 	: _name { name }
 	, _colour { colour }
 	, _diseaseCubes { cubes }
     , _outbreaks
-{
-	{ Colour::Black,false},
-	{ Colour::Blue,false},
-	{ Colour::Red,false },
-	{ Colour::Yellow,false}
-}
+	 {
+		{ Colour::Black,	false	},
+		{ Colour::Blue,		false	},
+		{ Colour::Red,		false	},
+		{ Colour::Yellow,	false	}
+	 }
 	, _quarantined {false}
-{
-	// Empty
-}
+{} // Empty
 
 std::string City::name() const
 {
@@ -120,6 +119,27 @@ std::vector<Colour> City::diseases() const
 		}
 	}
 	return d;
+}
+
+std::string City::string() const
+{
+	std::stringstream ss;
+	ss << name();
+	ss << " Colour: " << colourName(colour());
+	ss << "\nInfection status:\n";
+	for (const auto& colour : colours())
+	{
+		ss << "\t" << colourName(colour) << ": " << diseaseCubes(colour) << "\n";
+	}
+	ss << "Is quarantined: " << quarantined();
+	ss << "\nHas research station: " << hasResearchStation();
+	ss << "\nOutbreak status:\n";
+	for (const auto& colour : colours())
+	{
+		ss << "\t" << diseaseOutbreak(colour) << "\n";
+	}
+	ss << std::endl;
+	return ss.str();
 }
 
 bool operator==(const City& lhs, const City& rhs)

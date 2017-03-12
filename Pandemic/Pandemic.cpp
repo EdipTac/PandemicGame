@@ -64,12 +64,15 @@ bool cureDisease();
 bool actionQuit();
 
 void showCity(const City& city);
+void report();
 void displayCities();
+void cityReport();
+void directConnectionReport();
 void flipAndInfect(InfectionCardDeck&, GameState& );
 std::string solicitFileName();
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
-size_t solicitSize(size_t min, size_t max);
+size_t solicitSize(const size_t min, const size_t max);
 template <typename T> T validateInput(const std::map<std::string, T>& validInputs, const std::string& errMsg);
 template <typename T> T validateInput(const std::vector<T>& valid, const std::string& errMsg);
 template <typename T> void list(const T& collection);
@@ -95,10 +98,21 @@ const GeneralMenu mainMenu
 const GeneralMenu turnMenu
 {
 	{
+		{ "Report",			report			},
 		{ "Perform Action",	performAction	},
 		{ "Quit Game",		quit			}
 	}
 };
+
+const GeneralMenu reportMenu
+{
+	{
+		{ "Display Cities",				displayCities			},
+		{ "City Report",				cityReport				},
+		{ "Direct Connection Report",	directConnectionReport	}
+	}
+};
+
 
 const ActionMenu actionMenu
 {
@@ -579,7 +593,7 @@ std::string solicitPlayerName(const size_t number)
 	return playerName;
 }
 
-size_t solicitSize(size_t min, size_t max)
+size_t solicitSize(const size_t min, const size_t max)
 {
 	size_t size;
 	while (true)
@@ -598,92 +612,66 @@ size_t solicitSize(size_t min, size_t max)
 
 void showCity(const City& city)
 {
-	std::cout << city.name() << " Colour: " << colourAbbreviation(city.colour()) << "\n" <<
-		"Infection status: " << "\n" << "Blue Cube: " << city.diseaseCubes(Colour::Blue) << "\n"
-		"Black Cube: " << city.diseaseCubes(Colour::Black) << "\n" << "Red Cube: " << city.diseaseCubes(Colour::Red)
-		<< "\n" << "Yellow Cube: " << city.diseaseCubes(Colour::Yellow) << "\n" << "Is quarantined: " << city.quarantined() << "\n"
-		<< "Has research station ? " << city.hasResearchStation() << "\n" << "Outbreak status: \n" <<
-		"Blue disease outbreak: " << city.diseaseOutbreak(Colour::Blue) << "\n"
-		"Black disease outbreak: " << city.diseaseOutbreak(Colour::Black) << "\n" << "Red Cube: " << city.diseaseOutbreak(Colour::Red)
-		<< "\n" << "Yellow Cube: " << city.diseaseOutbreak(Colour::Yellow) << std::endl;
+	std::cout << city.string();
+}
+
+void report()
+{
+	reportMenu.solicitInput();
 }
 
 void displayCities()
 {
-	auto& player = game->currentPlayer();
-	const auto& position = player.pawn().position();
-	std::cout << "You are currently in " << position.name() << "\n";
-	while (true)
+	for (const auto& city : game->map().cities())
 	{
-		int index = 0;
-		char op;
+		showCity(*city);
+	}
+}
 
-		std::cout << "Press A,B,C,D to choose: \n" << "A) Dispaly all cities on the map " << "\n" << "B) Display specific city " << "\n"
-			<< "C) See direct connection cities with your current city" << "\n" << "D) Quit" << "\n";
-		std::cin >> op;
-		if (op == 'A' || op == 'a')
+void cityReport()
+{
+	int index;
+	char op;
+	std::string cityName;
+	std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
+	std::cin >> op;
+	if (op == 'A' || op == 'a')
+	{
+		std::cin >> index;
+		showCity(*game->map().cities()[index]);
+
+	}
+	else if (op == 'B' || op == 'b')
+	{
+		std::cin >> cityName;
+		for (const auto& city : game->map().cities())
 		{
-			for (const auto& city : game->map().cities())
-			{
-				std::cout << "City_Index_" << index << ":\n";
-				showCity(*city);
-				index++;
-			}
-		}
-		else if (op == 'B' || op == 'b')
-		{
-
-			std::string cityName;
-
-			std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
-			std::cin >> op;
-			if (op == 'A' || op == 'a')
-			{
-				std::cin >> index;
-				showCity(*game->map().cities()[index]);
-
-			}
-			else if (op == 'B' || op == 'b')
-			{
-				std::cin >> cityName;
-				for (const auto& city : game->map().cities())
-				{
-					if (lowercaseEquals(city->name(), cityName))
-					{
-						showCity(*city);
-					}
-				}
-			}
-
-			std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
-			std::cin >> op;
-
-			if (op == 'Y' || op == 'y')
-			{
-				for (const auto& city : game->map().cities()[index]->connections())
-				{
-					showCity(*city);
-
-				}
-			}
-
-
-		}
-		else if (op == 'C' || op == 'c')
-		{
-
-			std::cout << "In one action, you can move to\n";
-			for (const auto& city : position.connections())
+			if (lowercaseEquals(city->name(), cityName))
 			{
 				showCity(*city);
 			}
-
 		}
-		else if (op == 'D' || op == 'd')
+	}
+
+	std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
+	std::cin >> op;
+
+	if (op == 'Y' || op == 'y')
+	{
+		for (const auto& city : game->map().cities()[index]->connections())
 		{
-			break;
-		}
+			showCity(*city);
 
+		}
+	}
+}
+
+void directConnectionReport()
+{
+	std::cout << "In one action, you can move to\n";
+	for (const auto& city : game->currentPlayer().pawn().position().connections())
+	{
+		showCity(*city);
 	}
 }
 

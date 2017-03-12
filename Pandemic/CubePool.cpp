@@ -25,7 +25,8 @@ void CubePool::takeFrom(const Colour& colour, const size_t amount, CubePool& tar
 
 size_t CubePool::operator[](const Colour& colour) const
 {
-	return _diseaseCubes.find(colour)->second;
+	const auto& it = _diseaseCubes.find(colour);
+	return it == _diseaseCubes.end() ? 0u : it->second;
 }
 bool CubePool::isEradicated(const Colour& colour) const
 {

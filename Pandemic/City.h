@@ -18,7 +18,7 @@ class City
 {
 public:
 	// Constructs a city with a given name and colour.
-	City(const std::string& name = "", const Colour& colour = Colour::Black, const std::map<Colour, size_t> cubes = {});
+	City(const std::string& name = "", const Colour& colour = Colour::Black, const std::map<Colour, size_t>& cubes = {});
 
 	//    ----  Accessors  ----
 
@@ -74,6 +74,8 @@ public:
 	friend bool operator==(const City& lhs, const City& rhs);
 
 	unsigned const CUBE_PER_INFECTION = 1;
+
+	std::string string() const;
 
 	class Builder;
 
