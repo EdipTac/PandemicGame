@@ -22,16 +22,16 @@ std::string EpidemicCard::toString()
 	return "Epidemic\n" + PlayerCard::toString() + ", Description: \n" + EPIDEMIC_DESCRIPTION;
 }
 
-void EpidemicCard::onDraw(GameState& state) {}
+void EpidemicCard::cardWork(InfectionCardDeck& deck, GameState& state) {
+	state.advanceInfectionCounter();//increase
+	std::cout << "Draw for the bottom of the infection card deck: " << std::endl;
+	auto temp = move(deck.drawBottomCard());
+	City& city = dynamic_cast <InfectionCard*> (temp.get())->city();
+	std::cout << "Infection card : " << temp->name() << " with the colour of: " << colourAbbreviation(city.colour()) << std::endl;
+	std::cout << "Infects the city :" << temp->name() << " three times:"  << std::endl;
+	city.addDiseaseCubes(city.colour(), city.cubesBeforeOutbreak, state);//infect
+	deck.addToDiscard(move(temp));
+	deck.reshuffleAndputback();// intensify
+}
 
-//void EpidemicCard::epidemicInfect(InfectionCardDeck& deck, GameState& state)
-//{
-//	state.advanceInfectionCounter();//increase
-//	std::cout << "Draw for the bottom of the infection card deck: " << std::endl;
-//	std::unique_ptr<Card> temp = deck.drawBottomCard();
-//	City& city = dynamic_cast <InfectionCard*> (temp.get())->city();
-//	std::cout << "Infection card : " << temp->name() << " with the colour of: " << colourAbbreviation(city.colour()) << std::endl;
-//	std::cout << "Infects the city :" << temp->name() << " three times:" << std::endl;
-//	city.addDiseaseCubes(city.colour(), city.MAX_CUBE_PER_DISEASE, state);//infect
-//	deck.reshuffleAndputback();// intensify
-//}
+

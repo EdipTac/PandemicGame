@@ -18,6 +18,9 @@ class InfectionCardDeck
 {
 public:
 	//Default constructor
+	InfectionCardDeck();
+
+	//Overload constructor
 	InfectionCardDeck(std::string fileName);
 	void shuffle(std::vector <std::unique_ptr<InfectionCard>>&);
 	     //shuffle - shuffle infection cards in random order
