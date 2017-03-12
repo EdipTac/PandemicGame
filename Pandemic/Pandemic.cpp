@@ -711,10 +711,11 @@ std::string titleFont(const std::string& original)
 
 void flipAndInfect(InfectionCardDeck& deck, GameState& state) {// normal one infectio after each turn
 	std::cout << "Flip an infection card: " << std::endl;
-	std::unique_ptr<InfectionCard> temp = deck.drawTopCard();
+	auto temp = move(deck.drawTopCard());
 	City& city = temp->city();
 	std::cout << "Infection card :" << temp->name() << " with the colour of: " << colourAbbreviation(temp->colour()) << "\n" <<
 		"infects the city " << temp->name() << " one time " << std::endl;
 	city.addDiseaseCubes(city.colour(), city.cubesPerInfection, state);
-
+	std::cout << "Put it to infection card discard pile: " << std::endl;
+	deck.addToDiscard(move(temp));
 }
