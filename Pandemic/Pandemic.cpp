@@ -48,7 +48,7 @@
 void newGame();
 void loadGame();
 void waitForExit();
-void performAction();
+bool performAction();
 void quit();
 
 //  ----  Action menu options  ----  //
@@ -65,7 +65,7 @@ bool cureDisease();
 bool actionQuit();
 
 void showCity(const City& city);
-void report();
+bool report();
 void displayCities();
 //void cityReport();
 void directConnectionReport();
@@ -97,12 +97,13 @@ const GeneralMenu mainMenu
 	}
 };
 
-const GeneralMenu turnMenu
+// Return true iff the action 
+const ActionMenu turnMenu
 {
 	{
 		{ "Report",			report			},
 		{ "Perform Action",	performAction	},
-		{ "Quit Game",		quit			}
+		{ "Quit Game",		actionQuit		}
 	}
 };
 
@@ -150,7 +151,7 @@ void main()
 	{
 		auto& currentPlayer = game->nextPlayer();
 		std::cout << currentPlayer.name() << "'s turn.\n";
-		turnMenu.solicitInput();
+		while (!turnMenu.solicitInput()); // Intentionally empty body
 	}
 
 	waitForExit();
@@ -233,7 +234,7 @@ void waitForExit()
 }
 
 // On a player's turn, allow four actions
-void performAction()
+bool performAction()
 {
 	auto actions = actionsPerTurn;	// Counter
 	while (!game->shouldQuit() && actions > 0)	// To check game loss/win state between actions
@@ -246,6 +247,7 @@ void performAction()
 			--actions;
 		}
 	}
+	return true;
 }
 
 // The player moves their pawn from its current position to another directly connected city.
@@ -549,7 +551,7 @@ void quit()
 bool actionQuit()
 {
 	quit();
-	return false;
+	return true;
 }
 
 std::string solicitFileName(const std::string& msg)
@@ -608,9 +610,10 @@ size_t solicitSize(const size_t min, const size_t max)
 	return size;
 }
 
-void report()
+bool report()
 {
 	reportMenu.solicitInput();
+	return false;
 }
 
 void displayCities()
