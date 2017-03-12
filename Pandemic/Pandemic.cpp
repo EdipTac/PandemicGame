@@ -63,7 +63,6 @@ void showCity(const City& city);
 bool report();
 void displayCities();
 void directConnectionReport();
-void flipAndInfect(InfectionCardDeck&, GameState& );
 std::string solicitFileName(const std::string& msg);
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
@@ -701,12 +700,20 @@ std::string titleFont(const std::string& original)
 	return ss.str();
 }
 
-void flipAndInfect(InfectionCardDeck& deck, GameState& state) {// normal one infectio after each turn
+void infect()
+{
+	for (auto i = 0u; i < game->infectionRate(); ++i)
+	{
+		auto card = game->infectionDeck().drawTopCard();
+		card->onDraw(*game);
+		game->infectionDeck().addToDiscard(std::move(card));
+	}
+
 	std::cout << "Flip an infection card: " << std::endl;
-	auto temp = move(deck.drawTopCard());
-	std::cout << "Infection card :" << temp->name() << " with the colour of: " << colourAbbreviation(temp->colour()) << "\n" <<
-		"infects the city " << temp->name() << " one time " << std::endl;
-	temp->onDraw(state);
+	//auto temp = move(deck.drawTopCard());
+	//std::cout << "Infection card :" << temp->name() << " with the colour of: " << colourAbbreviation(temp->colour()) << "\n" <<
+//		"infects the city " << temp->name() << " one time " << std::endl;
+	//temp->onDraw(state);
 	std::cout << "Put it to infection card discard pile: " << std::endl;
-	deck.addToDiscard(move(temp));
+	//deck.addToDiscard(move(temp));
 }
