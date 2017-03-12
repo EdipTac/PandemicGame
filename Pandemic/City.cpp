@@ -60,6 +60,11 @@ size_t& City::diseaseCubes(const Colour& colour)
 	return _diseaseCubes[colour];
 }
 
+void City::setDiseaseCubes(const Colour& colour, int quantity) 
+{
+	_diseaseCubes[colour] = quantity;
+}
+
 bool City::diseaseOutbreak(const Colour& colour) const
 {
 	return _outbreaks.at(colour);

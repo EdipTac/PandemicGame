@@ -84,10 +84,6 @@
 		"discard": [
 			"London",
 			"Resilient Population"
-		],
-		"removed": [
-			"Epidemic",
-			"Forecast"
 		]
 	}
 }
