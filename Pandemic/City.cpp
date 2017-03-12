@@ -5,10 +5,10 @@
 #include "Colour.h"
 #include "InfectionCardDeck.h"
 
-City::City(const std::string& name, const Colour& colour)
+City::City(const std::string & name, const Colour & colour, const std::map<Colour, size_t> cubes)
 	: _name { name }
 	, _colour { colour }
-	, _diseaseCubes { 0 }
+	, _diseaseCubes { cubes }
     , _outbreaks
 {
 	{ Colour::Black,false},
