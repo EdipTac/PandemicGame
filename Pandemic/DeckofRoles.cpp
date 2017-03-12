@@ -75,3 +75,8 @@ uniquerolecard DeckofRoles::drawRoleCard(){
 	return (move(temp));
 }
 
+std::vector<std::unique_ptr<RoleCard>> DeckofRoles::roleCards()
+{
+	return std::move(deckofRole);
+}
+
