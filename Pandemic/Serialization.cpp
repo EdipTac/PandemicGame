@@ -167,12 +167,18 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 
 		// parse and set the player's role
 		std::string roleName = playerJSON["role"].get<std::string>();
-		//TODO: search through role cards and find a match. then set the role
-		for (auto itr = roles.begin(); itr != roles.end(); ++itr) {
-			if ((*itr)->name() == roleName) {
-				// found a match
+		//search through role cards and find a match, then set the role
+		auto itr = roles.begin();
+		while (itr != roles.end())
+		{
+			if ((*itr)->name() == roleName)
+			{
 				player->setRole(std::move(*itr));
-				roles.erase(itr);
+				itr = roles.erase(itr);
+			}
+			else
+			{
+				++itr;
 			}
 		}
 
@@ -190,19 +196,25 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 			}
 			
 			// loop through event cards, find the one that matches
-			for (auto it = events.begin(); it != events.end(); ++it) {
-				if ((*it)->name() == cardName) {
+			auto it = events.begin();
+			while (it != events.end())
+			{
+				if ((*it)->name() == cardName)
+				{
 					player->addCard(std::move(*it));
-					events.erase(it);
+					it = events.erase(it);
+				}
+				else
+				{
+					++it;
 				}
 			}
 		}
 
-
+		//std::cout << "\n" << player->getName() << "\nPosition: " << player->pawn().position().name();
+		//player->displayCards();
 
 		// store this player into the gameState
-		std::cout << "\n" << player->getName() << "\nPosition: " << player->pawn().position().name();
-		player->displayCards();
 		gameState->addPlayer(std::move(player));
 	}
 	
@@ -226,7 +238,6 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 				// found a match
 				if (isResearchStation) {
 					// mark the city as a research station
-					std::cout << "Giving " << cityName << " a research station...\n";
 					(*it)->giveResearchStation(*gameState);
 				}
 				// set the disease cubes for the city
@@ -277,7 +288,15 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 	auto curedDiseasesList = infection["cured"].get<std::vector<std::string>>();
 	for (auto it = curedDiseasesList.begin(); it != curedDiseasesList.end(); ++it) {
 		gameState->cureDisease(colourFromAbbreviation(*it));
-		// TODO: find a way to mark erradicated diseases!
+
+		// loop through all cities, and get the total cubes on the board for this disease
+		auto totalCubes = 0;
+		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
+			totalCubes += (*itr)->diseaseCubes(colourFromAbbreviation(*it));
+		}
+		if (totalCubes == 0) {
+			// mark this disease as erradicated
+		}
 	}
 
 
@@ -297,10 +316,17 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		}
 
 		// loop through event cards, find the one that matches
-		for (auto itr = events.begin(); itr != events.end(); ++itr) {
-			if ((*itr)->name() == *it) {
+		auto itr = events.begin();
+		while (itr != events.end())
+		{
+			if ((*itr)->name() == *it)
+			{
 				gameState->playerDeck().addToDeck(std::move(*itr));
-				events.erase(itr);
+				itr = events.erase(itr);
+			}
+			else
+			{
+				++itr;
 			}
 		}
 	}
@@ -317,10 +343,17 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		}
 
 		// loop through event cards, find the one that matches
-		for (auto itr = events.begin(); itr != events.end(); ++itr) {
-			if ((*itr)->name() == *it) {
+		auto itr = events.begin();
+		while (itr != events.end())
+		{
+			if ((*itr)->name() == *it)
+			{
 				gameState->playerDeck().addToDiscard(std::move(*itr));
-				events.erase(itr);
+				itr = events.erase(itr);
+			}
+			else
+			{
+				++itr;
 			}
 		}
 	}
