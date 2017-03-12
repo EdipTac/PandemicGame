@@ -1,5 +1,3 @@
-#pragma warning(disable : 4100)	// To be removed
-
 #include "EpidemicCard.h"
 
 const std::string EPIDEMIC_DESCRIPTION =
