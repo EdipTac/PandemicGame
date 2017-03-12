@@ -3,7 +3,6 @@
 #include "Pawn.h"
 #include "Player.h"
 #include "PlayerCityCard.h"
-#include "RoleCard.h"
 
 // Default Constructor
 Player::Player()

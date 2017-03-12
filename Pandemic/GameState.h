@@ -5,15 +5,10 @@
 
 #include "CubePool.h"
 #include "Deck.h"
-#include "InfectionCardDeck.h"
-//#include "Map.h"
-//#include "Player.h"
-//#include "PlayerCard.h"
-
-
-class PlayerCard;
-class Player;
-class Map;
+#include "InfectionCard.h"
+#include "Map.h"
+#include "Player.h"
+#include "PlayerCard.h"
 
 // Represents the state of the game
 class GameState
@@ -60,7 +55,7 @@ private:
 	bool _shouldQuit = false;
 	unsigned _researchStations = 6;
 	Deck<PlayerCard> _playerDeck;
-	InfectionCardDeck _infectionDeck;
+	Deck<InfectionCard> _infectionDeck;
 };
 
 std::unique_ptr<GameState> quitState();
