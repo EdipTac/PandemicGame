@@ -14,6 +14,7 @@ using json = nlohmann::json; // for convenience
 #include "PlayerCityCard.h"
 #include "DeckofEvents.h"
 #include "EventCard.h"
+#include "DeckofRoles.h"
 
 #pragma warning(disable : 4456)
 
@@ -139,7 +140,8 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 	gameState->setMap(readMapFromFile(mapFilePath));
 
 	auto& cities = gameState->map().cities();
-	//auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
+	auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
+	auto roles = std::make_unique<DeckofRoles>()->roleCards();
 
 	// PLAYER INITIALIZATION:
 	std::vector<json> playerListJSON = j["players"];
@@ -166,12 +168,13 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		// parse and set the player's role
 		std::string roleName = playerJSON["role"].get<std::string>();
 		//TODO: search through role cards and find a match. then set the role
-		//for (std::vector<std::unique_ptr<Role>>::iterator itr = roles.begin(); itr != roles.end(); ++itr) {
-		//	if ((*itr)->name() == roleName) {
-		//		// found a match
-		//		player->setRole(**itr);
-		//	}
-		//}
+		for (auto itr = roles.begin(); itr != roles.end(); ++itr) {
+			if ((*itr)->name() == roleName) {
+				// found a match
+				player->setRole(std::move(*itr));
+				roles.erase(itr);
+			}
+		}
 
 		// loop through all of the cards in the hand list
 		std::vector<json> playerHandJSON = playerJSON["hand"];
@@ -187,11 +190,12 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 			}
 			
 			// loop through event cards, find the one that matches
-			//for (auto it = events.begin(); it != events.end(); ++it) {
-			//	if ((*it)->name() == cardName) {
-			//		player->addCard(std::move(*it));
-			//	}
-			//}
+			for (auto it = events.begin(); it != events.end(); ++it) {
+				if ((*it)->name() == cardName) {
+					player->addCard(std::move(*it));
+					events.erase(it);
+				}
+			}
 		}
 
 
@@ -293,11 +297,12 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		}
 
 		// loop through event cards, find the one that matches
-		//for (auto itr = events.begin(); itr != events.end(); ++itr) {
-		//	if ((*itr)->name() == *it) {
-		//		gameState->playerDeck().addToDeck(std::move(*itr));
-		//	}
-		//}
+		for (auto itr = events.begin(); itr != events.end(); ++itr) {
+			if ((*itr)->name() == *it) {
+				gameState->playerDeck().addToDeck(std::move(*itr));
+				events.erase(itr);
+			}
+		}
 	}
 
 	std::vector<std::string> playerCardDiscard = playerCards["discard"].get<std::vector<std::string>>();
@@ -312,11 +317,12 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		}
 
 		// loop through event cards, find the one that matches
-		//for (auto itr = events.begin(); itr != events.end(); ++itr) {
-		//	if ((*itr)->name() == *it) {
-		//		gameState->playerDeck().addToDiscard(std::move(*itr));
-		//	}
-		//}
+		for (auto itr = events.begin(); itr != events.end(); ++itr) {
+			if ((*itr)->name() == *it) {
+				gameState->playerDeck().addToDiscard(std::move(*itr));
+				events.erase(itr);
+			}
+		}
 	}
 
 	return gameState;
