@@ -20,8 +20,7 @@ class RoleCard
 	: public TextualCard
 {
 public:
-	RoleCard();
-	RoleCard(const std::string& role, const std::string& description, const std::string& color);
+	RoleCard(const std::string& role = "", const std::string& description = "", const std::string& color = "");
 	~RoleCard() override;
 
 	void printRole();
