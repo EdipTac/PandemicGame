@@ -3,7 +3,7 @@
 #include <string>
 
 #include "PlayerCard.h"
-#include "Deck.h"
+#include "InfectionCardDeck.h"
 
 // Represents an epidemic player card.
 class EpidemicCard

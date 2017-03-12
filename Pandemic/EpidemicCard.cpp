@@ -30,7 +30,7 @@ void EpidemicCard::cardWork(InfectionCardDeck& deck, GameState& state) {
 	std::cout << "Infection card : " << temp->name() << " with the colour of: " << colourAbbreviation(city.colour()) << std::endl;
 	std::cout << "Infects the city :" << temp->name() << " three times:"  << std::endl;
 	city.addDiseaseCubes(city.colour(), city.cubesBeforeOutbreak, state);//infect
-	deck.addToDiscard(move(temp));
+	deck.addToDiscard(move(temp));//put to discard pile
 	deck.reshuffleAndputback();// intensify
 }
 
