@@ -173,6 +173,18 @@ std::string City::string()
 	{
 		ss << "\t" << colourName(colour) << ": " << diseaseOutbreak(colour) << "\n";
 	}
+	if (_connections.empty())
+	{
+		ss << "No connections.\n";
+	}
+	else
+	{
+		ss << "Connected to:\n";
+		for (const auto& connection : _connections)
+		{
+			ss << "\t" << connection->_name << "\n";
+		}
+	}
 	ss << std::endl;
 	return ss.str();
 }
