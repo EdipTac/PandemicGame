@@ -217,11 +217,12 @@ void newGame()
 	map.startingCity().giveResearchStation(*game);
 }
 
-// TODO
 void loadGame()
 {
 	std::cout << "Load game...\n";
 	const auto fileName = solicitFileName("Enter name of game save file: ");
+	game = readGameFromFile(fileName);
+	std::cout << titleFont("RESUMING GAME");
 }
 
 // The player wants to quit
