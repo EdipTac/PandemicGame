@@ -17,6 +17,9 @@ class InfectionCardDeck;
 class City
 {
 public:
+	static const unsigned cubesPerInfection = 1;
+	static const unsigned cubesBeforeOutbreak = 3;
+
 	// Constructs a city with a given name, colour, and disease cube count
 	City(const std::string& name = "", const Colour& colour = Colour::Black, const std::map<Colour, size_t>& cubes = {});
 
@@ -70,8 +73,6 @@ public:
 	// True iff the two cities share a name
 	friend bool operator==(const City& lhs, const City& rhs);
 
-	unsigned const CUBE_PER_INFECTION = 1;
-
 	// Returns a report on the city
 	std::string string();
 
@@ -88,7 +89,6 @@ private:
 	//Whether the city is quarantined
 	bool _quarantined;
 	// Maximum cuber per colour each city can hold
-	unsigned const MAX_CUBE_PER_DISEASE = 3;
 	// Place one cube for each infection
 	bool _hasResearchStation = false;
 };
