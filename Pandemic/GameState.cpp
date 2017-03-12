@@ -103,6 +103,21 @@ bool GameState::isCured(const Colour& colour) const
 	return _cured.at(colour);
 }
 
+bool GameState::isEradicated(const Colour& colour) const
+{
+	return isCured(colour) && diseaseCount(colour) == 0;
+}
+
+size_t GameState::diseaseCount(const Colour& colour) const
+{
+	size_t count = 0;
+	for (const auto& city : _map->cities())
+	{
+		count += city->diseaseCubes(colour);
+	}
+	return count;
+}
+
 void GameState::advanceInfectionCounter()
 {
 	_infectionCounter = std::min(_infectionCounter + 1, 7u);

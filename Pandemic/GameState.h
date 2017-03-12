@@ -34,6 +34,8 @@ public:
 	bool hasResearchStation() const;
 	void cureDisease(const Colour& colour);
 	bool isCured(const Colour& colour) const;
+	bool isEradicated(const Colour& colour) const;
+	size_t diseaseCount(const Colour& colour) const;
 
 	void advanceInfectionCounter();
 	unsigned infectionRate() const;
