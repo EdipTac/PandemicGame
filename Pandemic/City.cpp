@@ -1,32 +1,41 @@
 #include <algorithm>
 #include <stdexcept>
+#include <sstream>
 
 #include "City.h"
 #include "Colour.h"
 #include "InfectionCardDeck.h"
 
-City::City(const std::string& name, const Colour& colour)
+City::City(const std::string& name, const Colour& colour, const std::map<Colour, size_t>& cubes)
 	: _name { name }
 	, _colour { colour }
-	, _diseaseCubes { 0 }
+	, _diseaseCubes { cubes }
     , _outbreaks
-{
-	{ Colour::Black,false},
-	{ Colour::Blue,false},
-	{ Colour::Red,false },
-	{ Colour::Yellow,false}
-}
+	 {
+		{ Colour::Black,	false	},
+		{ Colour::Blue,		false	},
+		{ Colour::Red,		false	},
+		{ Colour::Yellow,	false	}
+	 }
 	, _quarantined {false}
-{
-	// Empty
-}
+{} // Empty
 
 std::string City::name() const
 {
 	return _name;
 }
 
+std::string& City::name()
+{
+	return _name;
+}
+
 Colour City::colour() const
+{
+	return _colour;
+}
+
+Colour& City::colour()
 {
 	return _colour;
 }
@@ -41,9 +50,19 @@ bool City::isConnectedTo(const City& target) const
 	return std::any_of(_connections.begin(), _connections.end(), [&](const auto& city) { return city == &target; });
 }
 
-unsigned City::diseaseCubes(const Colour& colour) const
+size_t City::diseaseCubes(const Colour& colour) const
 {
 	return _diseaseCubes[colour];
+}
+
+size_t& City::diseaseCubes(const Colour& colour)
+{
+	return _diseaseCubes[colour];
+}
+
+void City::setDiseaseCubes(const Colour& colour, int quantity) 
+{
+	_diseaseCubes[colour] = quantity;
 }
 
 bool City::diseaseOutbreak(const Colour& colour) const
@@ -71,15 +90,15 @@ void City::connectTo(City &target)
 
 void City::addDiseaseCubes(const Colour& colour, const unsigned amount, GameState& state)
 {
-	if (!_outbreaks[colour] && !_quarantined && ! state.cubePool().isEradicated(colour)) {
+	if (!_outbreaks[colour] && !_quarantined && !state.cubePool().isEradicated(colour)) {
 		_diseaseCubes.takeFrom(colour, amount, state.cubePool());
-		if (_diseaseCubes[colour] > MAX_CUBE_PER_DISEASE) {
+		if (_diseaseCubes[colour] > cubesBeforeOutbreak) {
 			_outbreaks[colour] = true;
 			state.advanceOutbreakCounter();
-			_diseaseCubes.giveTo(colour, (_diseaseCubes.operator[](colour) - MAX_CUBE_PER_DISEASE), state.cubePool());// may change source to a garbage CubePool
+			_diseaseCubes.giveTo(colour, (_diseaseCubes.operator[](colour) - cubesBeforeOutbreak), state.cubePool());
 			for (const auto& city : connections())
 			{
-				city->addDiseaseCubes(colour, CUBE_PER_INFECTION, state);
+				city->addDiseaseCubes(colour, cubesPerInfection, state);
 			}
 		}
 
@@ -87,12 +106,27 @@ void City::addDiseaseCubes(const Colour& colour, const unsigned amount, GameStat
 
 }
 
-void City::removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& source)
+void City::removeDiseaseCubes(const Colour& colour, const unsigned amount, GameState& state)
 {
-	_diseaseCubes.giveTo(colour, amount, source);
+	_diseaseCubes.giveTo(colour, amount, state.cubePool);
+}
+
+bool City::isQuarantined() const
+{
+	return _quarantined;
+}
+
+void City::quarantine()
+{
+	_quarantined = true;
 }
 
 bool City::hasResearchStation() const
+{
+	return _hasResearchStation;
+}
+
+bool& City::hasResearchStation()
 {
 	return _hasResearchStation;
 }
@@ -109,7 +143,7 @@ void City::removeResearchStation(GameState& game)
 	_hasResearchStation = false;
 }
 
-std::vector<Colour> City::diseases() const
+std::vector<Colour> City::diseases()
 {
 	std::vector<Colour> d;
 	for (const auto& colour : colours())
@@ -120,6 +154,27 @@ std::vector<Colour> City::diseases() const
 		}
 	}
 	return d;
+}
+
+std::string City::string()
+{
+	std::stringstream ss;
+	ss << name();
+	ss << " Colour: " << colourName(colour());
+	ss << "\nInfection status:\n";
+	for (const auto& colour : colours())
+	{
+		ss << "\t" << colourName(colour) << ": " << diseaseCubes(colour) << "\n";
+	}
+	ss << "Is quarantined: " << isQuarantined();
+	ss << "\nHas research station: " << hasResearchStation();
+	ss << "\nOutbreak status:\n";
+	for (const auto& colour : colours())
+	{
+		ss << "\t" << diseaseOutbreak(colour) << "\n";
+	}
+	ss << std::endl;
+	return ss.str();
 }
 
 bool operator==(const City& lhs, const City& rhs)

@@ -17,16 +17,26 @@ class InfectionCardDeck;
 class City
 {
 public:
-	// Constructs a city with a given name and colour.
-	City(const std::string& name = "", const Colour& colour = Colour::Black);
+	static const unsigned cubesPerInfection = 1;
+	static const unsigned cubesBeforeOutbreak = 3;
 
-	//    ----  Accessors  ----
+	// Constructs a city with a given name, colour, and disease cube count
+	City(const std::string& name = "", const Colour& colour = Colour::Black, const std::map<Colour, size_t>& cubes = {});
+
+	City(const City&) = delete;
+	City(City&&) = default;
+	City& operator=(const City&) = delete;
+	City& operator=(City&&) = default;
 
 	// The city's name
 	std::string name() const;
+	std::string& name();
+	void name(const std::string& name);
 
 	// The coloured "region" the city belongs to
 	Colour colour() const;
+	Colour& colour();
+	void colour(const Colour& colour);
 
 	// The cities that this city is connected to
 	const std::vector<City*>& connections() const;
@@ -34,56 +44,92 @@ public:
 	// True iff the city is connected to another given city
 	bool isConnectedTo(const City& target) const;
 
-	// The number of disease cubes of a given colour the city has
-	unsigned diseaseCubes(const Colour& colour) const;
-	// The outbreak status of each disease
-	bool diseaseOutbreak(const Colour& colour) const;
-
-	//    ----  Mutators  ----
-
-	// Changes the city's name
-	void name(const std::string& name);
-
-	// Changes the city's coloured region
-	void colour(const Colour& colour);
-
 	// Declares that this city is connected to another given city
 	void connectTo(City& target);
 
+	// The number of disease cubes of a given colour the city has
+	size_t diseaseCubes(const Colour& colour) const;
+	size_t& diseaseCubes(const Colour& colour);
+
+	// set the number of disease cubes in a City - used for the game loading
+	void setDiseaseCubes(const Colour& colour, int quantity);
+
+	// The outbreak status of each disease
+	bool diseaseOutbreak(const Colour& colour) const;
+
 	// Adds disease cubes of a given colour from a given source
-	void addDiseaseCubes(const Colour& colour, const unsigned amount, GameState& );
+	void addDiseaseCubes(const Colour& colour, const unsigned amount, GameState& state);
 
 	// Removes disease cubes of a given colour from a given source
-	void removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& source);
+	void removeDiseaseCubes(const Colour& colour, const unsigned amount, GameState& state);
 	
 	// True iff quarantine specialist locates at this city or at cities with direct connection with this city
-	bool quarantined() const {
-		return _quarantined;
-	}
-	void setQuarantined() {
-		_quarantined = true;
-	}
-	
+	bool isQuarantined() const;
 
+	// Sets quarantine to true
+	void quarantine();
+	
+	// True iff the city has a research station
 	bool hasResearchStation() const;
+	bool& hasResearchStation();
 	void giveResearchStation(GameState& game);
 	void removeResearchStation(GameState& game);
 
-	std::vector<Colour> diseases() const;
+	// List of all diseases in this city
+	std::vector<Colour> diseases();
 
+	// True iff the two cities share a name
 	friend bool operator==(const City& lhs, const City& rhs);
-	// Maximum cuber per colour each city can hold
-	unsigned const MAX_CUBE_PER_DISEASE = 3;
-	// Place one cube for each infection
-	unsigned const CUBE_PER_INFECTION = 1;
+
+	// Returns a report on the city
+	std::string string();
+
+	class Builder;
+
 private:
+
 	std::string _name;
 	Colour _colour;
 	std::vector<City*> _connections;
 	CubePool _diseaseCubes;
-	//Hold outbreak boolean of each colour
-    std::map < Colour, bool> _outbreaks;
-	//Whether the city is quarantined
+    std::map<Colour, bool> _outbreaks;
 	bool _quarantined;
 	bool _hasResearchStation = false;
+};
+
+class City::Builder
+{
+public:
+	Builder& name(const std::string& name)
+	{
+		_name = name;
+		return *this;
+	}
+
+	Builder& colour(const Colour& colour)
+	{
+		_colour = colour;
+		return *this;
+	}
+
+	Builder& cubes(const Colour& colour, const size_t count)
+	{
+		_cubes[colour] = count;
+		return *this;
+	}
+
+	City build() const
+	{
+		return { _name, _colour, _cubes };
+	}
+
+	std::unique_ptr<City> buildUnique() const
+	{
+		return std::make_unique<City>(_name, _colour, _cubes);
+	}
+
+private:
+	std::string _name;
+	Colour _colour;
+	std::map<Colour, size_t> _cubes;
 };
