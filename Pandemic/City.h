@@ -84,12 +84,8 @@ private:
 	Colour _colour;
 	std::vector<City*> _connections;
 	CubePool _diseaseCubes;
-	//Hold outbreak boolean of each colour
-    std::map < Colour, bool> _outbreaks;
-	//Whether the city is quarantined
+    std::map<Colour, bool> _outbreaks;
 	bool _quarantined;
-	// Maximum cuber per colour each city can hold
-	// Place one cube for each infection
 	bool _hasResearchStation = false;
 };
 
