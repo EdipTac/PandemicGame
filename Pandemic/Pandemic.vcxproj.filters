@@ -41,6 +41,15 @@
     <Filter Include="Util\src">
       <UniqueIdentifier>{f34b2921-a5d0-47cd-a707-b0b7622031ac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Editors">
+      <UniqueIdentifier>{80860c71-a814-403f-9f59-c431b8762adb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editors\header">
+      <UniqueIdentifier>{56713094-5de0-46d2-a0e6-4f03dac55350}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Editors\src">
+      <UniqueIdentifier>{6e4bb0b4-5c32-49ed-ba99-11c63aa6e1a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -119,7 +128,7 @@
       <Filter>General\header</Filter>
     </ClInclude>
     <ClInclude Include="MapEditor.h">
-      <Filter>General\header</Filter>
+      <Filter>Editors\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,7 +203,7 @@
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="MapEditor.cpp">
-      <Filter>General\src</Filter>
+      <Filter>Editors\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
