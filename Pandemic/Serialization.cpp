@@ -290,7 +290,7 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		gameState->cureDisease(colourFromAbbreviation(*it));
 
 		// loop through all cities, and get the total cubes on the board for this disease
-		auto totalCubes = 0;
+		size_t totalCubes = 0;
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			totalCubes += (*itr)->diseaseCubes(colourFromAbbreviation(*it));
 		}
