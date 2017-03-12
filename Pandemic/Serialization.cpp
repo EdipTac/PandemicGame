@@ -263,7 +263,7 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 
 	auto curedDiseasesList = infection["cured"].get<std::vector<std::string>>();
 	for (auto it = curedDiseasesList.begin(); it != curedDiseasesList.end(); ++it) {
-		gameState->cure(colourFromAbbreviation(*it));
+		gameState->cureDisease(colourFromAbbreviation(*it));
 		// TODO: find a way to mark erradicated diseases!
 	}
 
