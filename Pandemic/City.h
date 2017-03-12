@@ -99,16 +99,19 @@ public:
 	Builder& name(const std::string& name)
 	{
 		_name = name;
+		return *this;
 	}
 
 	Builder& colour(const Colour& colour)
 	{
 		_colour = colour;
+		return *this;
 	}
 
 	Builder& cubes(const Colour& colour, const size_t count)
 	{
 		_cubes[colour] = count;
+		return *this;
 	}
 
 	City build() const
