@@ -296,6 +296,7 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 		}
 		if (totalCubes == 0) {
 			// mark this disease as erradicated
+			gameState->isEradicated(colourFromAbbreviation(*it));
 		}
 	}
 
