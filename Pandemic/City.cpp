@@ -171,7 +171,7 @@ std::string City::string()
 	ss << "\nOutbreak status:\n";
 	for (const auto& colour : colours())
 	{
-		ss << "\t" << diseaseOutbreak(colour) << "\n";
+		ss << "\t" << colourName(colour) << ": " << diseaseOutbreak(colour) << "\n";
 	}
 	ss << std::endl;
 	return ss.str();

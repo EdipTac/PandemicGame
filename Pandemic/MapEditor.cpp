@@ -9,7 +9,8 @@
 void addCity();
 void deleteCity();
 void listCities();
-void cityReport();
+void editCity();
+void cityReport(City& city);
 void createNewMap();
 
 const GeneralMenu mapEditorMainMenu
@@ -24,14 +25,8 @@ const GeneralMenu editMapMenu
 	{
 		{ "Add City",		addCity		},
 		{ "Delete City",	deleteCity	},
-		{ "List Cities",	listCities	}
-	}
-};
-
-const GeneralMenu editCityMenu
-{
-	{
-		{ "Report",	cityReport }
+		{ "List Cities",	listCities	},
+		{ "Edit City",		editCity	}
 	}
 };
 
@@ -63,7 +58,16 @@ void addCity()
 
 void editCity()
 {
-
+	const auto& city = solicitCity(*map);
+	if (city)
+	{
+		GeneralMenu
+		{
+			{
+				{ "Report",	[&](){ cityReport(*city); } }
+			}
+		}.solicitInput();
+	}
 }
 
 void deleteCity()
@@ -81,4 +85,9 @@ void listCities()
 	{
 		std::cout << "\t" << city->name() << ": " << colourName(city->colour()) << "\n";
 	}
+}
+
+void cityReport(City& city)
+{
+	std::cout << city.string();
 }

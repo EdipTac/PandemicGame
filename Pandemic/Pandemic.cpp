@@ -67,7 +67,7 @@ bool actionQuit();
 void showCity(const City& city);
 void report();
 void displayCities();
-void cityReport();
+//void cityReport();
 void directConnectionReport();
 void flipAndInfect(InfectionCardDeck&, GameState& );
 std::string solicitFileName(const std::string& msg);
@@ -110,7 +110,7 @@ const GeneralMenu reportMenu
 {
 	{
 		{ "Display Cities",				displayCities			},
-		{ "City Report",				cityReport				},
+		//{ "City Report",				cityReport				},
 		{ "Direct Connection Report",	directConnectionReport	}
 	}
 };
@@ -621,7 +621,7 @@ void displayCities()
 	}
 }
 
-void cityReport()
+/*void cityReport()
 {
 	int index = 0;
 	char op;
@@ -657,7 +657,7 @@ void cityReport()
 
 		}
 	}
-}
+}*/
 
 void directConnectionReport()
 {
