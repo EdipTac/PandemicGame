@@ -129,9 +129,9 @@ void City::addDiseaseCubes(const Colour& colour, const unsigned amount, GameStat
 }
 
 
-void City::removeDiseaseCubes(const Colour& colour, const unsigned amount, GameState& state){
+void City::removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& pool){
 
-	_diseaseCubes.giveTo(colour, amount, state.cubePool());
+	_diseaseCubes.giveTo(colour, amount, pool);
 }
 
 

@@ -422,7 +422,8 @@ bool treatDisease()
 	}
 
 	const auto& colour = validateInput(colourNameMap(), "Not a disease.\n");
-	position.removeDiseaseCubes(colour, 1, *game);
+	auto& pool = game->cubePool();
+	position.removeDiseaseCubes(colour, 1, pool);
 
 	std::cout << "Disease report\n";
 	for (const auto& disease : diseases)
@@ -710,10 +711,9 @@ std::string titleFont(const std::string& original)
 void flipAndInfect(InfectionCardDeck& deck, GameState& state) {// normal one infectio after each turn
 	std::cout << "Flip an infection card: " << std::endl;
 	auto temp = move(deck.drawTopCard());
-	City& city = temp->city();
 	std::cout << "Infection card :" << temp->name() << " with the colour of: " << colourAbbreviation(temp->colour()) << "\n" <<
 		"infects the city " << temp->name() << " one time " << std::endl;
-	temp->cardWork(state);
+	temp->onDraw(state);
 	std::cout << "Put it to infection card discard pile: " << std::endl;
 	deck.addToDiscard(move(temp));
 }

@@ -62,7 +62,7 @@ public:
 	void addDiseaseCubes(const Colour& colour, const unsigned amount,GameState&);
 
 	// Removes disease cubes of a given colour from a given source
-	void removeDiseaseCubes(const Colour& colour, const unsigned amount, GameState&);
+	void removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& pool);
 	
 	// True iff quarantine specialist locates at this city or at cities with direct connection with this city
 	bool isQuarantined() const;
