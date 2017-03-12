@@ -495,13 +495,29 @@ bool cureDisease()
 	{
 		colourCount[colour] = 0;
 	}
+	
+	std::pair<Colour, bool> cured;
+	cured.second = false;
+
 	for (const auto& card : cards)
 	{
-		auto& count = colourCount[card->colour()];
+		const auto& colour = card->colour();
+		auto& count = colourCount[colour];
 		++count;
-		//if (count >= )
+		if (count >= 5)
+		{
+			cured = { colour, true };
+			break;
+		}
 	}
 
+	if (cured.second)
+	{
+		game->cureDisease(cured.first);
+		return true;
+	}
+
+	std::cout << "Not enough cards of a single colour!\n";
 	return false;
 }
 

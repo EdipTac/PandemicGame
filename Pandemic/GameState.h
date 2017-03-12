@@ -31,7 +31,7 @@ public:
 	void removeResearchStation();
 	void returnResearchStation();
 	bool hasResearchStation() const;
-	void cure(const Colour& colour);
+	void cureDisease(const Colour& colour);
 	bool isCured(const Colour& colour) const;
 
 	void advanceInfectionCounter();

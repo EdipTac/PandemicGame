@@ -87,7 +87,7 @@ bool GameState::hasResearchStation() const
 	return _researchStations > 0;
 }
 
-void GameState::cure(const Colour& colour)
+void GameState::cureDisease(const Colour& colour)
 {
 	_cured[colour] = true;
 }
