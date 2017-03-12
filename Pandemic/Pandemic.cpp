@@ -77,10 +77,10 @@ std::string titleFont(const std::string& original);
 std::unique_ptr<GameState> game;
 
 //  ----  Constants  -----  //
-constexpr size_t minPlayers =		1;
-constexpr size_t maxPlayers =		4;
-constexpr size_t actionsPerTurn	=	4;
-constexpr size_t cardsPerTurn =		2;
+constexpr size_t minPlayers		= 1;
+constexpr size_t maxPlayers		= 4;
+constexpr size_t actionsPerTurn	= 4;
+constexpr size_t cardsPerTurn	= 2;
 
 //  ----  Menus  ----  //
 const GeneralMenu mainMenu
