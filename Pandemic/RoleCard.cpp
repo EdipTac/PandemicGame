@@ -16,9 +16,7 @@ the color corresponding to each role that will be used to decide on the color of
 RoleCard::RoleCard(const std::string& role, const std::string& description, const std::string& color)
 	: TextualCard { role, description }
 	, _color { color }
-{
-	
-}
+{}
 
 RoleCard::~RoleCard() {}
 
