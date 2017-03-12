@@ -222,7 +222,7 @@ void loadGame()
 	std::cout << "Load game...\n";
 	const auto fileName = solicitFileName("Enter name of game save file: ");
 	game = readGameFromFile(fileName);
-	std::cout << titleFont("RESUMING GAME");
+	std::cout << "\n" << titleFont("RESUMING GAME") << "\n\n";
 }
 
 // The player wants to quit
