@@ -9,6 +9,7 @@
 void addCity();
 void deleteCity();
 void listCities();
+void cityReport();
 void createNewMap();
 
 const GeneralMenu mapEditorMainMenu
@@ -24,6 +25,13 @@ const GeneralMenu editMapMenu
 		{ "Add City",		addCity		},
 		{ "Delete City",	deleteCity	},
 		{ "List Cities",	listCities	}
+	}
+};
+
+const GeneralMenu editCityMenu
+{
+	{
+		{ "Report",	cityReport }
 	}
 };
 
@@ -53,25 +61,18 @@ void addCity()
 	map->addCity(std::move(city));
 }
 
+void editCity()
+{
+
+}
+
 void deleteCity()
 {
-	if (map->cities().empty())
+	const auto city = solicitCity(*map);
+	if (city)
 	{
-		std::cout << "No cities.\n";
-		return;
+		map->removeCity(*city);
 	}
-	City* city = nullptr;
-	std::cout << "Enter city name: ";
-	while (true)
-	{
-		city = map->findCityIfContained(solicitLine());
-		if (city)
-		{
-			break;
-		}
-		std::cout << "No city by that name.\n";
-	}
-	map->removeCity(*city);
 }
 
 void listCities()

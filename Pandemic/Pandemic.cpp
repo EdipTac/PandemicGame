@@ -608,11 +608,6 @@ size_t solicitSize(const size_t min, const size_t max)
 	return size;
 }
 
-void showCity(City& city)
-{
-	std::cout << city.string();
-}
-
 void report()
 {
 	reportMenu.solicitInput();
