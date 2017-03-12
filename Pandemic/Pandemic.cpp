@@ -420,7 +420,7 @@ bool treatDisease()
 	}
 
 	const auto& colour = validateInput(colourNameMap(), "Not a disease.\n");
-	position.removeDiseaseCubes(colour, 1, game->cubePool());
+	position.removeDiseaseCubes(colour, 1, *game);
 
 	std::cout << "Disease report\n";
 	for (const auto& disease : diseases)

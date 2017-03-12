@@ -11,6 +11,9 @@ Data: 20170209*/
 
 #include "InfectionCardDeck.h"
 
+InfectionCardDeck::InfectionCardDeck() {
+
+}
 InfectionCardDeck::InfectionCardDeck(std::string fileName)
 {
 	// initiate 48 infection cards on deck

@@ -15,7 +15,7 @@ Data: 20170209*/
 InfectionCard::InfectionCard(City& city)
 	: CityCard { city }
 {}
-
+InfectionCard::~InfectionCard(){}
 void InfectionCard::onDraw(GameState& state) {}
 
 std::string InfectionCard::description() const
