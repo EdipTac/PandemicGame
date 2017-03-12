@@ -40,8 +40,7 @@ T validateInput(const std::map<std::string, T>& valid, const std::string& errMsg
 	decltype(valid.find(input)) it;
 	while (true)
 	{
-		std::cin >> input;
-		std::cin.get();
+		std::getline(std::cin >> std::ws, input);
 		it = valid.find(input);
 		if (it != valid.end())
 		{
