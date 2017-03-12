@@ -74,6 +74,9 @@ public:
 	friend bool operator==(const City& lhs, const City& rhs);
 
 	unsigned const CUBE_PER_INFECTION = 1;
+
+	class Builder;
+
 private:
 	std::string _name;
 	Colour _colour;
