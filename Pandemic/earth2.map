@@ -1,0 +1,238 @@
+\\ Comment
+
+*Chicago B
+	Montreal
+	Atlanta
+	Mexico City
+	Los Angeles
+	San Francisco
+Montreal B
+	New York
+	Washington
+	Chicago5
+New York B
+	London
+	Madrid
+	Washington
+	Montreal
+London B
+	Essen
+	Paris
+	Madrid
+	New York
+Essen B
+	St. Petersburg
+	Milan
+	Paris
+	London
+St. Petersburg B
+	Moscow
+	Istanbul
+	Essen
+Milan B
+	Istanbul
+	Paris
+	Essen
+Paris B
+	London
+	Essen
+	Milan
+	Algiers
+	Madrid
+Madrid B
+	London
+	Paris
+	Algiers
+	Sao Paulo
+	New York
+Washington B
+	Montreal
+	New York
+	Miami
+	Atlanta
+Atlanta B
+	Chicago
+	Washington
+	Miami
+San Francisco B
+	Tokyo
+	Manila
+	Chicago
+	Los Angeles
+Los Angeles Y
+	San Francisco
+	Chicago
+	Mexico City
+	Sydney
+Mexico City Y
+	Chicago
+	Miami
+	Bogota
+	Lima
+	Los Angeles
+Miami Y
+	Atlanta
+	Washington
+	Bogota
+	Mexico City
+Bogota Y
+	Miami
+	Sao Paulo
+	Buenos Aires
+	Lima
+	Mexico City
+Lima Y
+	Mexico City
+	Bogota
+	Santiago
+Santiago Y
+	Lima
+Sao Paulo Y
+	Bogota
+	Madrid
+	Lagos
+	Buenos Aires
+Buenos Aires Y
+	Bogota
+	Sao Paulo
+Lagos Y
+	Sao Paulo
+	Khartoum
+	Kinshasa
+Kinshasa Y
+	Lagos
+	Khartoum
+	Johannesburg
+Khartoum Y
+	Cairo
+	Johannesburg
+	Kinshasa
+	Lagos
+Johannesburg Y
+	Kinshasa
+	Khartoum
+Algiers K
+	Madrid
+	Paris
+	Istanbul
+	Cairo
+Cairo K
+	Algiers
+	Istanbul
+	Baghdad
+	Riyadh
+Istanbul K
+	Milan
+	St. Petersburg
+	Moscow
+	Baghdad
+	Cairo
+	Algiers
+Moscow K
+	St. Petersburg
+	Tehran
+	Istanbul
+Tehran K
+	Moscow
+	Delhi
+	Karachi
+	Baghdad
+Delhi K
+	Tehran
+	Kolkata
+	Chennai
+	Mumbai
+	Karachi
+Baghdad K
+	Tehran
+	Karachi
+	Riyadh
+	Cairo
+	Istanbul
+Riyadh K
+	Cairo
+	Baghdad
+	Karachi
+Karachi K
+	Tehran
+	Delhi
+	Mumbai
+	Riyadh
+	Baghdad
+Mumbai K
+	Karachi
+	Delhi
+	Chennai
+Kolkata K
+	Delhi
+	Hong Kong
+	Bangkok
+	Chennai
+Chennai K
+	Mumbai
+	Delhi
+	Kolkata
+	Bangkok
+	Jakarta
+Beijing R
+	Seoul
+	Shanghai
+Seoul R
+	Beijing
+	Tokyo
+	Shanghai
+Tokyo R
+	Seoul
+	San Francisco
+	Osaka
+	Shanghai
+Shanghai R
+	Beijing
+	Seoul
+	Tokyo
+	Taipei
+	Hong Kong
+Hong Kong R
+	Shanghai
+	Taipei
+	Manila
+	Ho Chi Minh City
+	Bangkok
+	Kolkata
+Taipei R
+	Shanghai
+	Osaka
+	Manila
+	Hong Kong
+Osaka R
+	Tokyo
+	Taipei
+Bangkok R
+	Kolkata
+	Hong Kong
+	Ho Chi Minh City
+	Jakarta
+	Chennai
+Jakarta R
+	Chennai
+	Bangkok
+	Ho Chi Minh City
+	Sydney
+Ho Chi Minh City R
+	Bangkok
+	Hong Kong
+	Manila
+	Jakarta
+Manila R
+	Hong Kong
+	Taipei
+	San Francisco
+	Sydney
+	Ho Chi Minh City
+Sydney R
+	Los Angeles
+	Manila
+	Jakarta
+
+
+

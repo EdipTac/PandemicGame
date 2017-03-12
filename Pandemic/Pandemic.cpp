@@ -58,11 +58,14 @@ bool shuttleFlight();
 bool buildResearchStation();
 bool treatDisease();
 bool shareKnowledge();
+bool giveKnowledge(Player& target);
+bool takeKnowledge(Player& target);
 bool cureDisease();
 bool actionQuit();
 
 void showCity(const City& city);
 void displayCities();
+void flipAndInfect(InfectionCardDeck&, GameState& );
 std::string solicitFileName();
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
@@ -173,7 +176,7 @@ void newGame()
 		game->infectionDeck().addToDeck(std::make_unique<InfectionCard>(*city));
 	}
 	// TODO - Add EventCards
-	
+
 	game->playerDeck().shuffleDeck();
 
 	// Distribute cards to players
@@ -181,7 +184,7 @@ void newGame()
 	{
 		for (auto i = 0u; !game->playerDeck().empty() && i < cardsPerPlayer; ++i)
 		{
-			player->addCard(std::move(game->playerDeck().drawCard()));
+			player->addCard(std::move(game->playerDeck().drawTopCard()));
 		}
 	}
 
@@ -235,7 +238,7 @@ bool driveOrFerry()
 	auto& player = game->currentPlayer();
 	const auto& position = player.pawn().position();
 	const auto& connections = position.connections();
-	
+
 	std::cout << "You are currently in " << position.name() << "\n";
 
 	// Check if there are no connections - should not happen in a well-formed map
@@ -262,7 +265,7 @@ bool directFlight()
 	// Aliases
 	auto& player = game->currentPlayer();
 	const auto& cards = player.cityCards();
-	
+
 	// You can't discard a card if you have none!
 	if (cards.empty())
 	{
@@ -338,7 +341,7 @@ bool buildResearchStation()
 {
 	auto& player = game->currentPlayer(); // Alias
 
-	// No cards, no discard
+										  // No cards, no discard
 	if (!player.hasPositionCard())
 	{
 		std::cout << "No city card which matches our current position.\n";
@@ -351,7 +354,10 @@ bool buildResearchStation()
 		auto stations = game->map().stations(); // Alias
 		{
 			// Remove your current city from the list of potential targets
-			stations.erase(std::find_if(stations.begin(), stations.end(), [&](const auto& c) { return *c == player.pawn().position(); }));
+			stations.erase(std::find_if(stations.begin(), stations.end(), [&](const auto& c)
+			{
+				return *c == player.pawn().position();
+			}));
 		}
 
 		// No targets
@@ -367,9 +373,12 @@ bool buildResearchStation()
 	}
 
 	// Remove card, place station
-	auto& cards = player.cards();
+	const auto& cards = player.cards();
 	const auto& positionName = player.pawn().position().name();
-	auto it = std::find_if(cards.begin(), cards.end(), [&](const auto& card) { return card->name() == positionName; });
+	auto it = std::find_if(cards.begin(), cards.end(), [&](const auto& card)
+	{
+		return card->name() == positionName;
+	});
 	player.removeCardByName((*it)->name());
 	player.pawn().position().giveResearchStation(*game);
 
@@ -404,30 +413,21 @@ bool treatDisease()
 	return true;
 }
 
+// Give or take a card mathcing the city you are in from another player
 bool shareKnowledge()
 {
-	// TODO
-
-	ActionMenu
-	{
-		{
-			{ " Give Knowledge", [](){ return false; } }, // Placeholder
-			{ " Take Knowledge", [](){ return false; } },
-		}
-	}.solicitInput();
-
-
-	// Factor into separate function
+	// Aliases
 	auto& currentPlayer = game->currentPlayer();
 	const auto& position = currentPlayer.pawn().position();
 	const auto& players = game->players();
-	
-	std::vector<std::reference_wrapper<Player>> others;
+
+	// Select another player in your city
+	std::vector<Player*> others;
 	for (const auto& player : players)
 	{
 		if (player.get() != &currentPlayer && player->pawn().position() == position)
 		{
-			others.push_back(*player);
+			others.push_back(player.get());
 		}
 	}
 
@@ -437,7 +437,48 @@ bool shareKnowledge()
 		return false;
 	}
 
-	// TODO
+	std::cout << "Who to trade with?\n";
+	for (const auto& player : others)
+	{
+		std::cout << "\t" << player->name() << "\n";
+	}
+	auto& target = *validateInput(others, "Not a player in this city.\n");
+
+	// Give or take?
+	return ActionMenu
+	{
+		{
+			{ "Give Knowledge", [&](){ return giveKnowledge(target); } },
+			{ "Take Knowledge", [&](){ return takeKnowledge(target); } },
+		}
+	}.solicitInput();
+}
+
+// Give your city card to another player
+bool giveKnowledge(Player& target)
+{
+	auto& player = game->currentPlayer();
+	const auto& positionCard = player.positionCard();
+	if (!positionCard)
+	{
+		std::cout << "No matching city card to give!\n";
+		return false;
+	}
+	player.giveCard(*positionCard, target);
+
+	return true;
+}
+
+// Take the city card from another player
+bool takeKnowledge(Player& target)
+{
+	const auto& positionCard = target.positionCard();
+	if (!positionCard)
+	{
+		std::cout << "No matching city card to take!\n";
+		return false;
+	}
+	target.giveCard(*positionCard, game->currentPlayer());
 
 	return true;
 }
@@ -534,18 +575,21 @@ void showCity(const City& city)
 		<< "\n" << "Yellow Cube: " << city.diseaseOutbreak(Colour::Yellow) << std::endl;
 }
 
-void displayCities() {
+void displayCities()
+{
 	auto& player = game->currentPlayer();
 	const auto& position = player.pawn().position();
 	std::cout << "You are currently in " << position.name() << "\n";
-	while (true) {
+	while (true)
+	{
 		int index = 0;
 		char op;
-		
-		std::cout <<"Press A,B,C,D to choose: \n" << "A) Dispaly all cities on the map " << "\n" << "B) Display specific city " << "\n"
-			<< "C) See direct connection cities with your current city" << "\n"<< "D) Quit" <<"\n";
+
+		std::cout << "Press A,B,C,D to choose: \n" << "A) Dispaly all cities on the map " << "\n" << "B) Display specific city " << "\n"
+			<< "C) See direct connection cities with your current city" << "\n" << "D) Quit" << "\n";
 		std::cin >> op;
-		if (op == 'A' || op == 'a') {
+		if (op == 'A' || op == 'a')
+		{
 			for (const auto& city : game->map().cities())
 			{
 				std::cout << "City_Index_" << index << ":\n";
@@ -553,40 +597,47 @@ void displayCities() {
 				index++;
 			}
 		}
-		else if (op == 'B' || op == 'b') {
-			
-				std::string cityName;
-				
-				std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
-				std::cin >> op;
-				if (op == 'A' || op == 'a') {
-					std::cin >> index;
-					showCity(*game->map().cities()[index]);
-			     
-				}
-				else if (op == 'B' || op == 'b') {
-					std::cin >> cityName;
-					for (const auto& city : game->map().cities()) {
-						if (lowercaseEquals(city->name(),cityName)) {
-							showCity(*city);
-						}
-					}
-				}
+		else if (op == 'B' || op == 'b')
+		{
 
-				std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
-				std::cin >> op;
+			std::string cityName;
 
-				if(op == 'Y' || op == 'y') {
-					for (const auto& city : game->map().cities()[index]->connections())
+			std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
+			std::cin >> op;
+			if (op == 'A' || op == 'a')
+			{
+				std::cin >> index;
+				showCity(*game->map().cities()[index]);
+
+			}
+			else if (op == 'B' || op == 'b')
+			{
+				std::cin >> cityName;
+				for (const auto& city : game->map().cities())
+				{
+					if (lowercaseEquals(city->name(), cityName))
 					{
 						showCity(*city);
-						
 					}
 				}
+			}
+
+			std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
+			std::cin >> op;
+
+			if (op == 'Y' || op == 'y')
+			{
+				for (const auto& city : game->map().cities()[index]->connections())
+				{
+					showCity(*city);
+
+				}
+			}
 
 
 		}
-		else if (op == 'C' || op == 'c') {
+		else if (op == 'C' || op == 'c')
+		{
 
 			std::cout << "In one action, you can move to\n";
 			for (const auto& city : position.connections())
@@ -595,7 +646,8 @@ void displayCities() {
 			}
 
 		}
-		else if (op == 'D' || op == 'd') {
+		else if (op == 'D' || op == 'd')
+		{
 			break;
 		}
 
@@ -670,4 +722,14 @@ std::string titleFont(const std::string& original)
 	ornament();
 
 	return ss.str();
+}
+
+void flipAndInfect(InfectionCardDeck& deck, GameState& state) {// normal one infectio after each turn
+	std::cout << "Flip an infection card: " << std::endl;
+	std::unique_ptr<InfectionCard> temp = deck.drawTopCard();
+	City& city = temp->city();
+	std::cout << "Infection card :" << temp->name() << " with the colour of: " << colourAbbreviation(temp->colour()) << "\n" <<
+		"infects the city " << temp->name() << " one time " << std::endl;
+	city.addDiseaseCubes(city.colour(), city.CUBE_PER_INFECTION, state.cubePool(), deck);
+
 }

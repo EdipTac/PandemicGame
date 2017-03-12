@@ -25,7 +25,7 @@ public:
 	std::string name() const;
 
 	// Accessors and Mutators
-	const std::vector<std::unique_ptr<PlayerCard>>& cards() const;
+	std::vector<PlayerCard*> cards() const;
 	void addCard(std::unique_ptr<PlayerCard> card);
 	void removeCardByName(const std::string& name);
 
@@ -45,8 +45,12 @@ public:
 
 	void displayCards();
 
-	// True iff the player has a city card matching their pawn's position
 	bool hasPositionCard();
+
+	// True iff the player has a city card matching their pawn's position
+	PlayerCard* positionCard();
+
+	void giveCard(const PlayerCard& card, Player& recipient);
 
 private:
 	std::string _name;

@@ -73,6 +73,7 @@ public:
 
 	friend bool operator==(const City& lhs, const City& rhs);
 
+	unsigned const CUBE_PER_INFECTION = 1;
 private:
 	std::string _name;
 	Colour _colour;
@@ -85,6 +86,5 @@ private:
 	// Maximum cuber per colour each city can hold
 	unsigned const MAX_CUBE_PER_DISEASE = 3;
 	// Place one cube for each infection
-	unsigned const CUBE_PER_INFECTION = 1;
 	bool _hasResearchStation = false;
 };

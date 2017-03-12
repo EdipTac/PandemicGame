@@ -41,7 +41,7 @@ bool Deck<T>::empty() const
 }
 
 template <typename T>
-std::unique_ptr<T> Deck<T>::drawCard()
+std::unique_ptr<T> Deck<T>::drawTopCard()
 {
 	if (_drawPile.empty())
 	{
@@ -50,6 +50,18 @@ std::unique_ptr<T> Deck<T>::drawCard()
 
 	auto temp = move(_drawPile.back());
 	_drawPile.pop_back();
+	return temp;
+}
+template <typename T>
+std::unique_ptr<T> Deck<T>::drawBottomCard()
+{
+	if (_drawPile.empty())
+	{
+		throw std::logic_error { "Trying to draw from an empty deck." };
+	}
+
+	auto temp = move(_drawPile.front());
+	_drawPile.erase(_drawPile.begin());
 	return temp;
 }
 

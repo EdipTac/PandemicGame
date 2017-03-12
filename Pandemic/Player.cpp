@@ -24,8 +24,14 @@ std::string Player::name() const
 }
 
 // Accessors and Mutators
-const std::vector<std::unique_ptr<PlayerCard>>& Player::cards() const{
-	return _cards;
+std::vector<PlayerCard*> Player::cards() const
+{
+	std::vector<PlayerCard*> cardView;
+	for (const auto& card : _cards)
+	{
+		cardView.push_back(card.get());
+	}
+	return cardView;
 }
 void Player::addCard(std::unique_ptr<PlayerCard> card) {
 	_cards.push_back(std::move(card));
@@ -56,8 +62,38 @@ void Player::displayCards() {
 bool Player::hasPositionCard()
 {
 	auto& position = _pawn.position();
-	const auto& isPositionCard = [&](const auto& card) { return card->city() == position; };
+	const auto& isPositionCard = [&](const auto& card)
+	{
+		return card->city() == position;
+	};
 	return !std::any_of(cityCards().begin(), cityCards().end(), isPositionCard);
+}
+
+PlayerCard* Player::positionCard()
+{
+	auto& position = _pawn.position();
+	const auto& isPositionCard = [&](const auto& card)
+	{
+		return card->city() == position;
+	};
+	const auto& cards = cityCards();
+	const auto& it = std::find_if(cards.begin(), cards.end(), isPositionCard);
+	return it == cards.end() ? nullptr : *it;
+}
+
+void Player::giveCard(const PlayerCard& card, Player& recipient)
+{
+	const auto& it = std::find_if(_cards.begin(), _cards.end(), [&](const auto& c)
+	{
+		return c.get() == &card;
+	});
+	if (it == _cards.end())
+	{
+		return;
+	}
+	auto donation = std::move(*it);
+	_cards.erase(it);
+	recipient.addCard(std::move(donation));
 }
 
 std::vector<PlayerCityCard*> Player::cityCards() const

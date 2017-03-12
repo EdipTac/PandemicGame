@@ -3,6 +3,7 @@
 #include <string>
 
 #include "PlayerCard.h"
+#include "Deck.h"
 
 // Represents an epidemic player card.
 class EpidemicCard
@@ -17,4 +18,8 @@ public:
 
 	// Custom implementation of the inherited virtual function from PlayerCard
 	std::string toString();
+
+	void onDraw(GameState& state) override;
+
+	//void epidemicInfect(&, GameState&);
 };

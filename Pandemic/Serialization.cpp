@@ -13,7 +13,7 @@ using json = nlohmann::json; // for convenience
 #include "Util.h"
 #include "PlayerCityCard.h"
 
-#pragma warning (disable : 4456)
+#pragma warning(disable : 4456)
 
 std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 {

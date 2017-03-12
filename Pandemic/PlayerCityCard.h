@@ -26,4 +26,6 @@ public:
 	// Inherited via PlayerCard
 	virtual std::string name() const override;
 	virtual std::string description() const override;
+
+	void onDraw(GameState& state) override;
 };
