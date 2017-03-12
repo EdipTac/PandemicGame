@@ -16,6 +16,7 @@ class DeckofRoles: public Deck <RoleCard>{
 public: 
 	DeckofRoles(); //constructor
 	uniquerolecard drawRoleCard(); //this should not be needed since the base class has the drawCard function //the act of drawing a card to retun a role card
+	std::vector<std::unique_ptr<RoleCard>> roleCards();
 
 
 private:
