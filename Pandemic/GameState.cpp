@@ -34,6 +34,10 @@ Map& GameState::map() const
 
 void GameState::addPlayer(std::unique_ptr<Player> player)
 {
+	if (nameExists(player->name()))
+	{
+		throw std::logic_error { "No two players can have the same name." };
+	}
 	_players.push_back(std::move(player));
 }
 
@@ -79,6 +83,14 @@ Player& GameState::setCurrentPlayer(const size_t idx)
 {
 	_currentPlayerIdx = idx % _players.size();
 	return currentPlayer();
+}
+
+bool GameState::nameExists(const std::string& name) const
+{
+	return std::any_of(_players.begin(), _players.end(), [&](const auto& p)
+	{
+		return p->name() == name;
+	});
 }
 
 unsigned GameState::researchStations() const

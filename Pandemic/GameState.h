@@ -28,6 +28,7 @@ public:
 	Player& nextPlayer();
 	Player& currentPlayer();
 	Player& setCurrentPlayer(const size_t idx);
+	bool nameExists(const std::string& name) const;
 
 	unsigned researchStations() const;
 	void removeResearchStation();
