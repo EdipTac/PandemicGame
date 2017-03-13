@@ -223,21 +223,22 @@ void newGame()
 	map.startingCity().giveResearchStation(*game);
 
 	//Initial distribution of disease cubes during game initialization
-
-	//NOTE CURRENTLY IT DOESNT RETURN THE ADDED CITIES BACK TO THE DECK
 	game->infectionDeck().shuffleDeck();
 	std::cout << "Initial infected cities are as follows:" << std::endl;
 	for (int i = 0; i < 3; i++) {
 		auto temp = game->infectionDeck().drawTopCard();
 		temp->infect(*game, 3);
+		game->infectionDeck().addToDiscard(move(temp));	
 	}
 	for (int i = 0; i < 3; i++) {
 		auto temp = game->infectionDeck().drawTopCard();
 		temp->infect(*game, 2);
+		game->infectionDeck().addToDiscard(move(temp));
 	}
 	for (int i = 0; i < 3; i++) {
 		auto temp = game->infectionDeck().drawTopCard();
 		temp->infect(*game, 1);
+		game->infectionDeck().addToDiscard(move(temp));
 	}
 
 }
