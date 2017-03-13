@@ -203,9 +203,9 @@ void newGame()
 
 	//Distribute Role Cards to players
 	DeckofRoles roleCardDeck{};
-	for (const auto& player : game->players())
+	for (auto& player : game->players())
 	{
-		game->currentPlayer().setRole(roleCardDeck.drawRoleCard());
+		player->setRole(roleCardDeck.drawRoleCard());
 	}
 
 	for (const auto& player : game->players())
