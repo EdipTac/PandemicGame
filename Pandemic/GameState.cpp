@@ -189,7 +189,7 @@ size_t GameState::initialCards() const
 
 void GameState::distributePlayerCards(const size_t count)
 {
-	for (auto i = 0u; !playerDeck().empty && i < count; ++i)
+	for (auto i = 0u; !playerDeck().empty() && i < count; ++i)
 	{
 		currentPlayer().addCard(playerDeck().drawTopCard());
 	}
