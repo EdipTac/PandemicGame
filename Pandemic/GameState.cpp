@@ -13,9 +13,18 @@ GameState::GameState()
 	}
 }
 
-const std::vector<std::unique_ptr<Player>>& GameState::players() const
+std::vector<Player*> GameState::players()
 {
-	return _players;
+	std::vector<Player*> p;
+	const auto size = _players.size();
+	currentPlayer();
+	auto idx = _currentPlayerIdx;
+	for (auto i = 0u; i < size; ++i)
+	{
+		p.push_back(_players[idx].get());
+		idx = (idx + 1) % size;
+	}
+	return p;
 }
 
 Map& GameState::map() const
@@ -59,6 +68,10 @@ Player& GameState::nextPlayer()
 
 Player& GameState::currentPlayer()
 {
+	if (_currentPlayerIdx >= std::numeric_limits<size_t>::max())
+	{
+		_currentPlayerIdx = 0;
+	}
 	return *_players[_currentPlayerIdx];
 }
 
@@ -129,6 +142,16 @@ unsigned GameState::infectionRate() const
 	return	(1 <= c && c <= 3) ? 2 :
 		(4 <= c && c <= 5) ? 3 :
 		4;
+}
+
+unsigned GameState::infectionCounter() const
+{
+	return _infectionCounter;
+}
+
+unsigned GameState::outbreakCounter() const
+{
+	return _outbreakCounter;
 }
 
 void GameState::advanceOutbreakCounter()

@@ -172,6 +172,7 @@
     <None Include="earth.map" />
     <None Include="earth2.map" />
     <None Include="save.json" />
+    <None Include="save2.json" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

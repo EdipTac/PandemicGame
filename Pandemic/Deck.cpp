@@ -23,6 +23,28 @@ void Deck<T>::shuffleDiscards()
 	shuffle(_discardPile);
 }
 
+template<typename T>
+std::vector<T*> Deck<T>::drawPile() const
+{
+	std::vector<T*> cards;
+	for (const auto& card : _drawPile)
+	{
+		cards.push_back(card.get());
+	}
+	return cards;
+}
+
+template<typename T>
+std::vector<T*> Deck<T>::discardPile() const
+{
+	std::vector<T*> cards;
+	for (const auto& card : _discardPile)
+	{
+		cards.push_back(card.get());
+	}
+	return cards;
+}
+
 
 template <typename T>
 void Deck<T>::printDeck()

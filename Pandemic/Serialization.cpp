@@ -18,6 +18,8 @@ using json = nlohmann::json; // for convenience
 
 #pragma warning(disable : 4456)
 
+void writeToFile(std::string currentPlayer, json content);
+
 std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 {
 	std::ifstream fs { fileName };
@@ -362,15 +364,91 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 	return gameState;
 }
 
-void saveGame(std::unique_ptr<GameState> gameState) {
-	// get all of the information from gameState, and convert it to JSON - store it in 'content'
+void saveGame(GameState& game, const std::string& fileName)
+{
+	json j;
+	std::ofstream os { fileName };
+	j["map"] = fileName;
+	const auto& players = game.players();
+	
+	std::vector<json> playersJSON(players.size());
+	for (size_t idx = 0; idx < players.size(); ++idx)
+	{
+		auto& pj = playersJSON[idx];
+		auto& player = players[idx];
+		pj["name"] = player->name();
+		pj["position"] = player->pawn().position().name();
+		pj["role"] = player->role().name();
+		std::vector<std::string> cardNames;
+		for (const auto& card : player->cards())
+		{
+			pj["hand"].push_back(card->name());
+		}
+	}
+	j["players"] = playersJSON;
 
-	json content;
-	auto currentPlayer = gameState->currentPlayer().name();
-	writeToFile(currentPlayer, content);
+	const auto& cities = game.map().cities();
+	std::vector<json> citiesJSON(cities.size());
+	for (size_t idx = 0; idx < cities.size(); ++idx)
+	{
+		auto& cj = citiesJSON[idx];
+		auto& city = cities[idx];
+		cj["name"] = city->name();
+		cj["colour"] = colourAbbreviation(city->colour());
+		std::map<std::string, size_t> cubes;
+		for (const auto& colour : colours())
+		{
+			cubes[colourAbbreviation(colour)] = city->diseaseCubes(colour);
+		}
+		cj["disease cubes"] = cubes;
+		cj["researchStation"] = city->hasResearchStation();
+	}
+	j["cities"] = citiesJSON;
+
+	std::vector<std::string> deckNames;
+	for (const auto& card : game.playerDeck().drawPile())
+	{
+		deckNames.push_back(card->name());
+	}
+	j["playercards"]["deck"] = deckNames;
+
+	std::vector<std::string> discardNames;
+	for (const auto& card : game.playerDeck().discardPile())
+	{
+		discardNames.push_back(card->name());
+	}
+	j["playercards"]["discard"] = discardNames;
+
+	std::vector<std::string> infDeckNames;
+	for (const auto& card : game.infectionDeck().drawPile())
+	{
+		infDeckNames.push_back(card->name());
+	}
+	j["infection"]["deck"] = infDeckNames;
+
+	std::vector<std::string> infDiscNames;
+	for (const auto& card : game.infectionDeck().discardPile())
+	{
+		infDiscNames.push_back(card->name());
+	}
+	j["infection"]["discard"] = infDiscNames;
+
+	j["infection"]["outbreak"] = game.outbreakCounter();
+	j["infection"]["rate"] = game.infectionCounter();
+
+	for (const auto& colour : colours())
+	{
+		if (game.isCured(colour))
+		{
+			j["infection"]["cured"].push_back(colourAbbreviation(colour));
+		}
+	}
+
+	os << std::setw(4) << j;
 }
 
-void writeToFile(std::string currentPlayer, json content) {
+void writeToFile(std::string currentPlayer, json content)
+{
 	std::string saveFileName = currentPlayer + "_save.json";
 	std::ofstream fs{ saveFileName };
 	if (!fs)

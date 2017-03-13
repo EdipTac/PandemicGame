@@ -15,7 +15,8 @@ class GameState
 {
 public:
 	GameState();
-	const std::vector<std::unique_ptr<Player>>& players() const;
+	//const std::vector<std::unique_ptr<Player>>& players() const;
+	std::vector<Player*> players();
 	Map& map() const;
 	void addPlayer(std::unique_ptr<Player> player);
 	void setMap(std::unique_ptr<Map> map);
@@ -39,7 +40,9 @@ public:
 
 	void advanceInfectionCounter();
 	unsigned infectionRate() const;
+	unsigned infectionCounter() const;
 
+	unsigned outbreakCounter() const;
 	void advanceOutbreakCounter();
 	CubePool& cubePool();
 

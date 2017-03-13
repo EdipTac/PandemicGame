@@ -45,6 +45,7 @@
 //  ----  Forward declarations  ----  //
 void newGame();
 void loadGame();
+bool saveGame();
 void waitForExit();
 bool performAction();
 void quit();
@@ -97,9 +98,10 @@ const GeneralMenu mainMenu
 const ActionMenu turnMenu
 {
 	{
-		{ "Report",			report			},
-		{ "Perform Action",	performAction	},
-		{ "Quit Game",		actionQuit		}
+		{ "Report",			report								},
+		{ "Perform Action",	performAction						},
+		{ "Save Game",		static_cast<bool(*)()>(saveGame)	},
+		{ "Quit Game",		actionQuit							}
 	}
 };
 
@@ -128,6 +130,15 @@ const ActionMenu actionMenu
 };
 
 //	----    Program entry point    ----  //
+//#define TEST
+#ifdef TEST
+void main()
+{
+	game = readGameFromFile("save.json");
+	game->currentPlayer().setRole(std::make_unique<RoleCard>("Ayyy", "Lmao"));
+	saveGame(*game);
+}
+#else
 void main()
 {
 	// Title display
@@ -145,6 +156,7 @@ void main()
 
 	waitForExit();
 }
+#endif
 
 // The player wants to start a new game
 void newGame()
@@ -219,6 +231,17 @@ void loadGame()
 	const auto fileName = solicitFileName("Enter name of game save file: ");
 	game = readGameFromFile(fileName);
 	std::cout << "\n" << titleFont("RESUMING GAME") << "\n\n";
+}
+
+bool saveGame()
+{
+	std::cout << "Save game...\nEnter name of game save file : ";
+	std::string fileName;
+	std::cin >> fileName;
+	std::cin.ignore();
+	saveGame(*game, fileName);
+	std::cout << "\n" << titleFont("GAME SAVED") << "\n\n";
+	return false;
 }
 
 // The player wants to quit
@@ -441,9 +464,9 @@ bool shareKnowledge()
 	std::vector<Player*> others;
 	for (const auto& player : players)
 	{
-		if (player.get() != &currentPlayer && player->pawn().position() == position)
+		if (player != &currentPlayer && player->pawn().position() == position)
 		{
-			others.push_back(player.get());
+			others.push_back(player);
 		}
 	}
 
@@ -711,12 +734,4 @@ void infect()
 		card->onDraw(*game);
 		game->infectionDeck().addToDiscard(std::move(card));
 	}
-
-	std::cout << "Flip an infection card: " << std::endl;
-	//auto temp = move(deck.drawTopCard());
-	//std::cout << "Infection card :" << temp->name() << " with the colour of: " << colourAbbreviation(temp->colour()) << "\n" <<
-//		"infects the city " << temp->name() << " one time " << std::endl;
-	//temp->onDraw(state);
-	std::cout << "Put it to infection card discard pile: " << std::endl;
-	//deck.addToDiscard(move(temp));
 }
