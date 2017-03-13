@@ -40,6 +40,7 @@
 #include "PlayerCityCard.h"
 #include "Serialization.h"
 #include "Util.h"
+#include "DeckofRoles.h"
 
 
 //  ----  Forward declarations  ----  //
@@ -193,6 +194,7 @@ void newGame()
 	{
 		game->playerDeck().addToDeck(std::make_unique<PlayerCityCard>(*city));
 		game->infectionDeck().addToDeck(std::make_unique<InfectionCard>(*city));
+		
 	}
 	
 	auto eventCards = DeckofEvents {}.deckOfEvents();
@@ -200,6 +202,18 @@ void newGame()
 	{
 		game->playerDeck().addToDeck(std::move(eventCards.back()));
 		eventCards.pop_back();
+	}
+
+	//Distribute Role Cards to players
+	DeckofRoles roleCardDeck{};
+	for (auto& player : game->players())
+	{
+		player->setRole(roleCardDeck.drawRoleCard());
+	}
+
+	for (const auto& player : game->players())
+	{
+		std::cout << "Player " << player->name() << " has the role of " << player->role().name() << std::endl;
 	}
 
 	game->playerDeck().shuffleDeck();
@@ -221,6 +235,9 @@ void newGame()
 			std::cout << "\t" << card->name() << "\n";
 		}
 	}
+
+
+
 
 	//Place first research station
 	map.startingCity().giveResearchStation(*game);
