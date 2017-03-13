@@ -205,7 +205,7 @@ void newGame()
 	}
 
 	//Distribute Role Cards to players
-	DeckofRoles roleCardDeck{};
+	DeckofRoles roleCardDeck;
 	for (auto& player : game->players())
 	{
 		player->setRole(roleCardDeck.drawRoleCard());
