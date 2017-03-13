@@ -169,7 +169,7 @@
     <Text Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\x64\Debug\Pandemic.exe" />
+    <None Include="..\x64\Release\Pandemic.exe" />
     <None Include="earth.map" />
     <None Include="earth2.map" />
     <None Include="save.json" />
