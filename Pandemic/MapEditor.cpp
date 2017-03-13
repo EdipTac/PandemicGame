@@ -34,7 +34,7 @@ const GeneralMenu editMapMenu
 		{ "Delete City",	deleteCity	},
 		{ "List Cities",	listCities	},
 		{ "Edit City",		editCity	},
-		{ "Save Map",		/*editCity	*/},
+		{ "Save Map",		saveMap		},
 	}
 };
 
