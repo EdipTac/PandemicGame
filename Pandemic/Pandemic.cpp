@@ -257,6 +257,16 @@ bool saveGame()
 	std::string fileName;
 	std::cin >> fileName;
 	std::cin.ignore();
+	if (fileExists(fileName))
+	{
+		std::cout << "File exists. Overwrite? (Y/N)" << std::endl;
+		char overwrite;
+		std::cin >> overwrite;
+		if (!(overwrite == 'y' || overwrite == 'Y'))
+		{
+			return false;
+		}
+	}
 	saveGame(*game, fileName);
 	std::cout << "\n" << titleFont("GAME SAVED") << "\n\n";
 	return false;

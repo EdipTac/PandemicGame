@@ -1,0 +1,70 @@
+{
+    "cities": [
+        {
+            "colour": "B",
+            "disease cubes": {
+                "B": 3,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "London",
+            "researchStation": true
+        },
+        {
+            "colour": "Y",
+            "disease cubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 3
+            },
+            "name": "Montreal",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "disease cubes": {
+                "B": 0,
+                "K": 3,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Toronto",
+            "researchStation": false
+        }
+    ],
+    "infection": {
+        "deck": [],
+        "discard": [
+            "Montreal",
+            "Toronto",
+            "London"
+        ],
+        "outbreak": 0,
+        "rate": 1
+    },
+    "map": "n",
+    "playercards": {
+        "deck": [
+            "Montreal",
+            "Resilient Population",
+            "One Quiet Night",
+            "London"
+        ],
+        "discard": []
+    },
+    "players": [
+        {
+            "hand": [
+                "Forecast",
+                "Airlift",
+                "Toronto",
+                "Government Grant"
+            ],
+            "name": "Wishe",
+            "position": "London",
+            "role": ""
+        }
+    ]
+}
