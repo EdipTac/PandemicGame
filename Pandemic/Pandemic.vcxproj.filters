@@ -224,6 +224,8 @@
     <None Include="save2.json">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="..\x64\Debug\Pandemic.exe" />
+    <None Include="save5.json">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
