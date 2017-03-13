@@ -632,11 +632,17 @@ std::string solicitPlayerName(const size_t number)
 	while (true)
 	{
 		std::getline(std::cin >> std::ws, playerName);
-		if (!playerName.empty())
+		if (playerName.empty())
 		{
-			break;
+			std::cout << "Player name cannot be empty.\n";
+			continue;
 		}
-		std::cout << "Player name cannot be empty.\n";
+		if (game->nameExists(playerName))
+		{
+			std::cout << "Player names must be unique.\n";
+			continue;
+		}
+		break;
 	}
 	return playerName;
 }
