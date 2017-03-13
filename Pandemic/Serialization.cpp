@@ -361,3 +361,22 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 
 	return gameState;
 }
+
+void saveGame(std::unique_ptr<GameState> gameState) {
+	// get all of the information from gameState, and convert it to JSON - store it in 'content'
+
+	json content;
+	auto currentPlayer = gameState->currentPlayer().name();
+	writeToFile(currentPlayer, content);
+}
+
+void writeToFile(std::string currentPlayer, json content) {
+	std::string saveFileName = currentPlayer + "_save.json";
+	std::ofstream fs{ saveFileName };
+	if (!fs)
+	{
+		throw std::runtime_error{ "File I/O error!" };
+	}
+
+	fs << content;
+}

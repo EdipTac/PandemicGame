@@ -16,3 +16,5 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName);
 //void writeMapToFile(const Map& map, const std::string& fileName);
 
 std::unique_ptr<GameState> readGameFromFile(const std::string& fileName);
+
+void saveGame(std::unique_ptr<GameState> gameState);
