@@ -1,3 +1,11 @@
-./configure && make && make test
+# Enable C++ support
 language: cpp
-compiler: gcc
+# Compiler selection
+compiler:
+  - clang
+  - gcc
+# Build steps
+script:
+  - mkdir build
+  - cd build
+  - cmake .. && make
