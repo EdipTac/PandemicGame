@@ -60,7 +60,6 @@ bool giveKnowledge(Player& target);
 bool takeKnowledge(Player& target);
 bool cureDisease();
 bool actionQuit();
-void showCity(const City& city);
 bool report();
 void displayCities();
 void directConnectionReport();
@@ -145,7 +144,7 @@ void main()
 	std::cout << titleFont("PANDEMIC") << "\n\n\n";
 	mainMenu.solicitInput();
 
-	while (!game->shouldQuit())
+	while (game && !game->shouldQuit())
 	{
 		auto& currentPlayer = game->nextPlayer();
 		std::cout << currentPlayer.name() << "'s turn.\n";
@@ -265,6 +264,7 @@ bool saveGame()
 // The player wants to quit
 void waitForExit()
 {
+	std::cout << "\nThanks for playing!\n";
 	std::cout << "Press any key to continue...\n";
 	std::cin.get();
 }
@@ -591,23 +591,6 @@ bool actionQuit()
 	return true;
 }
 
-std::string solicitFileName(const std::string& msg)
-{
-	std::string fileName;
-	while (true)
-	{
-		std::cout << msg;
-		std::cin >> fileName;
-		std::cin.get();
-		if (fileExists(fileName))
-		{
-			break;
-		}
-		std::cout << "File not found.\n";
-	}
-	return fileName;
-}
-
 City& solicitConnection(const City& source)
 {
 	std::cout << "Where would you like to move to? ";
@@ -660,44 +643,6 @@ void displayCities()
 		showCity(*city);
 	}
 }
-
-/*void cityReport()
-{
-	int index = 0;
-	char op;
-	std::string cityName;
-	std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
-	std::cin >> op;
-	if (op == 'A' || op == 'a')
-	{
-		std::cin >> index;
-		showCity(*game->map().cities()[index]);
-
-	}
-	else if (op == 'B' || op == 'b')
-	{
-		std::cin >> cityName;
-		for (const auto& city : game->map().cities())
-		{
-			if (lowercaseEquals(city->name(), cityName))
-			{
-				showCity(*city);
-			}
-		}
-	}
-
-	std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
-	std::cin >> op;
-
-	if (op == 'Y' || op == 'y')
-	{
-		for (const auto& city : game->map().cities()[index]->connections())
-		{
-			showCity(*city);
-
-		}
-	}
-}*/
 
 void directConnectionReport()
 {

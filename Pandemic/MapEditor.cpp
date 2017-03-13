@@ -4,12 +4,15 @@
 #include "MapEditor.h"
 #include "Map.h"
 #include "Menu.h"
+#include "Serialization.h"
 #include "Util.h"
 
 void addCity();
 void deleteCity();
 void listCities();
 void editCity();
+void loadMap();
+void saveMap();
 void cityReport(City& city);
 void addConnection(City& city);
 void deleteConnection(City& city);
@@ -18,7 +21,9 @@ void createNewMap();
 const GeneralMenu mapEditorMainMenu
 {
 	{
-		{ "Create New Map", createNewMap }
+		{ "Create New Map", createNewMap	},
+		{ "Load Map",		loadMap			},
+		{ "Quit",			[](){}			},
 	}
 };
 
@@ -28,7 +33,8 @@ const GeneralMenu editMapMenu
 		{ "Add City",		addCity		},
 		{ "Delete City",	deleteCity	},
 		{ "List Cities",	listCities	},
-		{ "Edit City",		editCity	}
+		{ "Edit City",		editCity	},
+		{ "Save Map",		/*editCity	*/},
 	}
 };
 
@@ -37,16 +43,16 @@ std::unique_ptr<Map> map;
 void mapEditor()
 {
 	mapEditorMainMenu.solicitInput();
+	while (map)
+	{
+		editMapMenu.solicitInput();
+	}
 }
 
 void createNewMap()
 {
 	map = std::make_unique<Map>();
 	map->name() = solicitLine("Enter map name: ");
-	while (true)
-	{
-		editMapMenu.solicitInput();
-	}
 }
 
 void addCity()
@@ -106,7 +112,7 @@ void addConnection(City& city)
 	}
 }
 
-void deleteConnection(City & city)
+void deleteConnection(City& city)
 {
 	std::cout << "Which city to disconnect from? ";
 	auto target = solicitCity(*map);
@@ -115,3 +121,12 @@ void deleteConnection(City & city)
 		city.disconnectFrom(*target);
 	}
 }
+
+void loadMap()
+{
+	const auto fileName = solicitFileName("Enter name of map file: ");
+	map = readMapFromFile(fileName);
+}
+
+void saveMap()
+{}
