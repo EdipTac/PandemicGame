@@ -368,7 +368,7 @@ void saveGame(GameState& game, const std::string& fileName)
 {
 	json j;
 	std::ofstream os { fileName };
-	j["map"] = fileName;
+	j["map"] = game.map().name();
 	const auto& players = game.players();
 	
 	std::vector<json> playersJSON(players.size());
@@ -400,7 +400,7 @@ void saveGame(GameState& game, const std::string& fileName)
 		{
 			cubes[colourAbbreviation(colour)] = city->diseaseCubes(colour);
 		}
-		cj["disease cubes"] = cubes;
+		cj["diseaseCubes"] = cubes;
 		cj["researchStation"] = city->hasResearchStation();
 	}
 	j["cities"] = citiesJSON;
@@ -436,12 +436,18 @@ void saveGame(GameState& game, const std::string& fileName)
 	j["infection"]["outbreak"] = game.outbreakCounter();
 	j["infection"]["rate"] = game.infectionCounter();
 
+	bool hasCured = false;
 	for (const auto& colour : colours())
 	{
 		if (game.isCured(colour))
 		{
+			hasCured = true;
 			j["infection"]["cured"].push_back(colourAbbreviation(colour));
 		}
+	}
+	if (!hasCured) 
+	{
+		j["infection"]["cured"] = json::array();
 	}
 
 	os << std::setw(4) << j;
