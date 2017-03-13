@@ -227,5 +227,8 @@
     <None Include="save5.json">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include=".travis.yml">
+      <Filter>Util</Filter>
+    </None>
   </ItemGroup>
 </Project>
