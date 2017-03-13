@@ -12,6 +12,7 @@ void deleteCity();
 void listCities();
 void editCity();
 void loadMap();
+void saveMap();
 void cityReport(City& city);
 void addConnection(City& city);
 void deleteConnection(City& city);
@@ -32,7 +33,8 @@ const GeneralMenu editMapMenu
 		{ "Add City",		addCity		},
 		{ "Delete City",	deleteCity	},
 		{ "List Cities",	listCities	},
-		{ "Edit City",		editCity	}
+		{ "Edit City",		editCity	},
+		{ "Save Map",		/*editCity	*/},
 	}
 };
 
@@ -125,3 +127,6 @@ void loadMap()
 	const auto fileName = solicitFileName("Enter name of map file: ");
 	map = readMapFromFile(fileName);
 }
+
+void saveMap()
+{}

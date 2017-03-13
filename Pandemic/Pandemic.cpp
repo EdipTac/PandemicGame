@@ -246,6 +246,7 @@ bool saveGame()
 // The player wants to quit
 void waitForExit()
 {
+	std::cout << "\nThanks for playing!\n";
 	std::cout << "Press any key to continue...\n";
 	std::cin.get();
 }
