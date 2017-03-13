@@ -79,47 +79,10 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 	return std::move(map);
 }
 
-/*
 void writeMapToFile(const Map& map, const std::string& fileName)
-{
-	//throw std::logic_error { "Not implemented." };
-	std::map<std::string, std::string> players;
-	for (const auto& player : map.players())
-	{
-		players[player->name()] = player->pawn().position().name();
-	}
-
-	std::map<std::string, std::pair<std::string, std::vector<std::string>>> cities;
-	for (const auto& source : map.cities())
-	{
-		const auto& connections = source->connections();
-		cities[source->name()].first = colourName(source->colour());
-		for (const auto& target : connections)
-		{
-			cities[source->name()].second.push_back(target->name());
-		}
-	}
-	
-	std::ofstream stream{ fileName };
-	stream << "// Players - format\n// name:\n// @location\n";
-	for (const auto& pair : players)
-	{
-		stream << pair.first << ":\n@" << pair.second << "\n";
-	}
-
-	stream << "\n";
-
-	stream << "// Cities and connections - format\n// name colour\n//     target connection\n";
-	for (const auto& pair : cities)
-	{
-		stream << pair.first << " " << pair.second.first << "\n";
-		for (const auto& target : pair.second.second)
-		{
-			stream << "\t" << target << "\n";
-		}
-	}
+{	
+	std::ofstream stream { fileName };
 }
-*/
 
 std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 {

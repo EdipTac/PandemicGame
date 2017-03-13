@@ -118,9 +118,9 @@ void shuffle(std::vector<std::unique_ptr<T>>& cards)
 		temp.reserve(cards.size());
 		while (!cards.empty())
 		{
-			const auto i = randSize(cards.size());
-			temp.push_back(std::move(cards[i]));
-			cards.erase(cards.begin() + i);
+			const auto j = randSize(cards.size());
+			temp.push_back(std::move(cards[j]));
+			cards.erase(cards.begin() + j);
 		}
 
 		cards = std::move(temp);
