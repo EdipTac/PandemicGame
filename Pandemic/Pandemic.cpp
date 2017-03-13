@@ -60,7 +60,7 @@ bool giveKnowledge(Player& target);
 bool takeKnowledge(Player& target);
 bool cureDisease();
 bool actionQuit();
-void showCity(const City& city);
+// void showCity(const City& city);
 bool report();
 void displayCities();
 void directConnectionReport();
@@ -571,23 +571,6 @@ bool actionQuit()
 {
 	quit();
 	return true;
-}
-
-std::string solicitFileName(const std::string& msg)
-{
-	std::string fileName;
-	while (true)
-	{
-		std::cout << msg;
-		std::cin >> fileName;
-		std::cin.get();
-		if (fileExists(fileName))
-		{
-			break;
-		}
-		std::cout << "File not found.\n";
-	}
-	return fileName;
 }
 
 City& solicitConnection(const City& source)

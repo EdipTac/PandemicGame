@@ -87,3 +87,20 @@ void showCity(City& city)
 {
 	std::cout << city.string();
 }
+
+std::string solicitFileName(const std::string& msg)
+{
+	std::string fileName;
+	while (true)
+	{
+		std::cout << msg;
+		std::cin >> fileName;
+		std::cin.get();
+		if (fileExists(fileName))
+		{
+			break;
+		}
+		std::cout << "File not found.\n";
+	}
+	return fileName;
+}
