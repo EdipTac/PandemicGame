@@ -60,7 +60,6 @@ bool giveKnowledge(Player& target);
 bool takeKnowledge(Player& target);
 bool cureDisease();
 bool actionQuit();
-// void showCity(const City& city);
 bool report();
 void displayCities();
 void directConnectionReport();
@@ -625,44 +624,6 @@ void displayCities()
 		showCity(*city);
 	}
 }
-
-/*void cityReport()
-{
-	int index = 0;
-	char op;
-	std::string cityName;
-	std::cout << "Which city do you want to see ? A) Input by city index number : B) Input by city name " << "\n";
-	std::cin >> op;
-	if (op == 'A' || op == 'a')
-	{
-		std::cin >> index;
-		showCity(*game->map().cities()[index]);
-
-	}
-	else if (op == 'B' || op == 'b')
-	{
-		std::cin >> cityName;
-		for (const auto& city : game->map().cities())
-		{
-			if (lowercaseEquals(city->name(), cityName))
-			{
-				showCity(*city);
-			}
-		}
-	}
-
-	std::cout << "Do you want see the direct connnections of this city (Y/N) " << "\n";
-	std::cin >> op;
-
-	if (op == 'Y' || op == 'y')
-	{
-		for (const auto& city : game->map().cities()[index]->connections())
-		{
-			showCity(*city);
-
-		}
-	}
-}*/
 
 void directConnectionReport()
 {
