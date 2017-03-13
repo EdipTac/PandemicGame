@@ -113,13 +113,16 @@ size_t randSize(const size_t max)
 template <typename T>
 void shuffle(std::vector<std::unique_ptr<T>>& cards)
 {
-	std::vector<std::unique_ptr<T>> temp;
-	temp.reserve(cards.size());
-	while (!cards.empty())
-	{
-		const auto i = randSize(cards.size());
-		temp.push_back(std::move(cards[i]));
-		cards.erase(cards.begin() + i);
+	for (int i = 0; i < 2; i++) {
+		std::vector<std::unique_ptr<T>> temp;
+		temp.reserve(cards.size());
+		while (!cards.empty())
+		{
+			const auto i = randSize(cards.size());
+			temp.push_back(std::move(cards[i]));
+			cards.erase(cards.begin() + i);
+		}
+
+		cards = std::move(temp);
 	}
-	cards = std::move(temp);
 }
