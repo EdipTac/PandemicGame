@@ -17,7 +17,10 @@ std::vector<Player*> GameState::players()
 {
 	std::vector<Player*> p;
 	const auto size = _players.size();
-	currentPlayer();
+	if (_currentPlayerIdx >= std::numeric_limits<size_t>::max())
+	{
+		_currentPlayerIdx = 0;
+	}
 	auto idx = _currentPlayerIdx;
 	for (auto i = 0u; i < size; ++i)
 	{
@@ -72,10 +75,10 @@ Player& GameState::nextPlayer()
 
 Player& GameState::currentPlayer()
 {
-	if (_currentPlayerIdx >= std::numeric_limits<size_t>::max())
+	/*if (_currentPlayerIdx >= std::numeric_limits<size_t>::max())
 	{
 		_currentPlayerIdx = 0;
-	}
+	}*/
 	return *_players[_currentPlayerIdx];
 }
 
