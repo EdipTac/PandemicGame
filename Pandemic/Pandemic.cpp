@@ -144,7 +144,7 @@ void main()
 	std::cout << titleFont("PANDEMIC") << "\n\n\n";
 	mainMenu.solicitInput();
 
-	while (!game->shouldQuit())
+	while (game && !game->shouldQuit())
 	{
 		auto& currentPlayer = game->nextPlayer();
 		std::cout << currentPlayer.name() << "'s turn.\n";

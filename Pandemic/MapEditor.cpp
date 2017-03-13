@@ -41,7 +41,7 @@ std::unique_ptr<Map> map;
 void mapEditor()
 {
 	mapEditorMainMenu.solicitInput();
-	while (true)
+	while (map)
 	{
 		editMapMenu.solicitInput();
 	}
