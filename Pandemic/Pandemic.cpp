@@ -149,7 +149,10 @@ void main()
 		auto& currentPlayer = game->nextPlayer();
 		std::cout << currentPlayer.name() << "'s turn.\n";
 		while (!turnMenu.solicitInput()); // Intentionally empty body
-		game->distributePlayerCards(cardsPerTurn);
+		if (!game)
+		{
+			game->distributePlayerCards(cardsPerTurn);
+		}
 		infect();
 	}
 
@@ -225,22 +228,19 @@ void newGame()
 	//Initial distribution of disease cubes during game initialization
 	game->infectionDeck().shuffleDeck();
 	std::cout << "Initial infected cities are as follows:" << std::endl;
-	for (int i = 0; i < 3; i++) {
-		auto temp = game->infectionDeck().drawTopCard();
-		temp->infect(*game, 3);
-		game->infectionDeck().addToDiscard(move(temp));	
+	for (auto j = 3; j >= 1; --j)
+	{
+		for (auto i = 0; i < 3; ++i)
+		{
+			if (game->infectionDeck().empty())
+			{
+				break;
+			}
+			auto temp = game->infectionDeck().drawTopCard();
+			temp->infect(*game, j);
+			game->infectionDeck().addToDiscard(move(temp));
+		}
 	}
-	for (int i = 0; i < 3; i++) {
-		auto temp = game->infectionDeck().drawTopCard();
-		temp->infect(*game, 2);
-		game->infectionDeck().addToDiscard(move(temp));
-	}
-	for (int i = 0; i < 3; i++) {
-		auto temp = game->infectionDeck().drawTopCard();
-		temp->infect(*game, 1);
-		game->infectionDeck().addToDiscard(move(temp));
-	}
-
 }
 
 void loadGame()
@@ -692,7 +692,7 @@ std::string titleFont(const std::string& original)
 
 void infect()
 {
-	for (auto i = 0u; i < game->infectionRate(); ++i)
+	for (auto i = 0u; !game->infectionDeck().empty() && i < game->infectionRate(); ++i)
 	{
 		auto card = game->infectionDeck().drawTopCard();
 		card->onDraw(*game);
