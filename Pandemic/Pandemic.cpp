@@ -63,7 +63,7 @@ void showCity(const City& city);
 bool report();
 void displayCities();
 void directConnectionReport();
-void flipAndInfect(InfectionCardDeck&, GameState& );
+void infect();
 std::string solicitFileName(const std::string& msg);
 City& solicitConnection(const City& source);
 std::string solicitPlayerName(const size_t number);
@@ -77,10 +77,10 @@ std::string titleFont(const std::string& original);
 std::unique_ptr<GameState> game;
 
 //  ----  Constants  -----  //
-constexpr size_t minPlayers = 1;
-constexpr size_t maxPlayers = 4;
-constexpr size_t actionsPerTurn = 4;
-constexpr size_t cardsPerPlayer = 5;
+constexpr size_t minPlayers		= 1;
+constexpr size_t maxPlayers		= 4;
+constexpr size_t actionsPerTurn	= 4;
+constexpr size_t cardsPerTurn	= 2;
 
 //  ----  Menus  ----  //
 const GeneralMenu mainMenu
@@ -139,6 +139,8 @@ void main()
 		auto& currentPlayer = game->nextPlayer();
 		std::cout << currentPlayer.name() << "'s turn.\n";
 		while (!turnMenu.solicitInput()); // Intentionally empty body
+		game->distributePlayerCards(cardsPerTurn);
+		infect();
 	}
 
 	waitForExit();
@@ -191,7 +193,7 @@ void newGame()
 	// Distribute cards to players
 	for (const auto& player : game->players())
 	{
-		for (auto i = 0u; !game->playerDeck().empty() && i < cardsPerPlayer; ++i)
+		for (auto i = 0u; !game->playerDeck().empty() && i < game->initialCards(); ++i)
 		{
 			player->addCard(std::move(game->playerDeck().drawTopCard()));
 		}
@@ -208,6 +210,7 @@ void newGame()
 
 	//Place first research station
 	map.startingCity().giveResearchStation(*game);
+
 }
 
 void loadGame()
@@ -700,12 +703,20 @@ std::string titleFont(const std::string& original)
 	return ss.str();
 }
 
-void flipAndInfect(InfectionCardDeck& deck, GameState& state) {// normal one infectio after each turn
+void infect()
+{
+	for (auto i = 0u; i < game->infectionRate(); ++i)
+	{
+		auto card = game->infectionDeck().drawTopCard();
+		card->onDraw(*game);
+		game->infectionDeck().addToDiscard(std::move(card));
+	}
+
 	std::cout << "Flip an infection card: " << std::endl;
-	auto temp = move(deck.drawTopCard());
-	std::cout << "Infection card :" << temp->name() << " with the colour of: " << colourAbbreviation(temp->colour()) << "\n" <<
-		"infects the city " << temp->name() << " one time " << std::endl;
-	temp->onDraw(state);
+	//auto temp = move(deck.drawTopCard());
+	//std::cout << "Infection card :" << temp->name() << " with the colour of: " << colourAbbreviation(temp->colour()) << "\n" <<
+//		"infects the city " << temp->name() << " one time " << std::endl;
+	//temp->onDraw(state);
 	std::cout << "Put it to infection card discard pile: " << std::endl;
-	deck.addToDiscard(move(temp));
+	//deck.addToDiscard(move(temp));
 }

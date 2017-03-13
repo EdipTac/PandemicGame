@@ -4,8 +4,6 @@ Author: Ke chun Ye
 Version: 1.0
 Data: 20170209*/
 
-#pragma warning(disable : 4100)	// To be removed
-
 #include <iostream>
 #include <string>
 
@@ -14,15 +12,21 @@ Data: 20170209*/
 
 InfectionCard::InfectionCard(City& city)
 	: CityCard { city }
-{}
+{} // Empty
+
 InfectionCard::~InfectionCard(){}
-void InfectionCard::onDraw(GameState& state) {}
+
+void InfectionCard::onDraw(GameState& state)
+{
+	city().addDiseaseCubes(colour(), CUBE_NORMAL_INFECTION, state);
+	std::cout << city().name() << " infected with " << colourName(city().colour()) << " disease!\n";
+}
 std::string InfectionCard::description() const
 {
-    std::string descr;
-	descr = "Infection card: " + name() + " with the colour of " + colourAbbreviation(colour());
-	return descr;
+	return "This card infects " + name() + " with the " + colourAbbreviation(colour()) + " disease.";
 }
-void InfectionCard::cardWork(GameState& state) {// can merge to onDraw
-	city().addDiseaseCubes(colour(), CUBE_NORMAL_INFECTION, state);
+
+void InfectionCard::cardWork(GameState& state)
+{
+	onDraw(state);
 }
