@@ -44,13 +44,12 @@
 #include "Util.h"
 
 //	----    Program entry point    ----  //
-//#define TEST
+#define TEST
 #ifdef TEST
 void main()
 {
-	game = readGameFromFile("save.json");
-	game->currentPlayer().setRole(std::make_unique<RoleCard>("Ayyy", "Lmao"));
-	saveGame(*game);
+	auto map = readMapFromFile("earth.map");
+	writeMapToFile(*map, "test.map");
 }
 #else
 void main()
