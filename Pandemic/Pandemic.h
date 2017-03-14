@@ -1,5 +1,6 @@
 #pragma once
 
+//  ----  Forward declarations  ----  //
 void directConnectionReport();
 void displayCities();
 void displayReferenceCard();
@@ -35,3 +36,14 @@ City& solicitConnection(const City& source);
 template <typename T> void list(const T& collection);
 template <typename T> T validateInput(const std::map<std::string, T>& validInputs, const std::string& errMsg);
 template <typename T> T validateInput(const std::vector<T>& valid, const std::string& errMsg);
+
+const auto& saveGameAction = static_cast<bool(*)()>(saveGame);
+
+//  ----  Game pointer - global data  ----  //
+std::unique_ptr<GameState> game;
+
+//  ----  Constants  -----  //
+constexpr size_t minPlayers = 1;
+constexpr size_t maxPlayers = 4;
+constexpr size_t actionsPerTurn = 4;
+constexpr size_t cardsPerTurn = 2;

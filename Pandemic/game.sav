@@ -2,7 +2,7 @@
     "cities": [
         {
             "colour": "B",
-            "disease cubes": {
+            "diseaseCubes": {
                 "B": 3,
                 "K": 0,
                 "R": 0,
@@ -13,7 +13,7 @@
         },
         {
             "colour": "Y",
-            "disease cubes": {
+            "diseaseCubes": {
                 "B": 0,
                 "K": 0,
                 "R": 0,
@@ -24,7 +24,7 @@
         },
         {
             "colour": "K",
-            "disease cubes": {
+            "diseaseCubes": {
                 "B": 0,
                 "K": 3,
                 "R": 0,
@@ -35,36 +35,37 @@
         }
     ],
     "infection": {
+        "cured": [],
         "deck": [],
         "discard": [
-            "Montreal",
             "London",
-            "Toronto"
+            "Toronto",
+            "Montreal"
         ],
         "outbreak": 0,
         "rate": 1
     },
-    "map": "game.sav",
+    "map": "earth.map",
     "playercards": {
         "deck": [
-            "London",
-            "Toronto",
             "Forecast",
-            "Government Grant"
+            "One Quiet Night",
+            "Airlift",
+            "Montreal"
         ],
         "discard": []
     },
     "players": [
         {
             "hand": [
+                "Toronto",
+                "Government Grant",
                 "Resilient Population",
-                "One Quiet Night",
-                "Airlift",
-                "Montreal"
+                "London"
             ],
             "name": "Wishe",
             "position": "London",
-            "role": ""
+            "role": "QUARANTINE SPECIALIST"
         }
     ]
 }

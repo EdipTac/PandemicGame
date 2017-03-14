@@ -43,15 +43,6 @@
 #include "Util.h"
 #include "DeckofRoles.h"
 
-// Game pointer
-std::unique_ptr<GameState> game;
-
-//  ----  Constants  -----  //
-constexpr size_t minPlayers		= 1;
-constexpr size_t maxPlayers		= 4;
-constexpr size_t actionsPerTurn	= 4;
-constexpr size_t cardsPerTurn	= 2;
-
 //  ----  Menus  ----  //
 const GeneralMenu mainMenu
 {
@@ -67,10 +58,10 @@ const GeneralMenu mainMenu
 const ActionMenu turnMenu
 {
 	{
-		{ "Report",			report								},
-		{ "Perform Action",	performAction						},
-		{ "Save Game",		static_cast<bool(*)()>(saveGame)	},
-		{ "Quit Game",		actionQuit							}
+		{ "Report",			report			},
+		{ "Perform Action",	performAction	},
+		{ "Save Game",		saveGameAction	},
+		{ "Quit Game",		actionQuit		}
 	}
 };
 
