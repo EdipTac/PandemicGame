@@ -37,13 +37,14 @@ void Player::addCard(std::unique_ptr<PlayerCard> card) {
 	_cards.push_back(std::move(card));
 }
 // Should return to deck!
-void Player::removeCardByName(const std::string& name)
+void Player::removeCardByName(const std::string& name, GameState& state)
 {
 	auto it = std::find_if(_cards.begin(), _cards.end(), [&](const auto& card) { return card->name() == name; });
 	if (it == _cards.end())
 	{
 		return;
 	}
+	state.playerDeck().addToDiscard(move(*it));
 	_cards.erase(it);
 }
 
@@ -52,11 +53,24 @@ std::ostream& operator<<(std::ostream& os, PlayerCard& card)
 	return os << card.toString();
 }
 
-void Player::displayCards() {
-	std::cout << "\nDisplaying Cards: \n";
-	for (auto i = _cards.begin(); i != _cards.end(); ++i) {
-		std::cout << **i << "\n";
+void Player::displayCards(GameState& state) {
+	std::cout << "\nDisplaying Cards on hand: \n";
+	int k = 0;
+	for (auto& card : cityCards()) {
+		std::cout << card->toString() << "\n";
+		k++;
 	}
+	if (k > 7) {
+		std::cout << "More than seven city cards on hand, you have to drop " << (k - 7) << "city cards" << std::endl;
+	}
+	for (auto& player : state.players()) {
+		for (auto& card : player->cards()) {
+			if (!card->isCityCard()) {
+				std::cout << card->toString() << "\n";
+			}
+		}
+	}
+
 }
 
 bool Player::hasPositionCard()
