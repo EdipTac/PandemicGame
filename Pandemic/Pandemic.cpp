@@ -28,8 +28,9 @@
 // Project file inclusions
 #include "Card.h"
 #include "City.h"
-#include "EventCard.h"
 #include "DeckofEvents.h"
+#include "DeckofRoles.h"
+#include "EventCard.h"
 #include "GameState.h"
 #include "InfectionCard.h"
 #include "InfectionCardDeck.h"
@@ -41,54 +42,6 @@
 #include "PlayerCityCard.h"
 #include "Serialization.h"
 #include "Util.h"
-#include "DeckofRoles.h"
-
-//  ----  Menus  ----  //
-const GeneralMenu mainMenu
-{
-	{
-		{ "New Game",	newGame		},
-		{ "Load Game",	loadGame	},
-		{ "Map Editor",	mapEditor	},
-		{ "Exit",		quit		}
-	}
-};
-
-// Return true iff the action 
-const ActionMenu turnMenu
-{
-	{
-		{ "Report",			report			},
-		{ "Perform Action",	performAction	},
-		{ "Save Game",		saveGameAction	},
-		{ "Quit Game",		actionQuit		}
-	}
-};
-
-const GeneralMenu reportMenu
-{
-	{
-		{ "Display Cities",				displayCities			},
-		//{ "City Report",				cityReport				},
-		{ "Display Reference Card",	displayReferenceCard		},
-		{ "Direct Connection Report",	directConnectionReport	}
-	}
-};
-
-const ActionMenu actionMenu
-{
-	{
-		{ "Drive/Ferry",				driveOrFerry			},
-		{ "Direct Flight",				directFlight			},
-		{ "Charter Flight",				charterFlight			},
-		{ "Shuttle Flight",				shuttleFlight			},
-		{ "Build a Research Station",	buildResearchStation	},
-		{ "Treat Disease",				treatDisease			},
-		{ "Share Knowledge",			shareKnowledge			},
-		{ "Cure Disease",				cureDisease				},
-		{ "Quit Game",					actionQuit				}
-	}
-};
 
 //	----    Program entry point    ----  //
 //#define TEST
@@ -111,7 +64,7 @@ void main()
 		auto& currentPlayer = game->nextPlayer();
 		std::cout << currentPlayer.name() << "'s turn.\n";
 		while (!turnMenu.solicitInput()); // Intentionally empty body
-		if (!game)
+		if (game)
 		{
 			game->distributePlayerCards(cardsPerTurn);
 		}

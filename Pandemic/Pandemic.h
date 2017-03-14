@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Menu.h"
+
 //  ----  Forward declarations  ----  //
 void directConnectionReport();
 void displayCities();
@@ -47,3 +49,48 @@ constexpr size_t minPlayers = 1;
 constexpr size_t maxPlayers = 4;
 constexpr size_t actionsPerTurn = 4;
 constexpr size_t cardsPerTurn = 2;
+
+//  ----  Menus  ----  //
+const GeneralMenu mainMenu
+{
+	{
+		{ "New Game",	newGame },
+		{ "Load Game",	loadGame },
+		{ "Map Editor",	mapEditor },
+		{ "Exit",		quit }
+	}
+};
+
+const ActionMenu turnMenu
+{
+	{
+		{ "Report",			report },
+		{ "Perform Action",	performAction },
+		{ "Save Game",		saveGameAction },
+		{ "Quit Game",		actionQuit }
+	}
+};
+
+const GeneralMenu reportMenu
+{
+	{
+		{ "Display Cities",				displayCities },
+		{ "Display Reference Card",	displayReferenceCard },
+		{ "Direct Connection Report",	directConnectionReport }
+	}
+};
+
+const ActionMenu actionMenu
+{
+	{
+		{ "Drive/Ferry",				driveOrFerry },
+		{ "Direct Flight",				directFlight },
+		{ "Charter Flight",				charterFlight },
+		{ "Shuttle Flight",				shuttleFlight },
+		{ "Build a Research Station",	buildResearchStation },
+		{ "Treat Disease",				treatDisease },
+		{ "Share Knowledge",			shareKnowledge },
+		{ "Cure Disease",				cureDisease },
+		{ "Quit Game",					actionQuit }
+	}
+};
