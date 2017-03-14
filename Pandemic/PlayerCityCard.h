@@ -11,6 +11,7 @@ class PlayerCityCard
 	, public CityCard
 {
 public:
+	PlayerCityCard();
 	// Constructs a city player card for a given city
 	PlayerCityCard(City& city);
 

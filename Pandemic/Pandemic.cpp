@@ -44,6 +44,20 @@
 #include "Util.h"
 
 //	----    Program entry point    ----  //
+#define TEST
+#ifdef TEST
+void main()
+{
+	PlayerCard* ptr;
+	PlayerCityCard pcc;
+	EventCard ec { "" , "" };
+	ptr = &pcc;
+	std::cout << ptr->isCityCard() << std::endl;
+	ptr = &ec;
+	std::cout << ptr->isCityCard() << std::endl;
+	waitForExit();
+}
+#else
 void main()
 {
 	// Title display
@@ -64,6 +78,7 @@ void main()
 
 	waitForExit();
 }
+#endif
 
 // The player wants to start a new game
 void newGame()
