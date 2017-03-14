@@ -301,7 +301,7 @@ bool directFlight()
 	list(cards);
 	auto& targetCard = *validateInput(cards, "You have no city card of that name.\n");
 	player.pawn().setPosition(targetCard.city());
-	player.removeCardByName(targetCard.name());
+	player.removeCardByName(targetCard.name(),*game);
 
 	return true;
 }
@@ -324,7 +324,7 @@ bool charterFlight()
 	std::cout << "Where would you like to fly to? ";
 	auto& target = *validateInput(game->map().nameMap(), "No city of that name exists.\n");
 	pawn.setPosition(target);
-	player.removeCardByName(player.pawn().position().name());
+	player.removeCardByName(player.pawn().position().name(),*game);
 
 	return true;
 }
@@ -402,7 +402,7 @@ bool buildResearchStation()
 	{
 		return card->name() == positionName;
 	});
-	player.removeCardByName((*it)->name());
+	player.removeCardByName((*it)->name(),*game);
 	player.pawn().position().giveResearchStation(*game);
 
 	return true;
