@@ -6,6 +6,10 @@
 //PlayerCityCard::PlayerCityCard()
 //	: PlayerCard() {}
 
+PlayerCityCard::PlayerCityCard()
+	: CityCard {}
+{}
+
 // Constructor
 PlayerCityCard::PlayerCityCard(City& city)
 	: CityCard { city }

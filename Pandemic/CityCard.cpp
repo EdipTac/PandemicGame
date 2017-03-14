@@ -1,20 +1,22 @@
 #include "City.h"
 #include "CityCard.h"
 
+CityCard::CityCard() {}
+
 CityCard::CityCard(City& city)
-	: _city{ city }
+	: _city{ &city }
 {}
 
 CityCard::~CityCard() {}
 
 City& CityCard::city() const
 {
-	return _city;
+	return *_city;
 }
 
 std::string CityCard::name() const
 {
-	return _city.name();
+	return _city->name();
 }
 
 std::string CityCard::description() const
@@ -24,5 +26,5 @@ std::string CityCard::description() const
 
 Colour CityCard::colour() const
 {
-	return _city.colour();
+	return _city->colour();
 }

@@ -13,11 +13,6 @@
 //
 //  An implementation of the board game "Pandemic" by Z-Man Games.
 
-// Disable static initialization warning
-#pragma warning (disable: 4592)
-
-//  ----    Inclusions    ----  //
-// Standard library inclusions
 #include <iostream>
 #include <fstream>
 #include <random>
@@ -25,7 +20,6 @@
 #include <string>
 #include <vector>
 
-// Project file inclusions
 #include "Card.h"
 #include "City.h"
 #include "DeckofEvents.h"
@@ -44,6 +38,20 @@
 #include "Util.h"
 
 //	----    Program entry point    ----  //
+//#define TEST
+#ifdef TEST
+void main()
+{
+	PlayerCard* ptr;
+	PlayerCityCard pcc;
+	EventCard ec { "" , "" };
+	ptr = &pcc;
+	std::cout << ptr->isCityCard() << std::endl;
+	ptr = &ec;
+	std::cout << ptr->isCityCard() << std::endl;
+	waitForExit();
+}
+#else
 void main()
 {
 	// Title display
@@ -53,7 +61,7 @@ void main()
 	while (game && !game->shouldQuit())
 	{
 		auto& currentPlayer = game->nextPlayer();
-		std::cout << currentPlayer.name() << "'s turn.\n";
+		std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
 		while (!turnMenu.solicitInput()); // Intentionally empty body
 		if (game)
 		{
@@ -64,6 +72,9 @@ void main()
 
 	waitForExit();
 }
+#endif
+
+//  -----  Function definitions  ----  //
 
 // The player wants to start a new game
 void newGame()
@@ -193,7 +204,7 @@ void loadGame()
 	std::cout << "Load game...\n";
 	const auto fileName = solicitFileName("Enter name of game save file: ");
 	game = readGameFromFile(fileName);
-	std::cout << "\n" << titleFont("RESUMING GAME") << "\n\n";
+	std::cout << "\n\n" << titleFont("RESUMING GAME") << "\n\n";
 }
 
 bool saveGame()

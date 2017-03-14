@@ -12,6 +12,8 @@ class CityCard
 	: public Card
 {
 public:
+	CityCard();
+
 	// Constructs a card referencing a given city
 	CityCard(City& city);
 
@@ -31,5 +33,5 @@ public:
 	Colour colour() const;
 
 private:
-	City& _city;
+	City* _city;
 };
