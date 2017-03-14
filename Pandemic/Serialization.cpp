@@ -1,24 +1,21 @@
 #include <fstream>
 #include <memory>
-#include <string>
 #include <sstream>
 #include <stdexcept>
+#include <string>
 #include <tuple>
 
 #include "json.hpp"
-using json = nlohmann::json; // for convenience
 
 #include "Colour.h"
+#include "DeckofEvents.h"
+#include "DeckofRoles.h"
+#include "EventCard.h"
+#include "PlayerCityCard.h"
 #include "Serialization.h"
 #include "Util.h"
-#include "PlayerCityCard.h"
-#include "DeckofEvents.h"
-#include "EventCard.h"
-#include "DeckofRoles.h"
 
-//#pragma warning(disable : 4456)
-
-void writeToFile(std::string currentPlayer, json content);
+using json = nlohmann::json;
 
 std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 {
@@ -408,16 +405,4 @@ void saveGame(GameState& game, const std::string& fileName)
 	}
 
 	os << std::setw(4) << j;
-}
-
-void writeToFile(std::string currentPlayer, json content)
-{
-	std::string saveFileName = currentPlayer + "_save.json";
-	std::ofstream fs{ saveFileName };
-	if (!fs)
-	{
-		throw std::runtime_error{ "File I/O error!" };
-	}
-
-	fs << content;
 }
