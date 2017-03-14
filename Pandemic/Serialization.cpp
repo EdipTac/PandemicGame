@@ -55,6 +55,65 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 	return std::move(map);
 }
 
+std::unique_ptr<Map> oldReadMapFromFile(const std::string& fileName)
+{
+	std::ifstream fs { fileName };
+	if (!fs)
+	{
+		throw std::runtime_error { "File not found!" };
+	}
+
+	std::unique_ptr<Map> map;
+	std::map<City*, std::vector<std::string>> connections;
+
+	{
+		std::vector<std::unique_ptr<City>> cities;
+		City* startingCity;
+		while (!fs.eof())
+		{
+			auto line = getline(fs);
+			if (line.empty() || line[0] == '\\')
+			{
+				continue;
+			}
+			else if (line[0] == '\t')
+			{
+				connections[cities.back().get()].push_back(line.substr(1));
+			}
+			else
+			{
+				bool isStartingCity = false;
+				if (line[0] == '*')
+				{
+					line = line.substr(1);
+					isStartingCity = true;
+				}
+				std::string name, colour;
+				std::tie(name, colour) = splitOnLastSpace(line);
+				cities.push_back(std::make_unique<City>(name, colourFromAbbreviation(colour)));
+				connections[cities.back().get()];
+				if (isStartingCity)
+				{
+					startingCity = cities.back().get();
+				}
+			}
+		}
+
+		map = std::make_unique<Map>(fileName, startingCity, std::move(cities));
+	}
+
+	for (const auto& list : connections)
+	{
+		for (const auto& targetName : list.second)
+		{
+			auto& target = map->findCityByName(targetName);
+			list.first->connectTo(target);
+		}
+	}
+
+	return std::move(map);
+}
+
 void writeMapToFile(const Map& map, const std::string& fileName)
 {	
 	json j;
@@ -391,6 +450,7 @@ void saveGame(GameState& game, const std::string& fileName)
 	j["infection"]["rate"] = game.infectionCounter();
 
 	bool hasCured = false;
+	j["infection"];
 	for (const auto& colour : colours())
 	{
 		if (game.isCured(colour))
@@ -399,10 +459,10 @@ void saveGame(GameState& game, const std::string& fileName)
 			j["infection"]["cured"].push_back(colourAbbreviation(colour));
 		}
 	}
-	if (!hasCured) 
-	{
-		j["infection"]["cured"] = json::array();
-	}
+	//if (!hasCured) 
+	//{
+	//	j["infection"]["cured"] = json::array();
+	//}
 
 	os << std::setw(4) << j;
 }

@@ -11,6 +11,7 @@
 
 // Returns a map read from a given text file
 std::unique_ptr<Map> readMapFromFile(const std::string& fileName);
+std::unique_ptr<Map> oldReadMapFromFile(const std::string& fileName);
 
 // Given a map and file name, writes the map as a text file
 void writeMapToFile(const Map& map, const std::string& fileName);

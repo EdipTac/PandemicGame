@@ -44,14 +44,6 @@
 #include "Util.h"
 
 //	----    Program entry point    ----  //
-#define TEST
-#ifdef TEST
-void main()
-{
-	auto map = readMapFromFile("test.map");
-	writeMapToFile(*map, "test2.map");
-}
-#else
 void main()
 {
 	// Title display
@@ -72,7 +64,6 @@ void main()
 
 	waitForExit();
 }
-#endif
 
 // The player wants to start a new game
 void newGame()

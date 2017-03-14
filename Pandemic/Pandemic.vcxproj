@@ -171,7 +171,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map" />
-    <None Include="earth2.map" />
+    <None Include="earth2.map">
+      <DeploymentContent Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</DeploymentContent>
+    </None>
     <None Include="save.json" />
     <None Include="save2.json" />
     <None Include="save5.json" />

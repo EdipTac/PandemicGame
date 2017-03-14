@@ -1,238 +1,525 @@
-\\ Comment
-
-*Atlanta B
-	Chicago
-	Washington
-	Miami
-Chicago B
-	Montreal
-	Atlanta
-	Mexico City
-	Los Angeles
-	San Francisco
-Montreal B
-	New York
-	Washington
-	Chicago
-New York B
-	London
-	Madrid
-	Washington
-	Montreal
-London B
-	Essen
-	Paris
-	Madrid
-	New York
-Essen B
-	St. Petersburg
-	Milan
-	Paris
-	London
-St. Petersburg B
-	Moscow
-	Istanbul
-	Essen
-Milan B
-	Istanbul
-	Paris
-	Essen
-Paris B
-	London
-	Essen
-	Milan
-	Algiers
-	Madrid
-Madrid B
-	London
-	Paris
-	Algiers
-	Sao Paulo
-	New York
-Washington B
-	Montreal
-	New York
-	Miami
-	Atlanta
-San Francisco B
-	Tokyo
-	Manila
-	Chicago
-	Los Angeles
-Los Angeles Y
-	San Francisco
-	Chicago
-	Mexico City
-	Sydney
-Mexico City Y
-	Chicago
-	Miami
-	Bogota
-	Lima
-	Los Angeles
-Miami Y
-	Atlanta
-	Washington
-	Bogota
-	Mexico City
-Bogota Y
-	Miami
-	Sao Paulo
-	Buenos Aires
-	Lima
-	Mexico City
-Lima Y
-	Mexico City
-	Bogota
-	Santiago
-Santiago Y
-	Lima
-Sao Paulo Y
-	Bogota
-	Madrid
-	Lagos
-	Buenos Aires
-Buenos Aires Y
-	Bogota
-	Sao Paulo
-Lagos Y
-	Sao Paulo
-	Khartoum
-	Kinshasa
-Kinshasa Y
-	Lagos
-	Khartoum
-	Johannesburg
-Khartoum Y
-	Cairo
-	Johannesburg
-	Kinshasa
-	Lagos
-Johannesburg Y
-	Kinshasa
-	Khartoum
-Algiers K
-	Madrid
-	Paris
-	Istanbul
-	Cairo
-Cairo K
-	Algiers
-	Istanbul
-	Baghdad
-	Riyadh
-Istanbul K
-	Milan
-	St. Petersburg
-	Moscow
-	Baghdad
-	Cairo
-	Algiers
-Moscow K
-	St. Petersburg
-	Tehran
-	Istanbul
-Tehran K
-	Moscow
-	Delhi
-	Karachi
-	Baghdad
-Delhi K
-	Tehran
-	Kolkata
-	Chennai
-	Mumbai
-	Karachi
-Baghdad K
-	Tehran
-	Karachi
-	Riyadh
-	Cairo
-	Istanbul
-Riyadh K
-	Cairo
-	Baghdad
-	Karachi
-Karachi K
-	Tehran
-	Delhi
-	Mumbai
-	Riyadh
-	Baghdad
-Mumbai K
-	Karachi
-	Delhi
-	Chennai
-Kolkata K
-	Delhi
-	Hong Kong
-	Bangkok
-	Chennai
-Chennai K
-	Mumbai
-	Delhi
-	Kolkata
-	Bangkok
-	Jakarta
-Beijing R
-	Seoul
-	Shanghai
-Seoul R
-	Beijing
-	Tokyo
-	Shanghai
-Tokyo R
-	Seoul
-	San Francisco
-	Osaka
-	Shanghai
-Shanghai R
-	Beijing
-	Seoul
-	Tokyo
-	Taipei
-	Hong Kong
-Hong Kong R
-	Shanghai
-	Taipei
-	Manila
-	Ho Chi Minh City
-	Bangkok
-	Kolkata
-Taipei R
-	Shanghai
-	Osaka
-	Manila
-	Hong Kong
-Osaka R
-	Tokyo
-	Taipei
-Bangkok R
-	Kolkata
-	Hong Kong
-	Ho Chi Minh City
-	Jakarta
-	Chennai
-Jakarta R
-	Chennai
-	Bangkok
-	Ho Chi Minh City
-	Sydney
-Ho Chi Minh City R
-	Bangkok
-	Hong Kong
-	Manila
-	Jakarta
-Manila R
-	Hong Kong
-	Taipei
-	San Francisco
-	Sydney
-	Ho Chi Minh City
-Sydney R
-	Los Angeles
-	Manila
-	Jakarta
-
-
-
+{
+    "cities": [
+        {
+            "colour": "B",
+            "connections": [
+                "Chicago",
+                "Washington",
+                "Miami"
+            ],
+            "isStartingCity": true,
+            "name": "Atlanta"
+        },
+        {
+            "colour": "B",
+            "connections": [
+                "Montreal",
+                "Atlanta",
+                "Mexico City",
+                "Los Angeles",
+                "San Francisco"
+            ],
+            "isStartingCity": false,
+            "name": "Chicago"
+        },
+        {
+            "colour": "B",
+            "connections": [
+                "New York",
+                "Washington",
+                "Chicago"
+            ],
+            "isStartingCity": false,
+            "name": "Montreal"
+        },
+        {
+            "colour": "B",
+            "connections": [
+                "London",
+                "Madrid",
+                "Washington",
+                "Montreal"
+            ],
+            "isStartingCity": false,
+            "name": "New York"
+        },
+        {
+            "colour": "B",
+            "connections": [
+                "Essen",
+                "Paris",
+                "Madrid",
+                "New York"
+            ],
+            "isStartingCity": false,
+            "name": "London"
+        },
+        {
+            "colour": "B",
+            "connections": [
+                "St. Petersburg",
+                "Milan",
+                "Paris",
+                "London"
+            ],
+            "isStartingCity": false,
+            "name": "Essen"
+        },
+        {
+            "colour": "B",
+            "connections": [
+                "Moscow",
+                "Istanbul",
+                "Essen"
+            ],
+            "isStartingCity": false,
+            "name": "St. Petersburg"
+        },
+        {
+            "colour": "B",
+            "connections": [
+                "Istanbul",
+                "Paris",
+                "Essen"
+            ],
+            "isStartingCity": false,
+            "name": "Milan"
+        },
+        {
+            "colour": "B",
+            "connections": [
+                "London",
+                "Essen",
+                "Milan",
+                "Algiers",
+                "Madrid"
+            ],
+            "isStartingCity": false,
+            "name": "Paris"
+        },
+        {
+            "colour": "B",
+            "connections": [
+                "London",
+                "Paris",
+                "Algiers",
+                "Sao Paulo",
+                "New York"
+            ],
+            "isStartingCity": false,
+            "name": "Madrid"
+        },
+        {
+            "colour": "B",
+            "connections": [
+                "Montreal",
+                "New York",
+                "Miami",
+                "Atlanta"
+            ],
+            "isStartingCity": false,
+            "name": "Washington"
+        },
+        {
+            "colour": "B",
+            "connections": [
+                "Tokyo",
+                "Manila",
+                "Chicago",
+                "Los Angeles"
+            ],
+            "isStartingCity": false,
+            "name": "San Francisco"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "San Francisco",
+                "Chicago",
+                "Mexico City",
+                "Sydney"
+            ],
+            "isStartingCity": false,
+            "name": "Los Angeles"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Chicago",
+                "Miami",
+                "Bogota",
+                "Lima",
+                "Los Angeles"
+            ],
+            "isStartingCity": false,
+            "name": "Mexico City"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Atlanta",
+                "Washington",
+                "Bogota",
+                "Mexico City"
+            ],
+            "isStartingCity": false,
+            "name": "Miami"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Miami",
+                "Sao Paulo",
+                "Buenos Aires",
+                "Lima",
+                "Mexico City"
+            ],
+            "isStartingCity": false,
+            "name": "Bogota"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Mexico City",
+                "Bogota",
+                "Santiago"
+            ],
+            "isStartingCity": false,
+            "name": "Lima"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Lima"
+            ],
+            "isStartingCity": false,
+            "name": "Santiago"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Bogota",
+                "Madrid",
+                "Lagos",
+                "Buenos Aires"
+            ],
+            "isStartingCity": false,
+            "name": "Sao Paulo"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Bogota",
+                "Sao Paulo"
+            ],
+            "isStartingCity": false,
+            "name": "Buenos Aires"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Sao Paulo",
+                "Khartoum",
+                "Kinshasa"
+            ],
+            "isStartingCity": false,
+            "name": "Lagos"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Lagos",
+                "Khartoum",
+                "Johannesburg"
+            ],
+            "isStartingCity": false,
+            "name": "Kinshasa"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Cairo",
+                "Johannesburg",
+                "Kinshasa",
+                "Lagos"
+            ],
+            "isStartingCity": false,
+            "name": "Khartoum"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Kinshasa",
+                "Khartoum"
+            ],
+            "isStartingCity": false,
+            "name": "Johannesburg"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "Madrid",
+                "Paris",
+                "Istanbul",
+                "Cairo"
+            ],
+            "isStartingCity": false,
+            "name": "Algiers"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "Algiers",
+                "Istanbul",
+                "Baghdad",
+                "Riyadh"
+            ],
+            "isStartingCity": false,
+            "name": "Cairo"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "Milan",
+                "St. Petersburg",
+                "Moscow",
+                "Baghdad",
+                "Cairo",
+                "Algiers"
+            ],
+            "isStartingCity": false,
+            "name": "Istanbul"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "St. Petersburg",
+                "Tehran",
+                "Istanbul"
+            ],
+            "isStartingCity": false,
+            "name": "Moscow"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "Moscow",
+                "Delhi",
+                "Karachi",
+                "Baghdad"
+            ],
+            "isStartingCity": false,
+            "name": "Tehran"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "Tehran",
+                "Kolkata",
+                "Chennai",
+                "Mumbai",
+                "Karachi"
+            ],
+            "isStartingCity": false,
+            "name": "Delhi"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "Tehran",
+                "Karachi",
+                "Riyadh",
+                "Cairo",
+                "Istanbul"
+            ],
+            "isStartingCity": false,
+            "name": "Baghdad"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "Cairo",
+                "Baghdad",
+                "Karachi"
+            ],
+            "isStartingCity": false,
+            "name": "Riyadh"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "Tehran",
+                "Delhi",
+                "Mumbai",
+                "Riyadh",
+                "Baghdad"
+            ],
+            "isStartingCity": false,
+            "name": "Karachi"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "Karachi",
+                "Delhi",
+                "Chennai"
+            ],
+            "isStartingCity": false,
+            "name": "Mumbai"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "Delhi",
+                "Hong Kong",
+                "Bangkok",
+                "Chennai"
+            ],
+            "isStartingCity": false,
+            "name": "Kolkata"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "Mumbai",
+                "Delhi",
+                "Kolkata",
+                "Bangkok",
+                "Jakarta"
+            ],
+            "isStartingCity": false,
+            "name": "Chennai"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Seoul",
+                "Shanghai"
+            ],
+            "isStartingCity": false,
+            "name": "Beijing"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Beijing",
+                "Tokyo",
+                "Shanghai"
+            ],
+            "isStartingCity": false,
+            "name": "Seoul"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Seoul",
+                "San Francisco",
+                "Osaka",
+                "Shanghai"
+            ],
+            "isStartingCity": false,
+            "name": "Tokyo"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Beijing",
+                "Seoul",
+                "Tokyo",
+                "Taipei",
+                "Hong Kong"
+            ],
+            "isStartingCity": false,
+            "name": "Shanghai"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Shanghai",
+                "Taipei",
+                "Manila",
+                "Ho Chi Minh City",
+                "Bangkok",
+                "Kolkata"
+            ],
+            "isStartingCity": false,
+            "name": "Hong Kong"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Shanghai",
+                "Osaka",
+                "Manila",
+                "Hong Kong"
+            ],
+            "isStartingCity": false,
+            "name": "Taipei"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Tokyo",
+                "Taipei"
+            ],
+            "isStartingCity": false,
+            "name": "Osaka"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Kolkata",
+                "Hong Kong",
+                "Ho Chi Minh City",
+                "Jakarta",
+                "Chennai"
+            ],
+            "isStartingCity": false,
+            "name": "Bangkok"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Chennai",
+                "Bangkok",
+                "Ho Chi Minh City",
+                "Sydney"
+            ],
+            "isStartingCity": false,
+            "name": "Jakarta"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Bangkok",
+                "Hong Kong",
+                "Manila",
+                "Jakarta"
+            ],
+            "isStartingCity": false,
+            "name": "Ho Chi Minh City"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Hong Kong",
+                "Taipei",
+                "San Francisco",
+                "Sydney",
+                "Ho Chi Minh City"
+            ],
+            "isStartingCity": false,
+            "name": "Manila"
+        },
+        {
+            "colour": "R",
+            "connections": [
+                "Los Angeles",
+                "Manila",
+                "Jakarta"
+            ],
+            "isStartingCity": false,
+            "name": "Sydney"
+        }
+    ]
+}
