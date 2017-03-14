@@ -1,0 +1,31 @@
+{
+    "cities": [
+        {
+            "colour": "B",
+            "connections": [
+                "Toronto",
+                "Montreal"
+            ],
+            "isStartingCity": true,
+            "name": "London"
+        },
+        {
+            "colour": "Y",
+            "connections": [
+                "Toronto",
+                "London"
+            ],
+            "isStartingCity": false,
+            "name": "Montreal"
+        },
+        {
+            "colour": "K",
+            "connections": [
+                "London",
+                "Montreal"
+            ],
+            "isStartingCity": false,
+            "name": "Toronto"
+        }
+    ]
+}

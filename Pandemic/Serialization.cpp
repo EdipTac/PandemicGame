@@ -16,63 +16,42 @@ using json = nlohmann::json; // for convenience
 #include "EventCard.h"
 #include "DeckofRoles.h"
 
-#pragma warning(disable : 4456)
+//#pragma warning(disable : 4456)
 
 void writeToFile(std::string currentPlayer, json content);
 
 std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 {
-	std::ifstream fs { fileName };
-	if (!fs)
+	json j;
 	{
-		throw std::runtime_error { "File not found!" };
-	}
-
-	std::unique_ptr<Map> map;
-	std::map<City*, std::vector<std::string>> connections;
-
-	{
-		std::vector<std::unique_ptr<City>> cities;
-		City* startingCity;
-		while (!fs.eof())
+		std::ifstream fs { fileName };
+		if (!fs)
 		{
-			auto line = getline(fs);
-			if (line.empty() || line[0] == '\\')
-			{
-				continue;
-			}
-			else if (line[0] == '\t')
-			{
-				connections[cities.back().get()].push_back(line.substr(1));
-			}
-			else
-			{
-				bool isStartingCity = false;
-				if (line[0] == '*')
-				{
-					line = line.substr(1);
-					isStartingCity = true;
-				}
-				std::string name, colour;
-				std::tie(name, colour) = splitOnLastSpace(line);
-				cities.push_back(std::make_unique<City>(name, colourFromAbbreviation(colour)));
-				connections[cities.back().get()];
-				if (isStartingCity)
-				{
-					startingCity = cities.back().get();
-				}
-			}
+			throw std::runtime_error { "File not found!" };
 		}
-
-		map = std::make_unique<Map>(fileName, startingCity, std::move(cities));
+		fs >> j;
 	}
-
-	for (const auto& list : connections)
+	auto map = std::make_unique<Map>();
+	std::map<City*, std::vector<std::string>> connections;
+	for (const auto& jCity : j["cities"])
 	{
-		for (const auto& targetName : list.second)
+		auto city = std::make_unique<City>(jCity["name"], colourFromAbbreviation(jCity["colour"]));
+		for (const auto& connection : jCity["connections"])
 		{
-			auto& target = map->findCityByName(targetName);
-			list.first->connectTo(target);
+			connections[city.get()].push_back(connection);
+		}
+		if (jCity["isStartingCity"].get<bool>())
+		{
+			map->startingCity() = city.get();
+		}
+		map->addCity(std::move(city));
+	}
+	for (const auto& pair : connections)
+	{
+		auto& city = *pair.first;
+		for (const auto& connection : pair.second)
+		{
+			city.connectTo(map->findCityByName(connection));
 		}
 	}
 

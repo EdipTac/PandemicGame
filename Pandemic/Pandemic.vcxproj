@@ -176,6 +176,7 @@
     <None Include="save2.json" />
     <None Include="save5.json" />
     <None Include="test.map" />
+    <None Include="test2.map" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

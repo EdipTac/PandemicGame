@@ -48,8 +48,8 @@
 #ifdef TEST
 void main()
 {
-	auto map = readMapFromFile("earth.map");
-	writeMapToFile(*map, "test.map");
+	auto map = readMapFromFile("test.map");
+	writeMapToFile(*map, "test2.map");
 }
 #else
 void main()

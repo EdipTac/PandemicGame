@@ -32,6 +32,7 @@ public:
 
 	// The map's starting city
 	City& startingCity() const;
+	City*& startingCity();
 
 	// List of pointers to all contained cities
 	const std::vector<CityPtr>& cities() const;
@@ -51,5 +52,5 @@ public:
 private:
 	std::string _name;
 	std::vector<CityPtr> _cities;
-	City& _startingCity;
+	City* _startingCity;
 };
