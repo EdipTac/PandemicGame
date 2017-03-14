@@ -129,6 +129,7 @@
     <ClInclude Include="MapEditor.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuOption.h" />
+    <ClInclude Include="Pandemic.h" />
     <ClInclude Include="Pawn.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCard.h" />
@@ -169,7 +170,6 @@
     <Text Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\x64\Release\Pandemic.exe" />
     <None Include="earth.map" />
     <None Include="earth2.map" />
     <None Include="save.json" />

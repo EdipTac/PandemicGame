@@ -130,6 +130,7 @@
     <ClInclude Include="MapEditor.h">
       <Filter>Editors\header</Filter>
     </ClInclude>
+    <ClInclude Include="Pandemic.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -224,7 +225,8 @@
     <None Include="save2.json">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="save5.json" />
-    <None Include="..\x64\Release\Pandemic.exe" />
+    <None Include="save5.json">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

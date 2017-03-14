@@ -36,44 +36,12 @@
 #include "Map.h"
 #include "MapEditor.h"
 #include "Menu.h"
+#include "Pandemic.h"
 #include "Player.h"
 #include "PlayerCityCard.h"
 #include "Serialization.h"
 #include "Util.h"
 #include "DeckofRoles.h"
-
-
-//  ----  Forward declarations  ----  //
-void newGame();
-void loadGame();
-bool saveGame();
-void waitForExit();
-bool performAction();
-void quit();
-bool driveOrFerry();
-bool directFlight();
-bool charterFlight();
-bool shuttleFlight();
-bool buildResearchStation();
-bool treatDisease();
-bool shareKnowledge();
-bool giveKnowledge(Player& target);
-bool takeKnowledge(Player& target);
-bool cureDisease();
-bool actionQuit();
-bool report();
-void displayCities();
-void directConnectionReport();
-void infect();
-void displayReferenceCard();
-std::string solicitFileName(const std::string& msg);
-City& solicitConnection(const City& source);
-std::string solicitPlayerName(const size_t number);
-size_t solicitSize(const size_t min, const size_t max);
-template <typename T> T validateInput(const std::map<std::string, T>& validInputs, const std::string& errMsg);
-template <typename T> T validateInput(const std::vector<T>& valid, const std::string& errMsg);
-template <typename T> void list(const T& collection);
-std::string titleFont(const std::string& original);
 
 // Game pointer
 std::unique_ptr<GameState> game;
