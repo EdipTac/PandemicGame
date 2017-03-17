@@ -260,6 +260,9 @@
     </ClCompile>
     <ClCompile Include="DefaultTerminationObserver.cpp" />
     <ClCompile Include="DiseaseTracker.cpp" />
+    <ClCompile Include="Observer.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">

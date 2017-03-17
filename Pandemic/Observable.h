@@ -2,14 +2,14 @@
 
 #include <vector>
 
-class Observer;
+class Observer; //the abstract implementation for the subject component of the 
 
 class Observable
 {
 public:
 	virtual ~Observable() = 0;
-	void subscribe(Observer& observer);
-	void unsubscribe(Observer& observer);
+	void attach(Observer& observer);
+	void detach(Observer& observer);
 	void notify() const;
 
 private:
