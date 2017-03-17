@@ -8,8 +8,9 @@ class OutbreakCounter
 	: public Terminator
 {
 public:
-	OutbreakCounter(const size_t max = _defaultLossCount);
+	OutbreakCounter();
 	virtual TerminationState terminationState() const override;
+	size_t counter() const;
 	void advance();
 
 private:

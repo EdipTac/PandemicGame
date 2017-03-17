@@ -2,14 +2,19 @@
 
 const size_t OutbreakCounter::_defaultLossCount = 8;
 
-OutbreakCounter::OutbreakCounter(const size_t lossCount)
+OutbreakCounter::OutbreakCounter()
 	: _counter { 0 }
-	, _lossCount { lossCount }
+	, _lossCount { _defaultLossCount }
 {}
 
 TerminationState OutbreakCounter::terminationState() const
 {
 	return _counter > _lossCount ? TerminationState::Defeat : TerminationState::InProgress;
+}
+
+size_t OutbreakCounter::counter() const
+{
+	return _counter;
 }
 
 void OutbreakCounter::advance()

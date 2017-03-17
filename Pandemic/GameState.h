@@ -9,6 +9,8 @@
 #include "Map.h"
 #include "Player.h"
 #include "PlayerCard.h"
+#include "OutbreakCounter.h"
+#include "DefaultTerminationObserver.h"
 
 // Represents the state of the game
 class GameState
@@ -43,7 +45,7 @@ public:
 	unsigned infectionRate() const;
 	unsigned infectionCounter() const;
 
-	unsigned outbreakCounter() const;
+	size_t outbreakCounter() const;
 	void advanceOutbreakCounter();
 	CubePool& cubePool();
 
@@ -64,6 +66,9 @@ private:
 	unsigned _researchStations = 6;
 	Deck<PlayerCard> _playerDeck;
 	Deck<InfectionCard> _infectionDeck;
+
+	OutbreakCounter _outbreakCounter_;
+	DefaultTerminationObserver _terminationObserver;
 };
 
 std::unique_ptr<GameState> quitState();

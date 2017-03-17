@@ -6,11 +6,13 @@
 
 GameState::GameState()
 	: _cubePool { 96 / 4 }
+	, _terminationObserver { *this }
 {
 	for (const auto& colour : colours())
 	{
 		_cured[colour] = false;
 	}
+	_terminationObserver.subscribeTo(_outbreakCounter_);
 }
 
 std::vector<Player*> GameState::players()
@@ -155,8 +157,8 @@ unsigned GameState::infectionRate() const
 {
 	const auto& c = _infectionCounter; // Alias
 	return	(1 <= c && c <= 3) ? 2 :
-		(4 <= c && c <= 5) ? 3 :
-		4;
+			(4 <= c && c <= 5) ? 3 :
+								 4 ;
 }
 
 unsigned GameState::infectionCounter() const
@@ -164,19 +166,14 @@ unsigned GameState::infectionCounter() const
 	return _infectionCounter;
 }
 
-unsigned GameState::outbreakCounter() const
+size_t GameState::outbreakCounter() const
 {
-	return _outbreakCounter;
+	return _outbreakCounter_.counter();
 }
 
 void GameState::advanceOutbreakCounter()
 {
-	++_outbreakCounter;
-	if (_outbreakCounter >= 8)
-	{
-		std::cout << "You lose! 8 outbreaks.\n";
-		quit();
-	}
+	_outbreakCounter_.advance();
 }
 
 CubePool& GameState::cubePool()

@@ -42,13 +42,12 @@
 #ifdef TEST
 void main()
 {
-	PlayerCard* ptr;
-	PlayerCityCard pcc;
-	EventCard ec { "" , "" };
-	ptr = &pcc;
-	std::cout << ptr->isCityCard() << std::endl;
-	ptr = &ec;
-	std::cout << ptr->isCityCard() << std::endl;
+	GameState g;
+	while (!g.shouldQuit())
+	{
+		std::cout << g.outbreakCounter() << std::endl;
+		g.advanceOutbreakCounter();
+	}
 	waitForExit();
 }
 #else
