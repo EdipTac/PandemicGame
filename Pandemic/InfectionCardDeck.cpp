@@ -13,8 +13,7 @@ Data: 20170209*/
 
 InfectionCardDeck::InfectionCardDeck() {
 }
-// initialize in Pendemic.cpp, ignore codes below
-/*
+
 InfectionCardDeck::InfectionCardDeck(std::string fileName)
 {
    // initiate 48 infection cards on deck
@@ -25,7 +24,7 @@ InfectionCardDeck::InfectionCardDeck(std::string fileName)
    }
 	shuffleDeck();// shuffle infection cards on deck/
 }
-*/
+
 #pragma warning (push)
 
 #pragma warning (disable: 4100) // S since cards isn't used
