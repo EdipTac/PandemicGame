@@ -119,6 +119,7 @@
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DeckofEvents.h" />
     <ClInclude Include="DeckofRoles.h" />
+    <ClInclude Include="DefaultTerminationObserver.h" />
     <ClInclude Include="EpidemicCard.h" />
     <ClInclude Include="EventCard.h" />
     <ClInclude Include="GameState.h" />
@@ -154,6 +155,7 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DeckofEvents.cpp" />
     <ClCompile Include="DeckofRoles.cpp" />
+    <ClCompile Include="DefaultTerminationObserver.cpp" />
     <ClCompile Include="EpidemicCard.cpp" />
     <ClCompile Include="EventCard.cpp" />
     <ClCompile Include="GameState.cpp" />

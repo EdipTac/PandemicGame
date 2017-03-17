@@ -11,6 +11,8 @@ class TerminationObserver
 public:
 	void subscribeTo(Terminator& subject);
 	virtual void update() override;
+
+protected:
 	virtual void onVictory() = 0;
 	virtual void onDefeat() = 0;
 

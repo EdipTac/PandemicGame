@@ -163,6 +163,9 @@
     <ClInclude Include="Pandemic.h">
       <Filter>Main</Filter>
     </ClInclude>
+    <ClInclude Include="DefaultTerminationObserver.h">
+      <Filter>Victory and Defeat\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -252,6 +255,7 @@
     <ClCompile Include="Pandemic.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="DefaultTerminationObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
