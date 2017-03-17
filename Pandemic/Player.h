@@ -7,6 +7,7 @@
 #include <algorithm>
 
 #include "Pawn.h"
+#include "GameState.h"
 #include "PlayerCard.h"
 #include "RoleCard.h"
 
@@ -27,7 +28,7 @@ public:
 	// Accessors and Mutators
 	std::vector<PlayerCard*> cards() const;
 	void addCard(std::unique_ptr<PlayerCard> card);
-	void removeCardByName(const std::string& name);
+	void removeCardByName(const std::string& name, GameState& state);
 
 	std::vector<PlayerCityCard*> cityCards() const;
 
@@ -43,7 +44,7 @@ public:
 	std::string getName() const;
 	void setName(const std::string name);
 
-	void displayCards();
+	void displayCards(GameState& state);
 
 	bool hasPositionCard();
 

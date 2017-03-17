@@ -63,7 +63,7 @@ private:
 	bool _shouldQuit = false;
 	unsigned _researchStations = 6;
 	Deck<PlayerCard> _playerDeck;
-	Deck<InfectionCard> _infectionDeck;
+	InfectionCardDeck _infectionDeck;
 };
 
 std::unique_ptr<GameState> quitState();
