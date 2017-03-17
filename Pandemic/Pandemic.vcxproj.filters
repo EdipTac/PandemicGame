@@ -59,6 +59,9 @@
     <Filter Include="Victory and Defeat\src">
       <UniqueIdentifier>{ad338b42-bd7c-4d71-aa77-f5759b474df0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{c4b4a563-92a9-427a-b60f-7e79f6aad0f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -139,7 +142,6 @@
     <ClInclude Include="MapEditor.h">
       <Filter>Editors\header</Filter>
     </ClInclude>
-    <ClInclude Include="Pandemic.h" />
     <ClInclude Include="Observable.h">
       <Filter>General\header</Filter>
     </ClInclude>
@@ -154,6 +156,12 @@
     </ClInclude>
     <ClInclude Include="OutbreakCounter.h">
       <Filter>Victory and Defeat\header</Filter>
+    </ClInclude>
+    <ClInclude Include="TerminationObserver.h">
+      <Filter>Victory and Defeat\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Pandemic.h">
+      <Filter>Main</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -208,7 +216,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
-    <ClCompile Include="Pandemic.cpp" />
     <ClCompile Include="Deck.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
@@ -238,6 +245,12 @@
     </ClCompile>
     <ClCompile Include="OutbreakCounter.cpp">
       <Filter>Victory and Defeat\src</Filter>
+    </ClCompile>
+    <ClCompile Include="TerminationObserver.cpp">
+      <Filter>Victory and Defeat\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Pandemic.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

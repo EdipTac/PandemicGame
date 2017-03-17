@@ -5,12 +5,11 @@
 #include "TerminationState.h"
 
 class OutbreakCounter
-	: public Observable
-	, public Terminator
+	: public Terminator
 {
 public:
 	OutbreakCounter(const size_t max = _defaultLossCount);
-	virtual TerminationState terminationState() override;
+	virtual TerminationState terminationState() const override;
 	void advance();
 
 private:

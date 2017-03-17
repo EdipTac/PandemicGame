@@ -139,6 +139,7 @@
     <ClInclude Include="PlayerCityCard.h" />
     <ClInclude Include="RoleCard.h" />
     <ClInclude Include="Serialization.h" />
+    <ClInclude Include="TerminationObserver.h" />
     <ClInclude Include="TerminationState.h" />
     <ClInclude Include="Terminator.h" />
     <ClInclude Include="TextualCard.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="PlayerCityCard.cpp" />
     <ClCompile Include="RoleCard.cpp" />
     <ClCompile Include="Serialization.cpp" />
+    <ClCompile Include="TerminationObserver.cpp" />
     <ClCompile Include="Terminator.cpp" />
     <ClCompile Include="TextualCard.cpp" />
     <ClCompile Include="Util.cpp" />
