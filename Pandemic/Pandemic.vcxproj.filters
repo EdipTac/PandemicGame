@@ -166,6 +166,9 @@
     <ClInclude Include="DefaultTerminationObserver.h">
       <Filter>Victory and Defeat\header</Filter>
     </ClInclude>
+    <ClInclude Include="DiseaseTracker.h">
+      <Filter>Victory and Defeat\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -256,6 +259,7 @@
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="DefaultTerminationObserver.cpp" />
+    <ClCompile Include="DiseaseTracker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
