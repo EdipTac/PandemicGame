@@ -50,6 +50,15 @@
     <Filter Include="Editors\src">
       <UniqueIdentifier>{6e4bb0b4-5c32-49ed-ba99-11c63aa6e1a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Victory and Defeat">
+      <UniqueIdentifier>{6a4101d1-adab-4909-aada-4806a4a5d52a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Victory and Defeat\header">
+      <UniqueIdentifier>{b50446da-a4a3-4604-88f6-894ceffddf4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Victory and Defeat\src">
+      <UniqueIdentifier>{ad338b42-bd7c-4d71-aa77-f5759b474df0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -137,6 +146,12 @@
     <ClInclude Include="Observer.h">
       <Filter>General\header</Filter>
     </ClInclude>
+    <ClInclude Include="Terminator.h">
+      <Filter>Victory and Defeat\header</Filter>
+    </ClInclude>
+    <ClInclude Include="TerminationState.h">
+      <Filter>Victory and Defeat\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -214,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="Observable.cpp">
       <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Terminator.cpp">
+      <Filter>Victory and Defeat\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
