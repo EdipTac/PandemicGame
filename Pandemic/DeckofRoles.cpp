@@ -69,7 +69,7 @@ uniquerolecard DeckofRoles::drawRoleCard(){
 
 	srand((unsigned)time(0));
 	int i;
-	i = (rand() % 7);
+	i = (rand() % deckofRole.size());
 	auto temp = move (*(deckofRole.begin()+i));
 	deckofRole.erase(deckofRole.begin()+i);
 	return (move(temp));

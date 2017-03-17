@@ -52,7 +52,8 @@ void main()
 
 	while (game && !game->shouldQuit())
 	{
-		auto& currentPlayer = game->nextPlayer();
+		game->nextPlayer();
+		auto& currentPlayer = game->currentPlayer();
 		std::cout << currentPlayer.name() << "'s turn.\n";
 		while (!turnMenu.solicitInput()); // Intentionally empty body
 		if (game)

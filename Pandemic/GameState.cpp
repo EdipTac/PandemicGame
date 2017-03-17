@@ -75,10 +75,6 @@ Player& GameState::nextPlayer()
 
 Player& GameState::currentPlayer()
 {
-	/*if (_currentPlayerIdx >= std::numeric_limits<size_t>::max())
-	{
-		_currentPlayerIdx = 0;
-	}*/
 	return *_players[_currentPlayerIdx];
 }
 
