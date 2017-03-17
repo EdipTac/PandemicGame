@@ -131,6 +131,12 @@
       <Filter>Editors\header</Filter>
     </ClInclude>
     <ClInclude Include="Pandemic.h" />
+    <ClInclude Include="Observable.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -205,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="MapEditor.cpp">
       <Filter>Editors\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Observable.cpp">
+      <Filter>General\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
