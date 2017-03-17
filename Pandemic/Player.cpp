@@ -62,11 +62,14 @@ void Player::displayCards() {
 bool Player::hasPositionCard()
 {
 	auto& position = _pawn.position();
-	const auto& isPositionCard = [&](const auto& card)
+	for (const auto& card : cityCards())
 	{
-		return card->city() == position;
-	};
-	return !std::any_of(cityCards().begin(), cityCards().end(), isPositionCard);
+		if (card->city() == position)
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 PlayerCard* Player::positionCard()
