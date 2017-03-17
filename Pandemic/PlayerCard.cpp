@@ -3,7 +3,7 @@
 PlayerCard::~PlayerCard() {}
 
 bool PlayerCard::isCityCard() const
-{   
+{
 	return false;
 }
 

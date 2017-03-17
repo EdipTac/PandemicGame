@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "CityCard.h"
+
 #include "Card.h"
 
 // Represents a player card

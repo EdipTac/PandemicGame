@@ -117,6 +117,7 @@ void City::addDiseaseCubes(const Colour& colour, const unsigned amount, GameStat
 	if (!_outbreaks[colour] && !_quarantined && !state.cubePool().isEradicated(colour)) {
 		_diseaseCubes.takeFrom(colour, amount, state.cubePool());
 		if (_diseaseCubes[colour] > cubesBeforeOutbreak) {
+
 		    _outbreaks[colour] = true;
             state.advanceOutbreakCounter();
             _diseaseCubes.giveTo(colour, (_diseaseCubes.operator[](colour) - cubesBeforeOutbreak), state.cubePool());
