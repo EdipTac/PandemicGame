@@ -236,7 +236,9 @@
     <ClCompile Include="Terminator.cpp">
       <Filter>Victory and Defeat\src</Filter>
     </ClCompile>
-    <ClCompile Include="OutbreakCounter.cpp" />
+    <ClCompile Include="OutbreakCounter.cpp">
+      <Filter>Victory and Defeat\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
