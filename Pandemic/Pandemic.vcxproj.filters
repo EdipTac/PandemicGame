@@ -163,9 +163,6 @@
     <ClInclude Include="DiseaseTracker.h">
       <Filter>Victory and Defeat\header</Filter>
     </ClInclude>
-    <ClInclude Include="Terminator.h">
-      <Filter>Victory and Defeat\src</Filter>
-    </ClInclude>
     <ClInclude Include="Observable.h">
       <Filter>General\header</Filter>
     </ClInclude>
@@ -181,8 +178,8 @@
     <ClInclude Include="TerminationHandler.h">
       <Filter>Views\header</Filter>
     </ClInclude>
-    <ClInclude Include="DefaultTerminationHandler.h">
-      <Filter>Views\header</Filter>
+    <ClInclude Include="Terminator.h">
+      <Filter>Victory and Defeat\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -267,15 +264,14 @@
     <ClCompile Include="Pandemic.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="DiseaseTracker.cpp" />
     <ClCompile Include="Observable.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="TerminationHandler.cpp">
       <Filter>Views\src</Filter>
     </ClCompile>
-    <ClCompile Include="DefaultTerminationHandler.cpp">
-      <Filter>Views\src</Filter>
+    <ClCompile Include="DiseaseTracker.cpp">
+      <Filter>Victory and Defeat\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -42,3 +42,15 @@ bool TerminationHandler::shouldQuit() const
 {
 	return _shouldQuit;
 }
+
+void TerminationHandler::onVictory()
+{
+	std::cout << "You win!" << std::endl;
+	quit();
+}
+
+void TerminationHandler::onDefeat()
+{
+	std::cout << "You lose!" << std::endl;
+	quit();
+}

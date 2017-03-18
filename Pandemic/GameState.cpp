@@ -3,11 +3,11 @@
 #include <memory>
 
 #include "GameState.h"
-#include "DefaultTerminationHandler.h"
+#include "TerminationHandler.h"
 
 GameState::GameState()
 	: _cubePool { 96 / 4 }
-	, _terminationHandler { std::make_unique<DefaultTerminationHandler>() }
+	, _terminationHandler { std::make_unique<TerminationHandler>() }
 {
 	for (const auto& colour : colours())
 	{

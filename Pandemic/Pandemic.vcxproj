@@ -119,7 +119,6 @@
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DeckofEvents.h" />
     <ClInclude Include="DeckofRoles.h" />
-    <ClInclude Include="DefaultTerminationHandler.h" />
     <ClInclude Include="DiseaseTracker.h" />
     <ClInclude Include="EpidemicCard.h" />
     <ClInclude Include="EventCard.h" />
@@ -158,7 +157,6 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DeckofEvents.cpp" />
     <ClCompile Include="DeckofRoles.cpp" />
-    <ClCompile Include="DefaultTerminationHandler.cpp" />
     <ClCompile Include="DiseaseTracker.cpp" />
     <ClCompile Include="EpidemicCard.cpp" />
     <ClCompile Include="EventCard.cpp" />
