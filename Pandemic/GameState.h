@@ -10,13 +10,15 @@
 #include "Player.h"
 #include "PlayerCard.h"
 #include "OutbreakCounter.h"
-#include "DefaultTerminationObserver.h"
+
+class TerminationHandler;
 
 // Represents the state of the game
 class GameState
 {
 public:
 	GameState();
+	~GameState();
 	//const std::vector<std::unique_ptr<Player>>& players() const;
 	std::vector<Player*> players();
 	Map& map() const;
@@ -68,7 +70,7 @@ private:
 	Deck<InfectionCard> _infectionDeck;
 
 	OutbreakCounter _outbreakCounter_;
-	DefaultTerminationObserver _terminationObserver;
+	std::unique_ptr<TerminationHandler> _terminationHandler;
 };
 
 std::unique_ptr<GameState> quitState();

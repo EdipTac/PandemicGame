@@ -1,15 +1,12 @@
 #include <algorithm>
 #include <iostream>
 
-#include "TerminationObserver.h"
+#include "TerminationHandler.h"
+#include "GameState.h"
 
-void TerminationObserver::subscribeTo(Terminator& subject)
-{
-	subject.subscribe(*this);
-	_subjects.push_back(&subject);
-}
+TerminationHandler::~TerminationHandler() {}
 
-void TerminationObserver::update()
+void TerminationHandler::update()
 {
 	using TS = TerminationState;
 	const auto& hasTS = [](const TS& s)
@@ -33,4 +30,15 @@ void TerminationObserver::update()
 	{
 		onDefeat();
 	}
+}
+
+
+void TerminationHandler::quit()
+{
+	_shouldQuit = true;
+}
+
+bool TerminationHandler::shouldQuit() const
+{
+	return _shouldQuit;
 }

@@ -119,7 +119,7 @@
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DeckofEvents.h" />
     <ClInclude Include="DeckofRoles.h" />
-    <ClInclude Include="DefaultTerminationObserver.h" />
+    <ClInclude Include="DefaultTerminationHandler.h" />
     <ClInclude Include="DiseaseTracker.h" />
     <ClInclude Include="EpidemicCard.h" />
     <ClInclude Include="EventCard.h" />
@@ -131,6 +131,7 @@
     <ClInclude Include="MapEditor.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuOption.h" />
+    <ClInclude Include="MultiView.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="OutbreakCounter.h" />
@@ -141,11 +142,12 @@
     <ClInclude Include="PlayerCityCard.h" />
     <ClInclude Include="RoleCard.h" />
     <ClInclude Include="Serialization.h" />
-    <ClInclude Include="TerminationObserver.h" />
+    <ClInclude Include="TerminationHandler.h" />
     <ClInclude Include="TerminationState.h" />
     <ClInclude Include="Terminator.h" />
     <ClInclude Include="TextualCard.h" />
     <ClInclude Include="Util.h" />
+    <ClInclude Include="View.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp" />
@@ -156,7 +158,7 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DeckofEvents.cpp" />
     <ClCompile Include="DeckofRoles.cpp" />
-    <ClCompile Include="DefaultTerminationObserver.cpp" />
+    <ClCompile Include="DefaultTerminationHandler.cpp" />
     <ClCompile Include="DiseaseTracker.cpp" />
     <ClCompile Include="EpidemicCard.cpp" />
     <ClCompile Include="EventCard.cpp" />
@@ -175,7 +177,7 @@
     <ClCompile Include="PlayerCityCard.cpp" />
     <ClCompile Include="RoleCard.cpp" />
     <ClCompile Include="Serialization.cpp" />
-    <ClCompile Include="TerminationObserver.cpp" />
+    <ClCompile Include="TerminationHandler.cpp" />
     <ClCompile Include="Terminator.cpp" />
     <ClCompile Include="TextualCard.cpp" />
     <ClCompile Include="Util.cpp" />

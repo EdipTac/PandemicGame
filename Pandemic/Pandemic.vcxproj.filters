@@ -62,6 +62,15 @@
     <Filter Include="Main">
       <UniqueIdentifier>{c4b4a563-92a9-427a-b60f-7e79f6aad0f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Views">
+      <UniqueIdentifier>{dda3c2e8-c81e-4a95-923e-92f475833527}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Views\header">
+      <UniqueIdentifier>{5bf945b4-51e0-45da-b576-bb65fb32b26f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Views\src">
+      <UniqueIdentifier>{d00b4926-ef4f-44b5-94ab-4db3206bc5a8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -142,32 +151,38 @@
     <ClInclude Include="MapEditor.h">
       <Filter>Editors\header</Filter>
     </ClInclude>
-    <ClInclude Include="Observable.h">
-      <Filter>General\header</Filter>
-    </ClInclude>
-    <ClInclude Include="Observer.h">
-      <Filter>General\header</Filter>
-    </ClInclude>
-    <ClInclude Include="Terminator.h">
-      <Filter>Victory and Defeat\header</Filter>
-    </ClInclude>
     <ClInclude Include="TerminationState.h">
       <Filter>Victory and Defeat\header</Filter>
     </ClInclude>
     <ClInclude Include="OutbreakCounter.h">
       <Filter>Victory and Defeat\header</Filter>
     </ClInclude>
-    <ClInclude Include="TerminationObserver.h">
-      <Filter>Victory and Defeat\header</Filter>
-    </ClInclude>
     <ClInclude Include="Pandemic.h">
       <Filter>Main</Filter>
     </ClInclude>
-    <ClInclude Include="DefaultTerminationObserver.h">
-      <Filter>Victory and Defeat\header</Filter>
-    </ClInclude>
     <ClInclude Include="DiseaseTracker.h">
       <Filter>Victory and Defeat\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Terminator.h">
+      <Filter>Victory and Defeat\src</Filter>
+    </ClInclude>
+    <ClInclude Include="Observable.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="View.h">
+      <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="MultiView.h">
+      <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="TerminationHandler.h">
+      <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultTerminationHandler.h">
+      <Filter>Views\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -243,23 +258,25 @@
     <ClCompile Include="MapEditor.cpp">
       <Filter>Editors\src</Filter>
     </ClCompile>
-    <ClCompile Include="Observable.cpp">
-      <Filter>General\src</Filter>
-    </ClCompile>
     <ClCompile Include="Terminator.cpp">
       <Filter>Victory and Defeat\src</Filter>
     </ClCompile>
     <ClCompile Include="OutbreakCounter.cpp">
       <Filter>Victory and Defeat\src</Filter>
     </ClCompile>
-    <ClCompile Include="TerminationObserver.cpp">
-      <Filter>Victory and Defeat\src</Filter>
-    </ClCompile>
     <ClCompile Include="Pandemic.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="DefaultTerminationObserver.cpp" />
     <ClCompile Include="DiseaseTracker.cpp" />
+    <ClCompile Include="Observable.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="TerminationHandler.cpp">
+      <Filter>Views\src</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultTerminationHandler.cpp">
+      <Filter>Views\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">

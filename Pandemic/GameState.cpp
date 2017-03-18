@@ -3,17 +3,20 @@
 #include <memory>
 
 #include "GameState.h"
+#include "DefaultTerminationHandler.h"
 
 GameState::GameState()
 	: _cubePool { 96 / 4 }
-	, _terminationObserver { *this }
+	, _terminationHandler { std::make_unique<DefaultTerminationHandler>() }
 {
 	for (const auto& colour : colours())
 	{
 		_cured[colour] = false;
 	}
-	_terminationObserver.subscribeTo(_outbreakCounter_);
+	_terminationHandler->subscribeTo(_outbreakCounter_);
 }
+
+GameState::~GameState() {}
 
 std::vector<Player*> GameState::players()
 {
@@ -53,7 +56,7 @@ void GameState::setMap(std::unique_ptr<Map> map)
 
 bool GameState::shouldQuit() const
 {
-	return _shouldQuit;
+	return _terminationHandler->shouldQuit();
 }
 
 void GameState::quit()

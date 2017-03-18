@@ -36,9 +36,11 @@
 #include "PlayerCityCard.h"
 #include "Serialization.h"
 #include "Util.h"
+#include "DefaultTerminationHandler.h"
+#include "OutbreakCounter.h"
 
 //	----    Program entry point    ----  //
-//#define TEST
+#define TEST
 #ifdef TEST
 void main()
 {
