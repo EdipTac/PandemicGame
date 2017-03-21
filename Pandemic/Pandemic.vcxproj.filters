@@ -169,6 +169,15 @@
     <ClInclude Include="DiseaseTracker.h">
       <Filter>Victory and Defeat\header</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerView.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="ResearchStationsAndDiseases.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="ResearchStationsAndDiseasesView.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -261,6 +270,15 @@
     <ClCompile Include="DefaultTerminationObserver.cpp" />
     <ClCompile Include="DiseaseTracker.cpp" />
     <ClCompile Include="Observer.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerView.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ResearchStationsAndDiseases.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ResearchStationsAndDiseasesView.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
   </ItemGroup>

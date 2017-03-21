@@ -26,7 +26,7 @@ std::vector<Player*> GameState::players()
 	auto idx = _currentPlayerIdx;
 	for (auto i = 0u; i < size; ++i)
 	{
-		p.push_back(_players[idx].get());
+		p.push_back(_players[ppidx].get());
 		idx = (idx + 1) % size;
 	}
 	return p;

@@ -139,6 +139,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCard.h" />
     <ClInclude Include="PlayerCityCard.h" />
+    <ClInclude Include="PlayerView.h" />
+    <ClInclude Include="ResearchStationsAndDiseases.h" />
+    <ClInclude Include="ResearchStationsAndDiseasesView.h" />
     <ClInclude Include="RoleCard.h" />
     <ClInclude Include="Serialization.h" />
     <ClInclude Include="TerminationObserver.h" />
@@ -174,6 +177,9 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCard.cpp" />
     <ClCompile Include="PlayerCityCard.cpp" />
+    <ClCompile Include="PlayerView.cpp" />
+    <ClCompile Include="ResearchStationsAndDiseases.cpp" />
+    <ClCompile Include="ResearchStationsAndDiseasesView.cpp" />
     <ClCompile Include="RoleCard.cpp" />
     <ClCompile Include="Serialization.cpp" />
     <ClCompile Include="TerminationObserver.cpp" />

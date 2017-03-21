@@ -13,7 +13,7 @@
 #include "DefaultTerminationObserver.h"
 
 // Represents the state of the game
-class GameState
+class GameState : public Observable
 {
 public:
 	GameState();

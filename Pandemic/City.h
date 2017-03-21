@@ -8,6 +8,7 @@
 #include "Colour.h"
 #include "CubePool.h"
 
+using std::size_t;
 class GameState;
 class InfectionCardDeck;
 

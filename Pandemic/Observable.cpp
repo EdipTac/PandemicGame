@@ -9,7 +9,6 @@ of the player class in this implementation
 
 #include "Observable.h"
 #include "Observer.h"
-
 Observable::~Observable() {}
 
 void Observable::attach(Observer& observer)
@@ -19,10 +18,13 @@ void Observable::attach(Observer& observer)
 
 void Observable::detach(Observer& observer)
 {
-	std::remove_if(_observers.begin(), _observers.end(), [&](const auto& o)
-	{
-		return o == &observer;
-	});
+	_observers.erase(std::remove(_observers.begin(), _observers.end(), observer), _observers.end());
+	// or an alternate method
+	/*auto it = std::find(_observers.begin(), _observers.end(), observer);
+	if (it != _observers.end()) {
+		_observers.erase(it);
+	}*/
+	
 }
 
 void Observable::notify() const
