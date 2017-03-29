@@ -111,6 +111,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Action.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="City.h" />
     <ClInclude Include="CityCard.h" />
@@ -141,6 +142,8 @@
     <ClInclude Include="PlayerCityCard.h" />
     <ClInclude Include="RoleCard.h" />
     <ClInclude Include="Serialization.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="TerminationHandler.h" />
     <ClInclude Include="TerminationState.h" />
     <ClInclude Include="Terminator.h" />
@@ -175,6 +178,7 @@
     <ClCompile Include="PlayerCityCard.cpp" />
     <ClCompile Include="RoleCard.cpp" />
     <ClCompile Include="Serialization.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="TerminationHandler.cpp" />
     <ClCompile Include="Terminator.cpp" />
     <ClCompile Include="TextualCard.cpp" />

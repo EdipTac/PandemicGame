@@ -190,6 +190,15 @@
     <ClInclude Include="Board.h">
       <Filter>General\header</Filter>
     </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Controllers\header</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Controllers\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Action.h">
+      <Filter>Controllers\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -281,6 +290,9 @@
     </ClCompile>
     <ClCompile Include="Board.cpp">
       <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Controllers\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
