@@ -58,15 +58,12 @@ void main()
 	std::cout << titleFont("PANDEMIC") << "\n\n\n";
 	mainMenu.solicitInput();
 
-	while (game && !game->shouldQuit())
+	while (!Board::instance().shouldQuit())
 	{
-		auto& currentPlayer = game->nextPlayer();
+		auto& currentPlayer = Board::instance().nextPlayer();
 		std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
 		while (!turnMenu.solicitInput()); // Intentionally empty body
-		if (game)
-		{
-			game->distributePlayerCards(cardsPerTurn);
-		}
+		Board::instance().distributePlayerCards(cardsPerTurn);
 		infect();
 	}
 
@@ -82,18 +79,18 @@ void newGame()
 	std::cout << titleFont("NEW GAME") << "\n\n";
 
 	// Initialize game state
-	game = std::make_unique<Board>();
+	//game = std::make_unique<Board>();
 
 	// Get map file name and load it
 	const auto& fileName = solicitFileName("Load map file to start new game: ");
 	std::cout << "\nLoading map \"" << fileName << "\"...\n";
-	game->setMap(readMapFromFile(fileName));
+	Board::instance().setMap(readMapFromFile(fileName));
 	std::cout << "Map \"" << fileName << "\" loaded!\n\n";
 
 	// Create players
 	std::cout << "How many players? ";
 	const auto& numPlayers = solicitSize(minPlayers, maxPlayers);
-	const auto& map = game->map();	// alias
+	const auto& map = Board::instance().map();	// alias
 	for (auto i = 1; i <= numPlayers; ++i)
 	{
 		// For each player - get name, set position to starting city, give to game state
@@ -101,49 +98,49 @@ void newGame()
 		auto player = std::make_unique<Player>();
 		player->setName(playerName);
 		player->pawn().setPosition(map.startingCity());
-		game->addPlayer(std::move(player));
+		Board::instance().addPlayer(std::move(player));
 	}
 
 	// Other initializtion here - cards, etc
-	for (const auto& city : game->map().cities())
+	for (const auto& city : Board::instance().map().cities())
 	{
-		game->playerDeck().addToDeck(std::make_unique<PlayerCityCard>(*city));
-		game->infectionDeck().addToDeck(std::make_unique<InfectionCard>(*city));
+		Board::instance().playerDeck().addToDeck(std::make_unique<PlayerCityCard>(*city));
+		Board::instance().infectionDeck().addToDeck(std::make_unique<InfectionCard>(*city));
 		
 	}
 	
 	auto eventCards = DeckofEvents {}.deckOfEvents();
 	while (!eventCards.empty())
 	{
-		game->playerDeck().addToDeck(std::move(eventCards.back()));
+		Board::instance().playerDeck().addToDeck(std::move(eventCards.back()));
 		eventCards.pop_back();
 	}
 
 
 	//Distribute Role Cards to players
 	DeckofRoles roleCardDeck;
-	for (auto& player : game->players())
+	for (auto& player : Board::instance().players())
 	{
 		player->setRole(roleCardDeck.drawRoleCard());
 	}
 
-	for (const auto& player : game->players())
+	for (const auto& player : Board::instance().players())
 	{
 		std::cout << "Player " << player->name() << " has the role of " << player->role().name() << std::endl;
 	}
 
-	game->playerDeck().shuffleDeck();
+	Board::instance().playerDeck().shuffleDeck();
 
 	// Distribute cards to players
-	for (const auto& player : game->players())
+	for (const auto& player : Board::instance().players())
 	{
-		for (auto i = 0u; !game->playerDeck().empty() && i < game->initialCards(); ++i)
+		for (auto i = 0u; !Board::instance().playerDeck().empty() && i < Board::instance().initialCards(); ++i)
 		{
-			player->addCard(std::move(game->playerDeck().drawTopCard()));
+			player->addCard(std::move(Board::instance().playerDeck().drawTopCard()));
 		}
 	}
 
-	for (const auto& player : game->players())
+	for (const auto& player : Board::instance().players())
 	{
 		std::cout << "Player " << player->name() << " has\n";
 		for (const auto& card : player->cards())
@@ -156,22 +153,22 @@ void newGame()
 
 
 	//Place first research station
-	map.startingCity().giveResearchStation(*game);
+	map.startingCity().giveResearchStation(Board::instance());
 
 	//Initial distribution of disease cubes during game initialization
-	game->infectionDeck().shuffleDeck();
+	Board::instance().infectionDeck().shuffleDeck();
 	std::cout << "Initial infected cities are as follows:" << std::endl;
 	for (auto j = 3; j >= 1; --j)
 	{
 		for (auto i = 0; i < 3; ++i)
 		{
-			if (game->infectionDeck().empty())
+			if (Board::instance().infectionDeck().empty())
 			{
 				break;
 			}
-			auto temp = game->infectionDeck().drawTopCard();
-			temp->infect(*game, j);
-			game->infectionDeck().addToDiscard(move(temp));
+			auto temp = Board::instance().infectionDeck().drawTopCard();
+			temp->infect(Board::instance(), j);
+			Board::instance().infectionDeck().addToDiscard(move(temp));
 		}
 	}
 }
@@ -203,7 +200,7 @@ void loadGame()
 {
 	std::cout << "Load game...\n";
 	const auto fileName = solicitFileName("Enter name of game save file: ");
-	game = readGameFromFile(fileName);
+	//game = readGameFromFile(fileName);
 	std::cout << "\n\n" << titleFont("RESUMING GAME") << "\n\n";
 }
 
@@ -223,7 +220,7 @@ bool saveGame()
 			return false;
 		}
 	}
-	saveGame(*game, fileName);
+	saveGame(Board::instance(), fileName);
 	std::cout << "\n" << titleFont("GAME SAVED") << "\n\n";
 	return false;
 }
@@ -240,7 +237,7 @@ void waitForExit()
 bool performAction()
 {
 	auto actions = actionsPerTurn;	// Counter
-	while (!game->shouldQuit() && actions > 0)	// To check game loss/win state between actions
+	while (!Board::instance().shouldQuit() && actions > 0)	// To check game loss/win state between actions
 	{
 		std::cout << "You have " << actions << " actions remaining.\n";
 		// Sometimes actions cannot be completed - these do not count towards your limit of four!
@@ -258,7 +255,7 @@ bool performAction()
 bool driveOrFerry()
 {
 	// Aliases
-	auto& player = game->currentPlayer();
+	auto& player = Board::instance().currentPlayer();
 	const auto& position = player.pawn().position();
 	const auto& connections = position.connections();
 
@@ -286,7 +283,7 @@ bool driveOrFerry()
 bool directFlight()
 {
 	// Aliases
-	auto& player = game->currentPlayer();
+	auto& player = Board::instance().currentPlayer();
 	const auto& cards = player.cityCards();
 
 	// You can't discard a card if you have none!
@@ -310,7 +307,7 @@ bool directFlight()
 bool charterFlight()
 {
 	// Aliases
-	auto& player = game->currentPlayer();
+	auto& player = Board::instance().currentPlayer();
 	auto& pawn = player.pawn();
 
 	// Without cards you can't discard
@@ -322,7 +319,7 @@ bool charterFlight()
 
 	// Get city choice from player, move, and discard card
 	std::cout << "Where would you like to fly to? ";
-	auto& target = *validateInput(game->map().nameMap(), "No city of that name exists.\n");
+	auto& target = *validateInput(Board::instance().map().nameMap(), "No city of that name exists.\n");
 	pawn.setPosition(target);
 	player.removeCardByName(player.pawn().position().name());
 
@@ -332,7 +329,7 @@ bool charterFlight()
 // Player moves from a city to a research station to any other city with a research station
 bool shuttleFlight()
 {
-	auto& player = game->currentPlayer(); // Alias
+	auto& player = Board::instance().currentPlayer(); // Alias
 
 	// Not applicable if you have no research station in your city
 	if (!player.pawn().position().hasResearchStation())
@@ -341,7 +338,7 @@ bool shuttleFlight()
 		return false;
 	}
 
-	const auto& stations = game->map().stations(); // Alias
+	const auto& stations = Board::instance().map().stations(); // Alias
 
 	// If there are no other cities with stations, you can't move anywhere
 	if (stations.empty())
@@ -362,7 +359,7 @@ bool shuttleFlight()
 // Player discards a card matching the city they are in to build a research station
 bool buildResearchStation()
 {
-	auto& player = game->currentPlayer(); // Alias
+	auto& player = Board::instance().currentPlayer(); // Alias
 
 										  // No cards, no discard
 	if (!player.hasPositionCard())
@@ -372,9 +369,9 @@ bool buildResearchStation()
 	}
 
 	// If there are no remaining research stations, we have to steal from another city
-	if (!game->hasResearchStation())
+	if (!Board::instance().hasResearchStation())
 	{
-		auto stations = game->map().stations(); // Alias
+		auto stations = Board::instance().map().stations(); // Alias
 		{
 			// Remove your current city from the list of potential targets
 			stations.erase(std::find_if(stations.begin(), stations.end(), [&](const auto& c)
@@ -392,7 +389,7 @@ bool buildResearchStation()
 
 		// Choose city and eradicate station
 		auto& target = *validateInput(stations, "No city of that name has a research station.\n");
-		target.removeResearchStation(*game);
+		target.removeResearchStation(Board::instance());
 	}
 
 	// Remove card, place station
@@ -403,7 +400,7 @@ bool buildResearchStation()
 		return card->name() == positionName;
 	});
 	player.removeCardByName((*it)->name());
-	player.pawn().position().giveResearchStation(*game);
+	player.pawn().position().giveResearchStation(Board::instance());
 
 	return true;
 }
@@ -411,7 +408,7 @@ bool buildResearchStation()
 // The player removes a disease cube of a given colour from a city
 bool treatDisease()
 {
-	auto& position = game->currentPlayer().pawn().position();
+	auto& position = Board::instance().currentPlayer().pawn().position();
 	const auto& diseases = position.diseases();
 	if (diseases.empty())
 	{
@@ -425,7 +422,7 @@ bool treatDisease()
 	}
 
 	const auto& colour = validateInput(colourNameMap(), "Not a disease.\n");
-	auto& pool = game->cubePool();
+	auto& pool = Board::instance().cubePool();
 	position.removeDiseaseCubes(colour, 1, pool);
 
 	std::cout << "Disease report\n";
@@ -441,9 +438,9 @@ bool treatDisease()
 bool shareKnowledge()
 {
 	// Aliases
-	auto& currentPlayer = game->currentPlayer();
+	auto& currentPlayer = Board::instance().currentPlayer();
 	const auto& position = currentPlayer.pawn().position();
-	const auto& players = game->players();
+	const auto& players = Board::instance().players();
 
 	// Select another player in your city
 	std::vector<Player*> others;
@@ -481,7 +478,7 @@ bool shareKnowledge()
 // Give your city card to another player
 bool giveKnowledge(Player& target)
 {
-	auto& player = game->currentPlayer();
+	auto& player = Board::instance().currentPlayer();
 	const auto& positionCard = player.positionCard();
 	if (!positionCard)
 	{
@@ -502,20 +499,20 @@ bool takeKnowledge(Player& target)
 		std::cout << "No matching city card to take!\n";
 		return false;
 	}
-	target.giveCard(*positionCard, game->currentPlayer());
+	target.giveCard(*positionCard, Board::instance().currentPlayer());
 
 	return true;
 }
 
 bool cureDisease()
 {
-	auto& player = game->currentPlayer();
+	auto& player = Board::instance().currentPlayer();
 	if (!player.pawn().position().hasResearchStation())
 	{
 		std::cout << "No research station in this city.\n";
 		return false;
 	}
-	const auto& cards = game->currentPlayer().cityCards();
+	const auto& cards = Board::instance().currentPlayer().cityCards();
 	std::map<Colour, size_t> colourCount;
 	for (const auto& colour : colours())
 	{
@@ -539,7 +536,7 @@ bool cureDisease()
 
 	if (cured.second)
 	{
-		game->cureDisease(cured.first);
+		Board::instance().cureDisease(cured.first);
 		return true;
 	}
 
@@ -547,14 +544,9 @@ bool cureDisease()
 	return false;
 }
 
-void quit()
-{
-	game = quitState();
-}
-
 bool actionQuit()
 {
-	quit();
+	Board::instance().quit();
 	return true;
 }
 
@@ -576,7 +568,7 @@ std::string solicitPlayerName(const size_t number)
 			std::cout << "Player name cannot be empty.\n";
 			continue;
 		}
-		if (game->nameExists(playerName))
+		if (Board::instance().nameExists(playerName))
 		{
 			std::cout << "Player names must be unique.\n";
 			continue;
@@ -611,7 +603,7 @@ bool report()
 
 void displayCities()
 {
-	for (const auto& city : game->map().cities())
+	for (const auto& city : Board::instance().map().cities())
 	{
 		showCity(*city);
 	}
@@ -620,7 +612,7 @@ void displayCities()
 void directConnectionReport()
 {
 	std::cout << "In one action, you can move to\n";
-	for (const auto& city : game->currentPlayer().pawn().position().connections())
+	for (const auto& city : Board::instance().currentPlayer().pawn().position().connections())
 	{
 		showCity(*city);
 	}
@@ -664,10 +656,10 @@ std::string titleFont(const std::string& original)
 
 void infect()
 {
-	for (auto i = 0u; !game->infectionDeck().empty() && i < game->infectionRate(); ++i)
+	for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
 	{
-		auto card = game->infectionDeck().drawTopCard();
-		card->onDraw(*game);
-		game->infectionDeck().addToDiscard(std::move(card));
+		auto card = Board::instance().infectionDeck().drawTopCard();
+		card->onDraw(Board::instance());
+		Board::instance().infectionDeck().addToDiscard(std::move(card));
 	}
 }

@@ -42,7 +42,7 @@ template <typename T> T validateInput(const std::vector<T>& valid, const std::st
 const auto& saveGameAction = static_cast<bool(*)()>(saveGame);
 
 //  ----  Game pointer - global data  ----  //
-std::unique_ptr<Board> game;
+//std::unique_ptr<Board> game;
 
 //  ----  Constants  -----  //
 constexpr size_t minPlayers = 1;
@@ -57,7 +57,7 @@ const GeneralMenu mainMenu
 		{ "New Game",	newGame },
 		{ "Load Game",	loadGame },
 		{ "Map Editor",	mapEditor },
-		{ "Exit",		quit }
+		{ "Exit",		[](){actionQuit();} }
 	}
 };
 

@@ -17,6 +17,7 @@ class TerminationHandler;
 class Board
 {
 public:
+	static Board& instance();
 	Board();
 	~Board();
 	//const std::vector<std::unique_ptr<Player>>& players() const;

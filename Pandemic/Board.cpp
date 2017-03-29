@@ -5,6 +5,12 @@
 #include "Board.h"
 #include "TerminationHandler.h"
 
+Board& Board::instance()
+{
+	static Board board;
+	return board;
+}
+
 Board::Board()
 	: _cubePool { 96 / 4 }
 	, _terminationHandler { std::make_unique<TerminationHandler>() }
