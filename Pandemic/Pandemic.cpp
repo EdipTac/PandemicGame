@@ -39,7 +39,7 @@
 #include "OutbreakCounter.h"
 
 //	----    Program entry point    ----  //
-#define TEST
+//#define TEST
 #ifdef TEST
 void main()
 {

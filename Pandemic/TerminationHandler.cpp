@@ -32,7 +32,6 @@ void TerminationHandler::update()
 	}
 }
 
-
 void TerminationHandler::quit()
 {
 	_shouldQuit = true;
