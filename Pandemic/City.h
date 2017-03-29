@@ -8,7 +8,7 @@
 #include "Colour.h"
 #include "CubePool.h"
 
-class GameState;
+class Board;
 class InfectionCardDeck;
 
 // Represents a single city.
@@ -59,7 +59,7 @@ public:
 	bool diseaseOutbreak(const Colour& colour) const;
 
 	// Adds disease cubes of a given colour from a given source
-	void addDiseaseCubes(const Colour& colour, const unsigned amount,GameState&);
+	void addDiseaseCubes(const Colour& colour, const unsigned amount,Board&);
 
 	// Removes disease cubes of a given colour from a given source
 	void removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& pool);
@@ -73,8 +73,8 @@ public:
 	// True iff the city has a research station
 	bool hasResearchStation() const;
 	bool& hasResearchStation();
-	void giveResearchStation(GameState& game);
-	void removeResearchStation(GameState& game);
+	void giveResearchStation(Board& game);
+	void removeResearchStation(Board& game);
 
 	// List of all diseases in this city
 	std::vector<Colour> diseases();

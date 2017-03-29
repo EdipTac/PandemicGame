@@ -16,14 +16,14 @@ InfectionCard::InfectionCard(City& city)
 
 InfectionCard::~InfectionCard(){}
 
-void InfectionCard::onDraw(GameState& state)
+void InfectionCard::onDraw(Board& state)
 {
 	city().addDiseaseCubes(colour(), CUBE_NORMAL_INFECTION, state);
 	std::cout << city().name() << " infected with " << colourName(city().colour()) << " disease!\n";
 }
 
 //this function was added to be able to infect cities with however many cubes we want to (Used during initial infection of the map)
-void InfectionCard::infect(GameState& state, int numberOfCubes)
+void InfectionCard::infect(Board& state, int numberOfCubes)
 {
 	city().addDiseaseCubes(colour(), numberOfCubes, state);
 	std::cout << city().name() << " infected with " <<numberOfCubes << " cubes of " << colourName(city().colour()) << " disease!\n";
@@ -33,7 +33,7 @@ std::string InfectionCard::description() const
 	return "This card infects " + name() + " with the " + colourAbbreviation(colour()) + " disease.";
 }
 
-void InfectionCard::cardWork(GameState& state)
+void InfectionCard::cardWork(Board& state)
 {
 	onDraw(state);
 }

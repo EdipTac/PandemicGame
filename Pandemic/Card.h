@@ -2,7 +2,7 @@
 
 #include <string>
 
-class GameState;
+class Board;
 
 // Represents a single card of any type
 class Card
@@ -18,5 +18,5 @@ public:
 	virtual std::string description() const = 0;
 
 	// The card's action when drawn
-	virtual void onDraw(GameState& state) = 0;
+	virtual void onDraw(Board& state) = 0;
 };

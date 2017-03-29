@@ -27,5 +27,5 @@ public:
 	std::string toString();
 
 	// Inherited via TextualCard
-	virtual void onDraw(GameState& state) override;
+	virtual void onDraw(Board& state) override;
 };

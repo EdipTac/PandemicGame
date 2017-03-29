@@ -134,7 +134,7 @@ void writeMapToFile(const Map& map, const std::string& fileName)
 	std::ofstream { fileName } << std::setw(4) << j;
 }
 
-std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
+std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 {
 	
 	
@@ -148,7 +148,7 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 	json j;
 	fs >> j;
 
-	std::unique_ptr<GameState> gameState = std::make_unique<GameState>();
+	std::unique_ptr<Board> gameState = std::make_unique<Board>();
 
 	// read and store the map information
 	std::string mapFilePath = j["map"].get<std::string>();
@@ -377,7 +377,7 @@ std::unique_ptr<GameState> readGameFromFile(const std::string & fileName)
 	return gameState;
 }
 
-void saveGame(GameState& game, const std::string& fileName)
+void saveGame(Board& game, const std::string& fileName)
 {
 	json j;
 	std::ofstream os { fileName };

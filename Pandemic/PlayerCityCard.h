@@ -28,5 +28,5 @@ public:
 	virtual std::string name() const override;
 	virtual std::string description() const override;
 
-	void onDraw(GameState& state) override;
+	void onDraw(Board& state) override;
 };

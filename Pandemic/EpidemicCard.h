@@ -20,5 +20,5 @@ public:
 	std::string toString();
 
 	// Inherited via PlayerCard
-	void cardWork(InfectionCardDeck&, GameState &);
+	void cardWork(InfectionCardDeck&, Board &);
 };

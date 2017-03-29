@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include "GameState.h"
+#include "Board.h"
 #include "Map.h"
 
 // Utility functions for reading maps from and to a text file
@@ -16,6 +16,6 @@ std::unique_ptr<Map> oldReadMapFromFile(const std::string& fileName);
 // Given a map and file name, writes the map as a text file
 void writeMapToFile(const Map& map, const std::string& fileName);
 
-std::unique_ptr<GameState> readGameFromFile(const std::string& fileName);
+std::unique_ptr<Board> readGameFromFile(const std::string& fileName);
 
-void saveGame(GameState& gameState, const std::string& fileName);
+void saveGame(Board& gameState, const std::string& fileName);

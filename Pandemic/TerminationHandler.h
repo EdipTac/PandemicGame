@@ -4,7 +4,7 @@
 
 #include "MultiView.h"
 #include "Terminator.h"
-#include "GameState.h"
+#include "Board.h"
 
 class TerminationHandler
 	: public MultiView<Terminator>

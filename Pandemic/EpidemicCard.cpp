@@ -20,7 +20,7 @@ std::string EpidemicCard::toString()
 	return "Epidemic\n" + PlayerCard::toString() + ", Description: \n" + EPIDEMIC_DESCRIPTION;
 }
 
-void EpidemicCard::cardWork(InfectionCardDeck& deck, GameState& state) {
+void EpidemicCard::cardWork(InfectionCardDeck& deck, Board& state) {
 	state.advanceInfectionCounter();//increase
 	std::cout << "Draw for the bottom of the infection card deck: " << std::endl;
 	auto temp = move(deck.drawBottomCard());

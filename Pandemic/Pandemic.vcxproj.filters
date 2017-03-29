@@ -71,6 +71,15 @@
     <Filter Include="Views\src">
       <UniqueIdentifier>{d00b4926-ef4f-44b5-94ab-4db3206bc5a8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Controllers">
+      <UniqueIdentifier>{6fc5e5ae-0781-4541-8a36-c29ef2ebcac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controllers\header">
+      <UniqueIdentifier>{07cf3dfb-45d3-4b44-97c3-871ba57cabae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Controllers\src">
+      <UniqueIdentifier>{8f87dc60-d41d-4242-ab2b-28dc1aa3dbc4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -107,9 +116,6 @@
       <Filter>General\header</Filter>
     </ClInclude>
     <ClInclude Include="CubePool.h">
-      <Filter>General\header</Filter>
-    </ClInclude>
-    <ClInclude Include="GameState.h">
       <Filter>General\header</Filter>
     </ClInclude>
     <ClInclude Include="InfectionCardDeck.h">
@@ -181,6 +187,9 @@
     <ClInclude Include="Terminator.h">
       <Filter>Victory and Defeat\header</Filter>
     </ClInclude>
+    <ClInclude Include="Board.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -217,9 +226,6 @@
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="CubePool.cpp">
-      <Filter>General\src</Filter>
-    </ClCompile>
-    <ClCompile Include="GameState.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="InfectionCardDeck.cpp">
@@ -272,6 +278,9 @@
     </ClCompile>
     <ClCompile Include="DiseaseTracker.cpp">
       <Filter>Victory and Defeat\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Board.cpp">
+      <Filter>General\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

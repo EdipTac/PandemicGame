@@ -14,11 +14,11 @@
 class TerminationHandler;
 
 // Represents the state of the game
-class GameState
+class Board
 {
 public:
-	GameState();
-	~GameState();
+	Board();
+	~Board();
 	//const std::vector<std::unique_ptr<Player>>& players() const;
 	std::vector<Player*> players();
 	Map& map() const;
@@ -73,4 +73,4 @@ private:
 	std::unique_ptr<TerminationHandler> _terminationHandler;
 };
 
-std::unique_ptr<GameState> quitState();
+std::unique_ptr<Board> quitState();

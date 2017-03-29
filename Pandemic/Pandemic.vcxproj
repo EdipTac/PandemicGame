@@ -122,7 +122,7 @@
     <ClInclude Include="DiseaseTracker.h" />
     <ClInclude Include="EpidemicCard.h" />
     <ClInclude Include="EventCard.h" />
-    <ClInclude Include="GameState.h" />
+    <ClInclude Include="Board.h" />
     <ClInclude Include="InfectionCard.h" />
     <ClInclude Include="InfectionCardDeck.h" />
     <ClInclude Include="json.hpp" />
@@ -160,7 +160,7 @@
     <ClCompile Include="DiseaseTracker.cpp" />
     <ClCompile Include="EpidemicCard.cpp" />
     <ClCompile Include="EventCard.cpp" />
-    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="InfectionCard.cpp" />
     <ClCompile Include="InfectionCardDeck.cpp" />
     <ClCompile Include="Map.cpp" />

@@ -25,7 +25,7 @@
 #include "DeckofEvents.h"
 #include "DeckofRoles.h"
 #include "EventCard.h"
-#include "GameState.h"
+#include "Board.h"
 #include "InfectionCard.h"
 #include "InfectionCardDeck.h"
 #include "Map.h"
@@ -43,7 +43,7 @@
 #ifdef TEST
 void main()
 {
-	GameState g;
+	Board g;
 	while (!g.shouldQuit())
 	{
 		std::cout << g.outbreakCounter() << std::endl;
@@ -82,7 +82,7 @@ void newGame()
 	std::cout << titleFont("NEW GAME") << "\n\n";
 
 	// Initialize game state
-	game = std::make_unique<GameState>();
+	game = std::make_unique<Board>();
 
 	// Get map file name and load it
 	const auto& fileName = solicitFileName("Load map file to start new game: ");

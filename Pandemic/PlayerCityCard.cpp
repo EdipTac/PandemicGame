@@ -38,4 +38,4 @@ std::string PlayerCityCard::description() const
 	return CityCard::description();
 }
 
-void PlayerCityCard::onDraw(GameState& state) {}
+void PlayerCityCard::onDraw(Board& state) {}

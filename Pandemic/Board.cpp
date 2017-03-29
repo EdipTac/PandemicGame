@@ -2,10 +2,10 @@
 #include <vector>
 #include <memory>
 
-#include "GameState.h"
+#include "Board.h"
 #include "TerminationHandler.h"
 
-GameState::GameState()
+Board::Board()
 	: _cubePool { 96 / 4 }
 	, _terminationHandler { std::make_unique<TerminationHandler>() }
 {
@@ -16,9 +16,9 @@ GameState::GameState()
 	_terminationHandler->subscribeTo(_outbreakCounter_);
 }
 
-GameState::~GameState() {}
+Board::~Board() {}
 
-std::vector<Player*> GameState::players()
+std::vector<Player*> Board::players()
 {
 	std::vector<Player*> p;
 	const auto size = _players.size();
@@ -35,12 +35,12 @@ std::vector<Player*> GameState::players()
 	return p;
 }
 
-Map& GameState::map() const
+Map& Board::map() const
 {
 	return *_map;
 }
 
-void GameState::addPlayer(std::unique_ptr<Player> player)
+void Board::addPlayer(std::unique_ptr<Player> player)
 {
 	if (nameExists(player->name()))
 	{
@@ -49,22 +49,22 @@ void GameState::addPlayer(std::unique_ptr<Player> player)
 	_players.push_back(std::move(player));
 }
 
-void GameState::setMap(std::unique_ptr<Map> map)
+void Board::setMap(std::unique_ptr<Map> map)
 {
 	_map = std::move(map);
 }
 
-bool GameState::shouldQuit() const
+bool Board::shouldQuit() const
 {
 	return _terminationHandler->shouldQuit();
 }
 
-void GameState::quit()
+void Board::quit()
 {
 	_shouldQuit = true;
 }
 
-Player& GameState::nextPlayer()
+Player& Board::nextPlayer()
 {
 	if (_currentPlayerIdx >= std::numeric_limits<size_t>::max())
 	{
@@ -78,18 +78,18 @@ Player& GameState::nextPlayer()
 	return currentPlayer();
 }
 
-Player& GameState::currentPlayer()
+Player& Board::currentPlayer()
 {
 	return *_players[_currentPlayerIdx];
 }
 
-Player& GameState::setCurrentPlayer(const size_t idx)
+Player& Board::setCurrentPlayer(const size_t idx)
 {
 	_currentPlayerIdx = idx % _players.size();
 	return currentPlayer();
 }
 
-bool GameState::nameExists(const std::string& name) const
+bool Board::nameExists(const std::string& name) const
 {
 	return std::any_of(_players.begin(), _players.end(), [&](const auto& p)
 	{
@@ -97,12 +97,12 @@ bool GameState::nameExists(const std::string& name) const
 	});
 }
 
-unsigned GameState::researchStations() const
+unsigned Board::researchStations() const
 {
 	return _researchStations;
 }
 
-void GameState::removeResearchStation()
+void Board::removeResearchStation()
 {
 	if (_researchStations == 0)
 	{
@@ -112,32 +112,32 @@ void GameState::removeResearchStation()
 	--_researchStations;
 }
 
-void GameState::returnResearchStation()
+void Board::returnResearchStation()
 {
 	++_researchStations;
 }
 
-bool GameState::hasResearchStation() const
+bool Board::hasResearchStation() const
 {
 	return _researchStations > 0;
 }
 
-void GameState::cureDisease(const Colour& colour)
+void Board::cureDisease(const Colour& colour)
 {
 	_cured[colour] = true;
 }
 
-bool GameState::isCured(const Colour& colour) const
+bool Board::isCured(const Colour& colour) const
 {
 	return _cured.at(colour);
 }
 
-bool GameState::isEradicated(const Colour& colour) const
+bool Board::isEradicated(const Colour& colour) const
 {
 	return isCured(colour) && diseaseCount(colour) == 0;
 }
 
-size_t GameState::diseaseCount(const Colour& colour) const
+size_t Board::diseaseCount(const Colour& colour) const
 {
 	size_t count = 0;
 	for (const auto& city : _map->cities())
@@ -147,12 +147,12 @@ size_t GameState::diseaseCount(const Colour& colour) const
 	return count;
 }
 
-void GameState::advanceInfectionCounter()
+void Board::advanceInfectionCounter()
 {
 	_infectionCounter = std::min(_infectionCounter + 1, 7u);
 }
 
-unsigned GameState::infectionRate() const
+unsigned Board::infectionRate() const
 {
 	const auto& c = _infectionCounter; // Alias
 	return	(1 <= c && c <= 3) ? 2 :
@@ -160,37 +160,37 @@ unsigned GameState::infectionRate() const
 								 4 ;
 }
 
-unsigned GameState::infectionCounter() const
+unsigned Board::infectionCounter() const
 {
 	return _infectionCounter;
 }
 
-size_t GameState::outbreakCounter() const
+size_t Board::outbreakCounter() const
 {
 	return _outbreakCounter_.counter();
 }
 
-void GameState::advanceOutbreakCounter()
+void Board::advanceOutbreakCounter()
 {
 	_outbreakCounter_.advance();
 }
 
-CubePool& GameState::cubePool()
+CubePool& Board::cubePool()
 {
 	return _cubePool;
 }
 
-Deck<PlayerCard>& GameState::playerDeck()
+Deck<PlayerCard>& Board::playerDeck()
 {
 	return _playerDeck;
 }
 
-Deck<InfectionCard>& GameState::infectionDeck()
+Deck<InfectionCard>& Board::infectionDeck()
 {
 	return _infectionDeck;
 }
 
-size_t GameState::initialCards() const
+size_t Board::initialCards() const
 {
 	const auto size = _players.size();
 	return	size <= 2 ? 4 :
@@ -198,7 +198,7 @@ size_t GameState::initialCards() const
 						2 ;
 }
 
-void GameState::distributePlayerCards(const size_t count)
+void Board::distributePlayerCards(const size_t count)
 {
 	for (auto i = 0u; !playerDeck().empty() && i < count; ++i)
 	{
@@ -207,7 +207,7 @@ void GameState::distributePlayerCards(const size_t count)
 }
 
 class QuitState
-	: public GameState
+	: public Board
 {
 	bool shouldQuit() const override
 	{
@@ -215,7 +215,7 @@ class QuitState
 	}
 };
 
-std::unique_ptr<GameState> quitState()
+std::unique_ptr<Board> quitState()
 {
 	return std::make_unique<QuitState>();
 }

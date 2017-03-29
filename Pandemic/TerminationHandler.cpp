@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "TerminationHandler.h"
-#include "GameState.h"
+#include "Board.h"
 
 TerminationHandler::~TerminationHandler() {}
 

@@ -113,7 +113,7 @@ void City::disconnectFrom(City& target)
 
 }
 
-void City::addDiseaseCubes(const Colour& colour, const unsigned amount, GameState& state){
+void City::addDiseaseCubes(const Colour& colour, const unsigned amount, Board& state){
 	if (!_outbreaks[colour] && !_quarantined && !state.cubePool().isEradicated(colour)) {
 		_diseaseCubes.takeFrom(colour, amount, state.cubePool());
 		if (_diseaseCubes[colour] > cubesBeforeOutbreak) {
@@ -155,13 +155,13 @@ bool& City::hasResearchStation()
 	return _hasResearchStation;
 }
 
-void City::giveResearchStation(GameState& game)
+void City::giveResearchStation(Board& game)
 {
 	game.removeResearchStation();
 	_hasResearchStation = true;
 }
 
-void City::removeResearchStation(GameState& game)
+void City::removeResearchStation(Board& game)
 {
 	game.returnResearchStation();
 	_hasResearchStation = false;
