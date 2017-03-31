@@ -6,11 +6,11 @@
 using namespace action;
 
 const std::string name = "Drive/Ferry";
-const std::string description = "Move to a city connected to the one you are in.";
+const std::string desc = "Move to a city connected to the one you are in.";
 
 
 action::DriveOrFerry::DriveOrFerry(Player* const performer)
-	: Action(name, description, performer)
+	: Action("Drive/Ferry", desc, performer)
 {}
 
 DriveOrFerry::~DriveOrFerry(){}

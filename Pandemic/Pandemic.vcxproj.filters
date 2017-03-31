@@ -208,7 +208,10 @@
     <ClInclude Include="Action.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
-    <ClInclude Include="DriveOrFerry.h" />
+    <ClInclude Include="DriveOrFerry.h">
+      <Filter>Actions\header</Filter>
+    </ClInclude>
+    <ClInclude Include="ActionController.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -307,7 +310,10 @@
     <ClCompile Include="Action.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="DriveOrFerry.cpp" />
+    <ClCompile Include="DriveOrFerry.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ActionController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">

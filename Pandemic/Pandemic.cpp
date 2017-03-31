@@ -20,6 +20,7 @@
 #include <string>
 #include <vector>
 
+#include "ActionController.h"
 #include "Card.h"
 #include "City.h"
 #include "DeckofEvents.h"
@@ -44,11 +45,12 @@
 #ifdef TEST
 void main()
 {
-	//Board g;
 	newGame();
-	action::DriveOrFerry a(&Board::instance().currentPlayer());
-	a.solicitData();
-	a.perform();
+	ActionController a(Board::instance().currentPlayer());
+	while (a.hasActionPoints())
+	{
+		a.solicitAction();
+	}
 	waitForExit();
 }
 #else

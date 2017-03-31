@@ -7,3 +7,13 @@ action::Action::Action(const std::string& name, const std::string& description, 
 {}
 
 action::Action::~Action() {}
+
+std::string action::Action::name() const
+{
+	return _name;
+}
+
+std::string action::Action::description() const
+{
+	return _description;
+}

@@ -18,6 +18,12 @@ namespace action
 		// Abstract
 		virtual ~Action() = 0;
 
+		// The name of the action
+		std::string name() const;
+
+		// Descriptive text
+		std::string description() const;
+
 		// Prepare action for performance
 		virtual void solicitData() = 0;
 
@@ -34,7 +40,7 @@ namespace action
 		// The name of the action
 		std::string _name;
 
-		// A descriptive string
+		// Descriptive text
 		std::string _description;
 	};
 }
