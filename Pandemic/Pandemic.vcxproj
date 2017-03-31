@@ -121,6 +121,7 @@
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DeckofEvents.h" />
     <ClInclude Include="DeckofRoles.h" />
+    <ClInclude Include="DirectFlight.h" />
     <ClInclude Include="DiseaseTracker.h" />
     <ClInclude Include="DriveOrFerry.h" />
     <ClInclude Include="EpidemicCard.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DeckofEvents.cpp" />
     <ClCompile Include="DeckofRoles.cpp" />
+    <ClCompile Include="DirectFlight.cpp" />
     <ClCompile Include="DiseaseTracker.cpp" />
     <ClCompile Include="DriveOrFerry.cpp" />
     <ClCompile Include="EpidemicCard.cpp" />

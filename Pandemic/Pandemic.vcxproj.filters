@@ -211,7 +211,12 @@
     <ClInclude Include="DriveOrFerry.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
-    <ClInclude Include="ActionController.h" />
+    <ClInclude Include="ActionController.h">
+      <Filter>Controllers\header</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectFlight.h">
+      <Filter>Actions\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -313,7 +318,10 @@
     <ClCompile Include="DriveOrFerry.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="ActionController.cpp" />
+    <ClCompile Include="ActionController.cpp">
+      <Filter>Controllers\src</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectFlight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
