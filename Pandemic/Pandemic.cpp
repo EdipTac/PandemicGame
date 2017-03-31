@@ -24,6 +24,7 @@
 #include "City.h"
 #include "DeckofEvents.h"
 #include "DeckofRoles.h"
+#include "DriveOrFerry.h"
 #include "EventCard.h"
 #include "Board.h"
 #include "InfectionCard.h"
@@ -43,12 +44,11 @@
 #ifdef TEST
 void main()
 {
-	Board g;
-	while (!g.shouldQuit())
-	{
-		std::cout << g.outbreakCounter() << std::endl;
-		g.advanceOutbreakCounter();
-	}
+	//Board g;
+	newGame();
+	action::DriveOrFerry a(&Board::instance().currentPlayer());
+	a.solicitData();
+	a.perform();
 	waitForExit();
 }
 #else
