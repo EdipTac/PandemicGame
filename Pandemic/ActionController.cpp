@@ -5,6 +5,7 @@
 #include "DriveOrFerry.h"
 #include "DirectFlight.h"
 #include "Player.h"
+#include "ShuttleFlight.h"
 
 using namespace action;
 
@@ -50,8 +51,8 @@ void ActionController::solicitAction()
 	if (action.isValid())
 	{
 		--_actionPointsRemaining;
+		action.perform();
 	}
-	action.perform();
 }
 
 bool ActionController::hasActionPoints()
@@ -64,5 +65,6 @@ std::vector<std::unique_ptr<Action>> prepareActions(Player& player)
 	std::vector<std::unique_ptr<Action>> actions;
 	actions.push_back(std::make_unique<DriveOrFerry>(&player));
 	actions.push_back(std::make_unique<DirectFlight>(&player));
+	actions.push_back(std::make_unique<ShuttleFlight>(&player));
 	return actions;
 }

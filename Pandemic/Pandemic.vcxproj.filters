@@ -220,6 +220,9 @@
     <ClInclude Include="CharterFlight.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="ShuttleFlight.h">
+      <Filter>Actions\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -330,6 +333,7 @@
     <ClCompile Include="CharterFlight.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
+    <ClCompile Include="ShuttleFlight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
