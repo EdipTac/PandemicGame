@@ -6,16 +6,15 @@ class City;
 
 namespace action
 {
-	class DriveOrFerry :
-		public Action
+	class DirectFlight
+		: public Action
 	{
 	public:
-		DriveOrFerry(Player* const performer = nullptr);
-		virtual ~DriveOrFerry() override;
-		virtual void perform() override;
+		DirectFlight(Player* const performer = nullptr);
 		virtual void solicitData() override;
+		virtual void perform() override;
 		virtual bool isValid() const override;
-
+	
 	private:
 		City* _target;
 	};
