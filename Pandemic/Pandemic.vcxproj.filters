@@ -220,6 +220,9 @@
     <ClInclude Include="ShuttleFlight.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="TreatDisease.h">
+      <Filter>Actions\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -327,7 +330,10 @@
     <ClCompile Include="DirectFlight.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="ShuttleFlight.cpp" />
+    <ClCompile Include="ShuttleFlight.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="TreatDisease.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">

@@ -6,6 +6,7 @@
 #include "DirectFlight.h"
 #include "Player.h"
 #include "ShuttleFlight.h"
+#include "TreatDisease.h"
 
 using namespace action;
 
@@ -66,5 +67,6 @@ std::vector<std::unique_ptr<Action>> prepareActions(Player& player)
 	actions.push_back(std::make_unique<DriveOrFerry>(&player));
 	actions.push_back(std::make_unique<DirectFlight>(&player));
 	actions.push_back(std::make_unique<ShuttleFlight>(&player));
+	actions.push_back(std::make_unique<TreatDisease>(&player));
 	return actions;
 }

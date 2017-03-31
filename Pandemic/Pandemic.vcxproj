@@ -152,6 +152,7 @@
     <ClInclude Include="TerminationState.h" />
     <ClInclude Include="Terminator.h" />
     <ClInclude Include="TextualCard.h" />
+    <ClInclude Include="TreatDisease.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
@@ -191,6 +192,7 @@
     <ClCompile Include="TerminationHandler.cpp" />
     <ClCompile Include="Terminator.cpp" />
     <ClCompile Include="TextualCard.cpp" />
+    <ClCompile Include="TreatDisease.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
