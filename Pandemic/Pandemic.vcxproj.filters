@@ -80,6 +80,15 @@
     <Filter Include="Controllers\src">
       <UniqueIdentifier>{8f87dc60-d41d-4242-ab2b-28dc1aa3dbc4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actions">
+      <UniqueIdentifier>{d37f08b0-6c2d-40e3-a183-72c754099b3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\header">
+      <UniqueIdentifier>{093a2aa8-24c7-4bf8-9613-1bb8191b74b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\src">
+      <UniqueIdentifier>{e7318972-542c-4228-b517-471d163c3807}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -197,7 +206,7 @@
       <Filter>Controllers\header</Filter>
     </ClInclude>
     <ClInclude Include="Action.h">
-      <Filter>Controllers\header</Filter>
+      <Filter>Actions\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +302,9 @@
     </ClCompile>
     <ClCompile Include="StateMachine.cpp">
       <Filter>Controllers\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Action.cpp">
+      <Filter>Actions\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

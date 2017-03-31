@@ -152,6 +152,7 @@
     <ClInclude Include="View.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Action.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="City.cpp" />
     <ClCompile Include="CityCard.cpp" />
