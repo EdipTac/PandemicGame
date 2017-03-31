@@ -10,6 +10,7 @@
 #include "PlayerCard.h"
 #include "RoleCard.h"
 
+
 class PlayerCityCard;
 
 // A player of the game

@@ -3,6 +3,7 @@
 #include "Pawn.h"
 #include "Player.h"
 #include "PlayerCityCard.h"
+#include "Board.h"
 
 // Default Constructor
 Player::Player()
@@ -53,10 +54,23 @@ std::ostream& operator<<(std::ostream& os, PlayerCard& card)
 }
 
 void Player::displayCards() {
-	std::cout << "\nDisplaying Cards: \n";
-	for (auto i = _cards.begin(); i != _cards.end(); ++i) {
-		std::cout << **i << "\n";
+	std::cout << "\nDisplaying Cards on hand: \n";
+	int k = 0;
+	for (auto& card : cityCards()) {
+		std::cout << card->toString() << "\n";
+		k++;
 	}
+	if (k > 7) {
+		std::cout << "More than seven city cards on hand, you have to drop " << (k - 7) << "city cards" << std::endl;
+	}
+	for (auto& player : Board::instance().players()) {
+		for (auto& card : player->cards()) {
+			if (!card->isCityCard()) {
+				std::cout << card->toString() << "\n";
+			}
+		}
+	}
+
 }
 
 bool Player::hasPositionCard()
