@@ -223,6 +223,9 @@
     <ClInclude Include="ShuttleFlight.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="TreatDisease.h">
+      <Filter>Actions\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -328,9 +331,6 @@
       <Filter>Controllers\src</Filter>
     </ClCompile>
     <ClCompile Include="DirectFlight.cpp">
-      <Filter>Actions\src</Filter>
-    </ClCompile>
-    <ClCompile Include="CharterFlight.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
     <ClCompile Include="ShuttleFlight.cpp" />
