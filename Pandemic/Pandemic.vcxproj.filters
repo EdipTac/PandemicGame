@@ -217,10 +217,10 @@
     <ClInclude Include="DirectFlight.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
-    <ClInclude Include="ShuttleFlight.h">
+    <ClInclude Include="CharterFlight.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
-    <ClInclude Include="TreatDisease.h">
+    <ClInclude Include="ShuttleFlight.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
   </ItemGroup>
@@ -330,10 +330,10 @@
     <ClCompile Include="DirectFlight.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="ShuttleFlight.cpp">
+    <ClCompile Include="CharterFlight.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="TreatDisease.cpp" />
+    <ClCompile Include="ShuttleFlight.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
