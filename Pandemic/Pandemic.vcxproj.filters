@@ -217,6 +217,9 @@
     <ClInclude Include="DirectFlight.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="CharterFlight.h">
+      <Filter>Actions\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -321,7 +324,12 @@
     <ClCompile Include="ActionController.cpp">
       <Filter>Controllers\src</Filter>
     </ClCompile>
-    <ClCompile Include="DirectFlight.cpp" />
+    <ClCompile Include="DirectFlight.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="CharterFlight.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
