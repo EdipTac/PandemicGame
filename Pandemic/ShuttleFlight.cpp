@@ -25,7 +25,7 @@ void action::ShuttleFlight::solicitData()
 	const auto& stations = Board::instance().map().stations(); // Alias
 
 	// If there are no other cities with stations, you can't move anywhere
-	if (stations.empty())
+	if (stations.size() < 2)
 	{
 		std::cout << "There are no other cities with research stations.\n";
 		return;
