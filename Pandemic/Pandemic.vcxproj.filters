@@ -351,7 +351,9 @@
     <ClCompile Include="DiscoverACure.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="GiveKnowledge.cpp" />
+    <ClCompile Include="GiveKnowledge.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
