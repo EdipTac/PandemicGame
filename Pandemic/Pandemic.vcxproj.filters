@@ -333,7 +333,15 @@
     <ClCompile Include="DirectFlight.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="ShuttleFlight.cpp" />
+    <ClCompile Include="CharterFlight.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ShuttleFlight.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="TreatDisease.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
