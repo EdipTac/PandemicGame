@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "TreatDisease.h"
 
-const std::string desc = "Remove 1 disease cube from the city you are in, placing it in the cube suppled next to the board.";
+constexpr auto desc = "Remove 1 disease cube from the city you are in, placing it in the cube suppled next to the board.";
 
 action::TreatDisease::TreatDisease(Player* const performer)
 	: Action { "Treat Disease", desc, performer }

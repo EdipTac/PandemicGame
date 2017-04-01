@@ -41,11 +41,21 @@
 #include "OutbreakCounter.h"
 
 //	----    Program entry point    ----  //
-#define TEST
+//#define TEST
 #ifdef TEST
 void main()
 {
 	newGame();
+	const auto& startingColour = Board::instance().map().startingCity()->colour();
+	const auto& cities = Board::instance().map().cities();
+	auto& colouredCity = **std::find_if(cities.begin(), cities.end(), [&](const auto& c)
+	{
+		return c->colour() == startingColour;
+	});
+	for (int i = 0; i < 5; ++i)
+	{
+		Board::instance().currentPlayer().addCard(std::make_unique<PlayerCityCard>(colouredCity));
+	}
 	ActionController a(Board::instance().currentPlayer());
 	while (a.hasActionPoints())
 	{

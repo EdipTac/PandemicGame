@@ -226,6 +226,9 @@
     <ClInclude Include="TreatDisease.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="DiscoverACure.h">
+      <Filter>Actions\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -340,6 +343,9 @@
       <Filter>Actions\src</Filter>
     </ClCompile>
     <ClCompile Include="TreatDisease.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="DiscoverACure.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
   </ItemGroup>
