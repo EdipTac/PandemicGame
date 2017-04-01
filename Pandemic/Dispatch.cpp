@@ -57,7 +57,7 @@ void action::Dispatch::solicitData()
 	for (const auto& player : others)
 	{
 		auto city = &player->pawn().position();
-		if (std::find(destinations.begin(), destinations.end(), city) == destinations.end) // Not already in list
+		if (std::find(destinations.begin(), destinations.end(), city) == destinations.end()) // Not already in list
 		{
 			destinations.push_back(city);
 		}
@@ -71,7 +71,6 @@ void action::Dispatch::solicitData()
 	}
 
 	// Get destination from player
-	std::string input;
 	while (true)
 	{
 		std::getline(std::cin >> std::ws, input);

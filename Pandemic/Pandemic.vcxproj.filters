@@ -8,12 +8,6 @@
     <Filter Include="Cards">
       <UniqueIdentifier>{a4a46059-1194-4b5d-9354-962712d90885}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Cards\header">
-      <UniqueIdentifier>{478694a9-22ff-43f6-a515-7a0f23f6eb52}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Cards\src">
-      <UniqueIdentifier>{49ad233d-fe1c-4f09-8f41-95e095b7024c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="General">
       <UniqueIdentifier>{0cd3817d-db93-4235-9227-fc01f32916b8}</UniqueIdentifier>
     </Filter>
@@ -110,34 +104,49 @@
     <Filter Include="Actions\Role Actions\src">
       <UniqueIdentifier>{8c5ef2d7-a7a6-4f69-aee0-b76235e52ac1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Cards\Role Cards">
+      <UniqueIdentifier>{b2339754-1bea-4372-aa5b-90086507cd03}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cards\Role Cards\header">
+      <UniqueIdentifier>{0995aac1-899e-471d-8e99-1b05c2242169}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cards\Role Cards\src">
+      <UniqueIdentifier>{9057ebff-04cf-41e1-9634-e43e18d84e52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cards\General">
+      <UniqueIdentifier>{0694715b-7e3c-4172-a62c-fef9c1232c23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cards\General\header">
+      <UniqueIdentifier>{478694a9-22ff-43f6-a515-7a0f23f6eb52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Cards\General\src">
+      <UniqueIdentifier>{49ad233d-fe1c-4f09-8f41-95e095b7024c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
-      <Filter>Cards\header</Filter>
+      <Filter>Cards\General\header</Filter>
     </ClInclude>
     <ClInclude Include="CityCard.h">
-      <Filter>Cards\header</Filter>
+      <Filter>Cards\General\header</Filter>
     </ClInclude>
     <ClInclude Include="EpidemicCard.h">
-      <Filter>Cards\header</Filter>
+      <Filter>Cards\General\header</Filter>
     </ClInclude>
     <ClInclude Include="EventCard.h">
-      <Filter>Cards\header</Filter>
+      <Filter>Cards\General\header</Filter>
     </ClInclude>
     <ClInclude Include="InfectionCard.h">
-      <Filter>Cards\header</Filter>
+      <Filter>Cards\General\header</Filter>
     </ClInclude>
     <ClInclude Include="PlayerCard.h">
-      <Filter>Cards\header</Filter>
+      <Filter>Cards\General\header</Filter>
     </ClInclude>
     <ClInclude Include="PlayerCityCard.h">
-      <Filter>Cards\header</Filter>
-    </ClInclude>
-    <ClInclude Include="RoleCard.h">
-      <Filter>Cards\header</Filter>
+      <Filter>Cards\General\header</Filter>
     </ClInclude>
     <ClInclude Include="TextualCard.h">
-      <Filter>Cards\header</Filter>
+      <Filter>Cards\General\header</Filter>
     </ClInclude>
     <ClInclude Include="City.h">
       <Filter>General\header</Filter>
@@ -259,34 +268,37 @@
     <ClInclude Include="Dispatch.h">
       <Filter>Actions\Role Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="RoleCard.h">
+      <Filter>Cards\Role Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Dispatcher.h">
+      <Filter>Cards\Role Cards\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
-      <Filter>Cards\src</Filter>
+      <Filter>Cards\General\src</Filter>
     </ClCompile>
     <ClCompile Include="CityCard.cpp">
-      <Filter>Cards\src</Filter>
+      <Filter>Cards\General\src</Filter>
     </ClCompile>
     <ClCompile Include="EpidemicCard.cpp">
-      <Filter>Cards\src</Filter>
+      <Filter>Cards\General\src</Filter>
     </ClCompile>
     <ClCompile Include="EventCard.cpp">
-      <Filter>Cards\src</Filter>
+      <Filter>Cards\General\src</Filter>
     </ClCompile>
     <ClCompile Include="InfectionCard.cpp">
-      <Filter>Cards\src</Filter>
+      <Filter>Cards\General\src</Filter>
     </ClCompile>
     <ClCompile Include="PlayerCard.cpp">
-      <Filter>Cards\src</Filter>
+      <Filter>Cards\General\src</Filter>
     </ClCompile>
     <ClCompile Include="PlayerCityCard.cpp">
-      <Filter>Cards\src</Filter>
-    </ClCompile>
-    <ClCompile Include="RoleCard.cpp">
-      <Filter>Cards\src</Filter>
+      <Filter>Cards\General\src</Filter>
     </ClCompile>
     <ClCompile Include="TextualCard.cpp">
-      <Filter>Cards\src</Filter>
+      <Filter>Cards\General\src</Filter>
     </ClCompile>
     <ClCompile Include="City.cpp">
       <Filter>General\src</Filter>
@@ -384,7 +396,15 @@
     <ClCompile Include="TreatDisease.cpp">
       <Filter>Actions\General Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="Dispatch.cpp" />
+    <ClCompile Include="RoleCard.cpp">
+      <Filter>Cards\Role Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Dispatch.cpp">
+      <Filter>Actions\Role Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Dispatcher.cpp">
+      <Filter>Cards\Role Cards\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
