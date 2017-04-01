@@ -4,6 +4,7 @@
 #include "ActionController.h"
 #include "DriveOrFerry.h"
 #include "GiveKnowledge.h"
+#include "TakeKnowledge.h"
 #include "DirectFlight.h"
 #include "CharterFlight.h"
 #include "Player.h"
@@ -15,14 +16,13 @@ using namespace action;
 
 constexpr size_t actionsTotalDefault = 4;
 
-std::vector<std::unique_ptr<action::Action>> prepareActions(Player& player);
-
 ActionController::ActionController(Player& player)
 	: _player { player }
 	, _actionPointsTotal { actionsTotalDefault }
 	, _actionPointsRemaining { _actionPointsTotal }
-	, _actions { prepareActions(_player) }
-{}
+{
+	resetActionList();
+}
 
 void ActionController::solicitAction()
 {
@@ -57,6 +57,7 @@ void ActionController::solicitAction()
 		--_actionPointsRemaining;
 		action.perform();
 	}
+	resetActionList();
 }
 
 bool ActionController::hasActionPoints()
@@ -64,15 +65,15 @@ bool ActionController::hasActionPoints()
 	return _actionPointsRemaining > 0;
 }
 
-std::vector<std::unique_ptr<Action>> prepareActions(Player& player)
+void ActionController::resetActionList()
 {
-	std::vector<std::unique_ptr<Action>> actions;
-	actions.push_back(std::make_unique<DriveOrFerry>(&player));
-	actions.push_back(std::make_unique<DirectFlight>(&player));
-	actions.push_back(std::make_unique<ShuttleFlight>(&player));
-	actions.push_back(std::make_unique<CharterFlight>(&player));
-	actions.push_back(std::make_unique<TreatDisease>(&player));
-	actions.push_back(std::make_unique<DiscoverACure>(&player));
-	actions.push_back(std::make_unique<GiveKnowledge>(&player));
-	return actions;
+	_actions.clear();
+	_actions.push_back(std::make_unique<DriveOrFerry>(&_player));
+	_actions.push_back(std::make_unique<DirectFlight>(&_player));
+	_actions.push_back(std::make_unique<ShuttleFlight>(&_player));
+	_actions.push_back(std::make_unique<CharterFlight>(&_player));
+	_actions.push_back(std::make_unique<TreatDisease>(&_player));
+	_actions.push_back(std::make_unique<DiscoverACure>(&_player));
+	_actions.push_back(std::make_unique<GiveKnowledge>(&_player));
+	_actions.push_back(std::make_unique<TakeKnowledge>(&_player));
 }

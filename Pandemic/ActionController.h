@@ -13,6 +13,7 @@ public:
 	ActionController(Player& player);
 	void solicitAction();
 	bool hasActionPoints();
+	void resetActionList();
 
 private:
 	Player& _player;
