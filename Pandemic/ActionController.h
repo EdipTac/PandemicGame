@@ -19,6 +19,14 @@ private:
 	Player& _player;
 	size_t _actionPointsTotal;
 	size_t _actionPointsRemaining;
-	std::vector<std::unique_ptr<action::Action>> _actions;
-};
+	std::vector<std::unique_ptr<action::Action>> _generalActions;
+	std::vector<action::Action*> _actions;
 
+	void _resetGeneralActions();
+
+	template <typename T>
+	std::unique_ptr<T> _makeAction()
+	{
+		return std::make_unique<T>(&_player);
+	}
+};

@@ -2,15 +2,16 @@
 #include <sstream>
 
 #include "ActionController.h"
+#include "Action.h"
+#include "CharterFlight.h"
+#include "DirectFlight.h"
+#include "DiscoverACure.h"
 #include "DriveOrFerry.h"
 #include "GiveKnowledge.h"
-#include "TakeKnowledge.h"
-#include "DirectFlight.h"
-#include "CharterFlight.h"
 #include "Player.h"
 #include "ShuttleFlight.h"
+#include "TakeKnowledge.h"
 #include "TreatDisease.h"
-#include "DiscoverACure.h"
 
 using namespace action;
 
@@ -67,13 +68,31 @@ bool ActionController::hasActionPoints()
 
 void ActionController::resetActionList()
 {
+	_resetGeneralActions();
 	_actions.clear();
-	_actions.push_back(std::make_unique<DriveOrFerry>(&_player));
-	_actions.push_back(std::make_unique<DirectFlight>(&_player));
-	_actions.push_back(std::make_unique<ShuttleFlight>(&_player));
-	_actions.push_back(std::make_unique<CharterFlight>(&_player));
-	_actions.push_back(std::make_unique<TreatDisease>(&_player));
-	_actions.push_back(std::make_unique<DiscoverACure>(&_player));
-	_actions.push_back(std::make_unique<GiveKnowledge>(&_player));
-	_actions.push_back(std::make_unique<TakeKnowledge>(&_player));
+
+	// General actions
+	for (const auto& action : _generalActions)
+	{
+		_actions.push_back(action.get());
+	}
+
+	// Special role actions
+	for (const auto& action : _player.role().actions())
+	{
+		_actions.push_back(action);
+	}
+}
+
+void ActionController::_resetGeneralActions()
+{
+	_generalActions.clear();
+	_generalActions.push_back(_makeAction<DriveOrFerry>());
+	_generalActions.push_back(_makeAction<DirectFlight>());
+	_generalActions.push_back(_makeAction<ShuttleFlight>());
+	_generalActions.push_back(_makeAction<CharterFlight>());
+	_generalActions.push_back(_makeAction<TreatDisease>());
+	_generalActions.push_back(_makeAction<DiscoverACure>());
+	_generalActions.push_back(_makeAction<GiveKnowledge>());
+	_generalActions.push_back(_makeAction<TakeKnowledge>());
 }

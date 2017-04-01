@@ -36,7 +36,7 @@ public:
 	const RoleCard& role() const;
 
 	// Accessors and Mutators for _role
-	//Prints the role of the player
+	// Prints the role of the player
 	void displayRole();
 
 	void setRole(std::unique_ptr<RoleCard> role);
