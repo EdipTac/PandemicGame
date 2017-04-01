@@ -147,7 +147,7 @@
     <ClInclude Include="PlayerCityCard.h" />
     <ClInclude Include="RoleCard.h" />
     <ClInclude Include="Serialization.h" />
-    <ClInclude Include="ShareKnowledge.h" />
+    <ClInclude Include="GiveKnowledge.h" />
     <ClInclude Include="ShuttleFlight.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
@@ -192,7 +192,7 @@
     <ClCompile Include="PlayerCityCard.cpp" />
     <ClCompile Include="RoleCard.cpp" />
     <ClCompile Include="Serialization.cpp" />
-    <ClCompile Include="ShareKnowledge.cpp" />
+    <ClCompile Include="GiveKnowledge.cpp" />
     <ClCompile Include="ShuttleFlight.cpp" />
     <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="TerminationHandler.cpp" />

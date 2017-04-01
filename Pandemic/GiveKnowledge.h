@@ -2,15 +2,21 @@
 
 #include "Action.h"
 
+class PlayerCard;
+
 namespace action
 {
-	class ShareKnowledge
+	class GiveKnowledge
 		: public Action
 	{
 	public:
-		ShareKnowledge(Player* const performer = nullptr);
+		GiveKnowledge(Player* const performer = nullptr);
 		virtual void solicitData() override;
 		virtual void perform() override;
 		virtual bool isValid() const override;
+
+	private:
+		Player* _target;
+		PlayerCard* _card;
 	};
 }
