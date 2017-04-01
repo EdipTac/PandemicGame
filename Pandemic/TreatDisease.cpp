@@ -32,11 +32,12 @@ void action::TreatDisease::solicitData()
 	while (true)
 	{
 		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(colours().begin(), colours().end(), [&](const auto& c)
+		const auto& clrs = colours();
+		const auto& it = std::find_if(clrs.begin(), clrs.end(), [&](const auto& c)
 		{
 			return input == colourName(c);
 		});
-		if (it != colours().end())
+		if (it != clrs.end())
 		{
 			_colour = *it;
 			break;
