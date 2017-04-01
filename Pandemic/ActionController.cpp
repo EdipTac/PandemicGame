@@ -4,6 +4,7 @@
 #include "ActionController.h"
 #include "DriveOrFerry.h"
 #include "DirectFlight.h"
+#include "CharterFlight.h"
 #include "Player.h"
 #include "ShuttleFlight.h"
 #include "TreatDisease.h"
@@ -68,6 +69,7 @@ std::vector<std::unique_ptr<Action>> prepareActions(Player& player)
 	actions.push_back(std::make_unique<DriveOrFerry>(&player));
 	actions.push_back(std::make_unique<DirectFlight>(&player));
 	actions.push_back(std::make_unique<ShuttleFlight>(&player));
+	actions.push_back(std::make_unique<CharterFlight>(&player));
 	actions.push_back(std::make_unique<TreatDisease>(&player));
 	actions.push_back(std::make_unique<DiscoverACure>(&player));
 	return actions;

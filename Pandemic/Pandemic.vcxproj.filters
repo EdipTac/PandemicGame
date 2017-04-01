@@ -229,6 +229,9 @@
     <ClInclude Include="DiscoverACure.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="ShareKnowledge.h">
+      <Filter>Actions\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -348,6 +351,7 @@
     <ClCompile Include="DiscoverACure.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
+    <ClCompile Include="ShareKnowledge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
