@@ -83,11 +83,32 @@
     <Filter Include="Actions">
       <UniqueIdentifier>{d37f08b0-6c2d-40e3-a183-72c754099b3a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actions\header">
+    <Filter Include="Actions\General Actions">
+      <UniqueIdentifier>{c2e0e9e3-147a-484b-a1ab-fac9e3d22916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\General Actions\header">
+      <UniqueIdentifier>{ccd22b86-e022-4b01-8f28-837477d06b89}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\General Actions\src">
+      <UniqueIdentifier>{76bd7ac1-0da2-4358-bb55-d7c566d5128e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\Abstract">
+      <UniqueIdentifier>{dd02fd5e-4782-4061-a5b4-8e60e28d942e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\Abstract\header">
       <UniqueIdentifier>{093a2aa8-24c7-4bf8-9613-1bb8191b74b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actions\src">
+    <Filter Include="Actions\Abstract\src">
       <UniqueIdentifier>{e7318972-542c-4228-b517-471d163c3807}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\Role Actions">
+      <UniqueIdentifier>{2fd5e80d-b54e-488a-b47b-332fa2141fa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\Role Actions\header">
+      <UniqueIdentifier>{a2016b86-e234-49d0-b2e9-75aaefb5f153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\Role Actions\src">
+      <UniqueIdentifier>{8c5ef2d7-a7a6-4f69-aee0-b76235e52ac1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -206,34 +227,37 @@
       <Filter>Controllers\header</Filter>
     </ClInclude>
     <ClInclude Include="Action.h">
-      <Filter>Actions\header</Filter>
-    </ClInclude>
-    <ClInclude Include="DriveOrFerry.h">
-      <Filter>Actions\header</Filter>
+      <Filter>Actions\Abstract\header</Filter>
     </ClInclude>
     <ClInclude Include="ActionController.h">
       <Filter>Controllers\header</Filter>
     </ClInclude>
-    <ClInclude Include="DirectFlight.h">
-      <Filter>Actions\header</Filter>
-    </ClInclude>
     <ClInclude Include="CharterFlight.h">
-      <Filter>Actions\header</Filter>
+      <Filter>Actions\General Actions\header</Filter>
     </ClInclude>
-    <ClInclude Include="ShuttleFlight.h">
-      <Filter>Actions\header</Filter>
-    </ClInclude>
-    <ClInclude Include="TreatDisease.h">
-      <Filter>Actions\header</Filter>
+    <ClInclude Include="DirectFlight.h">
+      <Filter>Actions\General Actions\header</Filter>
     </ClInclude>
     <ClInclude Include="DiscoverACure.h">
-      <Filter>Actions\header</Filter>
+      <Filter>Actions\General Actions\header</Filter>
+    </ClInclude>
+    <ClInclude Include="DriveOrFerry.h">
+      <Filter>Actions\General Actions\header</Filter>
     </ClInclude>
     <ClInclude Include="GiveKnowledge.h">
-      <Filter>Actions\header</Filter>
+      <Filter>Actions\General Actions\header</Filter>
+    </ClInclude>
+    <ClInclude Include="ShuttleFlight.h">
+      <Filter>Actions\General Actions\header</Filter>
     </ClInclude>
     <ClInclude Include="TakeKnowledge.h">
-      <Filter>Actions\header</Filter>
+      <Filter>Actions\General Actions\header</Filter>
+    </ClInclude>
+    <ClInclude Include="TreatDisease.h">
+      <Filter>Actions\General Actions\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Dispatch.h">
+      <Filter>Actions\Role Actions\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -331,35 +355,36 @@
       <Filter>Controllers\src</Filter>
     </ClCompile>
     <ClCompile Include="Action.cpp">
-      <Filter>Actions\src</Filter>
-    </ClCompile>
-    <ClCompile Include="DriveOrFerry.cpp">
-      <Filter>Actions\src</Filter>
+      <Filter>Actions\Abstract\src</Filter>
     </ClCompile>
     <ClCompile Include="ActionController.cpp">
       <Filter>Controllers\src</Filter>
     </ClCompile>
-    <ClCompile Include="DirectFlight.cpp">
-      <Filter>Actions\src</Filter>
-    </ClCompile>
     <ClCompile Include="CharterFlight.cpp">
-      <Filter>Actions\src</Filter>
+      <Filter>Actions\General Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="ShuttleFlight.cpp">
-      <Filter>Actions\src</Filter>
-    </ClCompile>
-    <ClCompile Include="TreatDisease.cpp">
-      <Filter>Actions\src</Filter>
+    <ClCompile Include="DirectFlight.cpp">
+      <Filter>Actions\General Actions\src</Filter>
     </ClCompile>
     <ClCompile Include="DiscoverACure.cpp">
-      <Filter>Actions\src</Filter>
+      <Filter>Actions\General Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="DriveOrFerry.cpp">
+      <Filter>Actions\General Actions\src</Filter>
     </ClCompile>
     <ClCompile Include="GiveKnowledge.cpp">
-      <Filter>Actions\src</Filter>
+      <Filter>Actions\General Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ShuttleFlight.cpp">
+      <Filter>Actions\General Actions\src</Filter>
     </ClCompile>
     <ClCompile Include="TakeKnowledge.cpp">
-      <Filter>Actions\src</Filter>
+      <Filter>Actions\General Actions\src</Filter>
     </ClCompile>
+    <ClCompile Include="TreatDisease.cpp">
+      <Filter>Actions\General Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Dispatch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
