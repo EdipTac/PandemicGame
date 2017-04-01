@@ -87,3 +87,13 @@ void action::Dispatch::solicitData()
 		std::cout << "No city of that name.\n";
 	}
 }
+
+void action::Dispatch::perform()
+{
+	_dispatchee->pawn().setPosition(*_destination);
+}
+
+bool action::Dispatch::isValid() const
+{
+	return _dispatchee && _destination;
+}
