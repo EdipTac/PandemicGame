@@ -232,6 +232,9 @@
     <ClInclude Include="GiveKnowledge.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="TakeKnowledge.h">
+      <Filter>Actions\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -352,6 +355,9 @@
       <Filter>Actions\src</Filter>
     </ClCompile>
     <ClCompile Include="GiveKnowledge.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="TakeKnowledge.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
   </ItemGroup>
