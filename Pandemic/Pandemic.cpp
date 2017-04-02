@@ -164,10 +164,7 @@ void newGame()
 			std::cout << "\t" << card->name() << "\n";
 		}
 	}
-
-
-
-
+	
 	//Place first research station
 	map.startingCity().giveResearchStation(Board::instance());
 
@@ -257,17 +254,6 @@ bool performAction()
 	{
 		controller.solicitAction();
 	}
-	//auto actions = actionsPerTurn;	// Counter
-	//while (!Board::instance().shouldQuit() && actions > 0)	// To check game loss/win state between actions
-	//{
-	//	std::cout << "You have " << actions << " actions remaining.\n";
-	//	// Sometimes actions cannot be completed - these do not count towards your limit of four!
-	//	const auto& actionCompleted = actionMenu.solicitInput();
-	//	if (actionCompleted)
-	//	{
-	//		--actions;
-	//	}
-	//}
 	return true;
 }
 
