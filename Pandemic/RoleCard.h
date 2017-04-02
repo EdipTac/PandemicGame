@@ -1,9 +1,13 @@
 #pragma once
 
 #include <string>
+#include <vector>
+#include <memory>
 
+#include "Action.h"
 #include "Card.h"
 #include "TextualCard.h"
+
 
 /*
 This is the header file for the RoleCards that will be used in the game that indicate the
@@ -21,10 +25,13 @@ class RoleCard
 {
 public:
 	RoleCard(const std::string& role = "", const std::string& description = "", const std::string& color = "");
-	~RoleCard() override;
-
+	virtual ~RoleCard() override;
 	void printRole();
 	void onDraw(Board& state) override;
+	std::vector<action::Action*> actions() const;
+
+protected:
+	std::vector<std::unique_ptr<action::Action>> _actions;
 
 private:
 	std::string _color;

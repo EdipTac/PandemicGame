@@ -1,7 +1,7 @@
 
 #include <string>
 #include <vector>
-//#include "ReferenceCard.h"
+#include "Dispatcher.h"
 #include "RoleCard.h"
 #include "DeckofRoles.h"
 #include <memory>
@@ -26,16 +26,7 @@ DeckofRoles::DeckofRoles() {
 			"hand limit.\n"
 			"When the Contingency Planner plays the Event card on his role card,\n"
 			"remove this Event card from the game(instead of discarding it).", "Teal Colored Pawn" ));
-	deckofRole.push_back(std::make_unique<RoleCard>("DISPATCHER","The Dispatcher may, as an action, either:\n"
-		"• move any pawn, if its owner agrees, to any city"
-		"containing another pawn, or\n"
-		"• move another player’s pawn, if its owner agrees,"
-		"as if it were his own.\n"
-		"Note: When moving a player’s pawn as if it were your own, discard cards\n"
-		"for Direct and Charter Flights from your hand.A card discarded for a\n"
-			"Charter Flight must match the city the pawn is moving from.\n"
-			"The Dispatcher can only MOVE other players’ pawns; he may not direct\n"
-			"them to do other actions, such as Treat Disease", "Pink Colored Pawn"));
+	deckofRole.push_back(std::make_unique<role::Dispatcher>());
 	deckofRole.push_back(std::make_unique<RoleCard>("MEDIC", "The Medic removes ALL cubes, not 1, of the same color"
 		" when doing the Treat Disease action.\n"
 		"If a disease has been cured, he automatically removes "

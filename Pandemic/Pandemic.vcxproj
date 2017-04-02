@@ -125,6 +125,8 @@
     <ClInclude Include="DirectFlight.h" />
     <ClInclude Include="DiscoverACure.h" />
     <ClInclude Include="DiseaseTracker.h" />
+    <ClInclude Include="Dispatch.h" />
+    <ClInclude Include="Dispatcher.h" />
     <ClInclude Include="DriveOrFerry.h" />
     <ClInclude Include="EpidemicCard.h" />
     <ClInclude Include="EventCard.h" />
@@ -176,6 +178,8 @@
     <ClCompile Include="DirectFlight.cpp" />
     <ClCompile Include="DiscoverACure.cpp" />
     <ClCompile Include="DiseaseTracker.cpp" />
+    <ClCompile Include="Dispatch.cpp" />
+    <ClCompile Include="Dispatcher.cpp" />
     <ClCompile Include="DriveOrFerry.cpp" />
     <ClCompile Include="EpidemicCard.cpp" />
     <ClCompile Include="EventCard.cpp" />
