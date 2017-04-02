@@ -16,7 +16,7 @@ void action::Dispatch::solicitData()
 	auto others = Board::instance().players();
 	std::remove_if(others.begin(), others.end(), [&](const auto& p)
 	{
-		return p == _performer;
+		return p == this->_performer;
 	});
 
 	if (others.empty())
@@ -52,15 +52,22 @@ void action::Dispatch::solicitData()
 	// Remove dispatchee from list of possible destinations
 	std::remove(others.begin(), others.end(), _dispatchee);
 
-	// Get possbile destinations
-	std::vector<City*> destinations;
+	// Get possbile destinations: ther pawn locations...
+	std::vector<City*> destinations;	
 	for (const auto& player : others)
 	{
 		auto city = &player->pawn().position();
-		if (std::find(destinations.begin(), destinations.end(), city) == destinations.end()) // Not already in list
+		if (std::find(destinations.begin(), destinations.end(), city) == destinations.end())
 		{
+			// Not already in list
 			destinations.push_back(city);
 		}
+	}
+
+	// ...or connected cities ("regular" move)
+	for (const auto& city : _dispatchee->pawn().position().connections())
+	{
+		destinations.push_back(city);
 	}
 
 	// List possible destinations

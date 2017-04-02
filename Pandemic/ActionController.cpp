@@ -81,6 +81,7 @@ void ActionController::resetActionList()
 	for (const auto& action : _player.role().actions())
 	{
 		_actions.push_back(action);
+		_actions.back()->setPerformer(&_player);
 	}
 }
 

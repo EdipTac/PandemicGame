@@ -86,15 +86,6 @@
     <Filter Include="Actions\General Actions\src">
       <UniqueIdentifier>{76bd7ac1-0da2-4358-bb55-d7c566d5128e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actions\Abstract">
-      <UniqueIdentifier>{dd02fd5e-4782-4061-a5b4-8e60e28d942e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actions\Abstract\header">
-      <UniqueIdentifier>{093a2aa8-24c7-4bf8-9613-1bb8191b74b8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actions\Abstract\src">
-      <UniqueIdentifier>{e7318972-542c-4228-b517-471d163c3807}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Actions\Role Actions">
       <UniqueIdentifier>{2fd5e80d-b54e-488a-b47b-332fa2141fa5}</UniqueIdentifier>
     </Filter>
@@ -121,6 +112,15 @@
     </Filter>
     <Filter Include="Cards\General\src">
       <UniqueIdentifier>{49ad233d-fe1c-4f09-8f41-95e095b7024c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\Interfaces">
+      <UniqueIdentifier>{dd02fd5e-4782-4061-a5b4-8e60e28d942e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\Interfaces\header">
+      <UniqueIdentifier>{093a2aa8-24c7-4bf8-9613-1bb8191b74b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actions\Interfaces\src">
+      <UniqueIdentifier>{e7318972-542c-4228-b517-471d163c3807}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -236,7 +236,7 @@
       <Filter>Controllers\header</Filter>
     </ClInclude>
     <ClInclude Include="Action.h">
-      <Filter>Actions\Abstract\header</Filter>
+      <Filter>Actions\Interfaces\header</Filter>
     </ClInclude>
     <ClInclude Include="ActionController.h">
       <Filter>Controllers\header</Filter>
@@ -272,6 +272,9 @@
       <Filter>Cards\Role Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="Dispatcher.h">
+      <Filter>Cards\Role Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="OperationsExpert.h">
       <Filter>Cards\Role Cards\header</Filter>
     </ClInclude>
   </ItemGroup>
@@ -367,7 +370,7 @@
       <Filter>Controllers\src</Filter>
     </ClCompile>
     <ClCompile Include="Action.cpp">
-      <Filter>Actions\Abstract\src</Filter>
+      <Filter>Actions\Interfaces\src</Filter>
     </ClCompile>
     <ClCompile Include="ActionController.cpp">
       <Filter>Controllers\src</Filter>
@@ -403,6 +406,9 @@
       <Filter>Actions\Role Actions\src</Filter>
     </ClCompile>
     <ClCompile Include="Dispatcher.cpp">
+      <Filter>Cards\Role Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="OperationsExpert.cpp">
       <Filter>Cards\Role Cards\src</Filter>
     </ClCompile>
   </ItemGroup>

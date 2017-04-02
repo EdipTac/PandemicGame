@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Dispatcher.h"
+#include "OperationsExpert.h"
 #include "RoleCard.h"
 #include "DeckofRoles.h"
 #include <memory>
@@ -35,13 +36,7 @@ DeckofRoles::DeckofRoles() {
 		"Note: The Medic’s automatic removal of cubes can occur on other players’ \n"
 		"turns, if he is moved by the Dispatcher or the Airlift Event.\n"
 		"The Medic also prevents placing disease cubes (and outbreaks) of CURED diseases in his location", "Orange Colored Pawn"));
-	deckofRole.push_back(std::make_unique<RoleCard>("OPERATIONS EXPERT","The Operations Expert man, as an action, either\n"
-		"• build a research station in his current city without "
-		"discarding(or using) a City card, or\n"
-		"• once per turn, move from a research station to any city "
-		"by discarding any City card.\n"
-		"Note: The Dispatcher may not use the Operations Expert’s special "
-		"move ability when moving the Operation Expert’s pawn.", "Green Colored Pawn"));
+	deckofRole.push_back(std::make_unique<role::OperationsExpert>());
 	deckofRole.push_back(std::make_unique<RoleCard>("QUARANTINE SPECIALIST", "The Quarantine Specialist prevents both outbreaks and "
 		"the placement of disease cubes in the city she is in "
 		"and all cities connected to that city.\nShe does not affect"

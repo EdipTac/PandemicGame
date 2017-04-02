@@ -25,6 +25,7 @@
 #include "City.h"
 #include "DeckofEvents.h"
 #include "DeckofRoles.h"
+#include "Dispatcher.h"
 #include "DriveOrFerry.h"
 #include "EventCard.h"
 #include "Board.h"
@@ -56,6 +57,7 @@ void main()
 	{
 		Board::instance().currentPlayer().addCard(std::make_unique<PlayerCityCard>(colouredCity));
 	}
+	Board::instance().currentPlayer().setRole(std::make_unique<role::Dispatcher>());
 	ActionController a(Board::instance().currentPlayer());
 	while (a.hasActionPoints())
 	{

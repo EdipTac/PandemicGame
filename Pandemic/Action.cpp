@@ -17,3 +17,8 @@ std::string action::Action::description() const
 {
 	return _description;
 }
+
+void action::Action::setPerformer(Player* const performer)
+{
+	_performer = performer;
+}
