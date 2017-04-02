@@ -170,7 +170,17 @@ unsigned Board::infectionCounter() const
 {
 	return _infectionCounter;
 }
+size_t Board::infectedCityCounter() const
+{
+	size_t count = 0;
+	for (const auto& city : _map->cities())
+	{
+		if(city->isInfected())
+		count ++;
+	}
+	return count;
 
+}
 size_t Board::outbreakCounter() const
 {
 	return _outbreakCounter_.counter();

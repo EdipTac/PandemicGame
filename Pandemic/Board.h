@@ -10,11 +10,12 @@
 #include "Player.h"
 #include "PlayerCard.h"
 #include "OutbreakCounter.h"
+#include "Observable.h"
 
 class TerminationHandler;
 
 // Represents the state of the game
-class Board
+class Board : public Observable
 {
 public:
 	static Board& instance();
@@ -47,11 +48,11 @@ public:
 	void advanceInfectionCounter();
 	unsigned infectionRate() const;
 	unsigned infectionCounter() const;
-
+	size_t infectedCityCounter() const; // count the cities being infected for the purpose of statistic
 	size_t outbreakCounter() const;
 	void advanceOutbreakCounter();
 	CubePool& cubePool();
-
+	
 	Deck<PlayerCard>& playerDeck();
 	Deck<InfectionCard>& infectionDeck();
 	size_t initialCards() const;
@@ -69,7 +70,6 @@ private:
 	unsigned _researchStations = 6;
 	Deck<PlayerCard> _playerDeck;
 	Deck<InfectionCard> _infectionDeck;
-
 	OutbreakCounter _outbreakCounter_;
 	std::unique_ptr<TerminationHandler> _terminationHandler;
 };

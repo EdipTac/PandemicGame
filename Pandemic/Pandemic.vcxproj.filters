@@ -235,6 +235,7 @@
     <ClInclude Include="TakeKnowledge.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="GameStatistics.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -360,6 +361,7 @@
     <ClCompile Include="TakeKnowledge.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
+    <ClCompile Include="GameStatistics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">

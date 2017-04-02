@@ -17,6 +17,7 @@ City::City(const std::string& name, const Colour& colour, const std::map<Colour,
 		{ Colour::Red,		false	},
 		{ Colour::Yellow,	false	}
 	 }
+	, _infected {false}
 	, _quarantined {false}
 {} // Empty
 
@@ -132,6 +133,16 @@ void City::addDiseaseCubes(const Colour& colour, const unsigned amount, Board& s
 void City::removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& pool){
 
 	_diseaseCubes.giveTo(colour, amount, pool);
+}
+
+bool City::isInfected() const
+{
+	return _infected;
+}
+
+void City::infect()
+{
+	_infected = true;
 }
 
 
