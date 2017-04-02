@@ -284,6 +284,9 @@
     <ClInclude Include="ResearcherGiveKnowledge.h">
       <Filter>Actions\Role Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="Researcher.h">
+      <Filter>Cards\Role Cards\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -422,7 +425,12 @@
     <ClCompile Include="MoveFromResearchStation.cpp">
       <Filter>Actions\Role Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="ResearcherGiveKnowledge.cpp" />
+    <ClCompile Include="ResearcherGiveKnowledge.cpp">
+      <Filter>Actions\Role Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Researcher.cpp">
+      <Filter>Cards\Role Cards\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">

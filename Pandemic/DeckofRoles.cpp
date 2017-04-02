@@ -5,6 +5,7 @@
 #include "OperationsExpert.h"
 #include "RoleCard.h"
 #include "DeckofRoles.h"
+#include "Researcher.h"
 #include <memory>
 #include <cstdlib>
 #include <ctime>
@@ -41,11 +42,7 @@ DeckofRoles::DeckofRoles() {
 		"the placement of disease cubes in the city she is in "
 		"and all cities connected to that city.\nShe does not affect"
 		"cubes placed during setup.", "Dark Green Colored Pawn"));
-	deckofRole.push_back(std::make_unique<RoleCard>("RESEARCHER", "As an action, the Researcher may give any City card from "
-		"her hand to another player in the same city as her, without "
-		"this card having to match her city.\nThe transfer must be"
-		"from her hand to the other player’s hand, but it can occur "
-		"on either player’s turn.", "Brown Colored Pawn"));
+	deckofRole.push_back(std::make_unique<role::Researcher>());
 	deckofRole.push_back(std::make_unique<RoleCard>("SCIENTIST","The Scientist needs only 4 (not 5) City cards of "
 		"the same disease color to Discover a Cure for that "
 		"disease.", "White Colored Pawn"));

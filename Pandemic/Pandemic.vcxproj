@@ -150,6 +150,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCard.h" />
     <ClInclude Include="PlayerCityCard.h" />
+    <ClInclude Include="Researcher.h" />
     <ClInclude Include="ResearcherGiveKnowledge.h" />
     <ClInclude Include="RoleCard.h" />
     <ClInclude Include="Serialization.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCard.cpp" />
     <ClCompile Include="PlayerCityCard.cpp" />
+    <ClCompile Include="Researcher.cpp" />
     <ClCompile Include="ResearcherGiveKnowledge.cpp" />
     <ClCompile Include="RoleCard.cpp" />
     <ClCompile Include="Serialization.cpp" />

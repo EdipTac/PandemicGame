@@ -43,7 +43,7 @@
 #include "OutbreakCounter.h"
 
 //	----    Program entry point    ----  //
-#define TEST
+//#define TEST
 #ifdef TEST
 void main()
 {
@@ -252,17 +252,22 @@ void waitForExit()
 // On a player's turn, allow four actions
 bool performAction()
 {
-	auto actions = actionsPerTurn;	// Counter
-	while (!Board::instance().shouldQuit() && actions > 0)	// To check game loss/win state between actions
+	ActionController controller(Board::instance().currentPlayer());
+	while (controller.hasActionPoints())
 	{
-		std::cout << "You have " << actions << " actions remaining.\n";
-		// Sometimes actions cannot be completed - these do not count towards your limit of four!
-		const auto& actionCompleted = actionMenu.solicitInput();
-		if (actionCompleted)
-		{
-			--actions;
-		}
+		controller.solicitAction();
 	}
+	//auto actions = actionsPerTurn;	// Counter
+	//while (!Board::instance().shouldQuit() && actions > 0)	// To check game loss/win state between actions
+	//{
+	//	std::cout << "You have " << actions << " actions remaining.\n";
+	//	// Sometimes actions cannot be completed - these do not count towards your limit of four!
+	//	const auto& actionCompleted = actionMenu.solicitInput();
+	//	if (actionCompleted)
+	//	{
+	//		--actions;
+	//	}
+	//}
 	return true;
 }
 
