@@ -1,4 +1,5 @@
 #include "OperationsExpert.h"
+#include "MoveFromResearchStation.h"
 
 const std::string desc =
 	"The Operations Expert man, as an action, either\n"
@@ -14,6 +15,7 @@ role::OperationsExpert::OperationsExpert()
 {
 	// TODO
 	//_actions.push_back(std::make_unique<BuildAResearchStationFree>());
+	_actions.push_back(std::make_unique<action::MoveFromResearchStation>());
 }
 
 role::OperationsExpert::~OperationsExpert() {}
