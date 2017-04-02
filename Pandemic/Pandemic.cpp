@@ -38,6 +38,7 @@
 #include "PlayerCityCard.h"
 #include "Serialization.h"
 #include "Util.h"
+#include "GameStatistics.h"
 #include "OutbreakCounter.h"
 
 //	----    Program entry point    ----  //
@@ -76,6 +77,7 @@ void main()
 		std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
 		while (!turnMenu.solicitInput()); // Intentionally empty body
 		Board::instance().distributePlayerCards(cardsPerTurn);
+		currentPlayer.displayCards();
 		infect();
 	}
 
@@ -184,7 +186,7 @@ void newGame()
 		}
 	}
 }
-
+GameStatistics *observer = new GameStatistics(Board::instance());
 //Initialize a reference card that any player can view
 void displayReferenceCard()
 {
@@ -674,4 +676,5 @@ void infect()
 		card->onDraw(Board::instance());
 		Board::instance().infectionDeck().addToDiscard(std::move(card));
 	}
+	Board::instance().notify();
 }
