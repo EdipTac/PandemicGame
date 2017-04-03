@@ -28,4 +28,6 @@ public:
 
 	// Inherited via TextualCard
 	virtual void onDraw(Board& state) override;
+
+	//virtual void ability() = 0;
 };

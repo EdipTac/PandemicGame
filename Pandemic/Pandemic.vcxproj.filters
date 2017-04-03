@@ -217,6 +217,9 @@
     <ClInclude Include="DirectFlight.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="Airlift.h">
+      <Filter>Cards\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -322,6 +325,9 @@
       <Filter>Controllers\src</Filter>
     </ClCompile>
     <ClCompile Include="DirectFlight.cpp" />
+    <ClCompile Include="Airlift.cpp">
+      <Filter>Cards\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
