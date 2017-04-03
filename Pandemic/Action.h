@@ -33,6 +33,9 @@ namespace action
 		// True iff the action can be completed - will consume an action
 		virtual bool isValid() const = 0;
 
+		// Set performer
+		void setPerformer(Player* const performer);
+
 	protected:
 		// The player that is performing the action
 		Player* _performer;

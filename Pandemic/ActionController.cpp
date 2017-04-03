@@ -2,22 +2,28 @@
 #include <sstream>
 
 #include "ActionController.h"
-#include "DriveOrFerry.h"
+#include "Action.h"
+#include "CharterFlight.h"
 #include "DirectFlight.h"
+#include "DiscoverACure.h"
+#include "DriveOrFerry.h"
+#include "GiveKnowledge.h"
 #include "Player.h"
+#include "ShuttleFlight.h"
+#include "TakeKnowledge.h"
+#include "TreatDisease.h"
 
 using namespace action;
 
 constexpr size_t actionsTotalDefault = 4;
 
-std::vector<std::unique_ptr<action::Action>> prepareActions(Player& player);
-
 ActionController::ActionController(Player& player)
 	: _player { player }
 	, _actionPointsTotal { actionsTotalDefault }
 	, _actionPointsRemaining { _actionPointsTotal }
-	, _actions { prepareActions(_player) }
-{}
+{
+	resetActionList();
+}
 
 void ActionController::solicitAction()
 {
@@ -50,8 +56,9 @@ void ActionController::solicitAction()
 	if (action.isValid())
 	{
 		--_actionPointsRemaining;
+		action.perform();
 	}
-	action.perform();
+	resetActionList();
 }
 
 bool ActionController::hasActionPoints()
@@ -59,10 +66,34 @@ bool ActionController::hasActionPoints()
 	return _actionPointsRemaining > 0;
 }
 
-std::vector<std::unique_ptr<Action>> prepareActions(Player& player)
+void ActionController::resetActionList()
 {
-	std::vector<std::unique_ptr<Action>> actions;
-	actions.push_back(std::make_unique<DriveOrFerry>(&player));
-	actions.push_back(std::make_unique<DirectFlight>(&player));
-	return actions;
+	_resetGeneralActions();
+	_actions.clear();
+
+	// General actions
+	for (const auto& action : _generalActions)
+	{
+		_actions.push_back(action.get());
+	}
+
+	// Special role actions
+	for (const auto& action : _player.role().actions())
+	{
+		_actions.push_back(action);
+		_actions.back()->setPerformer(&_player);
+	}
+}
+
+void ActionController::_resetGeneralActions()
+{
+	_generalActions.clear();
+	_generalActions.push_back(_makeAction<DriveOrFerry>());
+	_generalActions.push_back(_makeAction<DirectFlight>());
+	_generalActions.push_back(_makeAction<ShuttleFlight>());
+	_generalActions.push_back(_makeAction<CharterFlight>());
+	_generalActions.push_back(_makeAction<TreatDisease>());
+	_generalActions.push_back(_makeAction<DiscoverACure>());
+	_generalActions.push_back(_makeAction<GiveKnowledge>());
+	_generalActions.push_back(_makeAction<TakeKnowledge>());
 }

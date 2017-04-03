@@ -2,8 +2,8 @@
 
 #include <string>
 #include <iostream>
-#include "RoleCard.h"
 
+#include "RoleCard.h"
 
 /* 
 This is the cpp file for the role card. The code makes use of the 2 constructors for the RoleCards
@@ -25,3 +25,13 @@ void RoleCard::printRole() {
 }
 
 void RoleCard::onDraw(Board& state) {}
+
+std::vector<action::Action*> RoleCard::actions() const
+{
+	std::vector<action::Action*> list;
+	for (const auto& action : _actions)
+	{
+		list.push_back(action.get());
+	}
+	return list;
+}

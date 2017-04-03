@@ -26,7 +26,7 @@ void action::DirectFlight::solicitData()
 	{
 		std::cout << "\t" << card->name() << "\n";
 	}
-	//auto& targetCard = *validateInput(cards, "You have no city card of that name.\n");
+	
 	std::string input;
 	while (true)
 	{
