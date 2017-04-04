@@ -220,6 +220,9 @@
     <ClInclude Include="CharterFlight.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="BuildResearchStation.h">
+      <Filter>Actions\header</Filter>
+    </ClInclude>
     <ClInclude Include="ShuttleFlight.h">
       <Filter>Actions\header</Filter>
     </ClInclude>
@@ -333,7 +336,12 @@
     <ClCompile Include="CharterFlight.cpp">
       <Filter>Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="ShuttleFlight.cpp" />
+    <ClCompile Include="BuildResearchStation.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ShuttleFlight.cpp">
+      <Filter>Actions\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
