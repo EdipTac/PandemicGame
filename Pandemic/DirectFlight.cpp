@@ -54,3 +54,7 @@ bool action::DirectFlight::isValid() const
 {
 	return _performer && _target;
 }
+
+void action::DirectFlight::setTarget(City* newTarget) {
+	_target = newTarget;
+}
