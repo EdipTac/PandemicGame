@@ -27,13 +27,13 @@ using namespace role;
 
 DeckofRoles::DeckofRoles()
 {	
-	deckofRole.push_back(std::make_unique<ContingencyPlanner>());
-	deckofRole.push_back(std::make_unique<Dispatcher>());
-	deckofRole.push_back(std::make_unique<Medic>());
-	deckofRole.push_back(std::make_unique<OperationsExpert>());
-	deckofRole.push_back(std::make_unique<QuarantineSpecialist>());
-	deckofRole.push_back(std::make_unique<Researcher>());
-	deckofRole.push_back(std::make_unique<Scientist>());
+	deckOfRole.push_back(std::make_unique<ContingencyPlanner>());
+	deckOfRole.push_back(std::make_unique<Dispatcher>());
+	deckOfRole.push_back(std::make_unique<Medic>());
+	deckOfRole.push_back(std::make_unique<OperationsExpert>());
+	deckOfRole.push_back(std::make_unique<QuarantineSpecialist>());
+	deckOfRole.push_back(std::make_unique<Researcher>());
+	deckOfRole.push_back(std::make_unique<Scientist>());
 }
 
 //this method draws and returns a randomly selected role card for the player
@@ -41,14 +41,14 @@ uniquerolecard DeckofRoles::drawRoleCard(){
 
 	srand((unsigned)time(0));
 	int i;
-	i = (rand() % deckofRole.size());
-	auto temp = move (*(deckofRole.begin()+i));
-	deckofRole.erase(deckofRole.begin()+i);
+	i = (rand() % deckOfRole.size());
+	auto temp = move (*(deckOfRole.begin()+i));
+	deckOfRole.erase(deckOfRole.begin()+i);
 	return (move(temp));
 }
 
 std::vector<std::unique_ptr<RoleCard>> DeckofRoles::roleCards()
 {
-	return std::move(deckofRole);
+	return std::move(deckOfRole);
 }
 

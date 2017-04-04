@@ -20,6 +20,6 @@ public:
 
 
 private:
-	std::vector < uniquerolecard > deckofRole; //out deck of role cards
+	std::vector < uniquerolecard > deckOfRole; //out deck of role cards
 	
 };
