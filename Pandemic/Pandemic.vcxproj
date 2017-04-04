@@ -140,6 +140,7 @@
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapEditor.h" />
+    <ClInclude Include="Medic.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuOption.h" />
     <ClInclude Include="MoveFromResearchStation.h" />
@@ -199,6 +200,7 @@
     <ClCompile Include="InfectionCardDeck.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapEditor.cpp" />
+    <ClCompile Include="Medic.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MoveFromResearchStation.cpp" />
     <ClCompile Include="Observable.cpp" />

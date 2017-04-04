@@ -10,6 +10,7 @@
 #include "RoleCard.h"
 #include "DeckofRoles.h"
 #include "Researcher.h"
+#include "Medic.h"
 
 /*
 This is the cpp file for the deck of role cards.  It contains the constructor as well as the display method 
@@ -24,14 +25,7 @@ DeckofRoles::DeckofRoles() {
 	
 	deckofRole.push_back(std::make_unique<role::ContingencyPlanner>());
 	deckofRole.push_back(std::make_unique<role::Dispatcher>());
-	deckofRole.push_back(std::make_unique<RoleCard>("MEDIC", "The Medic removes ALL cubes, not 1, of the same color"
-		" when doing the Treat Disease action.\n"
-		"If a disease has been cured, he automatically removes "
-		"all cubes of that color from a city, simply by entering it "
-		"or being there.This does not take an action.\n"
-		"Note: The Medic’s automatic removal of cubes can occur on other players’ \n"
-		"turns, if he is moved by the Dispatcher or the Airlift Event.\n"
-		"The Medic also prevents placing disease cubes (and outbreaks) of CURED diseases in his location", "Orange Colored Pawn"));
+	deckofRole.push_back(std::make_unique<role::Medic>());
 	deckofRole.push_back(std::make_unique<role::OperationsExpert>());
 	deckofRole.push_back(std::make_unique<RoleCard>("QUARANTINE SPECIALIST", "The Quarantine Specialist prevents both outbreaks and "
 		"the placement of disease cubes in the city she is in "
