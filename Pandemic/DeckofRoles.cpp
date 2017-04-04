@@ -23,16 +23,19 @@ The "drawRoleCard" is a method that iterates through the vector of rolecards and
 picks a random role card from the deck.
 */
 
+using namespace role;
+
 DeckofRoles::DeckofRoles()
 {	
-	deckofRole.push_back(std::make_unique<role::ContingencyPlanner>());
-	deckofRole.push_back(std::make_unique<role::Dispatcher>());
-	deckofRole.push_back(std::make_unique<role::Medic>());
-	deckofRole.push_back(std::make_unique<role::OperationsExpert>());
-	deckofRole.push_back(std::make_unique<role::QuarantineSpecialist>());
-	deckofRole.push_back(std::make_unique<role::Researcher>());
-	deckofRole.push_back(std::make_unique<role::Scientist>());
+	deckofRole.push_back(std::make_unique<ContingencyPlanner>());
+	deckofRole.push_back(std::make_unique<Dispatcher>());
+	deckofRole.push_back(std::make_unique<Medic>());
+	deckofRole.push_back(std::make_unique<OperationsExpert>());
+	deckofRole.push_back(std::make_unique<QuarantineSpecialist>());
+	deckofRole.push_back(std::make_unique<Researcher>());
+	deckofRole.push_back(std::make_unique<Scientist>());
 }
+
 //this method draws and returns a randomly selected role card for the player
 uniquerolecard DeckofRoles::drawRoleCard(){
 
