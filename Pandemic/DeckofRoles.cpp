@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "Dispatcher.h"
+#include "ContingencyPlanner.h"
 #include "OperationsExpert.h"
 #include "RoleCard.h"
 #include "DeckofRoles.h"
@@ -21,13 +22,7 @@ picks a random role card from the deck.
 
 DeckofRoles::DeckofRoles() {
 	
-	deckofRole.push_back(std::make_unique<RoleCard>("CONTINGENCY PLANNER", "The Contingency Planner may, as an action, take an"
-			"Event card from anywhere in the Player Discard Pile \n"
-			"and place it on his Role card.Only 1 Event card can be"
-			"on his role card at a time.It does not count against his"
-			"hand limit.\n"
-			"When the Contingency Planner plays the Event card on his role card,\n"
-			"remove this Event card from the game(instead of discarding it).", "Teal Colored Pawn" ));
+	deckofRole.push_back(std::make_unique<role::ContingencyPlanner>());
 	deckofRole.push_back(std::make_unique<role::Dispatcher>());
 	deckofRole.push_back(std::make_unique<RoleCard>("MEDIC", "The Medic removes ALL cubes, not 1, of the same color"
 		" when doing the Treat Disease action.\n"

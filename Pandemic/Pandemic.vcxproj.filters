@@ -287,6 +287,10 @@
     <ClInclude Include="Researcher.h">
       <Filter>Cards\Role Cards\header</Filter>
     </ClInclude>
+    <ClInclude Include="Airlift.h" />
+    <ClInclude Include="ContingencyPlanner.h">
+      <Filter>Cards\Role Cards\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -431,6 +435,8 @@
     <ClCompile Include="Researcher.cpp">
       <Filter>Cards\Role Cards\src</Filter>
     </ClCompile>
+    <ClCompile Include="Airlift.cpp" />
+    <ClCompile Include="ContingencyPlanner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
