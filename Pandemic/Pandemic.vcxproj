@@ -114,6 +114,7 @@
     <ClInclude Include="Action.h" />
     <ClInclude Include="ActionController.h" />
     <ClInclude Include="Airlift.h" />
+    <ClInclude Include="BuildResearchStation.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CharterFlight.h" />
     <ClInclude Include="City.h" />
@@ -173,6 +174,7 @@
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionController.cpp" />
     <ClCompile Include="Airlift.cpp" />
+    <ClCompile Include="BuildResearchStation.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CharterFlight.cpp" />
     <ClCompile Include="City.cpp" />
