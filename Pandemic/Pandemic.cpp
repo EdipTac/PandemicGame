@@ -1,17 +1,8 @@
-//  Pandemic - Build 1
+//  Pandemic - Assignment 2
 //
 //					Authors
 //		============================
-//		Michael Deom	-	29549641
-//		Jonny Linton	-	
-//		Edip Tac		-	
-//		Kechun Ye		-	25654688
-//
-//  Submitted 15/03/2017
-//
-//  Build 1 of project.
-//
-//  An implementation of the board game "Pandemic" by Z-Man Games.
+//		Edip Tac		-	26783287
 
 #include <iostream>
 #include <fstream>
@@ -36,42 +27,6 @@
 #include "PlayerCityCard.h"
 #include "Serialization.h"
 #include "Util.h"
-
-//	----    Program entry point    ----  //
-//#define TEST
-#ifdef TEST
-void main()
-{
-	GameState g;
-	while (!g.shouldQuit())
-	{
-		std::cout << g.outbreakCounter() << std::endl;
-		g.advanceOutbreakCounter();
-	}
-	waitForExit();
-}
-#else
-void main()
-{
-	// Title display
-	std::cout << titleFont("PANDEMIC") << "\n\n\n";
-	mainMenu.solicitInput();
-
-	while (game && !game->shouldQuit())
-	{
-		auto& currentPlayer = game->nextPlayer();
-		std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
-		while (!turnMenu.solicitInput()); // Intentionally empty body
-		if (game)
-		{
-			game->distributePlayerCards(cardsPerTurn);
-		}
-		infect();
-	}
-
-	waitForExit();
-}
-#endif
 
 //  -----  Function definitions  ----  //
 
@@ -281,84 +236,7 @@ bool driveOrFerry()
 	return true;
 }
 
-// The player discards a city card to move to the indicated city.
-bool directFlight()
-{
-	// Aliases
-	auto& player = game->currentPlayer();
-	const auto& cards = player.cityCards();
 
-	// You can't discard a card if you have none!
-	if (cards.empty())
-	{
-		std::cout << "You have no city cards.\n";
-		return false;
-	}
-
-	// List cards, get player target, discard card, and move
-	std::cout << "City cards: \n";
-	list(cards);
-	auto& targetCard = *validateInput(cards, "You have no city card of that name.\n");
-	player.pawn().setPosition(targetCard.city());
-	player.removeCardByName(targetCard.name());
-
-	return true;
-}
-
-// Player discards a city card matching the city they are in to fly to any city.
-bool charterFlight()
-{
-	// Aliases
-	auto& player = game->currentPlayer();
-	auto& pawn = player.pawn();
-
-	// Without cards you can't discard
-	if (!player.hasPositionCard())
-	{
-		std::cout << "You don't have any city cards that match your position.\n";
-		return false;
-	}
-
-	// Get city choice from player, move, and discard card
-	std::cout << "Where would you like to fly to? ";
-	auto& target = *validateInput(game->map().nameMap(), "No city of that name exists.\n");
-	pawn.setPosition(target);
-	player.removeCardByName(player.pawn().position().name());
-
-	return true;
-}
-
-// Player moves from a city to a research station to any other city with a research station
-bool shuttleFlight()
-{
-	auto& player = game->currentPlayer(); // Alias
-
-	// Not applicable if you have no research station in your city
-	if (!player.pawn().position().hasResearchStation())
-	{
-		std::cout << "Your city does not have a research station.\n";
-		return false;
-	}
-
-	const auto& stations = game->map().stations(); // Alias
-
-	// If there are no other cities with stations, you can't move anywhere
-	if (stations.empty())
-	{
-		std::cout << "There are no other cities with research stations.\n";
-		return false;
-	}
-
-	// List stations, get target, and move
-	std::cout << "Where do you want to fly?\n";
-	list(stations);
-	auto& target = *validateInput(stations, "No city of that name has a research station.\n");
-	player.pawn().setPosition(target);
-
-	return true;
-}
-
-// Player discards a card matching the city they are in to build a research station
 bool buildResearchStation()
 {
 	auto& player = game->currentPlayer(); // Alias
@@ -436,115 +314,115 @@ bool treatDisease()
 	return true;
 }
 
-// Give or take a card mathcing the city you are in from another player
-bool shareKnowledge()
-{
-	// Aliases
-	auto& currentPlayer = game->currentPlayer();
-	const auto& position = currentPlayer.pawn().position();
-	const auto& players = game->players();
-
-	// Select another player in your city
-	std::vector<Player*> others;
-	for (const auto& player : players)
-	{
-		if (player != &currentPlayer && player->pawn().position() == position)
-		{
-			others.push_back(player);
-		}
-	}
-
-	if (others.empty())
-	{
-		std::cout << "No other players in your city.\n";
-		return false;
-	}
-
-	std::cout << "Who to trade with?\n";
-	for (const auto& player : others)
-	{
-		std::cout << "\t" << player->name() << "\n";
-	}
-	auto& target = *validateInput(others, "Not a player in this city.\n");
-
-	// Give or take?
-	return ActionMenu
-	{
-		{
-			{ "Give Knowledge", [&](){ return giveKnowledge(target); } },
-			{ "Take Knowledge", [&](){ return takeKnowledge(target); } },
-		}
-	}.solicitInput();
-}
-
-// Give your city card to another player
-bool giveKnowledge(Player& target)
-{
-	auto& player = game->currentPlayer();
-	const auto& positionCard = player.positionCard();
-	if (!positionCard)
-	{
-		std::cout << "No matching city card to give!\n";
-		return false;
-	}
-	player.giveCard(*positionCard, target);
-
-	return true;
-}
-
-// Take the city card from another player
-bool takeKnowledge(Player& target)
-{
-	const auto& positionCard = target.positionCard();
-	if (!positionCard)
-	{
-		std::cout << "No matching city card to take!\n";
-		return false;
-	}
-	target.giveCard(*positionCard, game->currentPlayer());
-
-	return true;
-}
-
-bool cureDisease()
-{
-	auto& player = game->currentPlayer();
-	if (!player.pawn().position().hasResearchStation())
-	{
-		std::cout << "No research station in this city.\n";
-		return false;
-	}
-	const auto& cards = game->currentPlayer().cityCards();
-	std::map<Colour, size_t> colourCount;
-	for (const auto& colour : colours())
-	{
-		colourCount[colour] = 0;
-	}
-	
-	std::pair<Colour, bool> cured;
-	cured.second = false;
-
-	for (const auto& card : cards)
-	{
-		const auto& colour = card->colour();
-		auto& count = colourCount[colour];
-		++count;
-		if (count >= 5)
-		{
-			cured = { colour, true };
-			break;
-		}
-	}
-
-	if (cured.second)
-	{
-		game->cureDisease(cured.first);
-		return true;
-	}
-
-	std::cout << "Not enough cards of a single colour!\n";
-	return false;
-}
+//// Give or take a card mathcing the city you are in from another player
+//bool shareKnowledge()
+//{
+//	// Aliases
+//	auto& currentPlayer = game->currentPlayer();
+//	const auto& position = currentPlayer.pawn().position();
+//	const auto& players = game->players();
+//
+//	// Select another player in your city
+//	std::vector<Player*> others;
+//	for (const auto& player : players)
+//	{
+//		if (player != &currentPlayer && player->pawn().position() == position)
+//		{
+//			others.push_back(player);
+//		}
+//	}
+//
+//	if (others.empty())
+//	{
+//		std::cout << "No other players in your city.\n";
+//		return false;
+//	}
+//
+//	std::cout << "Who to trade with?\n";
+//	for (const auto& player : others)
+//	{
+//		std::cout << "\t" << player->name() << "\n";
+//	}
+//	auto& target = *validateInput(others, "Not a player in this city.\n");
+//
+//	// Give or take?
+//	return ActionMenu
+//	{
+//		{
+//			{ "Give Knowledge", [&](){ return giveKnowledge(target); } },
+//			{ "Take Knowledge", [&](){ return takeKnowledge(target); } },
+//		}
+//	}.solicitInput();
+//}
+//
+//// Give your city card to another player
+//bool giveKnowledge(Player& target)
+//{
+//	auto& player = game->currentPlayer();
+//	const auto& positionCard = player.positionCard();
+//	if (!positionCard)
+//	{
+//		std::cout << "No matching city card to give!\n";
+//		return false;
+//	}
+//	player.giveCard(*positionCard, target);
+//
+//	return true;
+//}
+//
+//// Take the city card from another player
+//bool takeKnowledge(Player& target)
+//{
+//	const auto& positionCard = target.positionCard();
+//	if (!positionCard)
+//	{
+//		std::cout << "No matching city card to take!\n";
+//		return false;
+//	}
+//	target.giveCard(*positionCard, game->currentPlayer());
+//
+//	return true;
+//}
+//
+//bool cureDisease()
+//{
+//	auto& player = game->currentPlayer();
+//	if (!player.pawn().position().hasResearchStation())
+//	{
+//		std::cout << "No research station in this city.\n";
+//		return false;
+//	}
+//	const auto& cards = game->currentPlayer().cityCards();
+//	std::map<Colour, size_t> colourCount;
+//	for (const auto& colour : colours())
+//	{
+//		colourCount[colour] = 0;
+//	}
+//	
+//	std::pair<Colour, bool> cured;
+//	cured.second = false;
+//
+//	for (const auto& card : cards)
+//	{
+//		const auto& colour = card->colour();
+//		auto& count = colourCount[colour];
+//		++count;
+//		if (count >= 5)
+//		{
+//			cured = { colour, true };
+//			break;
+//		}
+//	}
+//
+//	if (cured.second)
+//	{
+//		game->cureDisease(cured.first);
+//		return true;
+//	}
+//
+//	std::cout << "Not enough cards of a single colour!\n";
+//	return false;
+//}
 
 void quit()
 {

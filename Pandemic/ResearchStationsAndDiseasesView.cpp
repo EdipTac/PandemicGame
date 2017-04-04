@@ -1,19 +1,26 @@
 #include "ResearchStationsAndDiseasesView.h"
 
-ResearchStationsAndDiseasesView::ResearchStationsAndDiseasesView(GameState* gameState)
-	:_subject{ gameState } 
+
+ResearchStationsAndDiseasesView::ResearchStationsAndDiseasesView() {};
+
+ResearchStationsAndDiseasesView::ResearchStationsAndDiseasesView(ResearchStationsAndDiseases* r)
+
 {
-	_subject->attach(*this);
+	_subject = r;
+	_subject->attach(this);
 }
 
-ResearchStationsAndDiseasesView::~ResearchStationsAndDiseasesView() {}
+ResearchStationsAndDiseasesView::~ResearchStationsAndDiseasesView() {
+	_subject->detach(this);
+}
 
 void ResearchStationsAndDiseasesView::update() 
 {
-
+	display();
 }
 
-GameState* ResearchStationsAndDiseasesView::subject() const
-{
-	return _subject;
+void ResearchStationsAndDiseasesView::display() {
+	int cubes = _subject->getRemainingCubes();
+	int stations = _subject->getRemainingStations();
+	std::cout << "There are currently " << cubes << " cubes and " << stations << " stations remaining. \n";
 }

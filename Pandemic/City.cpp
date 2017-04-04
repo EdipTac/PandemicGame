@@ -27,7 +27,7 @@ std::string City::name() const
 
 std::string& City::name()
 {
-	return _name;
+	return _name;//
 }
 
 Colour City::colour() const

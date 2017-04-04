@@ -13,5 +13,5 @@ public:
 	virtual void update() = 0; //this method is what will be called by the notify function inside the observable class
 
 protected:
-	Observer() {};
+	Observer() ;
 };

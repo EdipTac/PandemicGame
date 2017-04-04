@@ -44,3 +44,4 @@ void CubePool::giveTo(const Colour& colour, const size_t amount, CubePool& targe
 	_diseaseCubes[colour] -= trueAmount;
 	target._diseaseCubes[colour] += trueAmount;
 }
+

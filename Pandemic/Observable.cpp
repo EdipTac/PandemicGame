@@ -11,12 +11,17 @@ of the player class in this implementation
 #include "Observer.h"
 Observable::~Observable() {}
 
-void Observable::attach(Observer& observer)
-{
-	_observers.push_back(&observer);
+Observable::Observable() {
+	_observers = new std::vector<Observer*>;
 }
 
-void Observable::detach(Observer& observer)
+
+void Observable::attach(Observer* observer)
+{
+	_observers.push_back(observer);
+}
+
+void Observable::detach(Observer* observer)
 {
 	_observers.erase(std::remove(_observers.begin(), _observers.end(), observer), _observers.end());
 	// or an alternate method
@@ -27,7 +32,7 @@ void Observable::detach(Observer& observer)
 	
 }
 
-void Observable::notify() const
+void Observable::notify() 
 {
 	for (auto& observer : _observers) // this is done to notify each of the observers present
 	{

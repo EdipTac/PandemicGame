@@ -1,7 +1,7 @@
 #pragma once
 
 #include <map>
-
+#include <iostream>
 #include "Colour.h"
 
 // Represents a collection of disease cubes of each colour.
@@ -22,6 +22,7 @@ public:
 	// The number of cubes of a given colour
 	size_t operator[](const Colour& colour) const;
 	size_t& operator[](const Colour& colour);
+
 
 	// The eradication boolean of a given colour
 	bool isEradicated (const Colour& colour) const;

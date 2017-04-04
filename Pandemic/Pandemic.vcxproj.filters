@@ -281,6 +281,9 @@
     <ClCompile Include="ResearchStationsAndDiseasesView.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
