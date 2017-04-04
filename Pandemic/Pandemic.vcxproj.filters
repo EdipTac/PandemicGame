@@ -438,7 +438,9 @@
     <ClCompile Include="Researcher.cpp">
       <Filter>Cards\Roles\src</Filter>
     </ClCompile>
-    <ClCompile Include="Medic.cpp" />
+    <ClCompile Include="Medic.cpp">
+      <Filter>Cards\Roles\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
