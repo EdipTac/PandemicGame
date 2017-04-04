@@ -14,7 +14,7 @@ std::string EventCard::name() const
 
 std::string EventCard::description() const
 {
-	return TextualCard::name();
+	return TextualCard::description();
 }
 
 std::string EventCard::toString()

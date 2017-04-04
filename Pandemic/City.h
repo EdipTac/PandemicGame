@@ -63,6 +63,12 @@ public:
 
 	// Removes disease cubes of a given colour from a given source
 	void removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& pool);
+
+	// True iff city is infected, only for the purpose of statistic
+	bool isInfected() const;
+
+	// Sets infect status to true, only for the purpose of statistic
+	void infect();
 	
 	// True iff quarantine specialist locates at this city or at cities with direct connection with this city
 	bool isQuarantined() const;
@@ -95,6 +101,7 @@ private:
 	CubePool _diseaseCubes;
     std::map<Colour, bool> _outbreaks;
 	bool _quarantined;
+	bool _infected;
 	bool _hasResearchStation = false;
 };
 

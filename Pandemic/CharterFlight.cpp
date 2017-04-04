@@ -11,7 +11,6 @@ void action::CharterFlight::solicitData()
 	// Aliases
 	auto& player = *_performer;
 	const auto& cards = player.cityCards();
-	auto& pawn = player.pawn();
 
 	// You can't discard a card if you have none!
 	if (cards.empty())

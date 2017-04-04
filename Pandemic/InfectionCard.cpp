@@ -20,6 +20,7 @@ void InfectionCard::onDraw(Board& state)
 {
 	city().addDiseaseCubes(colour(), CUBE_NORMAL_INFECTION, state);
 	std::cout << city().name() << " infected with " << colourName(city().colour()) << " disease!\n";
+	city().infect();
 }
 
 //this function was added to be able to infect cities with however many cubes we want to (Used during initial infection of the map)

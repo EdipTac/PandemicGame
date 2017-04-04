@@ -25,6 +25,7 @@
 #include "City.h"
 #include "DeckofEvents.h"
 #include "DeckofRoles.h"
+#include "Dispatcher.h"
 #include "DriveOrFerry.h"
 #include "EventCard.h"
 #include "Board.h"
@@ -38,14 +39,26 @@
 #include "PlayerCityCard.h"
 #include "Serialization.h"
 #include "Util.h"
+#include "GameStatistics.h"
 #include "OutbreakCounter.h"
 
 //	----    Program entry point    ----  //
-#define TEST
+//#define TEST
 #ifdef TEST
 void main()
 {
 	newGame();
+	const auto& startingColour = Board::instance().map().startingCity()->colour();
+	const auto& cities = Board::instance().map().cities();
+	auto& colouredCity = **std::find_if(cities.begin(), cities.end(), [&](const auto& c)
+	{
+		return c->colour() == startingColour;
+	});
+	for (int i = 0; i < 5; ++i)
+	{
+		Board::instance().currentPlayer().addCard(std::make_unique<PlayerCityCard>(colouredCity));
+	}
+	Board::instance().currentPlayer().setRole(std::make_unique<role::Dispatcher>());
 	ActionController a(Board::instance().currentPlayer());
 	while (a.hasActionPoints())
 	{
@@ -66,6 +79,7 @@ void main()
 		std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
 		while (!turnMenu.solicitInput()); // Intentionally empty body
 		Board::instance().distributePlayerCards(cardsPerTurn);
+		currentPlayer.displayCards();
 		infect();
 	}
 
@@ -150,10 +164,7 @@ void newGame()
 			std::cout << "\t" << card->name() << "\n";
 		}
 	}
-
-
-
-
+	
 	//Place first research station
 	map.startingCity().giveResearchStation(Board::instance());
 
@@ -174,7 +185,7 @@ void newGame()
 		}
 	}
 }
-
+GameStatistics *observer = new GameStatistics(Board::instance());
 //Initialize a reference card that any player can view
 void displayReferenceCard()
 {
@@ -238,16 +249,10 @@ void waitForExit()
 // On a player's turn, allow four actions
 bool performAction()
 {
-	auto actions = actionsPerTurn;	// Counter
-	while (!Board::instance().shouldQuit() && actions > 0)	// To check game loss/win state between actions
+	ActionController controller(Board::instance().currentPlayer());
+	while (controller.hasActionPoints())
 	{
-		std::cout << "You have " << actions << " actions remaining.\n";
-		// Sometimes actions cannot be completed - these do not count towards your limit of four!
-		const auto& actionCompleted = actionMenu.solicitInput();
-		if (actionCompleted)
-		{
-			--actions;
-		}
+		controller.solicitAction();
 	}
 	return true;
 }
@@ -664,4 +669,5 @@ void infect()
 		card->onDraw(Board::instance());
 		Board::instance().infectionDeck().addToDiscard(std::move(card));
 	}
+	Board::instance().notify();
 }

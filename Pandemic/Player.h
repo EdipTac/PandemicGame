@@ -36,7 +36,7 @@ public:
 	const RoleCard& role() const;
 
 	// Accessors and Mutators for _role
-	//Prints the role of the player
+	// Prints the role of the player
 	void displayRole();
 
 	void setRole(std::unique_ptr<RoleCard> role);
@@ -48,7 +48,7 @@ public:
 
 	bool hasPositionCard();
 
-	// True iff the player has a city card matching their pawn's position
+	// Returns a pointer to a city card matching the player's position, if any. Returns nullptr otherwise.
 	PlayerCard* positionCard();
 
 	void giveCard(const PlayerCard& card, Player& recipient);
