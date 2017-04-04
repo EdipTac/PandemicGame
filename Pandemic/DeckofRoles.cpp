@@ -12,6 +12,7 @@
 #include "Researcher.h"
 #include "Medic.h"
 #include "QuarantineSpecialist.h"
+#include "Scientist.h"
 
 /*
 This is the cpp file for the deck of role cards.  It contains the constructor as well as the display method 
@@ -22,17 +23,15 @@ The "drawRoleCard" is a method that iterates through the vector of rolecards and
 picks a random role card from the deck.
 */
 
-DeckofRoles::DeckofRoles() {
-	
+DeckofRoles::DeckofRoles()
+{	
 	deckofRole.push_back(std::make_unique<role::ContingencyPlanner>());
 	deckofRole.push_back(std::make_unique<role::Dispatcher>());
 	deckofRole.push_back(std::make_unique<role::Medic>());
 	deckofRole.push_back(std::make_unique<role::OperationsExpert>());
 	deckofRole.push_back(std::make_unique<role::QuarantineSpecialist>());
 	deckofRole.push_back(std::make_unique<role::Researcher>());
-	deckofRole.push_back(std::make_unique<RoleCard>("SCIENTIST","The Scientist needs only 4 (not 5) City cards of "
-		"the same disease color to Discover a Cure for that "
-		"disease.", "White Colored Pawn"));
+	deckofRole.push_back(std::make_unique<role::Scientist>());
 }
 //this method draws and returns a randomly selected role card for the player
 uniquerolecard DeckofRoles::drawRoleCard(){

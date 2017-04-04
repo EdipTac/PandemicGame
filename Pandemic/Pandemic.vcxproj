@@ -158,6 +158,7 @@
     <ClInclude Include="Researcher.h" />
     <ClInclude Include="ResearcherGiveKnowledge.h" />
     <ClInclude Include="RoleCard.h" />
+    <ClInclude Include="Scientist.h" />
     <ClInclude Include="Serialization.h" />
     <ClInclude Include="GiveKnowledge.h" />
     <ClInclude Include="ShuttleFlight.h" />
@@ -216,6 +217,7 @@
     <ClCompile Include="Researcher.cpp" />
     <ClCompile Include="ResearcherGiveKnowledge.cpp" />
     <ClCompile Include="RoleCard.cpp" />
+    <ClCompile Include="Scientist.cpp" />
     <ClCompile Include="Serialization.cpp" />
     <ClCompile Include="GiveKnowledge.cpp" />
     <ClCompile Include="ShuttleFlight.cpp" />
