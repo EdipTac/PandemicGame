@@ -14,7 +14,7 @@ namespace action
 		virtual void solicitData() override;
 		virtual void perform() override;
 		virtual bool isValid() const override;
-	
+		void setTarget(City* newTarget);
 	private:
 		City* _target;
 	};
