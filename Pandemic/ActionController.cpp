@@ -15,6 +15,7 @@
 
 using namespace action;
 
+// Usually, a player gets four actions each turn.
 constexpr size_t actionsTotalDefault = 4;
 
 ActionController::ActionController(Player& player)
@@ -28,6 +29,8 @@ ActionController::ActionController(Player& player)
 void ActionController::solicitAction()
 {
 	std::cout << _player.name() << " has " << _actionPointsRemaining << " actions remaining.\n";
+
+	// List available actions
 	std::stringstream ss;
 	ss << "Please select an option:\n";
 	for (size_t i = 0; i < _actions.size(); ++i)
@@ -37,27 +40,35 @@ void ActionController::solicitAction()
 	ss << ": ";
 	std::cout << ss.str();
 
+	// Get an action index from the player
 	int idx;
 	while (true)
 	{
 		std::cin >> idx;
 		std::cin.clear();
 		std::cin.ignore();
-		--idx;
+		--idx;	// Action list is 1-based
 		if (idx >= 0 && idx < _actions.size())
 		{
+			// Good choice
 			break;
 		}
-		std::cout << "Not a valid option.\n";
+		std::cout << "Not a valid option.\n"; // Bad choice
 	}
+
+	// Alias action
 	auto& action = *_actions[idx];
 
+	// Get additional data from player
 	action.solicitData();
 	if (action.isValid())
 	{
+		// If action can be completed, cost the player a point
 		--_actionPointsRemaining;
 		action.perform();
 	}
+
+	// Refresh
 	resetActionList();
 }
 
