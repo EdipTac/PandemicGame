@@ -286,6 +286,9 @@
     <ClInclude Include="Medic.h">
       <Filter>Cards\Roles\header</Filter>
     </ClInclude>
+    <ClInclude Include="QuarantineSpecialist.h">
+      <Filter>Cards\Roles\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -439,6 +442,9 @@
       <Filter>Cards\Roles\src</Filter>
     </ClCompile>
     <ClCompile Include="Medic.cpp">
+      <Filter>Cards\Roles\src</Filter>
+    </ClCompile>
+    <ClCompile Include="QuarantineSpecialist.cpp">
       <Filter>Cards\Roles\src</Filter>
     </ClCompile>
   </ItemGroup>

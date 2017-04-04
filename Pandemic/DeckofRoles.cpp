@@ -11,6 +11,7 @@
 #include "DeckofRoles.h"
 #include "Researcher.h"
 #include "Medic.h"
+#include "QuarantineSpecialist.h"
 
 /*
 This is the cpp file for the deck of role cards.  It contains the constructor as well as the display method 
@@ -27,10 +28,7 @@ DeckofRoles::DeckofRoles() {
 	deckofRole.push_back(std::make_unique<role::Dispatcher>());
 	deckofRole.push_back(std::make_unique<role::Medic>());
 	deckofRole.push_back(std::make_unique<role::OperationsExpert>());
-	deckofRole.push_back(std::make_unique<RoleCard>("QUARANTINE SPECIALIST", "The Quarantine Specialist prevents both outbreaks and "
-		"the placement of disease cubes in the city she is in "
-		"and all cities connected to that city.\nShe does not affect"
-		"cubes placed during setup.", "Dark Green Colored Pawn"));
+	deckofRole.push_back(std::make_unique<role::QuarantineSpecialist>());
 	deckofRole.push_back(std::make_unique<role::Researcher>());
 	deckofRole.push_back(std::make_unique<RoleCard>("SCIENTIST","The Scientist needs only 4 (not 5) City cards of "
 		"the same disease color to Discover a Cure for that "
