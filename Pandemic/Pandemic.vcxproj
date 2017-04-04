@@ -162,8 +162,6 @@
     <ClInclude Include="Serialization.h" />
     <ClInclude Include="GiveKnowledge.h" />
     <ClInclude Include="ShuttleFlight.h" />
-    <ClInclude Include="State.h" />
-    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="TakeKnowledge.h" />
     <ClInclude Include="TerminationHandler.h" />
     <ClInclude Include="TerminationState.h" />
@@ -221,7 +219,6 @@
     <ClCompile Include="Serialization.cpp" />
     <ClCompile Include="GiveKnowledge.cpp" />
     <ClCompile Include="ShuttleFlight.cpp" />
-    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="TakeKnowledge.cpp" />
     <ClCompile Include="TerminationHandler.cpp" />
     <ClCompile Include="Terminator.cpp" />

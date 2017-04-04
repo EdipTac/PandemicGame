@@ -229,12 +229,6 @@
     <ClInclude Include="Board.h">
       <Filter>General\header</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachine.h">
-      <Filter>Controllers\header</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>Controllers\header</Filter>
-    </ClInclude>
     <ClInclude Include="Action.h">
       <Filter>Actions\General Actions\header</Filter>
     </ClInclude>
@@ -256,7 +250,6 @@
     <ClInclude Include="ShuttleFlight.h">
       <Filter>Actions\General Actions\header</Filter>
     </ClInclude>
-    <ClInclude Include="GameStatistics.h" />
     <ClInclude Include="DiscoverACure.h">
       <Filter>Actions\General Actions\header</Filter>
     </ClInclude>
@@ -281,7 +274,6 @@
     <ClInclude Include="OperationsExpert.h">
       <Filter>RoleCards\header</Filter>
     </ClInclude>
-    <ClInclude Include="Airlift.h" />
     <ClInclude Include="ContingencyPlanner.h">
       <Filter>RoleCards\header</Filter>
     </ClInclude>
@@ -302,6 +294,12 @@
     </ClInclude>
     <ClInclude Include="Airlift.h">
       <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Airlift.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStatistics.h">
+      <Filter>Views\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -395,9 +393,6 @@
     <ClCompile Include="Board.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>Controllers\src</Filter>
-    </ClCompile>
     <ClCompile Include="Action.cpp">
       <Filter>Actions\General Actions\src</Filter>
     </ClCompile>
@@ -419,7 +414,6 @@
     <ClCompile Include="ShuttleFlight.cpp">
       <Filter>Actions\General Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="GameStatistics.cpp" />
     <ClCompile Include="DiscoverACure.cpp">
       <Filter>Actions\General Actions\src</Filter>
     </ClCompile>
@@ -444,7 +438,6 @@
     <ClCompile Include="OperationsExpert.cpp">
       <Filter>RoleCards\src</Filter>
     </ClCompile>
-    <ClCompile Include="Airlift.cpp" />
     <ClCompile Include="ContingencyPlanner.cpp">
       <Filter>RoleCards\src</Filter>
     </ClCompile>
@@ -465,6 +458,12 @@
     </ClCompile>
     <ClCompile Include="Airlift.cpp">
       <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Airlift.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStatistics.cpp">
+      <Filter>Views\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -43,30 +43,6 @@
 #include "OutbreakCounter.h"
 
 //	----    Program entry point    ----  //
-//#define TEST
-#ifdef TEST
-void main()
-{
-	newGame();
-	const auto& startingColour = Board::instance().map().startingCity()->colour();
-	const auto& cities = Board::instance().map().cities();
-	auto& colouredCity = **std::find_if(cities.begin(), cities.end(), [&](const auto& c)
-	{
-		return c->colour() == startingColour;
-	});
-	for (int i = 0; i < 5; ++i)
-	{
-		Board::instance().currentPlayer().addCard(std::make_unique<PlayerCityCard>(colouredCity));
-	}
-	Board::instance().currentPlayer().setRole(std::make_unique<role::Dispatcher>());
-	ActionController a(Board::instance().currentPlayer());
-	while (a.hasActionPoints())
-	{
-		a.solicitAction();
-	}
-	waitForExit();
-}
-#else
 void main()
 {
 	// Title display
@@ -85,7 +61,6 @@ void main()
 
 	waitForExit();
 }
-#endif
 
 //  -----  Function definitions  ----  //
 
