@@ -258,9 +258,6 @@
     <ClInclude Include="Dispatch.h">
       <Filter>Actions\Role Actions\header</Filter>
     </ClInclude>
-    <ClInclude Include="Dispatcher.h">
-      <Filter>Actions\Role Actions\header</Filter>
-    </ClInclude>
     <ClInclude Include="MoveFromResearchStation.h">
       <Filter>Actions\Role Actions\header</Filter>
     </ClInclude>
@@ -276,12 +273,15 @@
     <ClInclude Include="OperationsExpert.h">
       <Filter>Cards\Roles\header</Filter>
     </ClInclude>
-    <ClInclude Include="Researcher.h">
-      <Filter>Cards\Roles\src</Filter>
-    </ClInclude>
     <ClInclude Include="Airlift.h" />
     <ClInclude Include="ContingencyPlanner.h">
-      <Filter>Cards\Role Cards\header</Filter>
+      <Filter>Cards\Roles\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Dispatcher.h">
+      <Filter>Cards\Roles\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Researcher.h">
+      <Filter>Cards\Roles\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -410,9 +410,6 @@
     <ClCompile Include="Dispatch.cpp">
       <Filter>Actions\Role Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="Dispatcher.cpp">
-      <Filter>Actions\Role Actions\src</Filter>
-    </ClCompile>
     <ClCompile Include="MoveFromResearchStation.cpp">
       <Filter>Actions\Role Actions\src</Filter>
     </ClCompile>
@@ -428,11 +425,16 @@
     <ClCompile Include="OperationsExpert.cpp">
       <Filter>Cards\Roles\src</Filter>
     </ClCompile>
-    <ClCompile Include="Researcher.cpp">
-      <Filter>Cards\Roles\header</Filter>
-    </ClCompile>
     <ClCompile Include="Airlift.cpp" />
-    <ClCompile Include="ContingencyPlanner.cpp" />
+    <ClCompile Include="ContingencyPlanner.cpp">
+      <Filter>Cards\Roles\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Dispatcher.cpp">
+      <Filter>Cards\Roles\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Researcher.cpp">
+      <Filter>Cards\Roles\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">

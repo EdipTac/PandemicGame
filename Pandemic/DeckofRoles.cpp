@@ -1,15 +1,15 @@
-
 #include <string>
 #include <vector>
+#include <memory>
+#include <cstdlib>
+#include <ctime>
+
 #include "Dispatcher.h"
 #include "ContingencyPlanner.h"
 #include "OperationsExpert.h"
 #include "RoleCard.h"
 #include "DeckofRoles.h"
 #include "Researcher.h"
-#include <memory>
-#include <cstdlib>
-#include <ctime>
 
 /*
 This is the cpp file for the deck of role cards.  It contains the constructor as well as the display method 
