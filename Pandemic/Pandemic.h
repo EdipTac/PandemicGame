@@ -12,19 +12,10 @@ void newGame();
 void waitForExit();
 
 bool actionQuit();
-bool buildResearchStation();
-bool charterFlight();
-bool cureDisease();
-bool directFlight();
-bool giveKnowledge(Player& target);
 bool performAction();
 bool playEventCard();
 bool report();
 bool saveGame();
-bool shareKnowledge();
-bool shuttleFlight();
-bool takeKnowledge(Player& target);
-bool treatDisease();
 
 size_t solicitSize(const size_t min, const size_t max);
 

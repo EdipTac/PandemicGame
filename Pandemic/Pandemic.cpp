@@ -264,6 +264,24 @@ bool playEventCard()
 		std::cout << "\t" << card->name() << " [" << owner->name() << "]\n";
 	}
 
+	// Solicit input
+	EventCard* cardToPlay = nullptr;
+	std::string input;
+	while (true)
+	{
+		std::getline(std::cin >> std::ws, input);
+		const auto& it = std::find_if(cardOwners.begin(), cardOwners.end(), [&](const auto& c)
+		{
+			return input == c.first->name();
+		});
+		if (it != cardOwners.end())
+		{
+			cardToPlay = it->first;
+			break;
+		}
+		std::cout << "No card of that name.\n";
+	}
+
 	// Doesn't cost an action
 	return false;
 }
