@@ -51,6 +51,22 @@ void Player::removeCardByName(const std::string& name)
 	_cards.erase(it);
 }
 
+void Player::discard(PlayerCard& card, Deck<PlayerCard>& deck)
+{
+	// Find card in hand
+	const auto& it = std::find_if(_cards.begin(), _cards.end(), [&](const auto& c)
+	{
+		return c.get() == &card;
+	});
+	if (it == _cards.end())
+	{
+		// Not found
+		return;
+	}
+	deck.addToDiscard(std::move(*it));
+	_cards.erase(it);
+}
+
 std::ostream& operator<<(std::ostream& os, PlayerCard& card)
 {
 	return os << card.toString();

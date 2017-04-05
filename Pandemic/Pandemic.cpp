@@ -284,7 +284,8 @@ bool playEventCard()
 
 	// Play and discard card
 	//cardToPlay->action() TODO
-	cardOwners[cardToPlay]->removeCardByName(cardToPlay->name());
+	auto& owner = cardOwners[cardToPlay];
+	owner->discard(*cardToPlay, Board::instance().playerDeck());
 
 	// Doesn't cost an action
 	return false;

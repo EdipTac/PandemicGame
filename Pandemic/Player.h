@@ -6,6 +6,7 @@
 #include <memory>
 #include <algorithm>
 
+#include "Deck.h"
 #include "Pawn.h"
 #include "PlayerCard.h"
 #include "RoleCard.h"
@@ -29,6 +30,7 @@ public:
 	std::vector<PlayerCard*> cards() const;
 	void addCard(std::unique_ptr<PlayerCard> card);
 	void removeCardByName(const std::string& name);
+	void discard(PlayerCard& card, Deck<PlayerCard>& deck);
 
 	std::vector<PlayerCityCard*> cityCards() const;
 	std::vector<EventCard*> eventCards() const;

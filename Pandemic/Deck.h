@@ -38,7 +38,6 @@ public:
 
 	// Discards a card
 	void addToDiscard(std::unique_ptr<T> card);
-	
 
 protected:
 	std::vector<std::unique_ptr<T>> _drawPile;
