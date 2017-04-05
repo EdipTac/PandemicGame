@@ -46,7 +46,7 @@ void action::CharterFlight::solicitData()
 
 void action::CharterFlight::perform()
 {
-	_performer->removeCardByName(_performer->pawn().position().name());
+	_performer->discard(*_performer->positionCard(), Board::instance().playerDeck());
 	_performer->pawn().setPosition(*_target);
 }
 

@@ -40,15 +40,17 @@ void Player::addCard(std::unique_ptr<PlayerCard> card) {
 	_cards.push_back(std::move(card));
 }
 
-// Should return to deck!
-void Player::removeCardByName(const std::string& name)
+PlayerCard* Player::getCard(const std::string& name)
 {
-	auto it = std::find_if(_cards.begin(), _cards.end(), [&](const auto& card) { return card->name() == name; });
+	auto it = std::find_if(_cards.begin(), _cards.end(), [&](const auto& card)
+	{
+		return card->name() == name;
+	});
 	if (it == _cards.end())
 	{
-		return;
+		return nullptr;
 	}
-	_cards.erase(it);
+	return it->get();
 }
 
 void Player::discard(PlayerCard& card, Deck<PlayerCard>& deck)
@@ -65,6 +67,11 @@ void Player::discard(PlayerCard& card, Deck<PlayerCard>& deck)
 	}
 	deck.addToDiscard(std::move(*it));
 	_cards.erase(it);
+}
+
+void Player::discard(const std::string& name, Deck<PlayerCard>& deck)
+{
+	discard(*getCard(name), deck);
 }
 
 std::ostream& operator<<(std::ostream& os, PlayerCard& card)

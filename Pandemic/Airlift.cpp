@@ -37,7 +37,7 @@ void action::Airlift::solicitData() {
 
 
 }void action::Airlift::perform() {
-	_performer->removeCardByName("Airlift");
+	_performer->discard("Airlift", Board::instance().playerDeck());
 	_performer->pawn().setPosition(*_target);
 }
 

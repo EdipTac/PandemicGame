@@ -29,8 +29,9 @@ public:
 	// Accessors and Mutators
 	std::vector<PlayerCard*> cards() const;
 	void addCard(std::unique_ptr<PlayerCard> card);
-	void removeCardByName(const std::string& name);
+	PlayerCard* getCard(const std::string& name);
 	void discard(PlayerCard& card, Deck<PlayerCard>& deck);
+	void discard(const std::string& name, Deck<PlayerCard>& deck);
 
 	std::vector<PlayerCityCard*> cityCards() const;
 	std::vector<EventCard*> eventCards() const;

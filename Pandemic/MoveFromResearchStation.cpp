@@ -81,7 +81,7 @@ void action::MoveFromResearchStation::solicitData()
 
 void action::MoveFromResearchStation::perform()
 {
-	_performer->removeCardByName(_toDiscard->name());
+	_performer->discard(*_toDiscard, Board::instance().playerDeck());
 	_performer->pawn().setPosition(*_destination);
 }
 

@@ -31,6 +31,6 @@ bool action::GovernmentGrant::isValid() const {
 }
 
 void action::GovernmentGrant::perform() {
-	_performer->removeCardByName("GovernmentCard");
+	_performer->discard("GovernmentCard", Board::instance().playerDeck());
 	_target->giveResearchStation(Board::instance());
 }

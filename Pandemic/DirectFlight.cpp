@@ -1,6 +1,7 @@
 #include "DirectFlight.h"
 #include "Player.h"
 #include "PlayerCityCard.h"
+#include "Board.h"
 
 const std::string desc = "Discard a city card to move to the city named on the card.";
 
@@ -46,7 +47,7 @@ void action::DirectFlight::solicitData()
 
 void action::DirectFlight::perform()
 {
-	_performer->removeCardByName(_target->name());
+	_performer->discard(_target->name(), Board::instance().playerDeck());
 	_performer->pawn().setPosition(*_target);
 }
 
