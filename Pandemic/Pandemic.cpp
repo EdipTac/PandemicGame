@@ -282,6 +282,10 @@ bool playEventCard()
 		std::cout << "No card of that name.\n";
 	}
 
+	// Play and discard card
+	//cardToPlay->action() TODO
+	cardOwners[cardToPlay]->removeCardByName(cardToPlay->name());
+
 	// Doesn't cost an action
 	return false;
 }
