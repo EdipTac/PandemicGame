@@ -21,25 +21,34 @@ void action::Airlift::solicitData() {
 
 	for (auto it = Board::instance().players().begin(); it != Board::instance().players().end(); ++it) {
 		if ((*it)->name() == liftee) {
-			playerToLift = (*it); 
+			//playerToLift = (*it); 
+			_performer = (*it);
 		}
 	}
 	
 	for (auto it = Board::instance().map().cities().begin(); it != Board::instance().map().cities().end(); ++it) {
 		if ((*it)->name() == destination) {
-			playerToLift->pawn().setPosition((**it));
+			//_performer->pawn().setPosition((**it));
+			setTarget(**it);
+			//_target = (**it);
 		}
 	}
 
 
 
 }void action::Airlift::perform() {
-	/*_performer->removeCardByName();
-	_performer->pawn().setPosition();*/
+	_performer->removeCardByName("Airlift");
+	_performer->pawn().setPosition(*_target);
 }
 
+void action::Airlift::setTarget(City& target) {
+	_target = &target;
+	
+}
 
-
+bool action::Airlift::isValid() const {
+	return _performer && _target;
+}
 
 //void Airlift::performEvent(std::string liftee, std::string destination) {
 //	Player* playerToLift=nullptr;

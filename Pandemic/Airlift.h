@@ -21,7 +21,7 @@ namespace action{
 		Airlift(Player* const performer = nullptr);
 		virtual void solicitData() override;
 		virtual void perform() override;
-		//virtual bool isValid() const override;
+		virtual bool isValid() const override;
 
 		//std::string name() const;
 
@@ -30,11 +30,10 @@ namespace action{
 		//virtual void performEvent(std::string liftee, std::string destination);
 		//virtual void performEvent(Player* const performer, std::string destination);
 
+		virtual void setTarget(City& target);
 
-
-
-
-		//
+	private:
+		City* _target;
 
 	};
 }
