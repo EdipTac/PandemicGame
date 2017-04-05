@@ -3,17 +3,17 @@
 #include "Observer.h"
 
 template <typename T>
-class View
+class MonoObserver
 	: public Observer
 {
 public:
-	View() {}
+	MonoObserver() {}
 
-	View(T& subject)
+	MonoObserver(T& subject)
 		: _subject { &subject }
 	{}
 
-	virtual ~View() override  = 0 {}
+	virtual ~MonoObserver() override  = 0 {}
 
 	void subscribeTo(T& subject)
 	{

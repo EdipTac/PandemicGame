@@ -214,12 +214,6 @@
     <ClInclude Include="Observer.h">
       <Filter>Views\header</Filter>
     </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>Views\header</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiView.h">
-      <Filter>Views\header</Filter>
-    </ClInclude>
     <ClInclude Include="TerminationHandler.h">
       <Filter>Views\header</Filter>
     </ClInclude>
@@ -299,6 +293,14 @@
       <Filter>Event Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="GameStatistics.h">
+      <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="GovernmentGrant.h" />
+    <ClInclude Include="ResilientPopulation.h" />
+    <ClInclude Include="MonoObserver.h">
+      <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="PolyObserver.h">
       <Filter>Views\header</Filter>
     </ClInclude>
   </ItemGroup>
@@ -465,6 +467,8 @@
     <ClCompile Include="GameStatistics.cpp">
       <Filter>Views\src</Filter>
     </ClCompile>
+    <ClCompile Include="GovernmentGrant.cpp" />
+    <ClCompile Include="ResilientPopulation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">

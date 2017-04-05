@@ -5,11 +5,11 @@
 #include "Observer.h"
 
 template <typename T>
-class MultiView
+class PolyObserver
 	: public Observer
 {
 public:
-	virtual ~MultiView() override  = 0 {}
+	virtual ~PolyObserver() override  = 0 {}
 
 	void subscribeTo(T& subject)
 	{
