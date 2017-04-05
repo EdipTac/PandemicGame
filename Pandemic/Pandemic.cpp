@@ -20,6 +20,7 @@
 #include <string>
 #include <vector>
 #include <map>
+#include <numeric>
 
 #include "ActionController.h"
 #include "Card.h"
@@ -256,12 +257,20 @@ bool playEventCard()
 	}
 
 	// Display
-	std::cout << "Which card to play? <Card>[<Owner>]\n";
+	std::cout << "Which card to play?\n";
+	size_t maxSize = 0;
+	for (const auto& cardOwner : cardOwners)
+	{
+		const auto& size = cardOwner.first->name().size();
+		maxSize = std::max(size, maxSize);
+	}
+	const auto width = maxSize + 1;
+	std::cout << "\t" << rightPad("<Card>", width) << "[<Owner>]\n";
 	for (const auto& cardOwner : cardOwners)
 	{
 		const auto& card = cardOwner.first;
 		const auto& owner = cardOwner.second;
-		std::cout << "\t" << card->name() << " [" << owner->name() << "]\n";
+		std::cout << "\t" << rightPad(card->name(), width) << " [" << owner->name() << "]\n";
 	}
 
 	// Solicit input

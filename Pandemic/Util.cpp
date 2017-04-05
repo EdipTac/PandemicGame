@@ -104,3 +104,14 @@ std::string solicitFileName(const std::string& msg)
 	}
 	return fileName;
 }
+
+std::string rightPad(const std::string& original, const size_t width)
+{
+	std::stringstream ss;
+	ss << original;
+	for (auto i = original.size(); i < width; ++i)
+	{
+		ss << " ";
+	}
+	return ss.str();
+}

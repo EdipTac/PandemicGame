@@ -73,3 +73,5 @@ void showCity(City& city);
 City* solicitCity(const Map& map);
 
 std::string solicitFileName(const std::string& msg);
+
+std::string rightPad(const std::string& original, const size_t width = 0);
