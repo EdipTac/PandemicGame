@@ -46,9 +46,6 @@ public:
 	// List of all cities with a research station
 	std::vector<City*> stations() const;
 
-	// Returns a map of city names and the associated cities
-	std::map<std::string, City*> nameMap() const;
-
 private:
 	std::string _name;
 	std::vector<CityPtr> _cities;

@@ -49,7 +49,7 @@ void action::DiscoverACure::perform()
 {
 	for (const auto& card : _cards)
 	{
-		_performer->removeCardByName(card->name());
+		_performer->discard(*card, Board::instance().playerDeck());
 	}
 	Board::instance().cureDisease(_colour);
 }

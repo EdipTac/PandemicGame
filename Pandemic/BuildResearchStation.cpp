@@ -82,7 +82,7 @@ void action::BuildResearchStation::perform()
 	{
 		return card->name() == positionName;
 	});
-	_performer->removeCardByName((*it)->name());
+	_performer->discard(**it, Board::instance().playerDeck());
 	_performer->pawn().position().giveResearchStation(Board::instance());
 }
 

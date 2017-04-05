@@ -49,16 +49,6 @@ std::vector<City*> Map::stations() const
 	return list;
 }
 
-std::map<std::string, City*> Map::nameMap() const
-{
-	std::map<std::string, City*> map;
-	for (const auto& city : _cities)
-	{
-		map[city->name()] = city.get();
-	}
-	return map;
-}
-
 City& Map::findCityByName(const std::string& name) const
 {
 	const auto it = std::find_if(_cities.begin(), _cities.end(), [&](const std::unique_ptr<City>& city) { return city->name() == name; });
