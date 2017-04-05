@@ -48,6 +48,7 @@ void main()
 	// Title display
 	std::cout << titleFont("PANDEMIC") << "\n\n\n";
 	mainMenu.solicitInput();
+	auto observer = std::make_unique<GameStatistics>(Board::instance());
 
 	while (!Board::instance().shouldQuit())
 	{
@@ -160,7 +161,7 @@ void newGame()
 		}
 	}
 }
-GameStatistics *observer = new GameStatistics(Board::instance());
+
 //Initialize a reference card that any player can view
 void displayReferenceCard()
 {
