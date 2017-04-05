@@ -72,9 +72,6 @@ void newGame()
 {
 	std::cout << titleFont("NEW GAME") << "\n\n";
 
-	// Initialize game state
-	//game = std::make_unique<Board>();
-
 	// Get map file name and load it
 	const auto& fileName = solicitFileName("Load map file to start new game: ");
 	std::cout << "\nLoading map \"" << fileName << "\"...\n";
