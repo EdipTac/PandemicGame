@@ -29,5 +29,8 @@ public:
 	// Inherited via TextualCard
 	virtual void onDraw(Board& state) override;
 
+	// True
+	virtual bool isEventCard() const override;
+
 	//virtual void ability() = 0;
 };

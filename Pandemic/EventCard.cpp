@@ -23,3 +23,8 @@ std::string EventCard::toString()
 }
 
 void EventCard::onDraw(Board&) {}
+
+bool EventCard::isEventCard() const
+{
+	return true;
+}

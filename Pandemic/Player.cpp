@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "PlayerCityCard.h"
 #include "Board.h"
+#include "EventCard.h"
 
 // Default Constructor
 Player::Player()
@@ -34,9 +35,11 @@ std::vector<PlayerCard*> Player::cards() const
 	}
 	return cardView;
 }
+
 void Player::addCard(std::unique_ptr<PlayerCard> card) {
 	_cards.push_back(std::move(card));
 }
+
 // Should return to deck!
 void Player::removeCardByName(const std::string& name)
 {
@@ -115,15 +118,28 @@ void Player::giveCard(const PlayerCard& card, Player& recipient)
 
 std::vector<PlayerCityCard*> Player::cityCards() const
 {
-	std::vector<PlayerCityCard*> cards;
+	std::vector<PlayerCityCard*> view;
 	for (const auto& card : _cards)
 	{
 		if (card->isCityCard())
 		{
-			cards.push_back(static_cast<PlayerCityCard*>(card.get()));
+			view.push_back(static_cast<PlayerCityCard*>(card.get()));
 		}
 	}
-	return cards;
+	return view;
+}
+
+std::vector<EventCard*> Player::eventCards() const
+{
+	std::vector<EventCard*> view;
+	for (const auto& card : _cards)
+	{
+		if (card->isEventCard())
+		{
+			view.push_back(static_cast<EventCard*>(card.get()));
+		}
+	}
+	return view;
 }
 
 Pawn& Player::pawn()

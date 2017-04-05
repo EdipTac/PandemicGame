@@ -10,8 +10,8 @@
 #include "PlayerCard.h"
 #include "RoleCard.h"
 
-
 class PlayerCityCard;
+class EventCard;
 
 // A player of the game
 class Player
@@ -31,6 +31,7 @@ public:
 	void removeCardByName(const std::string& name);
 
 	std::vector<PlayerCityCard*> cityCards() const;
+	std::vector<EventCard*> eventCards() const;
 
 	Pawn& pawn();
 	const RoleCard& role() const;

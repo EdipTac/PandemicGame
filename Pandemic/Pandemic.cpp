@@ -19,6 +19,7 @@
 #include <sstream>
 #include <string>
 #include <vector>
+#include <map>
 
 #include "ActionController.h"
 #include "Card.h"
@@ -231,6 +232,40 @@ bool performAction()
 		controller.solicitAction();
 	}
 	return true;
+}
+
+bool playEventCard()
+{
+	// To record cards and owners
+	std::map<EventCard*, Player*> cardOwners;
+
+	// Load event cards and owners
+	for (const auto& player : Board::instance().players())
+	{
+		for (const auto& card : player->eventCards())
+		{
+			cardOwners[card] = player;
+		}
+	}
+
+	// If there are no cards, do nothing
+	if (cardOwners.empty())
+	{
+		std::cout << "No event cards to play.\n";
+		return false;
+	}
+
+	// Display
+	std::cout << "Which card to play? <Card>[<Owner>]\n";
+	for (const auto& cardOwner : cardOwners)
+	{
+		const auto& card = cardOwner.first;
+		const auto& owner = cardOwner.second;
+		std::cout << "\t" << card->name() << " [" << owner->name() << "]\n";
+	}
+
+	// Doesn't cost an action
+	return false;
 }
 
 // The player moves their pawn from its current position to another directly connected city.

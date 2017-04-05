@@ -15,6 +15,9 @@ public:
 	// True iff the player card is also a city card
 	virtual bool isCityCard() const;
 
+	// True iff the card is an event card
+	virtual bool isEventCard() const;
+
 	// virtual function that converts a PlayerCard object into an informative string.
 	virtual std::string toString();
 };

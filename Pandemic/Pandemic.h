@@ -9,7 +9,6 @@ void displayReferenceCard();
 void infect();
 void loadGame();
 void newGame();
-void quit();
 void waitForExit();
 
 bool actionQuit();
@@ -20,6 +19,7 @@ bool directFlight();
 bool driveOrFerry();
 bool giveKnowledge(Player& target);
 bool performAction();
+bool playEventCard();
 bool report();
 bool saveGame();
 bool shareKnowledge();
@@ -64,10 +64,11 @@ const GeneralMenu mainMenu
 const ActionMenu turnMenu
 {
 	{
-		{ "Report",			report },
-		{ "Perform Action",	performAction },
-		{ "Save Game",		saveGameAction },
-		{ "Quit Game",		actionQuit }
+		{ "Report",			 report			},
+		{ "Perform Action",  performAction	},
+		{ "Play Event Card", playEventCard	},
+		{ "Save Game",		 saveGameAction	},
+		{ "Quit Game",		 actionQuit		}
 	}
 };
 
@@ -80,17 +81,17 @@ const GeneralMenu reportMenu
 	}
 };
 
-const ActionMenu actionMenu
-{
-	{
-		{ "Drive/Ferry",				driveOrFerry },
-		{ "Direct Flight",				directFlight },
-		{ "Charter Flight",				charterFlight },
-		{ "Shuttle Flight",				shuttleFlight },
-		{ "Build a Research Station",	buildResearchStation },
-		{ "Treat Disease",				treatDisease },
-		{ "Share Knowledge",			shareKnowledge },
-		{ "Cure Disease",				cureDisease },
-		{ "Quit Game",					actionQuit }
-	}
-};
+//const ActionMenu actionMenu
+//{
+//	{
+//		{ "Drive/Ferry",				driveOrFerry },
+//		{ "Direct Flight",				directFlight },
+//		{ "Charter Flight",				charterFlight },
+//		{ "Shuttle Flight",				shuttleFlight },
+//		{ "Build a Research Station",	buildResearchStation },
+//		{ "Treat Disease",				treatDisease },
+//		{ "Share Knowledge",			shareKnowledge },
+//		{ "Cure Disease",				cureDisease },
+//		{ "Quit Game",					actionQuit }
+//	}
+//};
