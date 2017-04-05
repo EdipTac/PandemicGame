@@ -16,7 +16,6 @@ bool buildResearchStation();
 bool charterFlight();
 bool cureDisease();
 bool directFlight();
-bool driveOrFerry();
 bool giveKnowledge(Player& target);
 bool performAction();
 bool playEventCard();
@@ -80,18 +79,3 @@ const GeneralMenu reportMenu
 		{ "Direct Connection Report",	directConnectionReport }
 	}
 };
-
-//const ActionMenu actionMenu
-//{
-//	{
-//		{ "Drive/Ferry",				driveOrFerry },
-//		{ "Direct Flight",				directFlight },
-//		{ "Charter Flight",				charterFlight },
-//		{ "Shuttle Flight",				shuttleFlight },
-//		{ "Build a Research Station",	buildResearchStation },
-//		{ "Treat Disease",				treatDisease },
-//		{ "Share Knowledge",			shareKnowledge },
-//		{ "Cure Disease",				cureDisease },
-//		{ "Quit Game",					actionQuit }
-//	}
-//};
