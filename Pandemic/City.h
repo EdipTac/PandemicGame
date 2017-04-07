@@ -66,7 +66,7 @@ public:
 	void removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& pool);
 
 	// Removes all disease cubes of a given colour, giving back to a given source
-	void removeDiseaseCubes(const Colour& colour, CubePool& pool);
+	void removeAllDiseaseCubes(const Colour& colour, CubePool& pool);
 
 	// True iff city is infected, only for the purpose of statistic
 	bool isInfected() const;

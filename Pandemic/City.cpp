@@ -135,7 +135,7 @@ void City::removeDiseaseCubes(const Colour& colour, const unsigned amount, CubeP
 	_diseaseCubes.giveTo(colour, amount, pool);
 }
 
-void City::removeDiseaseCubes(const Colour& colour, CubePool& pool)
+void City::removeAllDiseaseCubes(const Colour& colour, CubePool& pool)
 {
 	removeDiseaseCubes(colour, _diseaseCubes[colour], pool);
 }

@@ -6,6 +6,7 @@
 
 #include "Action.h"
 #include "Card.h"
+#include "Colour.h"
 #include "TextualCard.h"
 
 class City;
@@ -21,6 +22,7 @@ public:
 	std::vector<action::Action*> actions() const;
 	virtual int numCardsNeededToCure() const;
 	virtual void onEnter(City& city) const;
+	virtual void treatDisease(City& city, const Colour& colour) const;
 
 protected:
 	std::vector<std::unique_ptr<action::Action>> _actions;

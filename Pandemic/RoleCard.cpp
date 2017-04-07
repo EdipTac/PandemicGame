@@ -1,9 +1,11 @@
-#pragma warning(disable : 4100)	// To be removed
+//#pragma warning(disable : 4100)	// To be removed
 
 #include <string>
 #include <iostream>
 
+#include "Board.h"
 #include "RoleCard.h"
+#include "City.h"
 
 /* 
 This is the cpp file for the role card. The code makes use of the 2 constructors for the RoleCards
@@ -36,9 +38,13 @@ std::vector<action::Action*> RoleCard::actions() const
 	return list;
 }
 
-int RoleCard::numCardsNeededToCure() const
-{
+int RoleCard::numCardsNeededToCure() const{
 	return 5;
+}
+
+void RoleCard::treatDisease(City& city, const Colour& colour) const
+{
+	city.removeDiseaseCubes(colour, 1, Board::instance().cubePool());
 }
 
 void RoleCard::onEnter(City& city) const {}

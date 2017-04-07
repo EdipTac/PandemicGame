@@ -24,7 +24,12 @@ void role::Medic::onEnter(City& city) const
 	{
 		if (Board::instance().isCured(colour) && city.diseaseCubes(colour) > 0)
 		{
-			city.removeDiseaseCubes(colour, Board::instance().cubePool());
+			city.removeAllDiseaseCubes(colour, Board::instance().cubePool());
 		}
 	}
+}
+
+void role::Medic::treatDisease(City& city, const Colour& colour) const
+{
+	city.removeAllDiseaseCubes(colour, Board::instance().cubePool());
 }
