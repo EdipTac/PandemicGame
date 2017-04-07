@@ -29,6 +29,7 @@ public:
 	void printRole();
 	void onDraw(Board& state) override;
 	std::vector<action::Action*> actions() const;
+	virtual int numCardsNeededToCure() const;
 
 protected:
 	std::vector<std::unique_ptr<action::Action>> _actions;
