@@ -295,13 +295,17 @@
     <ClInclude Include="GameStatistics.h">
       <Filter>Views\header</Filter>
     </ClInclude>
-    <ClInclude Include="GovernmentGrant.h" />
-    <ClInclude Include="ResilientPopulation.h" />
     <ClInclude Include="MonoObserver.h">
       <Filter>Views\header</Filter>
     </ClInclude>
     <ClInclude Include="PolyObserver.h">
       <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="GovernmentGrant.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="ResilientPopulation.h">
+      <Filter>Event Cards\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -467,8 +471,12 @@
     <ClCompile Include="GameStatistics.cpp">
       <Filter>Views\src</Filter>
     </ClCompile>
-    <ClCompile Include="GovernmentGrant.cpp" />
-    <ClCompile Include="ResilientPopulation.cpp" />
+    <ClCompile Include="GovernmentGrant.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ResilientPopulation.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
