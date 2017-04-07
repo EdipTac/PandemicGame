@@ -19,6 +19,7 @@ public:
 	void printRole();
 	void onDraw(Board& state) override;
 	std::vector<action::Action*> actions() const;
+	virtual int numCardsNeededToCure() const;
 	virtual void onEnter(City& city) const;
 
 protected:

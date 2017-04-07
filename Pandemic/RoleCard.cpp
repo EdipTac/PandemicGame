@@ -36,4 +36,9 @@ std::vector<action::Action*> RoleCard::actions() const
 	return list;
 }
 
+int RoleCard::numCardsNeededToCure() const
+{
+	return 5;
+}
+
 void RoleCard::onEnter(City& city) const {}
