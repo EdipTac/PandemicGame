@@ -60,10 +60,10 @@ public:
 	bool diseaseOutbreak(const Colour& colour) const;
 
 	// Adds disease cubes of a given colour from a given source
-	void addDiseaseCubes(const Colour& colour, const unsigned amount,Board&);
+	void addDiseaseCubes(const Colour& colour, const size_t amount, Board&);
 
 	// Removes disease cubes of a given colour, giving back to a given source
-	void removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& pool);
+	void removeDiseaseCubes(const Colour& colour, const size_t amount, CubePool& pool);
 
 	// Removes all disease cubes of a given colour, giving back to a given source
 	void removeAllDiseaseCubes(const Colour& colour, CubePool& pool);
@@ -78,7 +78,7 @@ public:
 	bool isQuarantined() const;
 
 	// Sets quarantine to true
-	void quarantine();
+	void isQuarantined(const bool is);
 	
 	// True iff the city has a research station
 	bool hasResearchStation() const;
@@ -95,8 +95,9 @@ public:
 	// Returns a report on the city
 	std::string string();
 
-	// Called when a player enters the city - calls the player's onEnter(City&)
+	// Called when a player enters the city - calls the player role's onEnter(City&)
 	void onEnter(Player& player);
+	void onExit(Player& player);
 
 	class Builder;
 

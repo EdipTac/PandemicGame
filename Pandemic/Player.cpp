@@ -140,8 +140,9 @@ void Player::giveCard(const PlayerCard& card, Player& recipient)
 
 void Player::move(City& destination)
 {
+	_pawn.position().onExit(*this);
 	_pawn.setPosition(destination);
-	destination.onEnter(*this);
+	_pawn.position().onEnter(*this);
 }
 
 std::vector<PlayerCityCard*> Player::cityCards() const

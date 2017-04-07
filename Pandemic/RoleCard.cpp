@@ -26,7 +26,7 @@ void RoleCard::printRole() {
 	std::cout << name() << std::endl << _color << std::endl << description() << std::endl;
 }
 
-void RoleCard::onDraw(Board& state) {}
+void RoleCard::onDraw(Board&) {}
 
 std::vector<action::Action*> RoleCard::actions() const
 {
@@ -47,4 +47,6 @@ void RoleCard::treatDisease(City& city, const Colour& colour) const
 	city.removeDiseaseCubes(colour, 1, Board::instance().cubePool());
 }
 
-void RoleCard::onEnter(City& city) const {}
+void RoleCard::onEnter(City&) const {}
+
+void RoleCard::onExit(City&) const {}

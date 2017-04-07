@@ -114,7 +114,7 @@ void City::disconnectFrom(City& target)
 
 }
 
-void City::addDiseaseCubes(const Colour& colour, const unsigned amount, Board& state){
+void City::addDiseaseCubes(const Colour& colour, const size_t amount, Board& state){
 	if (!_outbreaks[colour] && !_quarantined && !state.cubePool().isEradicated(colour)) {
 		_diseaseCubes.takeFrom(colour, amount, state.cubePool());
 		if (_diseaseCubes[colour] > cubesBeforeOutbreak) {
@@ -130,7 +130,7 @@ void City::addDiseaseCubes(const Colour& colour, const unsigned amount, Board& s
 }
 
 
-void City::removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& pool){
+void City::removeDiseaseCubes(const Colour& colour, const size_t amount, CubePool& pool){
 
 	_diseaseCubes.giveTo(colour, amount, pool);
 }
@@ -150,15 +150,14 @@ void City::infect()
 	_infected = true;
 }
 
-
 bool City::isQuarantined() const
 {
 	return _quarantined;
 }
 
-void City::quarantine()
+void City::isQuarantined(const bool is)
 {
-	_quarantined = true;
+	_quarantined = is;
 }
 
 bool City::hasResearchStation() const
@@ -232,6 +231,11 @@ std::string City::string()
 void City::onEnter(Player& player)
 {
 	player.role().onEnter(*this);
+}
+
+void City::onExit(Player & player)
+{
+	player.role().onExit(*this);
 }
 
 bool operator==(const City& lhs, const City& rhs)

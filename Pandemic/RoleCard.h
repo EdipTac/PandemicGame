@@ -22,6 +22,7 @@ public:
 	std::vector<action::Action*> actions() const;
 	virtual int numCardsNeededToCure() const;
 	virtual void onEnter(City& city) const;
+	virtual void onExit(City& city) const;
 	virtual void treatDisease(City& city, const Colour& colour) const;
 
 protected:
