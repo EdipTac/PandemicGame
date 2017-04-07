@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Cards">
       <UniqueIdentifier>{a4a46059-1194-4b5d-9354-962712d90885}</UniqueIdentifier>
     </Filter>
@@ -119,6 +115,10 @@
     <Filter Include="Event Cards\src">
       <UniqueIdentifier>{02b552c8-052e-4038-8c05-fdbf02dd5206}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Event Cards\header\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -188,7 +188,7 @@
       <Filter>Util\header</Filter>
     </ClInclude>
     <ClInclude Include="json.hpp">
-      <Filter>Resource Files</Filter>
+      <Filter>Event Cards\header\Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="DeckofEvents.h">
       <Filter>General\header</Filter>
@@ -301,12 +301,8 @@
     <ClInclude Include="GameStatistics.h">
       <Filter>Views\header</Filter>
     </ClInclude>
-    <ClInclude Include="ResilientPopulation.h">
-      <Filter>Event Cards\header</Filter>
-    </ClInclude>
-    <ClInclude Include="GovernmentGrant.h">
-      <Filter>Event Cards\header</Filter>
-    </ClInclude>
+    <ClInclude Include="GovernmentGrant.h" />
+    <ClInclude Include="ResilientPopulation.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -472,38 +468,38 @@
       <Filter>Views\src</Filter>
     </ClCompile>
     <ClCompile Include="GovernmentGrant.cpp">
-      <Filter>Event Cards\src</Filter>
+      <Filter>Event Cards\header\Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="ResilientPopulation.cpp">
-      <Filter>Event Cards\src</Filter>
+      <Filter>Event Cards\header\Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
-      <Filter>Resource Files</Filter>
+      <Filter>Event Cards\header\Resource Files</Filter>
     </Text>
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">
-      <Filter>Resource Files</Filter>
+      <Filter>Event Cards\header\Resource Files</Filter>
     </None>
     <None Include="save.json">
-      <Filter>Resource Files</Filter>
+      <Filter>Event Cards\header\Resource Files</Filter>
     </None>
     <None Include="earth2.map">
-      <Filter>Resource Files</Filter>
+      <Filter>Event Cards\header\Resource Files</Filter>
     </None>
     <None Include="save2.json">
-      <Filter>Resource Files</Filter>
+      <Filter>Event Cards\header\Resource Files</Filter>
     </None>
     <None Include="save5.json">
-      <Filter>Resource Files</Filter>
+      <Filter>Event Cards\header\Resource Files</Filter>
     </None>
     <None Include="test.map">
-      <Filter>Resource Files</Filter>
+      <Filter>Event Cards\header\Resource Files</Filter>
     </None>
     <None Include="test2.map">
-      <Filter>Resource Files</Filter>
+      <Filter>Event Cards\header\Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -49,10 +49,20 @@ std::vector<T*> Deck<T>::discardPile() const
 template <typename T>
 void Deck<T>::printDeck()
 {
-	std::cout << "The cards within the deck are as follows:\n" << std::endl;
+	std::cout << "The cards within the deck are as follows:\n";
 	for (auto i = 0u; i < _drawPile.size(); i++)
 	{
 		std::cout << _drawPile[i]->name() << std::endl;
+	}
+}
+
+template <typename T>
+void Deck<T>::printDiscards()
+{
+	std::cout << "The cards within the discard pile are as follows: \n";
+	for (auto i = 0u; i < _discardPile.size(); i++) 
+	{
+		std::cout << _discardPile[i]->name() << std::endl;
 	}
 }
 
@@ -60,6 +70,12 @@ template<typename T>
 bool Deck<T>::empty() const
 {
 	return _drawPile.empty();
+}
+
+template<typename T>
+bool Deck<T>::emptyDiscard() const
+{
+	return _discardPile.empty();
 }
 
 template <typename T>
@@ -75,6 +91,19 @@ std::unique_ptr<T> Deck<T>::drawTopCard()
 	return temp;
 }
 template <typename T>
+std::unique_ptr<T> Deck<T>::drawTopDiscard()
+{
+	if (_discardPile.empty())
+	{
+		throw std::logic_error{ "Trying to draw from an empty discard deck." };
+	}
+
+	auto temp = move(_discardPile.back());
+	_discardPile.pop_back();
+	return temp;
+}
+
+template <typename T>
 std::unique_ptr<T> Deck<T>::drawBottomCard()
 {
 	if (_drawPile.empty())
@@ -84,6 +113,19 @@ std::unique_ptr<T> Deck<T>::drawBottomCard()
 
 	auto temp = move(_drawPile.front());
 	_drawPile.erase(_drawPile.begin());
+	return temp;
+}
+
+template <typename T>
+std::unique_ptr<T> Deck<T>::drawBottomDiscard()
+{
+	if (_discardPile.empty())
+	{
+		throw std::logic_error{ "Trying to draw from an empty discard deck." };
+	}
+
+	auto temp = move(_discardPile.front());
+	_discardPile.erase(_discardPile.begin());
 	return temp;
 }
 
@@ -125,4 +167,48 @@ void shuffle(std::vector<std::unique_ptr<T>>& cards)
 
 		cards = std::move(temp);
 	}
+}
+template <typename T>
+void Deck<T>::deleteDiscard()
+{
+	if (_discardPile.empty())
+	{
+		throw std::logic_error{ "There are no cards in the discard pile." };
+	}
+	std::cout << "Please enter the name of the card you would like to delete.\n";
+	std::string input;
+	while (true)
+	{
+		std::getline(std::cin >> std::ws, input);
+		const auto& it = std::find_if(_discardPile.begin(), _discardPile.end(), [&](const auto& c)
+		{
+			return input == c->name();
+		});
+		if (it != _discardPile.end())
+		{
+			_discardPile.erase(it);
+			break;
+		}
+		std::cout << "No card by that name in the discard pile.\n";
+
+	}
+}
+
+template <typename T>
+void Deck<T>::deleteDiscard(std::string cardToDelete)
+{
+	if (_discardPile.empty())
+	{
+		throw std::logic_error{ "There are no cards in the discard pile." };
+	}
+	const auto& it = std::find_if(_discardPile.begin(), _discardPile.end(), [&](const auto& c)
+	{
+		return cardToDelete == c->name();
+	});
+	if (it != _discardPile.end())
+	{
+		_discardPile.erase(it);
+		break;
+	}
+
 }
