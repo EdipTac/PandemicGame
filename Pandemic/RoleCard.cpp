@@ -35,3 +35,5 @@ std::vector<action::Action*> RoleCard::actions() const
 	}
 	return list;
 }
+
+void RoleCard::onEnter(City& city) const {}

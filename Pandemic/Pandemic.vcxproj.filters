@@ -101,15 +101,6 @@
     <Filter Include="Actions\Role Actions\src">
       <UniqueIdentifier>{7fc465f6-3703-4354-9038-1ab9d55babb1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="RoleCards">
-      <UniqueIdentifier>{7bf574de-65a6-45af-ae90-4ad662333ee9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RoleCards\header">
-      <UniqueIdentifier>{8c30b921-1c66-433e-9ab5-f6548a9039a1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="RoleCards\src">
-      <UniqueIdentifier>{0a9073b4-844c-4866-8724-3c330fd669b3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Event Cards">
       <UniqueIdentifier>{8611b03f-4e24-42d3-8ea8-032722c4f350}</UniqueIdentifier>
     </Filter>
@@ -118,6 +109,15 @@
     </Filter>
     <Filter Include="Event Cards\src">
       <UniqueIdentifier>{02b552c8-052e-4038-8c05-fdbf02dd5206}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Role Cards">
+      <UniqueIdentifier>{7bf574de-65a6-45af-ae90-4ad662333ee9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Role Cards\header">
+      <UniqueIdentifier>{8c30b921-1c66-433e-9ab5-f6548a9039a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Role Cards\src">
+      <UniqueIdentifier>{0a9073b4-844c-4866-8724-3c330fd669b3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -266,25 +266,25 @@
       <Filter>Actions\General Actions\header</Filter>
     </ClInclude>
     <ClInclude Include="OperationsExpert.h">
-      <Filter>RoleCards\header</Filter>
+      <Filter>Role Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="ContingencyPlanner.h">
-      <Filter>RoleCards\header</Filter>
+      <Filter>Role Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="Dispatcher.h">
-      <Filter>RoleCards\header</Filter>
+      <Filter>Role Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="Researcher.h">
-      <Filter>RoleCards\header</Filter>
+      <Filter>Role Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="Medic.h">
-      <Filter>RoleCards\header</Filter>
+      <Filter>Role Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="QuarantineSpecialist.h">
-      <Filter>RoleCards\header</Filter>
+      <Filter>Role Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="Scientist.h">
-      <Filter>RoleCards\header</Filter>
+      <Filter>Role Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="Airlift.h">
       <Filter>Event Cards\header</Filter>
@@ -438,25 +438,25 @@
       <Filter>Actions\General Actions\src</Filter>
     </ClCompile>
     <ClCompile Include="OperationsExpert.cpp">
-      <Filter>RoleCards\src</Filter>
+      <Filter>Role Cards\src</Filter>
     </ClCompile>
     <ClCompile Include="ContingencyPlanner.cpp">
-      <Filter>RoleCards\src</Filter>
+      <Filter>Role Cards\src</Filter>
     </ClCompile>
     <ClCompile Include="Dispatcher.cpp">
-      <Filter>RoleCards\src</Filter>
+      <Filter>Role Cards\src</Filter>
     </ClCompile>
     <ClCompile Include="Researcher.cpp">
-      <Filter>RoleCards\src</Filter>
+      <Filter>Role Cards\src</Filter>
     </ClCompile>
     <ClCompile Include="Medic.cpp">
-      <Filter>RoleCards\src</Filter>
+      <Filter>Role Cards\src</Filter>
     </ClCompile>
     <ClCompile Include="QuarantineSpecialist.cpp">
-      <Filter>RoleCards\src</Filter>
+      <Filter>Role Cards\src</Filter>
     </ClCompile>
     <ClCompile Include="Scientist.cpp">
-      <Filter>RoleCards\src</Filter>
+      <Filter>Role Cards\src</Filter>
     </ClCompile>
     <ClCompile Include="Airlift.cpp">
       <Filter>Event Cards\src</Filter>

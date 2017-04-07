@@ -135,6 +135,11 @@ void City::removeDiseaseCubes(const Colour& colour, const unsigned amount, CubeP
 	_diseaseCubes.giveTo(colour, amount, pool);
 }
 
+void City::removeDiseaseCubes(const Colour& colour, CubePool& pool)
+{
+	removeDiseaseCubes(colour, _diseaseCubes[colour], pool);
+}
+
 bool City::isInfected() const
 {
 	return _infected;
@@ -222,6 +227,11 @@ std::string City::string()
 	}
 	ss << std::endl;
 	return ss.str();
+}
+
+void City::onEnter(Player& player)
+{
+	player.role().onEnter(*this);
 }
 
 bool operator==(const City& lhs, const City& rhs)

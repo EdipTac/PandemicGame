@@ -1,4 +1,6 @@
 #include "Medic.h"
+#include "City.h"
+#include "Board.h"
 
 const std::string desc =
 	"The Medic removes ALL cubes, not 1, of the same color"
@@ -15,3 +17,14 @@ role::Medic::Medic()
 {}
 
 role::Medic::~Medic() {}
+
+void role::Medic::onEnter(City& city) const
+{
+	for (const auto& colour : colours())
+	{
+		if (Board::instance().isCured(colour) && city.diseaseCubes(colour) > 0)
+		{
+			city.removeDiseaseCubes(colour, Board::instance().cubePool());
+		}
+	}
+}
