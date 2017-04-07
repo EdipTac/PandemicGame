@@ -10,3 +10,8 @@ role::Scientist::Scientist()
 {}
 
 role::Scientist::~Scientist() {}
+
+int role::Scientist::numCardsNeededToCure() const
+{
+	return 4;
+}

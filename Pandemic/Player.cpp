@@ -9,7 +9,6 @@
 // Default Constructor
 Player::Player()
 	: _pawn { *this }
-	, _role { std::make_unique<RoleCard>() }
 {}
 
 // Constructor
@@ -137,6 +136,13 @@ void Player::giveCard(const PlayerCard& card, Player& recipient)
 	auto donation = std::move(*it);
 	_cards.erase(it);
 	recipient.addCard(std::move(donation));
+}
+
+void Player::move(City& destination)
+{
+	_pawn.position().onExit(*this);
+	_pawn.setPosition(destination);
+	_pawn.position().onEnter(*this);
 }
 
 std::vector<PlayerCityCard*> Player::cityCards() const

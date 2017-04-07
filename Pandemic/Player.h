@@ -13,6 +13,7 @@
 
 class PlayerCityCard;
 class EventCard;
+class City;
 
 // A player of the game
 class Player
@@ -56,6 +57,8 @@ public:
 	PlayerCard* positionCard();
 
 	void giveCard(const PlayerCard& card, Player& recipient);
+
+	void move(City& destination);
 
 private:
 	std::string _name;
