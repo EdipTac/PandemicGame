@@ -208,7 +208,7 @@ void Deck<T>::deleteDiscard(std::string cardToDelete)
 	if (it != _discardPile.end())
 	{
 		_discardPile.erase(it);
-		break;
+		return;
 	}
 
 }

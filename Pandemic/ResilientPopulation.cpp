@@ -1,6 +1,7 @@
 #include "ResilientPopulation.h"
 #include "Player.h"
 #include "Board.h"
+#include "InfectionCard.h"
 
 const std::string desc = "Take a card from the Infection Discard Pile and remove it from the game.";
 
@@ -24,7 +25,7 @@ void action::ResilientPopulation::solicitData()
 	while (true)
 	{
 		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(discardCards.begin(), discardCards.end(), [&](const auto& C)
+		const auto& it = std::find_if(discardCards.begin(), discardCards.end(), [&](const auto& c)
 		{
 			return input == c->name();
 		});
@@ -39,4 +40,14 @@ void action::ResilientPopulation::solicitData()
 void action::ResilientPopulation::perform()
 {
 	Board::instance().infectionDeck().deleteDiscard(_target);
+}
+
+bool action::ResilientPopulation::isValid() const
+{
+	return false;
+}
+
+void action::ResilientPopulation::setTarget(City* newTarget)
+{
+
 }
