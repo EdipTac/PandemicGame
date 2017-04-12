@@ -94,6 +94,8 @@ public:
 
 	// Returns a report on the city
 	std::string string();
+	// Sum up total cube numbers in the city
+	int totalCubes();
 
 	// Called when a player enters the city - calls the player role's onEnter(City&)
 	void onEnter(Player& player);

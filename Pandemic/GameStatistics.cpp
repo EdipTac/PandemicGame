@@ -15,7 +15,7 @@ void GameStatistics::update(){
 	display();
 }
 void GameStatistics::display() {
-	std::cout << "Game statistic: \n" << "Number of cities infected by players: " << _state->infectedCityCounter() << "\n" << 
+	std::cout << "\nGame statistic: \n\n" << "Number of cities infected by players: " << _state->infectedCityCounter() << "\n\n" << 
 		"Number of cards on each player's hand: " << std::endl;
 	for (const auto& player : Board::instance().players())
 	{
@@ -30,7 +30,7 @@ void GameStatistics::display() {
 		std::cout << "Player " << player->name() << " has " << countCity << " city card(s) " << countEvent << " event card(s)" << std::endl;
 	
 	}
-	std::cout << "The remaining diseases cubes on map: " << std::endl;
+	std::cout << "\nThe remaining diseases cubes on map: " << std::endl;
 	for (const auto& color : colours()) {
 		std::cout << "Disease " << colourName(color) << ": " << Board::instance().diseaseCount(color) << " cube(s) " << std::endl;
 	}
@@ -43,7 +43,7 @@ void GameStatistics::display() {
 			else
 				countEvent++;
 		}
-	std::cout << "The remaining resource: \n" << countCity << " city card(s) and " << countEvent << " event card(s)\n" <<
+	std::cout << "\nThe remaining resource: \n" << countCity << " city card(s) and " << countEvent << " event card(s)\n" <<
 		Board::instance().researchStations() << " Research stations " << std::endl;
 
 

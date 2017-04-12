@@ -44,6 +44,10 @@
 #include "GameStatistics.h"
 #include "OutbreakCounter.h"
 #include "SaveBuilder.h"
+#include "RemainingInfectionCard.h"
+#include "InfectedCityPercentage.h"
+#include "TreatmentPriority.h"
+
 
 //	----    Program entry point    ----  //
 void main()
@@ -52,6 +56,9 @@ void main()
 	std::cout << titleFont("PANDEMIC") << "\n\n\n";
 	mainMenu.solicitInput();
 	auto observer = std::make_unique<GameStatistics>(Board::instance());
+	auto decorator = std::make_unique<InfectedCityPercentage>(observer.get()); // city infection rate decorator initilization
+	auto infectDecro = std:: make_unique<RemainingInfectionCard>(decorator.get());// remaining infection card decorator initilization
+	auto infectStatus = std::make_unique <TreatmentPriority>(infectDecro.get());// treatment priority decorator initilization
 
 	while (!Board::instance().shouldQuit())
 	{
@@ -137,10 +144,7 @@ void newGame()
 	for (const auto& player : Board::instance().players())
 	{
 		std::cout << "Player " << player->name() << " has\n";
-		for (const auto& card : player->cards())
-		{
-			std::cout << "\t" << card->name() << "\n";
-		}
+		player->displayCards();
 	}
 	
 	//Place first research station
@@ -163,6 +167,7 @@ void newGame()
 		}
 	}
 }
+//GameStatistics *observer = new GameStatistics(Board::instance());// observer initilization
 
 //Initialize a reference card that any player can view
 void displayReferenceCard()
@@ -362,6 +367,16 @@ void displayCities()
 	{
 		showCity(*city);
 	}
+}
+
+void displayCurrentPosition() 
+{
+	showCity(Board::instance().currentPlayer().pawn().position());
+}
+
+void displayCardsInHand() 
+{
+	Board::instance().currentPlayer().displayCards();
 }
 
 void directConnectionReport()
