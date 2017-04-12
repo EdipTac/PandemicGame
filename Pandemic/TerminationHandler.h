@@ -12,12 +12,12 @@ class TerminationHandler
 public:
 	virtual ~TerminationHandler();
 	virtual void update() override;
+	void quit();
 	bool shouldQuit() const;
 
 protected:
 	virtual void onVictory();
 	virtual void onDefeat();
-	void quit();
 
 private:
 	bool _shouldQuit = false;

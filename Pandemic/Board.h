@@ -67,7 +67,6 @@ private:
 	CubePool _cubePool;
 	DiseaseTracker _diseaseTracker;
 	unsigned _infectionCounter = 1;
-	bool _shouldQuit = false;
 	unsigned _researchStations = 6;
 	Deck<PlayerCard> _playerDeck;
 	InfectionCardDeck _infectionDeck;
