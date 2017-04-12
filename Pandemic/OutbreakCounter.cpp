@@ -20,5 +20,5 @@ size_t OutbreakCounter::counter() const
 void OutbreakCounter::advance()
 {
 	++_counter;
-	notify();
+	//notify();
 }

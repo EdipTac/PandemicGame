@@ -43,6 +43,10 @@
 #include "Util.h"
 #include "GameStatistics.h"
 #include "OutbreakCounter.h"
+#include "TreatmentPriority.h"
+#include "InfectedCityPercentage.h"
+#include "RemainingInfectionCard.h"
+
 
 //	----    Program entry point    ----  //
 void main()
@@ -160,7 +164,10 @@ void newGame()
 		}
 	}
 }
-
+GameStatistics *observer = new GameStatistics(Board::instance());// observer initilization
+InfectedCityPercentage *decorator = new InfectedCityPercentage(observer); // city infection rate decorator initilization
+RemainingInfectionCard *infectDecro = new RemainingInfectionCard(decorator);// remaining infection card decorator initilization
+TreatmentPriority *infectStatus = new TreatmentPriority(infectDecro);// treatment priority decorator initilization
 //Initialize a reference card that any player can view
 void displayReferenceCard()
 {

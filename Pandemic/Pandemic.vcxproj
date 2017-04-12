@@ -138,6 +138,7 @@
     <ClInclude Include="GovernmentGrant.h" />
     <ClInclude Include="InfectionCard.h" />
     <ClInclude Include="InfectionCardDeck.h" />
+    <ClInclude Include="InfectedCityPercentage.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapEditor.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="PlayerCard.h" />
     <ClInclude Include="PlayerCityCard.h" />
     <ClInclude Include="QuarantineSpecialist.h" />
+    <ClInclude Include="RemainingInfectionCard.h" />
     <ClInclude Include="Researcher.h" />
     <ClInclude Include="ResearcherGiveKnowledge.h" />
     <ClInclude Include="ResilientPopulation.h" />
@@ -164,12 +166,14 @@
     <ClInclude Include="Serialization.h" />
     <ClInclude Include="GiveKnowledge.h" />
     <ClInclude Include="ShuttleFlight.h" />
+    <ClInclude Include="StatisticDecorator.h" />
     <ClInclude Include="TakeKnowledge.h" />
     <ClInclude Include="TerminationHandler.h" />
     <ClInclude Include="TerminationState.h" />
     <ClInclude Include="Terminator.h" />
     <ClInclude Include="TextualCard.h" />
     <ClInclude Include="TreatDisease.h" />
+    <ClInclude Include="TreatmentPriority.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="View.h" />
   </ItemGroup>
@@ -201,6 +205,7 @@
     <ClCompile Include="GovernmentGrant.cpp" />
     <ClCompile Include="InfectionCard.cpp" />
     <ClCompile Include="InfectionCardDeck.cpp" />
+    <ClCompile Include="InfectedCityPercentage.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapEditor.cpp" />
     <ClCompile Include="Medic.cpp" />
@@ -215,6 +220,7 @@
     <ClCompile Include="PlayerCard.cpp" />
     <ClCompile Include="PlayerCityCard.cpp" />
     <ClCompile Include="QuarantineSpecialist.cpp" />
+    <ClCompile Include="RemainingInfectionCard.cpp" />
     <ClCompile Include="Researcher.cpp" />
     <ClCompile Include="ResearcherGiveKnowledge.cpp" />
     <ClCompile Include="ResilientPopulation.cpp" />
@@ -223,11 +229,13 @@
     <ClCompile Include="Serialization.cpp" />
     <ClCompile Include="GiveKnowledge.cpp" />
     <ClCompile Include="ShuttleFlight.cpp" />
+    <ClCompile Include="StatisticDecorator.cpp" />
     <ClCompile Include="TakeKnowledge.cpp" />
     <ClCompile Include="TerminationHandler.cpp" />
     <ClCompile Include="Terminator.cpp" />
     <ClCompile Include="TextualCard.cpp" />
     <ClCompile Include="TreatDisease.cpp" />
+    <ClCompile Include="TreatmentPriority.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>

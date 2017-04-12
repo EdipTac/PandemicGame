@@ -307,6 +307,10 @@
     <ClInclude Include="GovernmentGrant.h">
       <Filter>Event Cards\header</Filter>
     </ClInclude>
+    <ClInclude Include="StatisticDecorator.h" />
+    <ClInclude Include="RemainingInfectionCard.h" />
+    <ClInclude Include="InfectedCityPercentage.h" />
+    <ClInclude Include="TreatmentPriority.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -477,6 +481,10 @@
     <ClCompile Include="ResilientPopulation.cpp">
       <Filter>Event Cards\src</Filter>
     </ClCompile>
+    <ClCompile Include="StatisticDecorator.cpp" />
+    <ClCompile Include="RemainingInfectionCard.cpp" />
+    <ClCompile Include="InfectedCityPercentage.cpp" />
+    <ClCompile Include="TreatmentPriority.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">

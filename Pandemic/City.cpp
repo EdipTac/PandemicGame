@@ -60,6 +60,13 @@ size_t& City::diseaseCubes(const Colour& colour)
 {
 	return _diseaseCubes[colour];
 }
+int City::totalCubes() {
+	int sum = 0;
+	for (auto& color : diseases()) {
+		sum += diseaseCubes(color);
+	}
+	return sum;
+}
 
 void City::setDiseaseCubes(const Colour& colour, int quantity) 
 {

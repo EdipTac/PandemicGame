@@ -90,7 +90,8 @@ public:
 
 	// Returns a report on the city
 	std::string string();
-
+	// Sum up total cube numbers in the city
+	int totalCubes();
 	class Builder;
 
 private:
