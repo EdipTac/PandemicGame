@@ -15,11 +15,8 @@ Board::Board()
 	: _cubePool { 96 / 4 }
 	, _terminationHandler { std::make_unique<TerminationHandler>() }
 {
-	for (const auto& colour : colours())
-	{
-		_cured[colour] = false;
-	}
-	_terminationHandler->subscribeTo(_outbreakCounter_);
+	_terminationHandler->subscribeTo(_outbreakCounter);
+	_terminationHandler->subscribeTo(_diseaseTracker);
 }
 
 Board::~Board() {}
@@ -130,12 +127,12 @@ bool Board::hasResearchStation() const
 
 void Board::cureDisease(const Colour& colour)
 {
-	_cured[colour] = true;
+	_diseaseTracker.cure(colour);
 }
 
 bool Board::isCured(const Colour& colour) const
 {
-	return _cured.at(colour);
+	return _diseaseTracker.isCured(colour);
 }
 
 bool Board::isEradicated(const Colour& colour) const
@@ -181,14 +178,14 @@ size_t Board::infectedCityCounter() const
 	return count;
 
 }
-size_t Board::outbreakCounter() const
+size_t Board::outbreaks() const
 {
-	return _outbreakCounter_.counter();
+	return _outbreakCounter.counter();
 }
 
 void Board::advanceOutbreakCounter()
 {
-	_outbreakCounter_.advance();
+	_outbreakCounter.advance();
 }
 
 CubePool& Board::cubePool()
@@ -220,18 +217,4 @@ void Board::distributePlayerCards(const size_t count)
 	{
 		currentPlayer().addCard(playerDeck().drawTopCard());
 	}
-}
-
-class QuitState
-	: public Board
-{
-	bool shouldQuit() const override
-	{
-		return true;
-	}
-};
-
-std::unique_ptr<Board> quitState()
-{
-	return std::make_unique<QuitState>();
 }
