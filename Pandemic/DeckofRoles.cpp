@@ -8,7 +8,7 @@
 #include "ContingencyPlanner.h"
 #include "OperationsExpert.h"
 #include "RoleCard.h"
-#include "DeckofRoles.h"
+#include "DeckOfRoles.h"
 #include "Researcher.h"
 #include "Medic.h"
 #include "QuarantineSpecialist.h"

@@ -175,9 +175,6 @@
     <ClInclude Include="Deck.h">
       <Filter>General\header</Filter>
     </ClInclude>
-    <ClInclude Include="DeckofRoles.h">
-      <Filter>General\header</Filter>
-    </ClInclude>
     <ClInclude Include="Menu.h">
       <Filter>Menus\header</Filter>
     </ClInclude>
@@ -316,6 +313,9 @@
     <ClInclude Include="json.hpp">
       <Filter>Resource Files</Filter>
     </ClInclude>
+    <ClInclude Include="DeckOfRoles.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -367,9 +367,6 @@
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="Deck.cpp">
-      <Filter>General\src</Filter>
-    </ClCompile>
-    <ClCompile Include="DeckofRoles.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="Menu.cpp">
@@ -491,6 +488,9 @@
     </ClCompile>
     <ClCompile Include="OneQuietNight.cpp">
       <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="DeckOfRoles.cpp">
+      <Filter>General\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

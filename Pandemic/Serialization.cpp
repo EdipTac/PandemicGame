@@ -9,7 +9,7 @@
 
 #include "Colour.h"
 #include "DeckofEvents.h"
-#include "DeckofRoles.h"
+#include "DeckOfRoles.h"
 #include "EventCard.h"
 #include "PlayerCityCard.h"
 #include "Serialization.h"
