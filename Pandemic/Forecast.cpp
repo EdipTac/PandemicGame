@@ -43,10 +43,6 @@ void action::Forecast::solicitData()
 		}
 		std::cout << "No city of that name.\n";
 	}
-
-
-
-
 }
 
 void action::Forecast::perform() {}

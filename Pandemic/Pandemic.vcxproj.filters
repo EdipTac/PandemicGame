@@ -119,6 +119,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{fb33f33a-9def-4b1d-b685-d377d2935492}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -289,9 +292,6 @@
     <ClInclude Include="GameStatistics.h">
       <Filter>Views\header</Filter>
     </ClInclude>
-    <ClInclude Include="json.hpp">
-      <Filter>General</Filter>
-    </ClInclude>
     <ClInclude Include="Airlift.h">
       <Filter>Event Cards\header</Filter>
     </ClInclude>
@@ -312,6 +312,9 @@
     </ClInclude>
     <ClInclude Include="PolyObserver.h">
       <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="json.hpp">
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -492,30 +495,30 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">
-      <Filter>General</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="earth2.map">
-      <Filter>General</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="save.json">
-      <Filter>General</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="save2.json">
-      <Filter>General</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="save5.json">
-      <Filter>General</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="test.map">
-      <Filter>General</Filter>
+      <Filter>Resource Files</Filter>
     </None>
     <None Include="test2.map">
-      <Filter>General</Filter>
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Text Include="README.txt">
-      <Filter>General</Filter>
+      <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
 </Project>
