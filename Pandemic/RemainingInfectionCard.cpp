@@ -30,6 +30,6 @@ void RemainingInfectionCard::display() {
 	
 	for (const auto& card : Board::instance().infectionDeck().discardPile())
 	{  
-		cout << card->name() << endl;
+		cout << card->name() << " " << colourName(card->colour()) << endl;
 	}
 };
