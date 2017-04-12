@@ -7,6 +7,7 @@
 #include "Deck.h"
 #include "DiseaseTracker.h"
 #include "InfectionCard.h"
+#include "InfectionCardDeck.h"
 #include "Map.h"
 #include "Player.h"
 #include "PlayerCard.h"
@@ -52,7 +53,7 @@ public:
 	CubePool& cubePool();
 	
 	Deck<PlayerCard>& playerDeck();
-	Deck<InfectionCard>& infectionDeck();
+	InfectionCardDeck& infectionDeck();
 	size_t initialCards() const;
 	void distributePlayerCards(const size_t count);
 
@@ -69,7 +70,7 @@ private:
 	bool _shouldQuit = false;
 	unsigned _researchStations = 6;
 	Deck<PlayerCard> _playerDeck;
-	Deck<InfectionCard> _infectionDeck;
+	InfectionCardDeck _infectionDeck;
 	OutbreakCounter _outbreakCounter;
 	std::unique_ptr<TerminationHandler> _terminationHandler;
 };

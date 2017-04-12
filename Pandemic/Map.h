@@ -20,6 +20,7 @@ public:
 	// Map file name
 	std::string name() const;
 	std::string& name();
+	void setName(const std::string& name);
 
 	// Find a city by name
 	City& findCityByName(const std::string& name) const;

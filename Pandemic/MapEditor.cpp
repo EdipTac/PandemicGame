@@ -4,7 +4,7 @@
 #include "MapEditor.h"
 #include "Map.h"
 #include "Menu.h"
-#include "Serialization.h"
+#include "BoardBuilder.h"
 #include "Util.h"
 
 void addCity();

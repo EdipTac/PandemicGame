@@ -11,48 +11,16 @@ Data: 20170209*/
 
 #include "InfectionCardDeck.h"
 
-InfectionCardDeck::InfectionCardDeck() {
-}
+InfectionCardDeck::~InfectionCardDeck() {}
 
-InfectionCardDeck::InfectionCardDeck(std::string fileName)
+TerminationState InfectionCardDeck::terminationState() const
 {
-   // initiate 48 infection cards on deck
-    auto  map = readMapFromFile(fileName);
-	for (const auto& city : map->cities())
-	{
-      Deck<InfectionCard>::addToDeck(std::make_unique<InfectionCard>(*city));
+	return empty() ? TerminationState::Defeat : TerminationState::InProgress;
    }
-	shuffleDeck();// shuffle infection cards on deck/
+
+std::unique_ptr<InfectionCard> InfectionCardDeck::drawTopCard()
+{
+	auto card = Deck<InfectionCard>::drawTopCard();
+	notify();
+	return card;
 }
-
-#pragma warning (push)
-
-#pragma warning (disable: 4100) // S since cards isn't used
-
-#pragma warning (pop)
-InfectionCardDeck::~InfectionCardDeck() {
-
-}
-
-void InfectionCardDeck::printDeck() {
-	for (const auto& infectionCard : _drawPile) {
-		std::cout << "Infection cards on deck : " << infectionCard->description() << std::endl;
-	}
-}
-
-void InfectionCardDeck::checkInfectionCardHistory() {
-	for (const auto& infectionCard : _discardPile) {
-		std::cout << "Infection cards on discard pile: " << infectionCard->description() << std::endl;
-	}
-}
-
-
-void InfectionCardDeck::reshuffleAndputback() {
-	shuffleDiscards();
-	for (auto& infectionCard : _discardPile) {
-		Deck<InfectionCard>::addToDeck(std::move(infectionCard));
-	}
-	_discardPile.clear();
-
-}
-

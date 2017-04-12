@@ -4,7 +4,10 @@
 
 #include "City.h"
 #include "Colour.h"
+#include "Board.h"
+#include "Player.h"
 #include "InfectionCardDeck.h"
+#include "Board.h"
 
 City::City(const std::string& name, const Colour& colour, const std::map<Colour, size_t>& cubes)
 	: _name { name }
