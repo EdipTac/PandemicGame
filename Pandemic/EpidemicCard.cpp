@@ -1,4 +1,5 @@
 #include "EpidemicCard.h"
+#include "Board.h"
 
 const std::string EPIDEMIC_DESCRIPTION =
 	"1-Increase:\nMove the infection rate marker forward 1 space\n"

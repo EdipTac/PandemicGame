@@ -6,12 +6,8 @@
 
 #pragma once
 
-#include <iostream>
-#include <vector>
-
 #include "Deck.h"
 #include "InfectionCard.h"
-#include "Serialization.h"
 #include "Terminator.h"
 
 class InfectionCardDeck
@@ -23,4 +19,6 @@ public:
 	virtual ~InfectionCardDeck() override;
 
 	virtual TerminationState terminationState() const override;
+
+	virtual std::unique_ptr<InfectionCard> drawTopCard() override;
 };
