@@ -12,7 +12,6 @@ action::ResilientPopulation::ResilientPopulation(Player* const performer)
 
 void action::ResilientPopulation::solicitData()
 {
-	auto& player = *_performer;
 	const auto& discardCards = Board::instance().infectionDeck().discardPile();
 	//if the infectionDeck is empty, we cant throw a card
 	if (Board::instance().infectionDeck().empty()) {
