@@ -134,6 +134,7 @@
     <ClInclude Include="EpidemicCard.h" />
     <ClInclude Include="EventCard.h" />
     <ClInclude Include="Board.h" />
+    <ClInclude Include="Forecast.h" />
     <ClInclude Include="GameStatistics.h" />
     <ClInclude Include="GovernmentGrant.h" />
     <ClInclude Include="InfectionCard.h" />
@@ -145,6 +146,7 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuOption.h" />
     <ClInclude Include="MoveFromResearchStation.h" />
+    <ClInclude Include="OneQuietNight.h" />
     <ClInclude Include="PolyObserver.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
@@ -197,6 +199,7 @@
     <ClCompile Include="EpidemicCard.cpp" />
     <ClCompile Include="EventCard.cpp" />
     <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Forecast.cpp" />
     <ClCompile Include="GameStatistics.cpp" />
     <ClCompile Include="GovernmentGrant.cpp" />
     <ClCompile Include="InfectionCard.cpp" />
@@ -207,6 +210,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MoveFromResearchStation.cpp" />
     <ClCompile Include="Observable.cpp" />
+    <ClCompile Include="OneQuietNight.cpp" />
     <ClCompile Include="OperationsExpert.cpp" />
     <ClCompile Include="OutbreakCounter.cpp" />
     <ClCompile Include="Pandemic.cpp" />

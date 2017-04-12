@@ -187,9 +187,6 @@
     <ClInclude Include="Util.h">
       <Filter>Util\header</Filter>
     </ClInclude>
-    <ClInclude Include="json.hpp">
-      <Filter>Event Cards\header\Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="DeckofEvents.h">
       <Filter>General\header</Filter>
     </ClInclude>
@@ -212,12 +209,6 @@
       <Filter>General\header</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
-      <Filter>Views\header</Filter>
-    </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>Views\header</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiView.h">
       <Filter>Views\header</Filter>
     </ClInclude>
     <ClInclude Include="TerminationHandler.h">
@@ -295,14 +286,29 @@
     <ClInclude Include="Airlift.h">
       <Filter>Event Cards\header</Filter>
     </ClInclude>
-    <ClInclude Include="Airlift.h">
-      <Filter>Event Cards\header</Filter>
-    </ClInclude>
     <ClInclude Include="GameStatistics.h">
       <Filter>Views\header</Filter>
     </ClInclude>
-    <ClInclude Include="GovernmentGrant.h" />
-    <ClInclude Include="ResilientPopulation.h" />
+    <ClInclude Include="PolyObserver.h" />
+    <ClInclude Include="MonoObserver.h" />
+    <ClInclude Include="json.hpp">
+      <Filter>General</Filter>
+    </ClInclude>
+    <ClInclude Include="Airlift.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="GovernmentGrant.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="ResilientPopulation.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Forecast.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="OneQuietNight.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -467,39 +473,45 @@
     <ClCompile Include="GameStatistics.cpp">
       <Filter>Views\src</Filter>
     </ClCompile>
-    <ClCompile Include="GovernmentGrant.cpp">
-      <Filter>Event Cards\header\Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="ResilientPopulation.cpp">
-      <Filter>Event Cards\header\Resource Files</Filter>
+      <Filter>Event Cards\src</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="README.txt">
-      <Filter>Event Cards\header\Resource Files</Filter>
-    </Text>
+    <ClCompile Include="GovernmentGrant.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Forecast.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="OneQuietNight.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">
-      <Filter>Event Cards\header\Resource Files</Filter>
-    </None>
-    <None Include="save.json">
-      <Filter>Event Cards\header\Resource Files</Filter>
+      <Filter>General</Filter>
     </None>
     <None Include="earth2.map">
-      <Filter>Event Cards\header\Resource Files</Filter>
+      <Filter>General</Filter>
+    </None>
+    <None Include="save.json">
+      <Filter>General</Filter>
     </None>
     <None Include="save2.json">
-      <Filter>Event Cards\header\Resource Files</Filter>
+      <Filter>General</Filter>
     </None>
     <None Include="save5.json">
-      <Filter>Event Cards\header\Resource Files</Filter>
+      <Filter>General</Filter>
     </None>
     <None Include="test.map">
-      <Filter>Event Cards\header\Resource Files</Filter>
+      <Filter>General</Filter>
     </None>
     <None Include="test2.map">
-      <Filter>Event Cards\header\Resource Files</Filter>
+      <Filter>General</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="README.txt">
+      <Filter>General</Filter>
+    </Text>
   </ItemGroup>
 </Project>

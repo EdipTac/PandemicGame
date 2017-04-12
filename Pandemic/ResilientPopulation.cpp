@@ -47,7 +47,4 @@ bool action::ResilientPopulation::isValid() const
 	return false;
 }
 
-void action::ResilientPopulation::setTarget(City* newTarget)
-{
 
-}

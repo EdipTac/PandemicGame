@@ -4,7 +4,7 @@
 //		============================
 //		Michael Deom	-	29549641
 //		Jonny Linton	-	
-//		Edip Tac		-	
+//		Edip Tac		-	26783287
 //		Kechun Ye		-	25654688
 //
 //  Submitted 15/03/2017
@@ -410,6 +410,8 @@ void infect()
 {
 	for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
 	{
+		auto& currentPlayer = Board::instance().nextPlayer();
+		if (currentPlayer.isOneQuietNight()) { break; } //added this for the one quiet night event card, should modify it so that once the event is complete, the status of isonequietnight reverts back to false.
 		auto card = Board::instance().infectionDeck().drawTopCard();
 		card->onDraw(Board::instance());
 		Board::instance().infectionDeck().addToDiscard(std::move(card));

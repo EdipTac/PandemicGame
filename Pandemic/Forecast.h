@@ -1,21 +1,20 @@
 #pragma once
 
 #include "Action.h"
-
-class City;
+#include "City.h"
 
 namespace action
 {
-	class ResilientPopulation
+	class Forecast
 		: public Action
 	{
 	public:
-		ResilientPopulation(Player* const performer = nullptr);
+		Forecast(Player* const performer = nullptr);
 		virtual void solicitData() override;
 		virtual void perform() override;
 		virtual bool isValid() const override;
-
+	
 	private:
-		std::string _target;
+		City* _target; //i dont need a private for this class, is there a way to not put this and still go through with it?
 	};
 }

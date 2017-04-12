@@ -17,6 +17,7 @@ Player::Player(const std::string name, const Pawn& pawn, std::vector<std::unique
 	, _pawn { pawn }
 	, _cards { std::move(cards) }
 	, _role { std::move(role) }
+	, _oneQuietNight {false}
 {}
 
 std::string Player::name() const
@@ -195,4 +196,12 @@ void Player::setName(const std::string name) {
 
 void Player::displayRole() {
 	_role->printRole();
+}
+
+bool Player::isOneQuietNight() {
+	return _oneQuietNight;
+}
+
+void Player::setOneQuietNight(bool boolean) {
+	_oneQuietNight = boolean;
 }
