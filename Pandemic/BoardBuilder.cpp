@@ -45,6 +45,26 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 	return std::move(map);
 }
 
+void writeMapToFile(const Map& map, const std::string& fileName)
+{
+	json j;
+	auto& jCities = j["cities"];
+	for (const auto& city : map.cities())
+	{
+		json jCity;
+		jCity["name"] = city->name();
+		for (const auto& target : city->connections())
+		{
+			jCity["connections"].push_back(target->name());
+		}
+		jCity["colour"] = colourAbbreviation(city->colour());
+		jCity["isStartingCity"] = map.startingCity() == *city;
+		jCities.push_back(jCity);
+
+	}
+	std::ofstream{ fileName } << std::setw(4) << j;
+}
+
 BoardBuilder& BoardBuilder::loadBoard(std::string& gameSaveFile)
 {
 	std::ifstream fs{ gameSaveFile };

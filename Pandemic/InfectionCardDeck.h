@@ -11,8 +11,6 @@
 
 #include "Deck.h"
 #include "InfectionCard.h"
-#include "Serialization.h"
-
 
 
 class InfectionCardDeck

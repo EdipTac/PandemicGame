@@ -6,6 +6,7 @@
 using json = nlohmann::json;
 
 std::unique_ptr<Map> readMapFromFile(const std::string& fileName);
+void writeMapToFile(const Map& map, const std::string& fileName);
 
 class BoardBuilder {
 public:

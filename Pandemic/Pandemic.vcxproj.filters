@@ -181,9 +181,6 @@
     <ClInclude Include="MenuOption.h">
       <Filter>Menus\header</Filter>
     </ClInclude>
-    <ClInclude Include="Serialization.h">
-      <Filter>Util\header</Filter>
-    </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Util\header</Filter>
     </ClInclude>
@@ -375,9 +372,6 @@
       <Filter>Menus\src</Filter>
     </ClCompile>
     <ClCompile Include="Util.cpp">
-      <Filter>Util\src</Filter>
-    </ClCompile>
-    <ClCompile Include="Serialization.cpp">
       <Filter>Util\src</Filter>
     </ClCompile>
     <ClCompile Include="DeckofEvents.cpp">

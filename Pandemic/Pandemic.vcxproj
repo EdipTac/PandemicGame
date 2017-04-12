@@ -165,7 +165,6 @@
     <ClInclude Include="RoleCard.h" />
     <ClInclude Include="SaveBuilder.h" />
     <ClInclude Include="Scientist.h" />
-    <ClInclude Include="Serialization.h" />
     <ClInclude Include="GiveKnowledge.h" />
     <ClInclude Include="ShuttleFlight.h" />
     <ClInclude Include="TakeKnowledge.h" />
@@ -228,7 +227,6 @@
     <ClCompile Include="RoleCard.cpp" />
     <ClCompile Include="SaveBuilder.cpp" />
     <ClCompile Include="Scientist.cpp" />
-    <ClCompile Include="Serialization.cpp" />
     <ClCompile Include="GiveKnowledge.cpp" />
     <ClCompile Include="ShuttleFlight.cpp" />
     <ClCompile Include="TakeKnowledge.cpp" />

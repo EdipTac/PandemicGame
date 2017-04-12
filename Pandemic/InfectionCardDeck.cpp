@@ -8,6 +8,7 @@ Data: 20170209*/
 #include <ctime>
 #include <iostream>
 #include <string>
+#include "Board.h"
 
 #include "InfectionCardDeck.h"
 
