@@ -44,6 +44,9 @@
 #include "GameStatistics.h"
 #include "OutbreakCounter.h"
 #include "SaveBuilder.h"
+#include "RemainingInfectionCard.h"
+#include "InfectedCityPercentage.h"
+#include "TreatmentPriority.h"
 
 
 //	----    Program entry point    ----  //
@@ -141,10 +144,7 @@ void newGame()
 	for (const auto& player : Board::instance().players())
 	{
 		std::cout << "Player " << player->name() << " has\n";
-		for (const auto& card : player->cards())
-		{
-			std::cout << "\t" << card->name() << "\n";
-		}
+		player->displayCards();
 	}
 	
 	//Place first research station
