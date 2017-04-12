@@ -97,7 +97,7 @@ SaveBuilder& SaveBuilder::saveInfectionCards()
 	}
 	gameFile["infection"]["discard"] = infDiscNames;
 
-	gameFile["infection"]["outbreak"] = Board::instance().outbreakCounter();
+	gameFile["infection"]["outbreak"] = Board::instance().outbreaks();
 	gameFile["infection"]["rate"] = Board::instance().infectionCounter();
 
 	bool hasCured = false;

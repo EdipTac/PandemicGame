@@ -78,6 +78,7 @@ void newGame()
 	std::cout << "\nLoading map \"" << fileName << "\"...\n";
 	Board::instance().setMap(readMapFromFile(fileName));
 	std::cout << "Map \"" << fileName << "\" loaded!\n\n";
+	Board::instance().map().setName(fileName); // set the name of the Map to the fileName
 
 	// Create players
 	std::cout << "How many players? ";

@@ -79,9 +79,8 @@ BoardBuilder& BoardBuilder::loadBoard(std::string& gameSaveFile)
 
 	gameFile = j;
 
-	auto mapFile = gameFile["map"].get<std::string>();
+	const auto mapFile = gameFile["map"].get<std::string>();
 	Board::instance().setMap(std::move(readMapFromFile(mapFile)));
-	//Board::instance().map().
 
 	return *this;
 }
