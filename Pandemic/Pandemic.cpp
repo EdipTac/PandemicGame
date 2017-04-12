@@ -55,6 +55,9 @@ void main()
 	std::cout << titleFont("PANDEMIC") << "\n\n\n";
 	mainMenu.solicitInput();
 	auto observer = std::make_unique<GameStatistics>(Board::instance());
+	auto decorator = std::make_unique<InfectedCityPercentage>(observer.get()); // city infection rate decorator initilization
+	auto infectDecro = std:: make_unique<RemainingInfectionCard>(decorator.get());// remaining infection card decorator initilization
+	auto infectStatus = std::make_unique <TreatmentPriority>(infectDecro.get());// treatment priority decorator initilization
 
 	while (!Board::instance().shouldQuit())
 	{
@@ -164,10 +167,8 @@ void newGame()
 		}
 	}
 }
-GameStatistics *observer = new GameStatistics(Board::instance());// observer initilization
-InfectedCityPercentage *decorator = new InfectedCityPercentage(observer); // city infection rate decorator initilization
-RemainingInfectionCard *infectDecro = new RemainingInfectionCard(decorator);// remaining infection card decorator initilization
-TreatmentPriority *infectStatus = new TreatmentPriority(infectDecro);// treatment priority decorator initilization
+//GameStatistics *observer = new GameStatistics(Board::instance());// observer initilization
+
 //Initialize a reference card that any player can view
 void displayReferenceCard()
 {

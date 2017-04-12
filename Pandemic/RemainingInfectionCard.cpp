@@ -25,7 +25,11 @@ void RemainingInfectionCard::display() {
 		else
 			yellow++;
 	}
-	cout << blue << " Remaining blue disease infection card(s)" << "\n" << black << " Remaining black disease infection card(s)" << "\n" << red
-		<< " Remaining red disease infection card(s)" << "\n" << yellow << " Remaining yellow disease infection card(s)" << endl;
-
+	cout << "\nOn infection card deck there are:\n"<< blue << " blue disease infection card(s)" << "\n" << black << " black disease infection card(s)" << "\n" << red
+		<< " red disease infection card(s)" << "\n" << yellow << " yellow disease infection card(s)\n\nUsed infection cards : " << endl;
+	
+	for (const auto& card : Board::instance().infectionDeck().discardPile())
+	{  
+		cout << card->name() << endl;
+	}
 };
