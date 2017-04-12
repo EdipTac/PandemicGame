@@ -156,7 +156,13 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 
 	auto& cities = gameState->map().cities();
 	auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
-	auto roles = std::make_unique<DeckofRoles>()->roleCards();
+	DeckofRoles deckOfRoles;
+	std::vector<std::unique_ptr<RoleCard>> roles;
+	while (!deckOfRoles.empty())
+	{
+		roles.push_back(deckOfRoles.drawTopCard());
+	}
+
 
 	// PLAYER INITIALIZATION:
 	std::vector<json> playerListJSON = j["players"];

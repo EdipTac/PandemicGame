@@ -12,10 +12,10 @@ class Deck
 
 public:
 	// Shuffles the draw pile
-	void shuffleDeck();
+	virtual void shuffleDeck();
 
 	// shuffles the draw pile
-	void shuffleDiscards();
+	virtual void shuffleDiscards();
 
 	std::vector<T*> drawPile() const;
 
@@ -34,30 +34,28 @@ public:
 	bool emptyDiscard() const;
 
 	// Returns the top card of the active deck
-	std::unique_ptr<T> drawTopCard();
+	virtual std::unique_ptr<T> drawTopCard();
 
 	// Returns the top card of the discard deck
-	std::unique_ptr<T> drawTopDiscard();
+	virtual std::unique_ptr<T> drawTopDiscard();
 
 
 	// Returns the bottom card of the active deck
-	std::unique_ptr<T> drawBottomCard();
+	virtual std::unique_ptr<T> drawBottomCard();
 
 	// Returns the bottom card of the discard deck
-	std::unique_ptr<T> drawBottomDiscard();
+	virtual std::unique_ptr<T> drawBottomDiscard();
 
 	// Inserts a card into the draw pile
-	void addToDeck(std::unique_ptr<T> card);
+	virtual void addToDeck(std::unique_ptr<T> card);
 
 	// Discards a card
-	void addToDiscard(std::unique_ptr<T> card);
+	virtual void addToDiscard(std::unique_ptr<T> card);
 
 	// deletes a discarded card
-	void deleteDiscard();
+	virtual void deleteDiscard();
 	
-	void deleteDiscard(std::string cardToDelete);
-
-
+	virtual void deleteDiscard(std::string cardToDelete);
 
 protected:
 	std::vector<std::unique_ptr<T>> _drawPile;

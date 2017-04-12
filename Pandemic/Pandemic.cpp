@@ -110,9 +110,10 @@ void newGame()
 
 	//Distribute Role Cards to players
 	DeckofRoles roleCardDeck;
+	roleCardDeck.shuffleDeck();
 	for (auto& player : Board::instance().players())
 	{
-		player->setRole(roleCardDeck.drawRoleCard());
+		player->setRole(roleCardDeck.drawTopCard());
 	}
 
 	for (const auto& player : Board::instance().players())
