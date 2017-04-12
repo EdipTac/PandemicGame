@@ -5,6 +5,7 @@
 
 #include "CubePool.h"
 #include "Deck.h"
+#include "DiseaseTracker.h"
 #include "InfectionCard.h"
 #include "Map.h"
 #include "Player.h"
@@ -15,20 +16,19 @@
 class TerminationHandler;
 
 // Represents the state of the game
-class Board : public Observable
+class Board
+	: public Observable
 {
 public:
 	static Board& instance();
 	Board();
 	~Board();
-	//const std::vector<std::unique_ptr<Player>>& players() const;
 	std::vector<Player*> players();
 	Map& map() const;
 	void addPlayer(std::unique_ptr<Player> player);
 	void setMap(std::unique_ptr<Map> map);
 	virtual bool shouldQuit() const;
 
-	// Quits at the end of the current action frame.
 	void quit();
 
 	Player& nextPlayer();
@@ -48,9 +48,7 @@ public:
 	void advanceInfectionCounter();
 	unsigned infectionRate() const;
 	unsigned infectionCounter() const;
-	size_t infectedCityCounter() const; // count the cities being infected for the purpose of statistic
-	size_t outbreakCounter() const;
-	void advanceOutbreakCounter();
+	size_t infectedCityCounter() const;
 	CubePool& cubePool();
 	
 	Deck<PlayerCard>& playerDeck();
@@ -58,20 +56,20 @@ public:
 	size_t initialCards() const;
 	void distributePlayerCards(const size_t count);
 
+	size_t outbreaks() const;
+	void advanceOutbreakCounter();
+
 private:
 	std::unique_ptr<Map> _map;
 	std::vector<std::unique_ptr<Player>> _players;
 	size_t _currentPlayerIdx = std::numeric_limits<size_t>::max();
 	CubePool _cubePool;
-	std::map<Colour, bool> _cured;
+	DiseaseTracker _diseaseTracker;
 	unsigned _infectionCounter = 1;
-	unsigned _outbreakCounter = 0;
 	bool _shouldQuit = false;
 	unsigned _researchStations = 6;
 	Deck<PlayerCard> _playerDeck;
 	Deck<InfectionCard> _infectionDeck;
-	OutbreakCounter _outbreakCounter_;
+	OutbreakCounter _outbreakCounter;
 	std::unique_ptr<TerminationHandler> _terminationHandler;
 };
-
-std::unique_ptr<Board> quitState();

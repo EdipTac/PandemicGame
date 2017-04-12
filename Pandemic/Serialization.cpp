@@ -446,7 +446,7 @@ void saveGame(Board& game, const std::string& fileName)
 	}
 	j["infection"]["discard"] = infDiscNames;
 
-	j["infection"]["outbreak"] = game.outbreakCounter();
+	j["infection"]["outbreak"] = game.outbreaks();
 	j["infection"]["rate"] = game.infectionCounter();
 
 	bool hasCured = false;
