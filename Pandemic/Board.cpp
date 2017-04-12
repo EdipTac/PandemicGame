@@ -64,7 +64,7 @@ bool Board::shouldQuit() const
 
 void Board::quit()
 {
-	_shouldQuit = true;
+	_terminationHandler->quit();
 }
 
 Player& Board::nextPlayer()
