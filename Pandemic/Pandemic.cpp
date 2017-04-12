@@ -369,6 +369,16 @@ void displayCities()
 	}
 }
 
+void displayCurrentPosition() 
+{
+	showCity(Board::instance().currentPlayer().pawn().position());
+}
+
+void displayCardsInHand() 
+{
+	Board::instance().currentPlayer().displayCards();
+}
+
 void directConnectionReport()
 {
 	std::cout << "In one action, you can move to\n";
