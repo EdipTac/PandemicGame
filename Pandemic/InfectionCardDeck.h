@@ -17,7 +17,7 @@ class InfectionCardDeck
 public:
 	// Dtor
 	virtual ~InfectionCardDeck() override;
-
+	
 	virtual TerminationState terminationState() const override;
 
 	virtual std::unique_ptr<InfectionCard> drawTopCard() override;

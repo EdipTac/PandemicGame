@@ -39,10 +39,11 @@
 #include "Pandemic.h"
 #include "Player.h"
 #include "PlayerCityCard.h"
-#include "Serialization.h"
+#include "BoardBuilder.h"
 #include "Util.h"
 #include "GameStatistics.h"
 #include "OutbreakCounter.h"
+#include "SaveBuilder.h"
 
 //	----    Program entry point    ----  //
 void main()
@@ -77,6 +78,7 @@ void newGame()
 	std::cout << "\nLoading map \"" << fileName << "\"...\n";
 	Board::instance().setMap(readMapFromFile(fileName));
 	std::cout << "Map \"" << fileName << "\" loaded!\n\n";
+	Board::instance().map().setName(fileName); // set the name of the Map to the fileName
 
 	// Create players
 	std::cout << "How many players? ";
@@ -188,8 +190,8 @@ void displayReferenceCard()
 void loadGame()
 {
 	std::cout << "Load game...\n";
-	const auto fileName = solicitFileName("Enter name of game save file: ");
-	//game = readGameFromFile(fileName);
+	auto fileName = solicitFileName("Enter name of game save file: ");
+	BoardBuilder().loadBoard(fileName).loadPlayers().loadCities().loadInfectionCards().loadPlayerCards();
 	std::cout << "\n\n" << titleFont("RESUMING GAME") << "\n\n";
 }
 
@@ -209,7 +211,7 @@ bool saveGame()
 			return false;
 		}
 	}
-	saveGame(Board::instance(), fileName);
+	SaveBuilder().saveMap().savePlayers().savePlayerCards().saveInfectionCards().saveCities().persist(fileName);
 	std::cout << "\n" << titleFont("GAME SAVED") << "\n\n";
 	return false;
 }

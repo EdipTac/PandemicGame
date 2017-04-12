@@ -181,9 +181,6 @@
     <ClInclude Include="MenuOption.h">
       <Filter>Menus\header</Filter>
     </ClInclude>
-    <ClInclude Include="Serialization.h">
-      <Filter>Util\header</Filter>
-    </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Util\header</Filter>
     </ClInclude>
@@ -304,6 +301,12 @@
     <ClInclude Include="OneQuietNight.h">
       <Filter>Event Cards\header</Filter>
     </ClInclude>
+    <ClInclude Include="BoardBuilder.h">
+      <Filter>Util\header</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveBuilder.h">
+      <Filter>Util\header</Filter>
+    </ClInclude>
     <ClInclude Include="MonoObserver.h">
       <Filter>Views\header</Filter>
     </ClInclude>
@@ -373,9 +376,6 @@
       <Filter>Menus\src</Filter>
     </ClCompile>
     <ClCompile Include="Util.cpp">
-      <Filter>Util\src</Filter>
-    </ClCompile>
-    <ClCompile Include="Serialization.cpp">
       <Filter>Util\src</Filter>
     </ClCompile>
     <ClCompile Include="DeckofEvents.cpp">
@@ -488,6 +488,12 @@
     </ClCompile>
     <ClCompile Include="OneQuietNight.cpp">
       <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardBuilder.cpp">
+      <Filter>Util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveBuilder.cpp">
+      <Filter>Util\src</Filter>
     </ClCompile>
     <ClCompile Include="DeckOfRoles.cpp">
       <Filter>General\src</Filter>

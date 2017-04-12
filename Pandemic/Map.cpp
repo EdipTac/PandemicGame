@@ -22,6 +22,11 @@ std::string& Map::name()
 	return _name;
 }
 
+void Map::setName(const std::string & name)
+{
+	_name = name;
+}
+
 City& Map::addCity(CityPtr city)
 {
 	_cities.push_back(std::move(city));
