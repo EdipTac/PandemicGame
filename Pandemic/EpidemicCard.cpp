@@ -20,16 +20,21 @@ std::string EpidemicCard::toString()
 	return "Epidemic\n" + PlayerCard::toString() + ", Description: \n" + EPIDEMIC_DESCRIPTION;
 }
 
-void EpidemicCard::cardWork(InfectionCardDeck& deck, Board& state) {
-	state.advanceInfectionCounter();//increase
+void EpidemicCard::cardWork(Deck<InfectionCard>& deck)
+{
+	Board::instance().advanceInfectionCounter();//increase
 	std::cout << "Draw for the bottom of the infection card deck: " << std::endl;
 	auto temp = move(deck.drawBottomCard());
 	City& city = dynamic_cast <InfectionCard*> (temp.get())->city();
 	std::cout << "Infection card : " << temp->name() << " with the colour of: " << colourAbbreviation(city.colour()) << std::endl;
 	std::cout << "Infects the city :" << temp->name() << " three times:"  << std::endl;
-	city.addDiseaseCubes(city.colour(), city.cubesBeforeOutbreak, state);//infect
+	city.addDiseaseCubes(city.colour(), city.cubesBeforeOutbreak, Board::instance());//infect
 	deck.addToDiscard(move(temp));//put to discard pile
-	deck.reshuffleAndputback();// intensify
+
+	// intensify
+	deck.shuffleDiscards();
+	while (!deck.emptyDiscard())
+	{
+		deck.addToDeck(deck.drawTopDiscard());
+	}
 }
-
-
