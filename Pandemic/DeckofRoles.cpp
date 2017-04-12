@@ -25,7 +25,7 @@ picks a random role card from the deck.
 
 using namespace role;
 
-DeckofRoles::DeckofRoles()
+DeckOfRoles::DeckOfRoles()
 {	
 	_drawPile.push_back(std::make_unique<ContingencyPlanner>());
 	_drawPile.push_back(std::make_unique<Dispatcher>());

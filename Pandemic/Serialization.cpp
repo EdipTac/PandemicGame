@@ -156,7 +156,7 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 
 	auto& cities = gameState->map().cities();
 	auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
-	DeckofRoles deckOfRoles;
+	DeckOfRoles deckOfRoles;
 	std::vector<std::unique_ptr<RoleCard>> roles;
 	while (!deckOfRoles.empty())
 	{

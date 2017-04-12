@@ -13,11 +13,11 @@ The aim of this code was to create an individual deck that will contain all of t
 and have the player pick his random role card from this deck.
 */
 
-class DeckofRoles
+class DeckOfRoles
 	: public Deck<RoleCard>
 {
 public: 
 	// Ctor
-	DeckofRoles();
+	DeckOfRoles();
 	
 };
