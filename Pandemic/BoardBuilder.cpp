@@ -1,10 +1,49 @@
 #include "BoardBuilder.h"
-#include "Serialization.h"
 #include "PlayerCityCard.h"
 #include "DeckofRoles.h"
 #include "DeckofEvents.h"
+#include "Map.h"
+#include "Board.h"
 #include <fstream>
 
+
+std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
+{
+	json j;
+	{
+		std::ifstream fs{ fileName };
+		if (!fs)
+		{
+			throw std::runtime_error{ "File not found!" };
+		}
+		fs >> j;
+	}
+	auto map = std::make_unique<Map>();
+	std::map<City*, std::vector<std::string>> connections;
+	for (const auto& jCity : j["cities"])
+	{
+		auto city = std::make_unique<City>(jCity["name"], colourFromAbbreviation(jCity["colour"]));
+		for (const auto& connection : jCity["connections"])
+		{
+			connections[city.get()].push_back(connection);
+		}
+		if (jCity["isStartingCity"].get<bool>())
+		{
+			map->startingCity() = city.get();
+		}
+		map->addCity(std::move(city));
+	}
+	for (const auto& pair : connections)
+	{
+		auto& city = *pair.first;
+		for (const auto& connection : pair.second)
+		{
+			city.connectTo(map->findCityByName(connection));
+		}
+	}
+
+	return std::move(map);
+}
 
 BoardBuilder& BoardBuilder::loadBoard(std::string& gameSaveFile)
 {

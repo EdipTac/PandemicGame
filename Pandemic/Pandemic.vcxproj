@@ -111,11 +111,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\A3_27388489_TeamCrows\src\BoardBuilder.h" />
-    <ClInclude Include="..\..\..\..\A3_27388489_TeamCrows\src\SaveBuilder.h" />
     <ClInclude Include="Action.h" />
     <ClInclude Include="ActionController.h" />
     <ClInclude Include="Airlift.h" />
+    <ClInclude Include="BoardBuilder.h" />
     <ClInclude Include="BuildResearchStation.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CharterFlight.h" />
@@ -164,6 +163,7 @@
     <ClInclude Include="ResearcherGiveKnowledge.h" />
     <ClInclude Include="ResilientPopulation.h" />
     <ClInclude Include="RoleCard.h" />
+    <ClInclude Include="SaveBuilder.h" />
     <ClInclude Include="Scientist.h" />
     <ClInclude Include="Serialization.h" />
     <ClInclude Include="GiveKnowledge.h" />
@@ -178,11 +178,10 @@
     <ClInclude Include="MonoObserver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\A3_27388489_TeamCrows\src\BoardBuilder.cpp" />
-    <ClCompile Include="..\..\..\..\A3_27388489_TeamCrows\src\SaveBuilder.cpp" />
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionController.cpp" />
     <ClCompile Include="Airlift.cpp" />
+    <ClCompile Include="BoardBuilder.cpp" />
     <ClCompile Include="BuildResearchStation.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CharterFlight.cpp" />
@@ -227,6 +226,7 @@
     <ClCompile Include="ResearcherGiveKnowledge.cpp" />
     <ClCompile Include="ResilientPopulation.cpp" />
     <ClCompile Include="RoleCard.cpp" />
+    <ClCompile Include="SaveBuilder.cpp" />
     <ClCompile Include="Scientist.cpp" />
     <ClCompile Include="Serialization.cpp" />
     <ClCompile Include="GiveKnowledge.cpp" />
