@@ -198,7 +198,7 @@ Deck<PlayerCard>& Board::playerDeck()
 	return _playerDeck;
 }
 
-Deck<InfectionCard>& Board::infectionDeck()
+InfectionCardDeck& Board::infectionDeck()
 {
 	return _infectionDeck;
 }

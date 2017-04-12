@@ -26,7 +26,7 @@
 #include "Card.h"
 #include "City.h"
 #include "DeckofEvents.h"
-#include "DeckofRoles.h"
+#include "DeckOfRoles.h"
 #include "Dispatcher.h"
 #include "DriveOrFerry.h"
 #include "EventCard.h"
@@ -111,10 +111,11 @@ void newGame()
 
 
 	//Distribute Role Cards to players
-	DeckofRoles roleCardDeck;
+	DeckOfRoles roleCardDeck;
+	roleCardDeck.shuffleDeck();
 	for (auto& player : Board::instance().players())
 	{
-		player->setRole(roleCardDeck.drawRoleCard());
+		player->setRole(roleCardDeck.drawTopCard());
 	}
 
 	for (const auto& player : Board::instance().players())

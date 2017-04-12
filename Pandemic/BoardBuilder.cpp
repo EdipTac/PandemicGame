@@ -46,7 +46,7 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 }
 
 void writeMapToFile(const Map& map, const std::string& fileName)
-{
+{	
 	json j;
 	auto& jCities = j["cities"];
 	for (const auto& city : map.cities())
@@ -89,7 +89,13 @@ BoardBuilder& BoardBuilder::loadPlayers()
 {
 	auto& cities = Board::instance().map().cities();
 	auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
-	auto roles = std::make_unique<DeckofRoles>()->roleCards();
+	DeckOfRoles deckOfRoles;
+	std::vector<std::unique_ptr<RoleCard>> roles;
+	while (!deckOfRoles.empty())
+	{
+		roles.push_back(deckOfRoles.drawTopCard());
+	}
+
 
 	// PLAYER INITIALIZATION:
 	std::vector<json> playerListJSON = this->gameFile["players"];
@@ -104,8 +110,8 @@ BoardBuilder& BoardBuilder::loadPlayers()
 
 		// parse and set the player's position
 		std::string cityName = playerJSON["position"].get<std::string>();
-
-		//loop through cities, and find the reference to the city that matches the name
+		
+		 //loop through cities, and find the reference to the city that matches the name
 		for (auto it = cities.begin(); it != cities.end(); ++it) {
 			if ((*it)->name() == cityName) {
 				// found a match
@@ -142,7 +148,7 @@ BoardBuilder& BoardBuilder::loadPlayers()
 					player->addCard(std::make_unique<PlayerCityCard>((**it)));
 				}
 			}
-
+			
 			// loop through event cards, find the one that matches
 			auto it = events.begin();
 			while (it != events.end())
@@ -164,8 +170,8 @@ BoardBuilder& BoardBuilder::loadPlayers()
 	}
 
 	return *this;
-}
-
+	}
+	
 BoardBuilder& BoardBuilder::loadCities()
 {
 	auto& cities = Board::instance().map().cities();
@@ -202,8 +208,8 @@ BoardBuilder& BoardBuilder::loadCities()
 	}
 
 	return *this;
-}
-
+	}
+	
 BoardBuilder& BoardBuilder::loadInfectionCards()
 {
 	auto& cities = Board::instance().map().cities();
@@ -215,7 +221,7 @@ BoardBuilder& BoardBuilder::loadInfectionCards()
 	for (auto it = infectionDeck.begin(); it != infectionDeck.end(); ++it) {
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			// if the city names match, create an infection card and add it to the deck
-			if ((*itr)->name() == *it) {
+			if ((*itr)->name() == *it) { 
 				// TODO: does this preserve the order?
 				Board::instance().infectionDeck().addToDeck(std::make_unique<InfectionCard>(**itr));
 			}

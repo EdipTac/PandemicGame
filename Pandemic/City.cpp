@@ -4,6 +4,8 @@
 
 #include "City.h"
 #include "Colour.h"
+#include "Board.h"
+#include "Player.h"
 #include "InfectionCardDeck.h"
 #include "Board.h"
 
