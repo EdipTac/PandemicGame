@@ -111,6 +111,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\A3_27388489_TeamCrows\src\BoardBuilder.h" />
+    <ClInclude Include="..\..\..\..\A3_27388489_TeamCrows\src\SaveBuilder.h" />
     <ClInclude Include="Action.h" />
     <ClInclude Include="ActionController.h" />
     <ClInclude Include="Airlift.h" />
@@ -176,6 +178,8 @@
     <ClInclude Include="MonoObserver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\A3_27388489_TeamCrows\src\BoardBuilder.cpp" />
+    <ClCompile Include="..\..\..\..\A3_27388489_TeamCrows\src\SaveBuilder.cpp" />
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionController.cpp" />
     <ClCompile Include="Airlift.cpp" />

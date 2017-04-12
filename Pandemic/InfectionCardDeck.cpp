@@ -17,8 +17,8 @@ InfectionCardDeck::InfectionCardDeck() {
 InfectionCardDeck::InfectionCardDeck(std::string fileName)
 {
    // initiate 48 infection cards on deck
-    auto  map = readMapFromFile(fileName);
-	for (const auto& city : map->cities())
+	auto map = Board::instance().map();
+	for (const auto& city : map.cities())
 	{
       Deck<InfectionCard>::addToDeck(std::make_unique<InfectionCard>(*city));
    }

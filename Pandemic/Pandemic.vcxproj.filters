@@ -309,6 +309,12 @@
     <ClInclude Include="OneQuietNight.h">
       <Filter>Event Cards\header</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\A3_27388489_TeamCrows\src\BoardBuilder.h">
+      <Filter>Util\header</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\A3_27388489_TeamCrows\src\SaveBuilder.h">
+      <Filter>Util\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -484,6 +490,12 @@
     </ClCompile>
     <ClCompile Include="OneQuietNight.cpp">
       <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\A3_27388489_TeamCrows\src\BoardBuilder.cpp">
+      <Filter>Util\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\A3_27388489_TeamCrows\src\SaveBuilder.cpp">
+      <Filter>Util\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
