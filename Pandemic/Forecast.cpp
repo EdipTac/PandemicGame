@@ -8,15 +8,14 @@ action::Forecast::Forecast(Player * const performer)
 
 void action::Forecast::solicitData()
 {
-	//auto& player = *_performer;
-	auto& cards = Board::instance().infectionDeck().drawPile();
+	const auto& cards = Board::instance().infectionDeck().drawPile();
 	
 	if (cards.empty())
 	{
 		std::cout << "No infection cards to draw from. \n";
 	}
 	std::vector<InfectionCard*> topCards;
-	for (auto it =  cards.begin(); it != (cards.begin() + 6); ++it)
+	for (auto it = cards.begin(); it != (cards.begin() + 6); ++it)
 	{
 		topCards.push_back(std::move(*it)); //this should work fine
 	}
