@@ -9,7 +9,6 @@ action::GovernmentGrant::GovernmentGrant(Player* const performer)
 {}
 
 void action::GovernmentGrant::solicitData() {
-	auto& player = *_performer;
 	std::cout << "Please indicate the name of the city you would like to add a Research Station to";;
 	std::string destination;
 	std::getline(std::cin >> std::ws, destination);

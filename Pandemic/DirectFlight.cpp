@@ -19,6 +19,7 @@ void action::DirectFlight::solicitData()
 	if (cards.empty())
 	{
 		std::cout << "You have no city cards.\n";
+		return;
 	}
 
 	// List cards, get player target, discard card, and move

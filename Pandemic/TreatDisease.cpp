@@ -48,8 +48,8 @@ void action::TreatDisease::solicitData()
 
 void action::TreatDisease::perform()
 {
-	auto& pool = Board::instance().cubePool();
-	_city->removeDiseaseCubes(_colour, 1, pool);
+	// Call performer's specicific treatDisease function
+	_performer->role().treatDisease(*_city, _colour);
 
 	std::cout << "Disease report\n";
 	for (const auto& disease : _city->diseases())

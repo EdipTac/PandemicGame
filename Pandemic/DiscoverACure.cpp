@@ -34,7 +34,7 @@ void action::DiscoverACure::solicitData()
 		const auto& colour = card->colour();
 		auto& cardsOfColour = colourCount[colour];
 		cardsOfColour.push_back(card);
-		if (cardsOfColour.size() >= 5)
+		if (cardsOfColour.size() >= _performer->role().numCardsNeededToCure())
 		{
 			_colour = colour;
 			_cards = cardsOfColour;
@@ -56,5 +56,5 @@ void action::DiscoverACure::perform()
 
 bool action::DiscoverACure::isValid() const
 {
-	return _cards.size() >= 5;
+	return _cards.size() >= _performer->role().numCardsNeededToCure();
 }

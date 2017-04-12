@@ -2,12 +2,12 @@
 
 #include <vector>
 
-#include "MultiView.h"
+#include "PolyObserver.h"
 #include "Terminator.h"
 #include "Board.h"
 
 class TerminationHandler
-	: public MultiView<Terminator>
+	: public PolyObserver<Terminator>
 {
 public:
 	virtual ~TerminationHandler();

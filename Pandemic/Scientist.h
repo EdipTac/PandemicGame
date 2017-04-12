@@ -10,5 +10,7 @@ namespace role
 	public:
 		Scientist();
 		virtual ~Scientist() override;
+
+		int numCardsNeededToCure() const override;
 	};
 }

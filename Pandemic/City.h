@@ -10,6 +10,7 @@
 
 class Board;
 class InfectionCardDeck;
+class Player;
 
 // Represents a single city.
 // Each city should belong to a map. A city has a name and a coloured "region" that it belongs to, for the purposes of disease classification.
@@ -59,10 +60,13 @@ public:
 	bool diseaseOutbreak(const Colour& colour) const;
 
 	// Adds disease cubes of a given colour from a given source
-	void addDiseaseCubes(const Colour& colour, const unsigned amount,Board&);
+	void addDiseaseCubes(const Colour& colour, const size_t amount, Board&);
 
-	// Removes disease cubes of a given colour from a given source
-	void removeDiseaseCubes(const Colour& colour, const unsigned amount, CubePool& pool);
+	// Removes disease cubes of a given colour, giving back to a given source
+	void removeDiseaseCubes(const Colour& colour, const size_t amount, CubePool& pool);
+
+	// Removes all disease cubes of a given colour, giving back to a given source
+	void removeAllDiseaseCubes(const Colour& colour, CubePool& pool);
 
 	// True iff city is infected, only for the purpose of statistic
 	bool isInfected() const;
@@ -74,7 +78,7 @@ public:
 	bool isQuarantined() const;
 
 	// Sets quarantine to true
-	void quarantine();
+	void isQuarantined(const bool is);
 	
 	// True iff the city has a research station
 	bool hasResearchStation() const;
@@ -92,6 +96,11 @@ public:
 	std::string string();
 	// Sum up total cube numbers in the city
 	int totalCubes();
+
+	// Called when a player enters the city - calls the player role's onEnter(City&)
+	void onEnter(Player& player);
+	void onExit(Player& player);
+
 	class Builder;
 
 private:

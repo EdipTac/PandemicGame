@@ -9,7 +9,6 @@
 // Default Constructor
 Player::Player()
 	: _pawn { *this }
-	, _role { std::make_unique<RoleCard>() }
 {}
 
 // Constructor
@@ -18,6 +17,7 @@ Player::Player(const std::string name, const Pawn& pawn, std::vector<std::unique
 	, _pawn { pawn }
 	, _cards { std::move(cards) }
 	, _role { std::move(role) }
+	, _oneQuietNight {false}
 {}
 
 std::string Player::name() const
@@ -139,6 +139,13 @@ void Player::giveCard(const PlayerCard& card, Player& recipient)
 	recipient.addCard(std::move(donation));
 }
 
+void Player::move(City& destination)
+{
+	_pawn.position().onExit(*this);
+	_pawn.setPosition(destination);
+	_pawn.position().onEnter(*this);
+}
+
 std::vector<PlayerCityCard*> Player::cityCards() const
 {
 	std::vector<PlayerCityCard*> view;
@@ -189,4 +196,12 @@ void Player::setName(const std::string name) {
 
 void Player::displayRole() {
 	_role->printRole();
+}
+
+bool Player::isOneQuietNight() {
+	return _oneQuietNight;
+}
+
+void Player::setOneQuietNight(bool boolean) {
+	_oneQuietNight = boolean;
 }

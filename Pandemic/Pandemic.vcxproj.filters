@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Cards">
       <UniqueIdentifier>{a4a46059-1194-4b5d-9354-962712d90885}</UniqueIdentifier>
     </Filter>
@@ -119,6 +115,10 @@
     <Filter Include="Event Cards\src">
       <UniqueIdentifier>{02b552c8-052e-4038-8c05-fdbf02dd5206}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Event Cards\header\Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Card.h">
@@ -187,9 +187,6 @@
     <ClInclude Include="Util.h">
       <Filter>Util\header</Filter>
     </ClInclude>
-    <ClInclude Include="json.hpp">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="DeckofEvents.h">
       <Filter>General\header</Filter>
     </ClInclude>
@@ -212,12 +209,6 @@
       <Filter>General\header</Filter>
     </ClInclude>
     <ClInclude Include="Observer.h">
-      <Filter>Views\header</Filter>
-    </ClInclude>
-    <ClInclude Include="View.h">
-      <Filter>Views\header</Filter>
-    </ClInclude>
-    <ClInclude Include="MultiView.h">
       <Filter>Views\header</Filter>
     </ClInclude>
     <ClInclude Include="TerminationHandler.h">
@@ -295,22 +286,29 @@
     <ClInclude Include="Airlift.h">
       <Filter>Event Cards\header</Filter>
     </ClInclude>
-    <ClInclude Include="Airlift.h">
-      <Filter>Event Cards\header</Filter>
-    </ClInclude>
     <ClInclude Include="GameStatistics.h">
       <Filter>Views\header</Filter>
     </ClInclude>
-    <ClInclude Include="ResilientPopulation.h">
+    <ClInclude Include="PolyObserver.h" />
+    <ClInclude Include="MonoObserver.h" />
+    <ClInclude Include="json.hpp">
+      <Filter>General</Filter>
+    </ClInclude>
+    <ClInclude Include="Airlift.h">
       <Filter>Event Cards\header</Filter>
     </ClInclude>
     <ClInclude Include="GovernmentGrant.h">
       <Filter>Event Cards\header</Filter>
     </ClInclude>
-    <ClInclude Include="StatisticDecorator.h" />
-    <ClInclude Include="RemainingInfectionCard.h" />
-    <ClInclude Include="InfectedCityPercentage.h" />
-    <ClInclude Include="TreatmentPriority.h" />
+    <ClInclude Include="ResilientPopulation.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Forecast.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="OneQuietNight.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -475,43 +473,45 @@
     <ClCompile Include="GameStatistics.cpp">
       <Filter>Views\src</Filter>
     </ClCompile>
-    <ClCompile Include="GovernmentGrant.cpp">
-      <Filter>Event Cards\src</Filter>
-    </ClCompile>
     <ClCompile Include="ResilientPopulation.cpp">
       <Filter>Event Cards\src</Filter>
     </ClCompile>
-    <ClCompile Include="StatisticDecorator.cpp" />
-    <ClCompile Include="RemainingInfectionCard.cpp" />
-    <ClCompile Include="InfectedCityPercentage.cpp" />
-    <ClCompile Include="TreatmentPriority.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="README.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
+    <ClCompile Include="GovernmentGrant.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Forecast.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="OneQuietNight.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">
-      <Filter>Resource Files</Filter>
-    </None>
-    <None Include="save.json">
-      <Filter>Resource Files</Filter>
+      <Filter>General</Filter>
     </None>
     <None Include="earth2.map">
-      <Filter>Resource Files</Filter>
+      <Filter>General</Filter>
+    </None>
+    <None Include="save.json">
+      <Filter>General</Filter>
     </None>
     <None Include="save2.json">
-      <Filter>Resource Files</Filter>
+      <Filter>General</Filter>
     </None>
     <None Include="save5.json">
-      <Filter>Resource Files</Filter>
+      <Filter>General</Filter>
     </None>
     <None Include="test.map">
-      <Filter>Resource Files</Filter>
+      <Filter>General</Filter>
     </None>
     <None Include="test2.map">
-      <Filter>Resource Files</Filter>
+      <Filter>General</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="README.txt">
+      <Filter>General</Filter>
+    </Text>
   </ItemGroup>
 </Project>

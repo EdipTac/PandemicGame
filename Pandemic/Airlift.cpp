@@ -10,14 +10,12 @@ action::Airlift::Airlift(Player* const performer)
 
 
 void action::Airlift::solicitData() {
-	auto& player = *_performer;
 	std::cout << "Please indicate the name of the player you would like to Airlift";
 	std::string liftee;
 	std::getline(std::cin >> std::ws, liftee);
 	std::cout << "Please indicate the city you would like to airlift to \n";
 	std::string destination;
 	std::getline(std::cin >> std::ws, destination);
-	Player* playerToLift = nullptr;
 
 	for (auto it = Board::instance().players().begin(); it != Board::instance().players().end(); ++it) {
 		if ((*it)->name() == liftee) {
