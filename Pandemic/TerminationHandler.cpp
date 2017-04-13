@@ -9,26 +9,18 @@ TerminationHandler::~TerminationHandler() {}
 void TerminationHandler::update()
 {
 	using TS = TerminationState;
-	const auto& hasTS = [](const TS& s)
+	for (const auto& subject : _subjects)
 	{
-		return [&](const Terminator* const t)
+		if (subject->terminationState() == TS::Victory)
 		{
-			return t->terminationState() == s;
-		};
-	};
-	const auto& anyHasTS = [&](const TS& s)
-	{
-		return std::any_of(_subjects.begin(), _subjects.end(), hasTS(s));
-	};
-	
-	if (anyHasTS(TS::Victory))
-	{
-		onVictory();
-	}
-
-	if (anyHasTS(TS::Defeat))
-	{
-		onDefeat();
+			onVictory();
+			break;
+		}
+		if (subject->terminationState() == TS::Defeat)
+		{
+			onDefeat();
+			break;
+		}
 	}
 }
 

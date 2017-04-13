@@ -47,9 +47,30 @@
 #include "RemainingInfectionCard.h"
 #include "InfectedCityPercentage.h"
 #include "TreatmentPriority.h"
+#include "TerminationHandler.h"
 
 
 //	----    Program entry point    ----  //
+//#define TEST
+#ifdef TEST
+void main()
+{
+	InfectionCardDeck d;
+	auto map = readMapFromFile("earth.map");
+	for (const auto& city : map->cities())
+	{
+		d.addToDeck(std::make_unique<InfectionCard>(*city));
+	}
+	TerminationHandler h;
+	h.subscribeTo(d);
+	while (!d.empty())
+	{
+		auto c = d.drawTopCard();
+		std::cout << "Drew " << c->name() << "\n";
+	}
+	waitForExit();
+}
+#else
 void main()
 {
 	// Title display
@@ -72,6 +93,7 @@ void main()
 
 	waitForExit();
 }
+#endif
 
 //  -----  Function definitions  ----  //
 

@@ -9,10 +9,10 @@
 #include "InfectionCard.h"
 #include "InfectionCardDeck.h"
 #include "Map.h"
+#include "Observable.h"
+#include "OutbreakCounter.h"
 #include "Player.h"
 #include "PlayerCard.h"
-#include "OutbreakCounter.h"
-#include "Observable.h"
 
 class TerminationHandler;
 
@@ -70,6 +70,7 @@ public:
 	void distributePlayerCards(const size_t count);
 
 private:
+	// Private ctor/dtor for singleton
 	Board();
 	~Board();
 

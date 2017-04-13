@@ -20,5 +20,6 @@ public:
 	
 	virtual TerminationState terminationState() const override;
 
+	// Notifies on draw
 	virtual std::unique_ptr<InfectionCard> drawTopCard() override;
 };
