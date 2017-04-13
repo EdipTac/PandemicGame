@@ -165,7 +165,7 @@ void newGame()
 
 	for (const auto& player : Board::instance().players())
 	{
-		std::cout << "Player " << player->name() << " has\n";
+		std::cout << "\nPlayer " << player->name() << ":";
 		player->displayCards();
 	}
 	
@@ -174,7 +174,7 @@ void newGame()
 
 	//Initial distribution of disease cubes during game initialization
 	Board::instance().infectionDeck().shuffleDeck();
-	std::cout << "Initial infected cities are as follows:" << std::endl;
+	std::cout << "\nInitial infected cities are as follows:" << std::endl;
 	for (auto j = 3; j >= 1; --j)
 	{
 		for (auto i = 0; i < 3; ++i)

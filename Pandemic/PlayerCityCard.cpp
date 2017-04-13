@@ -25,7 +25,7 @@ bool PlayerCityCard::isCityCard() const
 // Custom implementation of the inherited virtual function from PlayerCard
 std::string PlayerCityCard::toString()
 {
-	return "PlayerCityCard\n" + PlayerCard::toString();
+	return "Type: PlayerCityCard, " + PlayerCard::toString();
 }
 
 std::string PlayerCityCard::name() const

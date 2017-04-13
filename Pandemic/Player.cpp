@@ -83,7 +83,7 @@ void Player::displayCards() {
 	std::cout << "\nDisplaying Cards on hand: \n";
 	int k = 0;
 	for (auto& card : cityCards()) {
-		std::cout << card->toString() << " Colour: " << colourName(card->colour())<< "\n";
+		std::cout << card->toString() << ", Colour: " << colourName(card->colour())<< "\n";
 		k++;
 	}
 	if (k > 7) {
@@ -92,7 +92,7 @@ void Player::displayCards() {
 	for (auto& player : Board::instance().players()) {
 		for (auto& card : player->cards()) {
 			if (!card->isCityCard()) {
-				std::cout << card->toString() << "\n";
+				std::cout << "Type: "<< card->toString() << "\n";
 			}
 		}
 	}
