@@ -222,7 +222,6 @@ BoardBuilder& BoardBuilder::loadInfectionCards()
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			// if the city names match, create an infection card and add it to the deck
 			if ((*itr)->name() == *it) { 
-				// TODO: does this preserve the order?
 				Board::instance().infectionDeck().addToDeck(std::make_unique<InfectionCard>(**itr));
 			}
 		}
@@ -234,7 +233,6 @@ BoardBuilder& BoardBuilder::loadInfectionCards()
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			// if the city names match, create an infection card and add it to the DISCARD deck
 			if ((*itr)->name() == *it) {
-				// TODO: does this preserve the order?
 				Board::instance().infectionDeck().addToDiscard(std::make_unique<InfectionCard>(**itr));
 			}
 		}
@@ -282,7 +280,6 @@ BoardBuilder& BoardBuilder::loadPlayerCards()
 		// loop through cities, and find the cities that matches the name
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			if ((*itr)->name() == *it) {
-				// TODO: does this preserve the order?
 				Board::instance().playerDeck().addToDeck(std::make_unique<PlayerCityCard>((**itr)));
 			}
 		}
@@ -309,7 +306,6 @@ BoardBuilder& BoardBuilder::loadPlayerCards()
 		// loop through cities, and find the cities that matches the name
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			if ((*itr)->name() == *it) {
-				// TODO: does this preserve the order?
 				Board::instance().playerDeck().addToDiscard(std::make_unique<PlayerCityCard>((**itr)));
 			}
 		}
