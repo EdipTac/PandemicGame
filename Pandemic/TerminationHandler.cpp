@@ -4,7 +4,16 @@
 #include "TerminationHandler.h"
 #include "Board.h"
 
-TerminationHandler::~TerminationHandler() {}
+TerminationHandler::~TerminationHandler()
+{
+	for (const auto& subject : _subjects)
+	{
+		if (subject)
+		{
+			subject->unsubscribe(*this);
+		}
+	}
+}
 
 void TerminationHandler::update()
 {
