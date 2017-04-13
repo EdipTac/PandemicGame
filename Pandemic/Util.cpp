@@ -115,3 +115,39 @@ std::string rightPad(const std::string& original, const size_t width)
 	}
 	return ss.str();
 }
+
+std::string titleFont(const std::string& original)
+{
+	std::stringstream ss;
+	const auto& repeat = [&](const char c, const size_t t)
+	{
+		for (size_t i = 0; i < t; ++i)
+		{
+			ss << c;
+		}
+	};
+	const auto& ornament = [&]()
+	{
+		repeat(' ', 4);
+		repeat('-', 8);
+		repeat(' ', 4);
+	};
+	const auto& insertSpaces = [&]()
+	{
+		for (auto it = original.begin(); it != original.end(); ++it)
+		{
+			ss << *it;
+			if (it == original.end() - 1)
+			{
+				break;
+			}
+			ss << ' ';
+		}
+	};
+
+	ornament();
+	insertSpaces();
+	ornament();
+
+	return ss.str();
+}
