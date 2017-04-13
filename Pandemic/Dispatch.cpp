@@ -13,11 +13,14 @@ action::Dispatch::Dispatch(Player* const performer)
 void action::Dispatch::solicitData()
 {
 	// Get other players, if any
-	auto others = Board::instance().players();
-	std::remove_if(others.begin(), others.end(), [&](const auto& p)
+	std::vector<Player*> others;
+	for (const auto& player : Board::instance().players())
 	{
-		return p == this->_performer;
-	});
+		if (player != _performer)
+		{
+			others.push_back(player);
+		}
+	}
 
 	if (others.empty())
 	{
