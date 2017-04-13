@@ -92,7 +92,7 @@ void Player::displayCards() {
 	for (auto& player : Board::instance().players()) {
 		for (auto& card : player->cards()) {
 			if (!card->isCityCard()) {
-				std::cout << "Type: "<< card->toString() << "\n";
+				std::cout << card->toString() << "\n";
 			}
 		}
 	}
