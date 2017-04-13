@@ -37,7 +37,7 @@ public:
 	void setMap(std::unique_ptr<Map> map);
 	
 	// Quitting
-	virtual bool shouldQuit() const;
+	bool shouldQuit() const;
 	void quit();
 
 	// Research stations
