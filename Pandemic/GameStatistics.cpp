@@ -9,7 +9,10 @@ GameStatistics::GameStatistics(Board &state) {
 	 _state->subscribe(*this);
 }
 GameStatistics::~GameStatistics() {
-	_state->unsubscribe(*this);
+	if (_state)
+	{
+		_state->unsubscribe(*this);
+	}
 }
 void GameStatistics::update(){
 	display();
