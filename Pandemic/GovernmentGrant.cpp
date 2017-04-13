@@ -30,6 +30,6 @@ bool action::GovernmentGrant::isValid() const {
 }
 
 void action::GovernmentGrant::perform() {
-	_performer->discard("GovernmentCard", Board::instance().playerDeck());
+	//_performer->discard("GovernmentGrant", Board::instance().playerDeck()); //dont need this since the pandemic.cpp takes
 	_target->giveResearchStation(Board::instance());
 }

@@ -28,3 +28,8 @@ bool EventCard::isEventCard() const
 {
 	return true;
 }
+
+
+Action& EventCard::ability() {
+	return *_ability;
+}

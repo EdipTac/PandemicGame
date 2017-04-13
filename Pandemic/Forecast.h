@@ -2,6 +2,7 @@
 
 #include "Action.h"
 #include "City.h"
+#include "InfectionCard.h"
 
 namespace action
 {
@@ -15,6 +16,6 @@ namespace action
 		virtual bool isValid() const override;
 	
 	private:
-		City* _target; //i dont need a private for this class, is there a way to not put this and still go through with it?
+		std::vector<std::unique_ptr<InfectionCard>> _target; //this is added to separate the solicitData() and perform()
 	};
 }

@@ -289,7 +289,15 @@ bool playEventCard()
 	}
 
 	// Play and discard card
-	//cardToPlay->action() TODO
+	// whatever.solicitData followed by whatever.isValid().... then do whatever.perform()
+
+	//cardToPlay->action(); TODO
+	cardToPlay->ability().solicitData();
+	if (cardToPlay->ability().isValid())
+	{
+		cardToPlay->ability().perform();
+	}
+
 	cardOwners[cardToPlay]->discard(*cardToPlay, Board::instance().playerDeck());
 
 	// Doesn't cost an action
@@ -408,13 +416,20 @@ std::string titleFont(const std::string& original)
 
 void infect()
 {
-	for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
-	{
-		auto& currentPlayer = Board::instance().nextPlayer();
-		if (currentPlayer.isOneQuietNight()) { break; } //added this for the one quiet night event card, should modify it so that once the event is complete, the status of isonequietnight reverts back to false.
-		auto card = Board::instance().infectionDeck().drawTopCard();
-		card->onDraw(Board::instance());
-		Board::instance().infectionDeck().addToDiscard(std::move(card));
+	auto& oneQuietNightPlayer = Board::instance().nextPlayer();
+	if (oneQuietNightPlayer.isOneQuietNight()) 
+	{ 
+		oneQuietNightPlayer.setOneQuietNight(false);
+	} 
+	else {
+		for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
+		{
+			//auto& currentPlayer = Board::instance().nextPlayer();
+			auto card = Board::instance().infectionDeck().drawTopCard();
+			card->onDraw(Board::instance());
+			Board::instance().infectionDeck().addToDiscard(std::move(card));
+		}
 	}
 	Board::instance().notify();
+	
 }
