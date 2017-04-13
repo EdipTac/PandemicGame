@@ -35,10 +35,10 @@ City& Map::addCity(CityPtr city)
 
 void Map::removeCity(const City& city)
 {
-	std::remove_if(_cities.begin(), _cities.end(), [&](const auto& c)
+	_cities.erase(std::find_if(_cities.begin(), _cities.end(), [&](const auto& c)
 	{
 		return *c == city;
-	});
+	}));
 }
 
 std::vector<City*> Map::stations() const
