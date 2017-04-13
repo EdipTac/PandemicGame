@@ -76,7 +76,7 @@ private:
 
 	std::unique_ptr<Map> _map;
 	std::vector<std::unique_ptr<Player>> _players;
-	size_t _currentPlayerIdx = std::numeric_limits<size_t>::max();
+	size_t _currentPlayerIdx = 0;
 	CubePool _cubePool;
 	DiseaseTracker _diseaseTracker;
 	unsigned _infectionCounter = 1;

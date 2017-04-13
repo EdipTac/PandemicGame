@@ -25,10 +25,6 @@ std::vector<Player*> Board::players()
 {
 	std::vector<Player*> p;
 	const auto size = _players.size();
-	if (_currentPlayerIdx >= std::numeric_limits<size_t>::max())
-	{
-		_currentPlayerIdx = 0;
-	}
 	auto idx = _currentPlayerIdx;
 	for (auto i = 0u; i < size; ++i)
 	{
@@ -69,15 +65,8 @@ void Board::quit()
 
 Player& Board::nextPlayer()
 {
-	if (_currentPlayerIdx >= std::numeric_limits<size_t>::max())
-	{
-		_currentPlayerIdx = 0;
-	}
-	else
-	{
-		++_currentPlayerIdx;
-		_currentPlayerIdx %= _players.size();
-	}
+	++_currentPlayerIdx;
+	_currentPlayerIdx %= _players.size();
 	return currentPlayer();
 }
 

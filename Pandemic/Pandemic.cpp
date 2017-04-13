@@ -83,12 +83,13 @@ void main()
 
 	while (!Board::instance().shouldQuit())
 	{
-		auto& currentPlayer = Board::instance().nextPlayer();
+		auto& currentPlayer = Board::instance().currentPlayer();
 		std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
 		while (!turnMenu.solicitInput()); // Intentionally empty body
 		Board::instance().distributePlayerCards(cardsPerTurn);
 		currentPlayer.displayCards();
 		infect();
+		Board::instance().nextPlayer();
 	}
 
 	waitForExit();
