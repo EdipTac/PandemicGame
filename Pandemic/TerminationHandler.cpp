@@ -11,15 +11,14 @@ void TerminationHandler::update()
 	using TS = TerminationState;
 	for (const auto& subject : _subjects)
 	{
-		if (subject->terminationState() == TS::Victory)
+		switch (subject->terminationState())
 		{
-			onVictory();
-			break;
-		}
-		if (subject->terminationState() == TS::Defeat)
-		{
-			onDefeat();
-			break;
+			case TS::Victory:
+				onVictory();
+				return;
+			case TS::Defeat:
+				onDefeat();
+				return;
 		}
 	}
 }
