@@ -8,7 +8,7 @@
 #include "ContingencyPlanner.h"
 #include "OperationsExpert.h"
 #include "RoleCard.h"
-#include "DeckofRoles.h"
+#include "DeckOfRoles.h"
 #include "Researcher.h"
 #include "Medic.h"
 #include "QuarantineSpecialist.h"
@@ -25,30 +25,13 @@ picks a random role card from the deck.
 
 using namespace role;
 
-DeckofRoles::DeckofRoles()
+DeckOfRoles::DeckOfRoles()
 {	
-	deckOfRole.push_back(std::make_unique<ContingencyPlanner>());
-	deckOfRole.push_back(std::make_unique<Dispatcher>());
-	deckOfRole.push_back(std::make_unique<Medic>());
-	deckOfRole.push_back(std::make_unique<OperationsExpert>());
-	deckOfRole.push_back(std::make_unique<QuarantineSpecialist>());
-	deckOfRole.push_back(std::make_unique<Researcher>());
-	deckOfRole.push_back(std::make_unique<Scientist>());
+	_drawPile.push_back(std::make_unique<ContingencyPlanner>());
+	_drawPile.push_back(std::make_unique<Dispatcher>());
+	_drawPile.push_back(std::make_unique<Medic>());
+	_drawPile.push_back(std::make_unique<OperationsExpert>());
+	_drawPile.push_back(std::make_unique<QuarantineSpecialist>());
+	_drawPile.push_back(std::make_unique<Researcher>());
+	_drawPile.push_back(std::make_unique<Scientist>());
 }
-
-//this method draws and returns a randomly selected role card for the player
-uniquerolecard DeckofRoles::drawRoleCard(){
-
-	srand((unsigned)time(0));
-	int i;
-	i = (rand() % deckOfRole.size());
-	auto temp = move (*(deckOfRole.begin()+i));
-	deckOfRole.erase(deckOfRole.begin()+i);
-	return (move(temp));
-}
-
-std::vector<std::unique_ptr<RoleCard>> DeckofRoles::roleCards()
-{
-	return std::move(deckOfRole);
-}
-

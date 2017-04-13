@@ -4,7 +4,10 @@
 
 #include "City.h"
 #include "Colour.h"
+#include "Board.h"
+#include "Player.h"
 #include "InfectionCardDeck.h"
+#include "Board.h"
 
 City::City(const std::string& name, const Colour& colour, const std::map<Colour, size_t>& cubes)
 	: _name { name }
@@ -59,6 +62,13 @@ size_t City::diseaseCubes(const Colour& colour) const
 size_t& City::diseaseCubes(const Colour& colour)
 {
 	return _diseaseCubes[colour];
+}
+int City::totalCubes() {
+	int sum = 0;
+	for (auto& color : diseases()) {
+		sum += diseaseCubes(color);
+	}
+	return sum;
 }
 
 void City::setDiseaseCubes(const Colour& colour, int quantity) 

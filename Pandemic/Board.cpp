@@ -64,7 +64,7 @@ bool Board::shouldQuit() const
 
 void Board::quit()
 {
-	_shouldQuit = true;
+	_terminationHandler->quit();
 }
 
 Player& Board::nextPlayer()
@@ -198,7 +198,7 @@ Deck<PlayerCard>& Board::playerDeck()
 	return _playerDeck;
 }
 
-Deck<InfectionCard>& Board::infectionDeck()
+InfectionCardDeck& Board::infectionDeck()
 {
 	return _infectionDeck;
 }

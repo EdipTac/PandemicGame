@@ -1,30 +1,20 @@
-#include <fstream>
-#include <memory>
-#include <sstream>
-#include <stdexcept>
-#include <string>
-#include <tuple>
-
-#include "json.hpp"
-
-#include "Colour.h"
-#include "DeckofEvents.h"
-#include "DeckofRoles.h"
-#include "EventCard.h"
+#include "BoardBuilder.h"
 #include "PlayerCityCard.h"
-#include "Serialization.h"
-#include "Util.h"
+#include "DeckofRoles.h"
+#include "DeckofEvents.h"
+#include "Map.h"
+#include "Board.h"
+#include <fstream>
 
-using json = nlohmann::json;
 
 std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 {
 	json j;
 	{
-		std::ifstream fs { fileName };
+		std::ifstream fs{ fileName };
 		if (!fs)
 		{
-			throw std::runtime_error { "File not found!" };
+			throw std::runtime_error{ "File not found!" };
 		}
 		fs >> j;
 	}
@@ -55,65 +45,6 @@ std::unique_ptr<Map> readMapFromFile(const std::string& fileName)
 	return std::move(map);
 }
 
-std::unique_ptr<Map> oldReadMapFromFile(const std::string& fileName)
-{
-	std::ifstream fs { fileName };
-	if (!fs)
-	{
-		throw std::runtime_error { "File not found!" };
-	}
-
-	std::unique_ptr<Map> map;
-	std::map<City*, std::vector<std::string>> connections;
-
-	{
-		std::vector<std::unique_ptr<City>> cities;
-		City* startingCity;
-		while (!fs.eof())
-		{
-			auto line = getline(fs);
-			if (line.empty() || line[0] == '\\')
-			{
-				continue;
-			}
-			else if (line[0] == '\t')
-			{
-				connections[cities.back().get()].push_back(line.substr(1));
-			}
-			else
-			{
-				bool isStartingCity = false;
-				if (line[0] == '*')
-				{
-					line = line.substr(1);
-					isStartingCity = true;
-				}
-				std::string name, colour;
-				std::tie(name, colour) = splitOnLastSpace(line);
-				cities.push_back(std::make_unique<City>(name, colourFromAbbreviation(colour)));
-				connections[cities.back().get()];
-				if (isStartingCity)
-				{
-					startingCity = cities.back().get();
-				}
-			}
-		}
-
-		map = std::make_unique<Map>(fileName, startingCity, std::move(cities));
-	}
-
-	for (const auto& list : connections)
-	{
-		for (const auto& targetName : list.second)
-		{
-			auto& target = map->findCityByName(targetName);
-			list.first->connectTo(target);
-		}
-	}
-
-	return std::move(map);
-}
-
 void writeMapToFile(const Map& map, const std::string& fileName)
 {	
 	json j;
@@ -131,14 +62,12 @@ void writeMapToFile(const Map& map, const std::string& fileName)
 		jCities.push_back(jCity);
 
 	}
-	std::ofstream { fileName } << std::setw(4) << j;
+	std::ofstream{ fileName } << std::setw(4) << j;
 }
 
-std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
+BoardBuilder& BoardBuilder::loadBoard(std::string& gameSaveFile)
 {
-	
-	
-	std::ifstream fs{ fileName };
+	std::ifstream fs{ gameSaveFile };
 	if (!fs)
 	{
 		throw std::runtime_error{ "File not found!" };
@@ -148,20 +77,30 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 	json j;
 	fs >> j;
 
-	std::unique_ptr<Board> gameState = std::make_unique<Board>();
+	gameFile = j;
 
-	// read and store the map information
-	std::string mapFilePath = j["map"].get<std::string>();
-	gameState->setMap(readMapFromFile(mapFilePath));
+	const auto mapFile = gameFile["map"].get<std::string>();
+	Board::instance().setMap(std::move(readMapFromFile(mapFile)));
 
-	auto& cities = gameState->map().cities();
+	return *this;
+}
+
+BoardBuilder& BoardBuilder::loadPlayers()
+{
+	auto& cities = Board::instance().map().cities();
 	auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
-	auto roles = std::make_unique<DeckofRoles>()->roleCards();
+	DeckOfRoles deckOfRoles;
+	std::vector<std::unique_ptr<RoleCard>> roles;
+	while (!deckOfRoles.empty())
+	{
+		roles.push_back(deckOfRoles.drawTopCard());
+	}
+
 
 	// PLAYER INITIALIZATION:
-	std::vector<json> playerListJSON = j["players"];
+	std::vector<json> playerListJSON = this->gameFile["players"];
 
-	for (int i=0; i < playerListJSON.size(); i++) {
+	for (int i = 0; i < playerListJSON.size(); i++) {
 		auto playerJSON = playerListJSON.at(i);
 		std::unique_ptr<Player> player = std::make_unique<Player>();
 
@@ -226,15 +165,19 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 			}
 		}
 
-		//std::cout << "\n" << player->getName() << "\nPosition: " << player->pawn().position().name();
-		//player->displayCards();
-
 		// store this player into the gameState
-		gameState->addPlayer(std::move(player));
+		Board::instance().addPlayer(std::move(player));
+	}
+
+	return *this;
 	}
 	
+BoardBuilder& BoardBuilder::loadCities()
+{
+	auto& cities = Board::instance().map().cities();
+
 	// CITIES INITIALIZATION:
-	std::vector<json> cityListJSON = j["cities"];
+	std::vector<json> cityListJSON = gameFile["cities"];
 
 	for (int i = 0; i < cityListJSON.size(); i++) {
 		auto cityJSON = cityListJSON.at(i);
@@ -253,7 +196,7 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 				// found a match
 				if (isResearchStation) {
 					// mark the city as a research station
-					(*it)->giveResearchStation(*gameState);
+					(*it)->giveResearchStation(Board::instance());
 				}
 				// set the disease cubes for the city
 				(*it)->setDiseaseCubes(Colour::Blue, numOfBlue);
@@ -263,9 +206,16 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 			}
 		}
 	}
+
+	return *this;
+	}
 	
+BoardBuilder& BoardBuilder::loadInfectionCards()
+{
+	auto& cities = Board::instance().map().cities();
+
 	// INFECTION CARDS INITIALIZATION:
-	json infection = j["infection"];
+	json infection = gameFile["infection"];
 	auto infectionDeck = infection["deck"].get<std::vector<std::string>>();
 
 	for (auto it = infectionDeck.begin(); it != infectionDeck.end(); ++it) {
@@ -273,7 +223,7 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 			// if the city names match, create an infection card and add it to the deck
 			if ((*itr)->name() == *it) { 
 				// TODO: does this preserve the order?
-				gameState->infectionDeck().addToDeck(std::make_unique<InfectionCard>(**itr));
+				Board::instance().infectionDeck().addToDeck(std::make_unique<InfectionCard>(**itr));
 			}
 		}
 	}
@@ -285,24 +235,24 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 			// if the city names match, create an infection card and add it to the DISCARD deck
 			if ((*itr)->name() == *it) {
 				// TODO: does this preserve the order?
-				gameState->infectionDeck().addToDiscard(std::make_unique<InfectionCard>(**itr));
+				Board::instance().infectionDeck().addToDiscard(std::make_unique<InfectionCard>(**itr));
 			}
 		}
 	}
 
 	auto outbreakMarker = infection["outbreak"].get<int>();
 	for (int k = 0; k < outbreakMarker; k++) {
-		gameState->advanceOutbreakCounter();
+		Board::instance().advanceOutbreakCounter();
 	}
 
 	auto infectionRateIndex = infection["rate"].get<int>();
 	for (int k = 0; k <= infectionRateIndex; k++) {
-		gameState->advanceInfectionCounter();
+		Board::instance().advanceInfectionCounter();
 	}
 
 	auto curedDiseasesList = infection["cured"].get<std::vector<std::string>>();
 	for (auto it = curedDiseasesList.begin(); it != curedDiseasesList.end(); ++it) {
-		gameState->cureDisease(colourFromAbbreviation(*it));
+		Board::instance().cureDisease(colourFromAbbreviation(*it));
 
 		// loop through all cities, and get the total cubes on the board for this disease
 		size_t totalCubes = 0;
@@ -311,14 +261,20 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 		}
 		if (totalCubes == 0) {
 			// mark this disease as erradicated
-			gameState->isEradicated(colourFromAbbreviation(*it));
+			Board::instance().isEradicated(colourFromAbbreviation(*it));
 		}
 	}
 
+	return *this;
+}
 
+BoardBuilder& BoardBuilder::loadPlayerCards()
+{
+	auto& cities = Board::instance().map().cities();
+	auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
+	
 	// PLAYER CARDS INITIALIZATION:
-
-	json playerCards = j["playercards"];
+	json playerCards = gameFile["playercards"];
 
 	std::vector<std::string> playerCardDeck = playerCards["deck"].get<std::vector<std::string>>();
 	for (auto it = playerCardDeck.begin(); it != playerCardDeck.end(); ++it) {
@@ -327,7 +283,7 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			if ((*itr)->name() == *it) {
 				// TODO: does this preserve the order?
-				gameState->playerDeck().addToDeck(std::make_unique<PlayerCityCard>((**itr)));
+				Board::instance().playerDeck().addToDeck(std::make_unique<PlayerCityCard>((**itr)));
 			}
 		}
 
@@ -337,7 +293,7 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 		{
 			if ((*itr)->name() == *it)
 			{
-				gameState->playerDeck().addToDeck(std::move(*itr));
+				Board::instance().playerDeck().addToDeck(std::move(*itr));
 				itr = events.erase(itr);
 			}
 			else
@@ -354,7 +310,7 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 		for (auto itr = cities.begin(); itr != cities.end(); ++itr) {
 			if ((*itr)->name() == *it) {
 				// TODO: does this preserve the order?
-				gameState->playerDeck().addToDiscard(std::make_unique<PlayerCityCard>((**itr)));
+				Board::instance().playerDeck().addToDiscard(std::make_unique<PlayerCityCard>((**itr)));
 			}
 		}
 
@@ -364,7 +320,7 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 		{
 			if ((*itr)->name() == *it)
 			{
-				gameState->playerDeck().addToDiscard(std::move(*itr));
+				Board::instance().playerDeck().addToDiscard(std::move(*itr));
 				itr = events.erase(itr);
 			}
 			else
@@ -374,95 +330,5 @@ std::unique_ptr<Board> readGameFromFile(const std::string & fileName)
 		}
 	}
 
-	return gameState;
-}
-
-void saveGame(Board& game, const std::string& fileName)
-{
-	json j;
-	std::ofstream os { fileName };
-	j["map"] = game.map().name();
-	const auto& players = game.players();
-	
-	std::vector<json> playersJSON(players.size());
-	for (size_t idx = 0; idx < players.size(); ++idx)
-	{
-		auto& pj = playersJSON[idx];
-		auto& player = players[idx];
-		pj["name"] = player->name();
-		pj["position"] = player->pawn().position().name();
-		pj["role"] = player->role().name();
-		std::vector<std::string> cardNames;
-		for (const auto& card : player->cards())
-		{
-			pj["hand"].push_back(card->name());
-		}
-	}
-	j["players"] = playersJSON;
-
-	const auto& cities = game.map().cities();
-	std::vector<json> citiesJSON(cities.size());
-	for (size_t idx = 0; idx < cities.size(); ++idx)
-	{
-		auto& cj = citiesJSON[idx];
-		auto& city = cities[idx];
-		cj["name"] = city->name();
-		cj["colour"] = colourAbbreviation(city->colour());
-		std::map<std::string, size_t> cubes;
-		for (const auto& colour : colours())
-		{
-			cubes[colourAbbreviation(colour)] = city->diseaseCubes(colour);
-		}
-		cj["diseaseCubes"] = cubes;
-		cj["researchStation"] = city->hasResearchStation();
-	}
-	j["cities"] = citiesJSON;
-
-	std::vector<std::string> deckNames;
-	for (const auto& card : game.playerDeck().drawPile())
-	{
-		deckNames.push_back(card->name());
-	}
-	j["playercards"]["deck"] = deckNames;
-
-	std::vector<std::string> discardNames;
-	for (const auto& card : game.playerDeck().discardPile())
-	{
-		discardNames.push_back(card->name());
-	}
-	j["playercards"]["discard"] = discardNames;
-
-	std::vector<std::string> infDeckNames;
-	for (const auto& card : game.infectionDeck().drawPile())
-	{
-		infDeckNames.push_back(card->name());
-	}
-	j["infection"]["deck"] = infDeckNames;
-
-	std::vector<std::string> infDiscNames;
-	for (const auto& card : game.infectionDeck().discardPile())
-	{
-		infDiscNames.push_back(card->name());
-	}
-	j["infection"]["discard"] = infDiscNames;
-
-	j["infection"]["outbreak"] = game.outbreaks();
-	j["infection"]["rate"] = game.infectionCounter();
-
-	bool hasCured = false;
-	j["infection"];
-	for (const auto& colour : colours())
-	{
-		if (game.isCured(colour))
-		{
-			hasCured = true;
-			j["infection"]["cured"].push_back(colourAbbreviation(colour));
-		}
-	}
-	//if (!hasCured) 
-	//{
-	//	j["infection"]["cured"] = json::array();
-	//}
-
-	os << std::setw(4) << j;
+	return *this;
 }

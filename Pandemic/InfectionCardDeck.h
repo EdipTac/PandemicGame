@@ -6,39 +6,20 @@
 
 #pragma once
 
-#include <iostream>
-#include <vector>
-
 #include "Deck.h"
 #include "InfectionCard.h"
-#include "Serialization.h"
-
-
+#include "Terminator.h"
 
 class InfectionCardDeck
-
 	: public Deck<InfectionCard>
-
+	, public Terminator
 {
- //using ID = Deck<InfectionCard>;
 public:
-	//Default constructon
-	InfectionCardDeck();
-	//Overload constructor
-	InfectionCardDeck(std::string fileName);
-	//void shuffle(std::vector <std::unique_ptr<InfectionCard>>&);
-	//shuffle - shuffle infection cards in random order
-	//@param vector <InfectionCard> - infection card vector which
-	void printDeck();
-	//print - print all infection cards on deck. 
-	//This is a programming test method and can not be used by player.
-	//Distructor
-	~InfectionCardDeck();
-	//Accessor
-	void checkInfectionCardHistory();
-	//checkInfectionCardHistory - check all used infection cards
-	void reshuffleAndputback();
-	//reshuffle all discard infection cards and put them back to deck
-};
+	// Dtor
+	virtual ~InfectionCardDeck() override;
 	
+	virtual TerminationState terminationState() const override;
 
+	// Notifies on draw
+	virtual std::unique_ptr<InfectionCard> drawTopCard() override;
+};

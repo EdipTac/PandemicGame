@@ -26,7 +26,7 @@
 #include "Card.h"
 #include "City.h"
 #include "DeckofEvents.h"
-#include "DeckofRoles.h"
+#include "DeckOfRoles.h"
 #include "Dispatcher.h"
 #include "DriveOrFerry.h"
 #include "EventCard.h"
@@ -39,18 +39,47 @@
 #include "Pandemic.h"
 #include "Player.h"
 #include "PlayerCityCard.h"
-#include "Serialization.h"
+#include "BoardBuilder.h"
 #include "Util.h"
 #include "GameStatistics.h"
 #include "OutbreakCounter.h"
+#include "SaveBuilder.h"
+#include "RemainingInfectionCard.h"
+#include "InfectedCityPercentage.h"
+#include "TreatmentPriority.h"
+#include "TerminationHandler.h"
+
 
 //	----    Program entry point    ----  //
+//#define TEST
+#ifdef TEST
+void main()
+{
+	InfectionCardDeck d;
+	auto map = readMapFromFile("earth.map");
+	for (const auto& city : map->cities())
+	{
+		d.addToDeck(std::make_unique<InfectionCard>(*city));
+	}
+	TerminationHandler h;
+	h.subscribeTo(d);
+	while (!d.empty())
+	{
+		auto c = d.drawTopCard();
+		std::cout << "Drew " << c->name() << "\n";
+	}
+	waitForExit();
+}
+#else
 void main()
 {
 	// Title display
 	std::cout << titleFont("PANDEMIC") << "\n\n\n";
 	mainMenu.solicitInput();
 	auto observer = std::make_unique<GameStatistics>(Board::instance());
+	auto decorator = std::make_unique<InfectedCityPercentage>(observer.get()); // city infection rate decorator initilization
+	auto infectDecro = std:: make_unique<RemainingInfectionCard>(decorator.get());// remaining infection card decorator initilization
+	auto infectStatus = std::make_unique <TreatmentPriority>(infectDecro.get());// treatment priority decorator initilization
 
 	while (!Board::instance().shouldQuit())
 	{
@@ -64,6 +93,7 @@ void main()
 
 	waitForExit();
 }
+#endif
 
 //  -----  Function definitions  ----  //
 
@@ -77,6 +107,7 @@ void newGame()
 	std::cout << "\nLoading map \"" << fileName << "\"...\n";
 	Board::instance().setMap(readMapFromFile(fileName));
 	std::cout << "Map \"" << fileName << "\" loaded!\n\n";
+	Board::instance().map().setName(fileName); // set the name of the Map to the fileName
 
 	// Create players
 	std::cout << "How many players? ";
@@ -109,10 +140,11 @@ void newGame()
 
 
 	//Distribute Role Cards to players
-	DeckofRoles roleCardDeck;
+	DeckOfRoles roleCardDeck;
+	roleCardDeck.shuffleDeck();
 	for (auto& player : Board::instance().players())
 	{
-		player->setRole(roleCardDeck.drawRoleCard());
+		player->setRole(roleCardDeck.drawTopCard());
 	}
 
 	for (const auto& player : Board::instance().players())
@@ -134,10 +166,7 @@ void newGame()
 	for (const auto& player : Board::instance().players())
 	{
 		std::cout << "Player " << player->name() << " has\n";
-		for (const auto& card : player->cards())
-		{
-			std::cout << "\t" << card->name() << "\n";
-		}
+		player->displayCards();
 	}
 	
 	//Place first research station
@@ -160,6 +189,7 @@ void newGame()
 		}
 	}
 }
+//GameStatistics *observer = new GameStatistics(Board::instance());// observer initilization
 
 //Initialize a reference card that any player can view
 void displayReferenceCard()
@@ -187,8 +217,8 @@ void displayReferenceCard()
 void loadGame()
 {
 	std::cout << "Load game...\n";
-	const auto fileName = solicitFileName("Enter name of game save file: ");
-	//game = readGameFromFile(fileName);
+	auto fileName = solicitFileName("Enter name of game save file: ");
+	BoardBuilder().loadBoard(fileName).loadPlayers().loadCities().loadInfectionCards().loadPlayerCards();
 	std::cout << "\n\n" << titleFont("RESUMING GAME") << "\n\n";
 }
 
@@ -208,7 +238,7 @@ bool saveGame()
 			return false;
 		}
 	}
-	saveGame(Board::instance(), fileName);
+	SaveBuilder().saveMap().savePlayers().savePlayerCards().saveInfectionCards().saveCities().persist(fileName);
 	std::cout << "\n" << titleFont("GAME SAVED") << "\n\n";
 	return false;
 }
@@ -369,6 +399,16 @@ void displayCities()
 	}
 }
 
+void displayCurrentPosition() 
+{
+	showCity(Board::instance().currentPlayer().pawn().position());
+}
+
+void displayCardsInHand() 
+{
+	Board::instance().currentPlayer().displayCards();
+}
+
 void directConnectionReport()
 {
 	std::cout << "In one action, you can move to\n";
@@ -376,42 +416,6 @@ void directConnectionReport()
 	{
 		showCity(*city);
 	}
-}
-
-std::string titleFont(const std::string& original)
-{
-	std::stringstream ss;
-	const auto& repeat = [&](const char c, const size_t t)
-	{
-		for (size_t i = 0; i < t; ++i)
-		{
-			ss << c;
-		}
-	};
-	const auto& ornament = [&]()
-	{
-		repeat(' ', 4);
-		repeat('-', 8);
-		repeat(' ', 4);
-	};
-	const auto& insertSpaces = [&]()
-	{
-		for (auto it = original.begin(); it != original.end(); ++it)
-		{
-			ss << *it;
-			if (it == original.end() - 1)
-			{
-				break;
-			}
-			ss << ' ';
-		}
-	};
-
-	ornament();
-	insertSpaces();
-	ornament();
-
-	return ss.str();
 }
 
 void infect()

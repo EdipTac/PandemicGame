@@ -9,6 +9,8 @@
 #include "City.h"
 #include "Map.h"
 
+std::string titleFont(const std::string& original);
+
 void clearStringStream(std::stringstream& ss);
 
 std::pair<std::string, std::string> splitOnLastSpace(const std::string& s);

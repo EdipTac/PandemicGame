@@ -114,6 +114,7 @@
     <ClInclude Include="Action.h" />
     <ClInclude Include="ActionController.h" />
     <ClInclude Include="Airlift.h" />
+    <ClInclude Include="BoardBuilder.h" />
     <ClInclude Include="BuildResearchStation.h" />
     <ClInclude Include="Card.h" />
     <ClInclude Include="CharterFlight.h" />
@@ -124,7 +125,7 @@
     <ClInclude Include="CubePool.h" />
     <ClInclude Include="Deck.h" />
     <ClInclude Include="DeckofEvents.h" />
-    <ClInclude Include="DeckofRoles.h" />
+    <ClInclude Include="DeckOfRoles.h" />
     <ClInclude Include="DirectFlight.h" />
     <ClInclude Include="DiscoverACure.h" />
     <ClInclude Include="DiseaseTracker.h" />
@@ -139,6 +140,7 @@
     <ClInclude Include="GovernmentGrant.h" />
     <ClInclude Include="InfectionCard.h" />
     <ClInclude Include="InfectionCardDeck.h" />
+    <ClInclude Include="InfectedCityPercentage.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapEditor.h" />
@@ -158,20 +160,23 @@
     <ClInclude Include="PlayerCard.h" />
     <ClInclude Include="PlayerCityCard.h" />
     <ClInclude Include="QuarantineSpecialist.h" />
+    <ClInclude Include="RemainingInfectionCard.h" />
     <ClInclude Include="Researcher.h" />
     <ClInclude Include="ResearcherGiveKnowledge.h" />
     <ClInclude Include="ResilientPopulation.h" />
     <ClInclude Include="RoleCard.h" />
+    <ClInclude Include="SaveBuilder.h" />
     <ClInclude Include="Scientist.h" />
-    <ClInclude Include="Serialization.h" />
     <ClInclude Include="GiveKnowledge.h" />
     <ClInclude Include="ShuttleFlight.h" />
+    <ClInclude Include="StatisticDecorator.h" />
     <ClInclude Include="TakeKnowledge.h" />
     <ClInclude Include="TerminationHandler.h" />
     <ClInclude Include="TerminationState.h" />
     <ClInclude Include="Terminator.h" />
     <ClInclude Include="TextualCard.h" />
     <ClInclude Include="TreatDisease.h" />
+    <ClInclude Include="TreatmentPriority.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="MonoObserver.h" />
   </ItemGroup>
@@ -179,6 +184,7 @@
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionController.cpp" />
     <ClCompile Include="Airlift.cpp" />
+    <ClCompile Include="BoardBuilder.cpp" />
     <ClCompile Include="BuildResearchStation.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="CharterFlight.cpp" />
@@ -189,7 +195,7 @@
     <ClCompile Include="CubePool.cpp" />
     <ClCompile Include="Deck.cpp" />
     <ClCompile Include="DeckofEvents.cpp" />
-    <ClCompile Include="DeckofRoles.cpp" />
+    <ClCompile Include="DeckOfRoles.cpp" />
     <ClCompile Include="DirectFlight.cpp" />
     <ClCompile Include="DiscoverACure.cpp" />
     <ClCompile Include="DiseaseTracker.cpp" />
@@ -204,6 +210,7 @@
     <ClCompile Include="GovernmentGrant.cpp" />
     <ClCompile Include="InfectionCard.cpp" />
     <ClCompile Include="InfectionCardDeck.cpp" />
+    <ClCompile Include="InfectedCityPercentage.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapEditor.cpp" />
     <ClCompile Include="Medic.cpp" />
@@ -219,19 +226,22 @@
     <ClCompile Include="PlayerCard.cpp" />
     <ClCompile Include="PlayerCityCard.cpp" />
     <ClCompile Include="QuarantineSpecialist.cpp" />
+    <ClCompile Include="RemainingInfectionCard.cpp" />
     <ClCompile Include="Researcher.cpp" />
     <ClCompile Include="ResearcherGiveKnowledge.cpp" />
     <ClCompile Include="ResilientPopulation.cpp" />
     <ClCompile Include="RoleCard.cpp" />
+    <ClCompile Include="SaveBuilder.cpp" />
     <ClCompile Include="Scientist.cpp" />
-    <ClCompile Include="Serialization.cpp" />
     <ClCompile Include="GiveKnowledge.cpp" />
     <ClCompile Include="ShuttleFlight.cpp" />
+    <ClCompile Include="StatisticDecorator.cpp" />
     <ClCompile Include="TakeKnowledge.cpp" />
     <ClCompile Include="TerminationHandler.cpp" />
     <ClCompile Include="Terminator.cpp" />
     <ClCompile Include="TextualCard.cpp" />
     <ClCompile Include="TreatDisease.cpp" />
+    <ClCompile Include="TreatmentPriority.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -4,31 +4,31 @@
 #include "TerminationHandler.h"
 #include "Board.h"
 
-TerminationHandler::~TerminationHandler() {}
+TerminationHandler::~TerminationHandler()
+{
+	for (const auto& subject : _subjects)
+	{
+		if (subject)
+		{
+			subject->unsubscribe(*this);
+		}
+	}
+}
 
 void TerminationHandler::update()
 {
 	using TS = TerminationState;
-	const auto& hasTS = [](const TS& s)
+	for (const auto& subject : _subjects)
 	{
-		return [&](const Terminator* const t)
+		switch (subject->terminationState())
 		{
-			return t->terminationState() == s;
-		};
-	};
-	const auto& anyHasTS = [&](const TS& s)
-	{
-		return std::any_of(_subjects.begin(), _subjects.end(), hasTS(s));
-	};
-	
-	if (anyHasTS(TS::Victory))
-	{
-		onVictory();
-	}
-
-	if (anyHasTS(TS::Defeat))
-	{
-		onDefeat();
+			case TS::Victory:
+				onVictory();
+				return;
+			case TS::Defeat:
+				onDefeat();
+				return;
+		}
 	}
 }
 
