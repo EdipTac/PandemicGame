@@ -12,10 +12,14 @@ void Observable::subscribe(Observer& observer)
 
 void Observable::unsubscribe(Observer& observer)
 {
-	std::remove_if(_observers.begin(), _observers.end(), [&](const auto& o)
+	const auto& it = std::find_if(_observers.begin(), _observers.end(), [&](const auto& o)
 	{
 		return o == &observer;
 	});
+	if (it != _observers.end())
+	{
+		_observers.erase(it);
+	}
 }
 
 void Observable::notify() const

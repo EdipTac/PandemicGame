@@ -319,6 +319,11 @@
     <ClInclude Include="DeckOfRoles.h">
       <Filter>General\header</Filter>
     </ClInclude>
+    <ClInclude Include="InfectedCityPercentage.h" />
+    <ClInclude Include="RemainingInfectionCard.h" />
+    <ClInclude Include="StatisticDecorator.h" />
+    <ClInclude Include="TreatmentPriority.h" />
+    <ClInclude Include="HandObserver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -498,6 +503,11 @@
     <ClCompile Include="DeckOfRoles.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
+    <ClCompile Include="InfectedCityPercentage.cpp" />
+    <ClCompile Include="RemainingInfectionCard.cpp" />
+    <ClCompile Include="StatisticDecorator.cpp" />
+    <ClCompile Include="TreatmentPriority.cpp" />
+    <ClCompile Include="HandObserver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">

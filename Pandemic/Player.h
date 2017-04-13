@@ -10,6 +10,7 @@
 #include "Pawn.h"
 #include "PlayerCard.h"
 #include "RoleCard.h"
+#include "Observable.h"
 
 class PlayerCityCard;
 class EventCard;
@@ -17,6 +18,7 @@ class City;
 
 // A player of the game
 class Player
+	: public Observable
 {
 public:
 	// Default Constructor
@@ -29,6 +31,7 @@ public:
 
 	// Accessors and Mutators
 	std::vector<PlayerCard*> cards() const;
+	size_t cardCount() const;
 	void addCard(std::unique_ptr<PlayerCard> card);
 	PlayerCard* getCard(const std::string& name);
 	void discard(PlayerCard& card, Deck<PlayerCard>& deck);

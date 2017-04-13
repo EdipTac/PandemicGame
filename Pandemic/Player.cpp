@@ -36,8 +36,14 @@ std::vector<PlayerCard*> Player::cards() const
 	return cardView;
 }
 
+size_t Player::cardCount() const
+{
+	return _cards.size();
+}
+
 void Player::addCard(std::unique_ptr<PlayerCard> card) {
 	_cards.push_back(std::move(card));
+	notify();
 }
 
 PlayerCard* Player::getCard(const std::string& name)

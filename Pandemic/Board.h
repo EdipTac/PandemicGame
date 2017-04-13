@@ -13,6 +13,7 @@
 #include "OutbreakCounter.h"
 #include "Player.h"
 #include "PlayerCard.h"
+#include "HandObserver.h"
 
 class TerminationHandler;
 
@@ -85,4 +86,5 @@ private:
 	InfectionCardDeck _infectionDeck;
 	OutbreakCounter _outbreakCounter;
 	std::unique_ptr<TerminationHandler> _terminationHandler;
+	HandObserver _handObserver;
 };

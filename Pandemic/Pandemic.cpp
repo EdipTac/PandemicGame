@@ -48,6 +48,7 @@
 #include "InfectedCityPercentage.h"
 #include "TreatmentPriority.h"
 #include "TerminationHandler.h"
+#include "HandObserver.h"
 
 
 //	----    Program entry point    ----  //
@@ -55,18 +56,13 @@
 #ifdef TEST
 void main()
 {
-	InfectionCardDeck d;
-	auto map = readMapFromFile("earth.map");
-	for (const auto& city : map->cities())
+	HandObserver obs;
+	Player p;
+	obs.subscribeTo(p);
+	City c("test");
+	for (int i = 1; i <= 8; ++i)
 	{
-		d.addToDeck(std::make_unique<InfectionCard>(*city));
-	}
-	TerminationHandler h;
-	h.subscribeTo(d);
-	while (!d.empty())
-	{
-		auto c = d.drawTopCard();
-		std::cout << "Drew " << c->name() << "\n";
+		p.addCard(std::make_unique<PlayerCityCard>(c));
 	}
 	waitForExit();
 }

@@ -138,6 +138,7 @@
     <ClInclude Include="Forecast.h" />
     <ClInclude Include="GameStatistics.h" />
     <ClInclude Include="GovernmentGrant.h" />
+    <ClInclude Include="HandObserver.h" />
     <ClInclude Include="InfectionCard.h" />
     <ClInclude Include="InfectionCardDeck.h" />
     <ClInclude Include="InfectedCityPercentage.h" />
@@ -208,6 +209,7 @@
     <ClCompile Include="Forecast.cpp" />
     <ClCompile Include="GameStatistics.cpp" />
     <ClCompile Include="GovernmentGrant.cpp" />
+    <ClCompile Include="HandObserver.cpp" />
     <ClCompile Include="InfectionCard.cpp" />
     <ClCompile Include="InfectionCardDeck.cpp" />
     <ClCompile Include="InfectedCityPercentage.cpp" />

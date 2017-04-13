@@ -46,6 +46,7 @@ void Board::addPlayer(std::unique_ptr<Player> player)
 		throw std::logic_error { "No two players can have the same name." };
 	}
 	_players.push_back(std::move(player));
+	_handObserver.subscribeTo(*_players.back().get());
 }
 
 void Board::setMap(std::unique_ptr<Map> map)
