@@ -19,7 +19,7 @@ std::string EventCard::description() const
 
 std::string EventCard::toString()
 {
-	return "Event\n" + PlayerCard::toString() + ", Description: " + description();
+	return "Type: Event, " + PlayerCard::toString() + ", Description: " + description();
 }
 
 void EventCard::onDraw(Board&) {}
@@ -27,4 +27,9 @@ void EventCard::onDraw(Board&) {}
 bool EventCard::isEventCard() const
 {
 	return true;
+}
+
+
+Action& EventCard::ability() {
+	return *_ability;
 }

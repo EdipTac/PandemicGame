@@ -18,7 +18,7 @@ std::string EpidemicCard::description() const
 
 std::string EpidemicCard::toString()
 {
-	return "Epidemic\n" + PlayerCard::toString() + ", Description: \n" + EPIDEMIC_DESCRIPTION;
+	return "Type: Epidemic, " + PlayerCard::toString() + ", Description: \n" + EPIDEMIC_DESCRIPTION;
 }
 
 void EpidemicCard::cardWork(Deck<InfectionCard>& deck)

@@ -35,7 +35,7 @@ void action::Airlift::solicitData() {
 
 
 }void action::Airlift::perform() {
-	_performer->discard("Airlift", Board::instance().playerDeck());
+	//_performer->discard("Airlift", Board::instance().playerDeck()); //dont really need this anymore since pandemic.cpp takes care of the discard
 	_performer->pawn().setPosition(*_target);
 }
 

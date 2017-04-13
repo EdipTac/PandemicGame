@@ -18,7 +18,7 @@ public:
 	virtual void shuffleDiscards();
 
 	std::vector<T*> drawPile() const;
-
+	
 	std::vector<T*> discardPile() const;
 
 	// Prints the deck

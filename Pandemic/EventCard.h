@@ -1,9 +1,11 @@
 #pragma once
 
 #include <string>
-
+#include <memory>
 #include "PlayerCard.h"
 #include "TextualCard.h"
+#include "Action.h"
+using namespace action;
 
 // Represents an Event player card
 class EventCard
@@ -32,5 +34,10 @@ public:
 	// True
 	virtual bool isEventCard() const override;
 
-	//virtual void ability() = 0;
+	virtual Action& ability();
+
+
+
+private:
+	std::unique_ptr<Action> _ability;
 };

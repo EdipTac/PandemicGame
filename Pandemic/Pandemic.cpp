@@ -166,7 +166,7 @@ void newGame()
 
 	for (const auto& player : Board::instance().players())
 	{
-		std::cout << "Player " << player->name() << " has\n";
+		std::cout << "\nPlayer " << player->name() << ":";
 		player->displayCards();
 	}
 	
@@ -175,7 +175,7 @@ void newGame()
 
 	//Initial distribution of disease cubes during game initialization
 	Board::instance().infectionDeck().shuffleDeck();
-	std::cout << "Initial infected cities are as follows:" << std::endl;
+	std::cout << "\nInitial infected cities are as follows:" << std::endl;
 	for (auto j = 3; j >= 1; --j)
 	{
 		for (auto i = 0; i < 3; ++i)
@@ -320,7 +320,15 @@ bool playEventCard()
 	}
 
 	// Play and discard card
-	//cardToPlay->action() TODO
+	// whatever.solicitData followed by whatever.isValid().... then do whatever.perform()
+
+	//cardToPlay->action(); TODO
+	cardToPlay->ability().solicitData();
+	if (cardToPlay->ability().isValid())
+	{
+		cardToPlay->ability().perform();
+	}
+
 	cardOwners[cardToPlay]->discard(*cardToPlay, Board::instance().playerDeck());
 
 	// Doesn't cost an action
@@ -413,13 +421,20 @@ void directConnectionReport()
 
 void infect()
 {
-	for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
-	{
-		auto& currentPlayer = Board::instance().nextPlayer();
-		if (currentPlayer.isOneQuietNight()) { break; } //added this for the one quiet night event card, should modify it so that once the event is complete, the status of isonequietnight reverts back to false.
-		auto card = Board::instance().infectionDeck().drawTopCard();
-		card->onDraw(Board::instance());
-		Board::instance().infectionDeck().addToDiscard(std::move(card));
+	auto& oneQuietNightPlayer = Board::instance().nextPlayer();
+	if (oneQuietNightPlayer.isOneQuietNight()) 
+	{ 
+		oneQuietNightPlayer.setOneQuietNight(false);
+	} 
+	else {
+		for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
+		{
+			//auto& currentPlayer = Board::instance().nextPlayer();
+			auto card = Board::instance().infectionDeck().drawTopCard();
+			card->onDraw(Board::instance());
+			Board::instance().infectionDeck().addToDiscard(std::move(card));
+		}
 	}
 	Board::instance().notify();
+	
 }
