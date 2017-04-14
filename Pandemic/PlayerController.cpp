@@ -4,7 +4,7 @@ std::vector<Player*> PlayerController::players()
 {
 	std::vector<Player*> p;
 	const auto size = _players.size();
-	auto idx = _currentPlayerIdx;
+	auto idx = _idx;
 	for (auto i = 0u; i < size; ++i)
 	{
 		p.push_back(_players[idx].get());
@@ -17,26 +17,30 @@ void PlayerController::add(std::unique_ptr<Player> player)
 {
 	if (nameExists(player->name()))
 	{
-		throw std::logic_error { "No two players can have the same name." };
+		throw std::invalid_argument("No two players can have the same name.");
 	}
 	_players.push_back(std::move(player));
 }
 
 Player& PlayerController::next()
 {
-	++_currentPlayerIdx;
-	_currentPlayerIdx %= _players.size();
+	++_idx;
+	_idx %= _players.size();
 	return current();
 }
 
 Player& PlayerController::current()
 {
-	return *_players[_currentPlayerIdx];
+	return *_players[_idx];
 }
 
 Player& PlayerController::setCurrent(const size_t idx)
 {
-	_currentPlayerIdx = idx % _players.size();
+	if (!(0 <= idx && idx < _players.size()))
+	{
+		throw std::invalid_argument("Invalid player index.");
+	}
+	_idx = idx;
 	return current();
 }
 

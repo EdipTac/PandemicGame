@@ -18,5 +18,5 @@ public:
 
 private:
 	std::vector<std::unique_ptr<Player>> _players;
-	size_t _currentPlayerIdx = 0;
+	size_t _idx = 0;
 };
