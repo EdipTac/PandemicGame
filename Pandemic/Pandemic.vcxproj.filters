@@ -334,6 +334,9 @@
     <ClInclude Include="TreatmentPriority.h">
       <Filter>Views\header</Filter>
     </ClInclude>
+    <ClInclude Include="DoNothing.h">
+      <Filter>Actions\General Actions\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -528,6 +531,7 @@
     <ClCompile Include="TreatmentPriority.cpp">
       <Filter>Views\src</Filter>
     </ClCompile>
+    <ClCompile Include="DoNothing.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">

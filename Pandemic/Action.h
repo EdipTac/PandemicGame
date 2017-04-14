@@ -5,6 +5,7 @@
 
 #include <string>
 
+class ActionController;
 class Player;
 
 namespace action
@@ -32,6 +33,9 @@ namespace action
 
 		// True iff the action can be completed - will consume an action
 		virtual bool isValid() const = 0;
+
+		// Reduces action points of the calling controller - default is 1 point
+		virtual void spendActionPoints(ActionController& ac) const;
 
 		// Set performer
 		void setPerformer(Player* const performer);

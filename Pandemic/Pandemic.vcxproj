@@ -131,6 +131,7 @@
     <ClInclude Include="DiseaseTracker.h" />
     <ClInclude Include="Dispatch.h" />
     <ClInclude Include="Dispatcher.h" />
+    <ClInclude Include="DoNothing.h" />
     <ClInclude Include="DriveOrFerry.h" />
     <ClInclude Include="EpidemicCard.h" />
     <ClInclude Include="EventCard.h" />
@@ -202,6 +203,7 @@
     <ClCompile Include="DiseaseTracker.cpp" />
     <ClCompile Include="Dispatch.cpp" />
     <ClCompile Include="Dispatcher.cpp" />
+    <ClCompile Include="DoNothing.cpp" />
     <ClCompile Include="DriveOrFerry.cpp" />
     <ClCompile Include="EpidemicCard.cpp" />
     <ClCompile Include="EventCard.cpp" />
