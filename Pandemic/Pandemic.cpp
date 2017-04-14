@@ -186,7 +186,6 @@ void newGame()
 		}
 	}
 }
-//GameStatistics *observer = new GameStatistics(Board::instance());// observer initilization
 
 //Initialize a reference card that any player can view
 void displayReferenceCard()
