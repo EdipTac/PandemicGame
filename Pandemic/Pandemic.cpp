@@ -422,14 +422,14 @@ void infect()
 	{ 
 		oneQuietNightPlayer.setOneQuietNight(false);
 	} 
-	else {
+
 		for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
 		{
 			//auto& currentPlayer = Board::instance().nextPlayer();
 			auto card = Board::instance().infectionDeck().drawTopCard();
 			card->onDraw(Board::instance());
 			Board::instance().infectionDeck().addToDiscard(std::move(card));
-		}
+		
 	}
 	Board::instance().notify();
 	
