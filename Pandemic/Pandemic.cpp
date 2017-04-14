@@ -58,12 +58,13 @@ void main()
 {
 	HandObserver obs;
 	Player p;
-	obs.subscribeTo(p);
 	City c("test");
 	for (int i = 1; i <= 8; ++i)
 	{
 		p.addCard(std::make_unique<PlayerCityCard>(c));
 	}
+	obs.subscribeTo(p);
+	p.addCard(std::make_unique<PlayerCityCard>(c));
 	waitForExit();
 }
 #else
@@ -259,6 +260,12 @@ bool performAction()
 	return true;
 }
 
+// Do nothing
+bool skipAction()
+{
+	return true;
+}
+
 bool playEventCard()
 {
 	// To record cards and owners
@@ -417,20 +424,19 @@ void directConnectionReport()
 
 void infect()
 {
-	auto& oneQuietNightPlayer = Board::instance().nextPlayer();
-	if (oneQuietNightPlayer.isOneQuietNight()) 
-	{ 
-		oneQuietNightPlayer.setOneQuietNight(false);
-	} 
-	else {
-		for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
-		{
-			//auto& currentPlayer = Board::instance().nextPlayer();
-			auto card = Board::instance().infectionDeck().drawTopCard();
-			card->onDraw(Board::instance());
-			Board::instance().infectionDeck().addToDiscard(std::move(card));
-		}
-	}
-	Board::instance().notify();
-	
+//	auto& oneQuietNightPlayer = Board::instance().nextPlayer();
+//	if (oneQuietNightPlayer.isOneQuietNight()) 
+//	{ 
+//		oneQuietNightPlayer.setOneQuietNight(false);
+//	} 
+//	else {
+//		for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
+//		{
+//			//auto& currentPlayer = Board::instance().nextPlayer();
+//			auto card = Board::instance().infectionDeck().drawTopCard();
+//			card->onDraw(Board::instance());
+//			Board::instance().infectionDeck().addToDiscard(std::move(card));
+//		}
+//	}
+//	Board::instance().notify();	
 }

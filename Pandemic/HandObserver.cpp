@@ -4,7 +4,8 @@
 void forceDiscard(Player& player)
 {
 	const auto& cards = player.cards();
-	std::cout << "You have " << cards.size() << " cards out of a maximum of 7. Pick a card to discard:\n";
+	std::cout << "You have " << cards.size() << " cards out of a maximum of 7.\n";
+	std::cout << "You must discard " << cards.size() - 7 << ". Pick a card to discard:\n";
 	for (const auto& card : cards)
 	{
 		std::cout << "\t" << card->name() << "\n";

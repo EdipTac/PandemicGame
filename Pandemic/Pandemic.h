@@ -15,6 +15,7 @@ void waitForExit();
 
 bool actionQuit();
 bool performAction();
+bool skipAction();
 bool playEventCard();
 bool report();
 bool saveGame();
@@ -59,6 +60,7 @@ const ActionMenu turnMenu
 		{ "Report",			 report			},
 		{ "Perform Action",  performAction	},
 		{ "Play Event Card", playEventCard	},
+		{ "Skip Turn",		 skipAction     },
 		{ "Save Game",		 saveGameAction	},
 		{ "Quit Game",		 actionQuit		}
 	}
