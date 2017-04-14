@@ -531,7 +531,9 @@
     <ClCompile Include="TreatmentPriority.cpp">
       <Filter>Views\src</Filter>
     </ClCompile>
-    <ClCompile Include="DoNothing.cpp" />
+    <ClCompile Include="DoNothing.cpp">
+      <Filter>Actions\General Actions\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">
