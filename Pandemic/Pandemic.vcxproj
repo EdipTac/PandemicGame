@@ -151,6 +151,7 @@
     <ClInclude Include="MenuOption.h" />
     <ClInclude Include="MoveFromResearchStation.h" />
     <ClInclude Include="OneQuietNight.h" />
+    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PolyObserver.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="Observer.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCard.cpp" />
     <ClCompile Include="PlayerCityCard.cpp" />
+    <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="QuarantineSpecialist.cpp" />
     <ClCompile Include="RemainingInfectionCard.cpp" />
     <ClCompile Include="Researcher.cpp" />

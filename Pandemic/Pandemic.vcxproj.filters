@@ -337,6 +337,9 @@
     <ClInclude Include="DoNothing.h">
       <Filter>Actions\General Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Controllers\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -533,6 +536,9 @@
     </ClCompile>
     <ClCompile Include="DoNothing.cpp">
       <Filter>Actions\General Actions\src</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>Controllers\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
