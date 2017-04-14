@@ -319,11 +319,21 @@
     <ClInclude Include="DeckOfRoles.h">
       <Filter>General\header</Filter>
     </ClInclude>
-    <ClInclude Include="InfectedCityPercentage.h" />
-    <ClInclude Include="RemainingInfectionCard.h" />
-    <ClInclude Include="StatisticDecorator.h" />
-    <ClInclude Include="TreatmentPriority.h" />
-    <ClInclude Include="HandObserver.h" />
+    <ClInclude Include="HandObserver.h">
+      <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="InfectedCityPercentage.h">
+      <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="RemainingInfectionCard.h">
+      <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="StatisticDecorator.h">
+      <Filter>Views\header</Filter>
+    </ClInclude>
+    <ClInclude Include="TreatmentPriority.h">
+      <Filter>Views\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -503,11 +513,21 @@
     <ClCompile Include="DeckOfRoles.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
-    <ClCompile Include="InfectedCityPercentage.cpp" />
-    <ClCompile Include="RemainingInfectionCard.cpp" />
-    <ClCompile Include="StatisticDecorator.cpp" />
-    <ClCompile Include="TreatmentPriority.cpp" />
-    <ClCompile Include="HandObserver.cpp" />
+    <ClCompile Include="HandObserver.cpp">
+      <Filter>Views\src</Filter>
+    </ClCompile>
+    <ClCompile Include="InfectedCityPercentage.cpp">
+      <Filter>Views\src</Filter>
+    </ClCompile>
+    <ClCompile Include="RemainingInfectionCard.cpp">
+      <Filter>Views\src</Filter>
+    </ClCompile>
+    <ClCompile Include="StatisticDecorator.cpp">
+      <Filter>Views\src</Filter>
+    </ClCompile>
+    <ClCompile Include="TreatmentPriority.cpp">
+      <Filter>Views\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">
