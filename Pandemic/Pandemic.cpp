@@ -49,6 +49,7 @@
 #include "TreatmentPriority.h"
 #include "TerminationHandler.h"
 #include "HandObserver.h"
+#include "Airlift.h"
 
 
 //	----    Program entry point    ----  //
@@ -56,15 +57,6 @@
 #ifdef TEST
 void main()
 {
-	HandObserver obs;
-	Player p;
-	City c("test");
-	for (int i = 1; i <= 8; ++i)
-	{
-		p.addCard(std::make_unique<PlayerCityCard>(c));
-	}
-	obs.subscribeTo(p);
-	p.addCard(std::make_unique<PlayerCityCard>(c));
 	waitForExit();
 }
 #else

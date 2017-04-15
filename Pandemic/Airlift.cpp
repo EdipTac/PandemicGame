@@ -20,18 +20,23 @@ void action::Airlift::solicitData() {
 	std::string destination;
 	std::getline(std::cin >> std::ws, destination);
 
-	for (auto it = Board::instance().players().begin(); it != Board::instance().players().end(); ++it) {
+	const auto& players = Board::instance().players();
+	for (auto it = players.begin(); it != players.end(); ++it) {
 		if ((*it)->name() == liftee) {
 			//playerToLift = (*it); 
 			_performer = (*it);
+			break;
 		}
 	}
 	
-	for (auto it = Board::instance().map().cities().begin(); it != Board::instance().map().cities().end(); ++it) {
+
+	const auto& cities = Board::instance().map().cities();
+	for (auto it = cities.begin(); it != cities.end(); ++it) {
 		if ((*it)->name() == destination) {
 			//_performer->pawn().setPosition((**it));
 			setTarget(**it);
 			//_target = (**it);
+			break;
 		}
 	}
 
