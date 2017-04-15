@@ -26,7 +26,7 @@ void action::DirectFlight::solicitData()
 	std::cout << "City cards: \n";
 	for (const auto& card : cards)
 	{
-		std::cout << "\t" << card->name() << "\n";
+		std::cout << "\t" << card->name() << " " << colourName(card->colour()) << "\n";
 	}
 	
 	std::string input;

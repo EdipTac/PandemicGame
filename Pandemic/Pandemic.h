@@ -8,6 +8,7 @@ void displayCities();
 void displayReferenceCard();
 void displayCurrentPosition();
 void displayCardsInHand();
+void displayRole();
 void infect();
 void loadGame();
 void newGame();
@@ -73,6 +74,7 @@ const GeneralMenu reportMenu
 		{ "Display Reference Card",	displayReferenceCard },
 		{ "Direct Connection Report",	directConnectionReport },
 		{ "Display Current Position",	displayCurrentPosition },
+		{ "Display Role",	displayRole },
 		{ "Display Cards in Hand",	displayCardsInHand }
 	}
 };

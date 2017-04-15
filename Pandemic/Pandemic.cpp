@@ -187,7 +187,6 @@ void newGame()
 		}
 	}
 }
-//GameStatistics *observer = new GameStatistics(Board::instance());// observer initilization
 
 //Initialize a reference card that any player can view
 void displayReferenceCard()
@@ -411,6 +410,11 @@ void displayCurrentPosition()
 void displayCardsInHand() 
 {
 	Board::instance().currentPlayer().displayCards();
+}
+
+void displayRole()
+{
+	std::cout << "Role: " << Board::instance().currentPlayer().role().name() << "\nDescription: " << Board::instance().currentPlayer().role().description() << "\n\n";
 }
 
 void directConnectionReport()

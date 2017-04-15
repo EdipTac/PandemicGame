@@ -30,7 +30,7 @@ void TreatmentPriority::display() {
 	sort(citylist.begin(), citylist.end(), sortbysec);
 	for (int i = 0; i<citylist.size(); i++)
 	{
-		if (citylist[i].second >= 2) {
+		if (citylist[i].second >= 1) {
 			cout << citylist[i].first->name() << endl;
 			for (auto& color : citylist[i].first->diseases()) {
 				cout << "has " << citylist[i].first->diseaseCubes(color) << " " << colourName(color) << " disease cube(s)" << endl;

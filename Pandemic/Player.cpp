@@ -86,6 +86,7 @@ std::ostream& operator<<(std::ostream& os, PlayerCard& card)
 }
 
 void Player::displayCards() {
+	_role->printRole();
 	std::cout << "\nDisplaying Cards on hand: \n";
 	int k = 0;
 	for (auto& card : cityCards()) {
