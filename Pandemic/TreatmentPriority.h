@@ -7,5 +7,5 @@ class TreatmentPriority : public StatisticDecorator {
 public: TreatmentPriority(GameStatistics *dec);
 		void update();
 		void display();
-		static bool sortbysec(const std::pair<City*, int> &a, const std::pair<City*, int> &b);
+		static bool sortbysec(const std::pair<City*, size_t> &a, const std::pair<City*, size_t> &b);
 };

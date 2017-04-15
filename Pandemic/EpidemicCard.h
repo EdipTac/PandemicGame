@@ -2,8 +2,9 @@
 
 #include <string>
 
+#include "Deck.h"
+#include "InfectionCard.h"
 #include "PlayerCard.h"
-#include "InfectionCardDeck.h"
 
 // Represents an epidemic player card.
 class EpidemicCard

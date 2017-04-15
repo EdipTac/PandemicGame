@@ -14,6 +14,10 @@ action::MoveFromResearchStation::~MoveFromResearchStation() {}
 
 void action::MoveFromResearchStation::solicitData()
 {
+	// Reset
+	_destination = nullptr;
+	_toDiscard = nullptr;
+
 	if (!_performer->pawn().position().hasResearchStation())
 	{
 		// Can only perform this action in a city with a research station
@@ -82,7 +86,7 @@ void action::MoveFromResearchStation::solicitData()
 void action::MoveFromResearchStation::perform()
 {
 	_performer->discard(*_toDiscard, Board::instance().playerDeck());
-	_performer->pawn().setPosition(*_destination);
+	_performer->moveTo(*_destination);
 }
 
 bool action::MoveFromResearchStation::isValid() const

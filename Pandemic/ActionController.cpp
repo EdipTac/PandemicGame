@@ -24,6 +24,15 @@ ActionController::ActionController(Player& player)
 	, _actionPointsTotal { actionsTotalDefault }
 	, _actionPointsRemaining { _actionPointsTotal }
 {
+	_generalActions.push_back(_makeAction<DriveOrFerry>());
+	_generalActions.push_back(_makeAction<DirectFlight>());
+	_generalActions.push_back(_makeAction<ShuttleFlight>());
+	_generalActions.push_back(_makeAction<CharterFlight>());
+	_generalActions.push_back(_makeAction<TreatDisease>());
+	_generalActions.push_back(_makeAction<DiscoverACure>());
+	_generalActions.push_back(_makeAction<GiveKnowledge>());
+	_generalActions.push_back(_makeAction<TakeKnowledge>());
+	_generalActions.push_back(_makeAction<DoNothing>());
 	resetActionList();
 }
 
@@ -80,7 +89,6 @@ bool ActionController::hasActionPoints()
 
 void ActionController::resetActionList()
 {
-	_resetGeneralActions();
 	_actions.clear();
 
 	// General actions
@@ -105,18 +113,4 @@ void ActionController::decrementActionPoints()
 void ActionController::zeroActionPoints()
 {
 	_actionPointsRemaining = 0;
-}
-
-void ActionController::_resetGeneralActions()
-{
-	_generalActions.clear();
-	_generalActions.push_back(_makeAction<DriveOrFerry>());
-	_generalActions.push_back(_makeAction<DirectFlight>());
-	_generalActions.push_back(_makeAction<ShuttleFlight>());
-	_generalActions.push_back(_makeAction<CharterFlight>());
-	_generalActions.push_back(_makeAction<TreatDisease>());
-	_generalActions.push_back(_makeAction<DiscoverACure>());
-	_generalActions.push_back(_makeAction<GiveKnowledge>());
-	_generalActions.push_back(_makeAction<TakeKnowledge>());
-	_generalActions.push_back(_makeAction<DoNothing>());
 }

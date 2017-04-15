@@ -17,6 +17,7 @@ Board::Board()
 {
 	_terminationHandler->subscribeTo(_outbreakCounter);
 	_terminationHandler->subscribeTo(_diseaseTracker);
+	_terminationHandler->subscribeTo(_playerDeck);
 }
 
 Board::~Board() {}
@@ -165,12 +166,12 @@ CubePool& Board::cubePool()
 	return _cubePool;
 }
 
-Deck<PlayerCard>& Board::playerDeck()
+PlayerCardDeck& Board::playerDeck()
 {
 	return _playerDeck;
 }
 
-InfectionCardDeck& Board::infectionDeck()
+Deck<InfectionCard>& Board::infectionDeck()
 {
 	return _infectionDeck;
 }

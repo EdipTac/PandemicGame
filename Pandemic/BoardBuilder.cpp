@@ -1,7 +1,7 @@
 #include "BoardBuilder.h"
 #include "PlayerCityCard.h"
 #include "DeckofRoles.h"
-#include "DeckofEvents.h"
+#include "DeckOfEvents.h"
 #include "Map.h"
 #include "Board.h"
 #include <fstream>
@@ -88,7 +88,7 @@ BoardBuilder& BoardBuilder::loadBoard(std::string& gameSaveFile)
 BoardBuilder& BoardBuilder::loadPlayers()
 {
 	auto& cities = Board::instance().map().cities();
-	auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
+	auto events = event::cards();
 	DeckOfRoles deckOfRoles;
 	std::vector<std::unique_ptr<RoleCard>> roles;
 	while (!deckOfRoles.empty())
@@ -115,7 +115,7 @@ BoardBuilder& BoardBuilder::loadPlayers()
 		for (auto it = cities.begin(); it != cities.end(); ++it) {
 			if ((*it)->name() == cityName) {
 				// found a match
-				player->pawn().setPosition(**it);
+				player->moveTo(**it);
 			}
 		}
 
@@ -269,7 +269,7 @@ BoardBuilder& BoardBuilder::loadInfectionCards()
 BoardBuilder& BoardBuilder::loadPlayerCards()
 {
 	auto& cities = Board::instance().map().cities();
-	auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
+	auto events = event::cards();
 	
 	// PLAYER CARDS INITIALIZATION:
 	json playerCards = gameFile["playercards"];

@@ -1,54 +1,43 @@
-//  Pandemic - Build 1
+//			  Pandemic  -   Build 2
 //
-//					Authors
-//		============================
+//					 Authors
+//	  ================================
 //		Michael Deom	-	29549641
 //		Jonny Linton	-	
 //		Edip Tac		-	26783287
 //		Kechun Ye		-	25654688
 //
-//  Submitted 15/03/2017
-//
-//  Build 1 of project.
-//
+//  Build 2 submitted 18/04/2017.
 //  An implementation of the board game "Pandemic" by Z-Man Games.
 
 #include <iostream>
-#include <fstream>
-#include <random>
-#include <sstream>
-#include <string>
-#include <vector>
 #include <map>
 #include <numeric>
+#include <string>
+#include <vector>
 
 #include "ActionController.h"
+#include "Board.h"
+#include "BoardBuilder.h"
 #include "Card.h"
 #include "City.h"
-#include "DeckofEvents.h"
 #include "DeckOfRoles.h"
-#include "Dispatcher.h"
-#include "DriveOrFerry.h"
+#include "DeckOfEvents.h"
 #include "EventCard.h"
-#include "Board.h"
+#include "GameStatistics.h"
+#include "InfectedCityPercentage.h"
 #include "InfectionCard.h"
-#include "InfectionCardDeck.h"
 #include "Map.h"
 #include "MapEditor.h"
 #include "Menu.h"
 #include "Pandemic.h"
 #include "Player.h"
 #include "PlayerCityCard.h"
-#include "BoardBuilder.h"
-#include "Util.h"
-#include "GameStatistics.h"
-#include "OutbreakCounter.h"
-#include "SaveBuilder.h"
 #include "RemainingInfectionCard.h"
-#include "InfectedCityPercentage.h"
+#include "SaveBuilder.h"
 #include "TreatmentPriority.h"
-#include "TerminationHandler.h"
-#include "HandObserver.h"
+#include "Util.h"
+#include "Quit.h"
 
 
 //	----    Program entry point    ----  //
@@ -56,15 +45,6 @@
 #ifdef TEST
 void main()
 {
-	HandObserver obs;
-	Player p;
-	City c("test");
-	for (int i = 1; i <= 8; ++i)
-	{
-		p.addCard(std::make_unique<PlayerCityCard>(c));
-	}
-	obs.subscribeTo(p);
-	p.addCard(std::make_unique<PlayerCityCard>(c));
 	waitForExit();
 }
 #else
@@ -78,18 +58,24 @@ void main()
 	auto infectDecro = std:: make_unique<RemainingInfectionCard>(decorator.get());// remaining infection card decorator initilization
 	auto infectStatus = std::make_unique <TreatmentPriority>(infectDecro.get());// treatment priority decorator initilization
 
-	while (!Board::instance().shouldQuit())
+	try
 	{
-		auto& currentPlayer = Board::instance().currentPlayer();
-		std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
-		while (!turnMenu.solicitInput()); // Intentionally empty body
-		Board::instance().distributePlayerCards(cardsPerTurn);
-		currentPlayer.displayCards();
-		infect();
-		Board::instance().nextPlayer();
+		while (!Board::instance().shouldQuit())
+		{
+			auto& currentPlayer = Board::instance().currentPlayer();
+			std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
+			while (!turnMenu.solicitInput()); // Intentionally empty body
+			Board::instance().distributePlayerCards(cardsPerTurn);
+			currentPlayer.displayCards();
+			infect();
+			Board::instance().nextPlayer();
+		}
 	}
-
-	waitForExit();
+	catch (const Quit& q)
+	{
+		std::cout << "\n" << q.what() << "\n";
+		waitForExit();
+	}
 }
 #endif
 
@@ -132,7 +118,7 @@ void newGame()
 		
 	}
 	
-	auto eventCards = DeckofEvents {}.deckOfEvents();
+	auto eventCards = event::cards();
 	while (!eventCards.empty())
 	{
 		Board::instance().playerDeck().addToDeck(std::move(eventCards.back()));

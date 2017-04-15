@@ -8,6 +8,9 @@ action::CharterFlight::CharterFlight(Player * const performer)
 
 void action::CharterFlight::solicitData()
 {
+	// Reset
+	_target = nullptr;
+
 	// Aliases
 	auto& player = *_performer;
 	const auto& cards = player.cityCards();
@@ -47,7 +50,7 @@ void action::CharterFlight::solicitData()
 void action::CharterFlight::perform()
 {
 	_performer->discard(*_performer->positionCard(), Board::instance().playerDeck());
-	_performer->pawn().setPosition(*_target);
+	_performer->moveTo(*_target);
 }
 
 bool action::CharterFlight::isValid() const

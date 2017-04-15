@@ -10,6 +10,9 @@ action::Airlift::Airlift(Player* const performer)
 
 
 void action::Airlift::solicitData() {
+	// Reset
+	_target = nullptr;
+
 	std::cout << "Please indicate the name of the player you would like to Airlift";
 	std::string liftee;
 	std::getline(std::cin >> std::ws, liftee);
@@ -17,18 +20,23 @@ void action::Airlift::solicitData() {
 	std::string destination;
 	std::getline(std::cin >> std::ws, destination);
 
-	for (auto it = Board::instance().players().begin(); it != Board::instance().players().end(); ++it) {
+	const auto& players = Board::instance().players();
+	for (auto it = players.begin(); it != players.end(); ++it) {
 		if ((*it)->name() == liftee) {
 			//playerToLift = (*it); 
 			_performer = (*it);
+			break;
 		}
 	}
 	
-	for (auto it = Board::instance().map().cities().begin(); it != Board::instance().map().cities().end(); ++it) {
+
+	const auto& cities = Board::instance().map().cities();
+	for (auto it = cities.begin(); it != cities.end(); ++it) {
 		if ((*it)->name() == destination) {
-			//_performer->pawn().setPosition((**it));
+			//_performer->move((**it));
 			setTarget(**it);
 			//_target = (**it);
+			break;
 		}
 	}
 
@@ -36,7 +44,7 @@ void action::Airlift::solicitData() {
 
 }void action::Airlift::perform() {
 	//_performer->discard("Airlift", Board::instance().playerDeck()); //dont really need this anymore since pandemic.cpp takes care of the discard
-	_performer->pawn().setPosition(*_target);
+	_performer->moveTo(*_target);
 }
 
 void action::Airlift::setTarget(City& target) {
@@ -61,7 +69,7 @@ bool action::Airlift::isValid() const {
 //	
 //	for (auto it = Board::instance().map().cities().begin(); it != Board::instance().map().cities().end(); ++it) {
 //		if ((*it)->name() == destination) {
-//			playerToLift->pawn().setPosition((**it));
+//			playerToLift->move((**it));
 //		}
 //	}
 //

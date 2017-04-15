@@ -1,22 +1,27 @@
 #include <algorithm>
-#include "GameStatistics.h"
-#include "Board.h"
 #include <iostream>
 
+#include "Board.h"
+#include "GameStatistics.h"
+
 GameStatistics::GameStatistics() {};
+
 GameStatistics::GameStatistics(Board &state) {
 	 _state = &state;
 	 _state->subscribe(*this);
 }
+
 GameStatistics::~GameStatistics() {
 	if (_state)
 	{
 		_state->unsubscribe(*this);
 	}
 }
+
 void GameStatistics::update(){
 	display();
 }
+
 void GameStatistics::display() {
 	std::cout << "\nGame statistic: \n\n" << "Number of cities infected by players: " << _state->infectedCityCounter() << "\n\n" << 
 		"Number of cards on each player's hand: " << std::endl;
@@ -58,6 +63,3 @@ void GameStatistics::display() {
    
 
 }
-
-
-

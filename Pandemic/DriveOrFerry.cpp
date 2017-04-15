@@ -18,11 +18,16 @@ DriveOrFerry::~DriveOrFerry(){}
 void action::DriveOrFerry::perform()
 {
 	// Move the action performer to the target city.
-	_performer->pawn().setPosition(*_target);
+	_performer->moveTo(*_target);
 }
 
 void action::DriveOrFerry::solicitData()
 {
+	// Reset
+	_target = nullptr;
+
+
+	// Aliases
 	auto& player = *_performer;
 	const auto& position = player.pawn().position();
 	const auto& connections = position.connections();

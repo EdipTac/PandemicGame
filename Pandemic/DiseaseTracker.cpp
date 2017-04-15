@@ -15,6 +15,11 @@ TerminationState DiseaseTracker::terminationState() const
 	return TS::Victory;
 }
 
+std::string DiseaseTracker::message() const
+{
+	return "All diseases have been cured.";
+}
+
 bool DiseaseTracker::isCured(const Colour& colour) const
 {
 	return _cured.find(colour) != _cured.end();

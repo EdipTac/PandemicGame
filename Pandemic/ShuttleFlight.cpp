@@ -13,6 +13,10 @@ action::ShuttleFlight::~ShuttleFlight() {}
 
 void action::ShuttleFlight::solicitData()
 {
+	// Reset
+	_target = nullptr;
+
+	// Alias
 	auto& player = *_performer;
 
 	// Not applicable if you have no research station in your city
@@ -52,7 +56,7 @@ void action::ShuttleFlight::solicitData()
 
 void action::ShuttleFlight::perform()
 {
-	_performer->pawn().setPosition(*_target);
+	_performer->moveTo(*_target);
 }
 
 bool action::ShuttleFlight::isValid() const

@@ -12,6 +12,10 @@ action::Dispatch::Dispatch(Player* const performer)
 
 void action::Dispatch::solicitData()
 {
+	// Reset
+	_dispatchee = nullptr;
+	_destination = nullptr;
+
 	// Get other players, if any
 	std::vector<Player*> others;
 	for (const auto& player : Board::instance().players())
@@ -99,7 +103,7 @@ void action::Dispatch::solicitData()
 
 void action::Dispatch::perform()
 {
-	_dispatchee->pawn().setPosition(*_destination);
+	_dispatchee->moveTo(*_destination);
 }
 
 bool action::Dispatch::isValid() const

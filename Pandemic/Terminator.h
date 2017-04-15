@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include "TerminationState.h"
 #include "Observable.h"
 
@@ -11,4 +13,5 @@ class Terminator
 public:
 	virtual ~Terminator() = 0;
 	virtual TerminationState terminationState() const = 0;
+	virtual std::string message() const = 0;
 };

@@ -115,10 +115,6 @@
     <Filter Include="Event Cards\src">
       <UniqueIdentifier>{02b552c8-052e-4038-8c05-fdbf02dd5206}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Event Cards\header\Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{fb33f33a-9def-4b1d-b685-d377d2935492}</UniqueIdentifier>
     </Filter>
@@ -160,9 +156,6 @@
     <ClInclude Include="CubePool.h">
       <Filter>General\header</Filter>
     </ClInclude>
-    <ClInclude Include="InfectionCardDeck.h">
-      <Filter>General\header</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>General\header</Filter>
     </ClInclude>
@@ -183,9 +176,6 @@
     </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Util\header</Filter>
-    </ClInclude>
-    <ClInclude Include="DeckofEvents.h">
-      <Filter>General\header</Filter>
     </ClInclude>
     <ClInclude Include="MapEditor.h">
       <Filter>Editors\header</Filter>
@@ -340,6 +330,15 @@
     <ClInclude Include="PlayerController.h">
       <Filter>Controllers\header</Filter>
     </ClInclude>
+    <ClInclude Include="DeckOfEvents.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
+    <ClInclude Include="Quit.h">
+      <Filter>Victory and Defeat\header</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCardDeck.h">
+      <Filter>Victory and Defeat\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -378,9 +377,6 @@
     <ClCompile Include="CubePool.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
-    <ClCompile Include="InfectionCardDeck.cpp">
-      <Filter>General\src</Filter>
-    </ClCompile>
     <ClCompile Include="Map.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
@@ -398,9 +394,6 @@
     </ClCompile>
     <ClCompile Include="Util.cpp">
       <Filter>Util\src</Filter>
-    </ClCompile>
-    <ClCompile Include="DeckofEvents.cpp">
-      <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="MapEditor.cpp">
       <Filter>Editors\src</Filter>
@@ -539,6 +532,15 @@
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Controllers\src</Filter>
+    </ClCompile>
+    <ClCompile Include="DeckOfEvents.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Quit.cpp">
+      <Filter>Victory and Defeat\src</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCardDeck.cpp">
+      <Filter>Victory and Defeat\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
