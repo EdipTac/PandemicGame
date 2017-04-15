@@ -13,6 +13,10 @@ action::ShuttleFlight::~ShuttleFlight() {}
 
 void action::ShuttleFlight::solicitData()
 {
+	// Reset
+	_target = nullptr;
+
+	// Alias
 	auto& player = *_performer;
 
 	// Not applicable if you have no research station in your city

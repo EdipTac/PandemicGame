@@ -14,6 +14,10 @@ action::MoveFromResearchStation::~MoveFromResearchStation() {}
 
 void action::MoveFromResearchStation::solicitData()
 {
+	// Reset
+	_destination = nullptr;
+	_toDiscard = nullptr;
+
 	if (!_performer->pawn().position().hasResearchStation())
 	{
 		// Can only perform this action in a city with a research station

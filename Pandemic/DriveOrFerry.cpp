@@ -23,6 +23,11 @@ void action::DriveOrFerry::perform()
 
 void action::DriveOrFerry::solicitData()
 {
+	// Reset
+	_target = nullptr;
+
+
+	// Aliases
 	auto& player = *_performer;
 	const auto& position = player.pawn().position();
 	const auto& connections = position.connections();

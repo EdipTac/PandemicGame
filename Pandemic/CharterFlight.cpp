@@ -8,6 +8,9 @@ action::CharterFlight::CharterFlight(Player * const performer)
 
 void action::CharterFlight::solicitData()
 {
+	// Reset
+	_target = nullptr;
+
 	// Aliases
 	auto& player = *_performer;
 	const auto& cards = player.cityCards();

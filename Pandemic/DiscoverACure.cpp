@@ -16,6 +16,9 @@ action::DiscoverACure::DiscoverACure(Player* const performer)
 
 void action::DiscoverACure::solicitData()
 {
+	// Reset
+	_cards.clear();
+
 	if (!_performer->pawn().position().hasResearchStation())
 	{
 		std::cout << "No research station in this city.\n";

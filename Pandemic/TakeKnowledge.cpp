@@ -14,6 +14,10 @@ action::TakeKnowledge::TakeKnowledge(Player* const performer)
 
 void action::TakeKnowledge::solicitData()
 {
+	// Reset
+	_target = nullptr;
+	_card = nullptr;
+
 	// Aliases
 	const auto& position = _performer->pawn().position();
 	const auto& players = Board::instance().players();

@@ -10,6 +10,9 @@ action::Airlift::Airlift(Player* const performer)
 
 
 void action::Airlift::solicitData() {
+	// Reset
+	_target = nullptr;
+
 	std::cout << "Please indicate the name of the player you would like to Airlift";
 	std::string liftee;
 	std::getline(std::cin >> std::ws, liftee);

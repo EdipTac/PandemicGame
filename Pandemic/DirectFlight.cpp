@@ -11,6 +11,9 @@ action::DirectFlight::DirectFlight(Player* const performer)
 
 void action::DirectFlight::solicitData()
 {
+	// Reset
+	_target = nullptr;
+
 	// Aliases
 	auto& player = *_performer;
 	const auto& cards = player.cityCards();
