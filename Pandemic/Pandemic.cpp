@@ -1,36 +1,31 @@
-//  Pandemic - Build 1
+//			  Pandemic  -   Build 2
 //
-//					Authors
-//		============================
+//					 Authors
+//	  ================================
 //		Michael Deom	-	29549641
 //		Jonny Linton	-	
 //		Edip Tac		-	26783287
 //		Kechun Ye		-	25654688
 //
-//  Submitted 15/03/2017
-//
-//  Build 1 of project.
-//
+//  Build 2 submitted 18/04/2017.
 //  An implementation of the board game "Pandemic" by Z-Man Games.
 
 #include <iostream>
-#include <fstream>
-#include <random>
-#include <sstream>
-#include <string>
-#include <vector>
 #include <map>
 #include <numeric>
+#include <string>
+#include <vector>
 
 #include "ActionController.h"
+#include "Board.h"
+#include "BoardBuilder.h"
 #include "Card.h"
 #include "City.h"
-#include "DeckofEvents.h"
 #include "DeckOfRoles.h"
-#include "Dispatcher.h"
-#include "DriveOrFerry.h"
+#include "DeckofEvents.h"
 #include "EventCard.h"
-#include "Board.h"
+#include "GameStatistics.h"
+#include "InfectedCityPercentage.h"
 #include "InfectionCard.h"
 #include "InfectionCardDeck.h"
 #include "Map.h"
@@ -39,17 +34,10 @@
 #include "Pandemic.h"
 #include "Player.h"
 #include "PlayerCityCard.h"
-#include "BoardBuilder.h"
-#include "Util.h"
-#include "GameStatistics.h"
-#include "OutbreakCounter.h"
-#include "SaveBuilder.h"
 #include "RemainingInfectionCard.h"
-#include "InfectedCityPercentage.h"
+#include "SaveBuilder.h"
 #include "TreatmentPriority.h"
-#include "TerminationHandler.h"
-#include "HandObserver.h"
-#include "Airlift.h"
+#include "Util.h"
 
 
 //	----    Program entry point    ----  //
