@@ -56,7 +56,7 @@ void action::ShuttleFlight::solicitData()
 
 void action::ShuttleFlight::perform()
 {
-	_performer->pawn().setPosition(*_target);
+	_performer->moveTo(*_target);
 }
 
 bool action::ShuttleFlight::isValid() const

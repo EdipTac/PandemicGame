@@ -50,7 +50,7 @@ void action::CharterFlight::solicitData()
 void action::CharterFlight::perform()
 {
 	_performer->discard(*_performer->positionCard(), Board::instance().playerDeck());
-	_performer->pawn().setPosition(*_target);
+	_performer->moveTo(*_target);
 }
 
 bool action::CharterFlight::isValid() const

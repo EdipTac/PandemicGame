@@ -115,7 +115,7 @@ BoardBuilder& BoardBuilder::loadPlayers()
 		for (auto it = cities.begin(); it != cities.end(); ++it) {
 			if ((*it)->name() == cityName) {
 				// found a match
-				player->pawn().setPosition(**it);
+				player->moveTo(**it);
 			}
 		}
 

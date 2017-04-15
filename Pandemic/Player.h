@@ -61,7 +61,7 @@ public:
 
 	void giveCard(const PlayerCard& card, Player& recipient);
 
-	void move(City& destination);
+	void moveTo(City& destination);
 
 	bool isOneQuietNight();
 	void setOneQuietNight(bool boolean);

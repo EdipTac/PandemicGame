@@ -52,7 +52,7 @@ void action::DirectFlight::solicitData()
 void action::DirectFlight::perform()
 {
 	_performer->discard(_target->name(), Board::instance().playerDeck());
-	_performer->pawn().setPosition(*_target);
+	_performer->moveTo(*_target);
 }
 
 bool action::DirectFlight::isValid() const

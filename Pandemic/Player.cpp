@@ -146,7 +146,7 @@ void Player::giveCard(const PlayerCard& card, Player& recipient)
 	recipient.addCard(std::move(donation));
 }
 
-void Player::move(City& destination)
+void Player::moveTo(City& destination)
 {
 	_pawn.position().onExit(*this);
 	_pawn.setPosition(destination);

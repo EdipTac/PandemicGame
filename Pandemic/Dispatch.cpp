@@ -103,7 +103,7 @@ void action::Dispatch::solicitData()
 
 void action::Dispatch::perform()
 {
-	_dispatchee->pawn().setPosition(*_destination);
+	_dispatchee->moveTo(*_destination);
 }
 
 bool action::Dispatch::isValid() const
