@@ -24,6 +24,7 @@
 #include "DeckOfRoles.h"
 #include "DeckOfEvents.h"
 #include "EventCard.h"
+#include "EpidemicCard.h"
 #include "GameStatistics.h"
 #include "InfectedCityPercentage.h"
 #include "InfectionCard.h"
