@@ -413,6 +413,11 @@ void displayCardsInHand()
 	Board::instance().currentPlayer().displayCards();
 }
 
+void displayRole()
+{
+	std::cout << "Role: " << Board::instance().currentPlayer().role().name() << "\nDescription: " << Board::instance().currentPlayer().role().description() << "\n\n";
+}
+
 void directConnectionReport()
 {
 	std::cout << "In one action, you can move to\n";
