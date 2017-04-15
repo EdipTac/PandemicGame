@@ -24,6 +24,7 @@
 #include "DeckOfRoles.h"
 #include "DeckOfEvents.h"
 #include "EventCard.h"
+#include "EpidemicCard.h"
 #include "GameStatistics.h"
 #include "InfectedCityPercentage.h"
 #include "InfectionCard.h"
@@ -442,7 +443,7 @@ void directConnectionReport()
 
 void infect()
 {
-	auto& oneQuietNightPlayer = Board::instance().nextPlayer();
+	auto& oneQuietNightPlayer = Board::instance().currentPlayer();
 	if (oneQuietNightPlayer.isOneQuietNight()) 
     { 
 		oneQuietNightPlayer.setOneQuietNight(false);
