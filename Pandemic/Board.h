@@ -14,6 +14,7 @@
 #include "Player.h"
 #include "PlayerCard.h"
 #include "HandObserver.h"
+#include "PlayerController.h"
 
 class TerminationHandler;
 
@@ -76,8 +77,7 @@ private:
 	~Board();
 
 	std::unique_ptr<Map> _map;
-	std::vector<std::unique_ptr<Player>> _players;
-	size_t _currentPlayerIdx = 0;
+	PlayerController _playerController;
 	CubePool _cubePool;
 	DiseaseTracker _diseaseTracker;
 	unsigned _infectionCounter = 1;

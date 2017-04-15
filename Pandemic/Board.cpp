@@ -23,15 +23,7 @@ Board::~Board() {}
 
 std::vector<Player*> Board::players()
 {
-	std::vector<Player*> p;
-	const auto size = _players.size();
-	auto idx = _currentPlayerIdx;
-	for (auto i = 0u; i < size; ++i)
-	{
-		p.push_back(_players[idx].get());
-		idx = (idx + 1) % size;
-	}
-	return p;
+	return _playerController.players();
 }
 
 Map& Board::map() const
@@ -41,12 +33,8 @@ Map& Board::map() const
 
 void Board::addPlayer(std::unique_ptr<Player> player)
 {
-	if (nameExists(player->name()))
-	{
-		throw std::logic_error { "No two players can have the same name." };
-	}
-	_players.push_back(std::move(player));
-	_handObserver.subscribeTo(*_players.back().get());
+	_handObserver.subscribeTo(*player.get());
+	_playerController.add(std::move(player));
 }
 
 void Board::setMap(std::unique_ptr<Map> map)
@@ -66,28 +54,22 @@ void Board::quit()
 
 Player& Board::nextPlayer()
 {
-	++_currentPlayerIdx;
-	_currentPlayerIdx %= _players.size();
-	return currentPlayer();
+	return _playerController.next();
 }
 
 Player& Board::currentPlayer()
 {
-	return *_players[_currentPlayerIdx];
+	return _playerController.current();
 }
 
 Player& Board::setCurrentPlayer(const size_t idx)
 {
-	_currentPlayerIdx = idx % _players.size();
-	return currentPlayer();
+	return _playerController.setCurrent(idx);
 }
 
 bool Board::nameExists(const std::string& name) const
 {
-	return std::any_of(_players.begin(), _players.end(), [&](const auto& p)
-	{
-		return p->name() == name;
-	});
+	return _playerController.nameExists(name);
 }
 
 unsigned Board::researchStations() const
@@ -195,7 +177,7 @@ InfectionCardDeck& Board::infectionDeck()
 
 size_t Board::initialCards() const
 {
-	const auto size = _players.size();
+	const auto size = _playerController.size();
 	return	size <= 2 ? 4 :
 			size == 3 ? 3 :
 						2 ;

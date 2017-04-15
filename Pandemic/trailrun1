@@ -1,0 +1,665 @@
+{
+    "cities": [
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 1,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Atlanta",
+            "researchStation": true
+        },
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Chicago",
+            "researchStation": false
+        },
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 1,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Montreal",
+            "researchStation": false
+        },
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "New York",
+            "researchStation": false
+        },
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 1,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "London",
+            "researchStation": false
+        },
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Essen",
+            "researchStation": false
+        },
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 1,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "St. Petersburg",
+            "researchStation": false
+        },
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Milan",
+            "researchStation": false
+        },
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 1,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Paris",
+            "researchStation": false
+        },
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Madrid",
+            "researchStation": false
+        },
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 1,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Washington",
+            "researchStation": false
+        },
+        {
+            "colour": "B",
+            "diseaseCubes": {
+                "B": 1,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "San Francisco",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Los Angeles",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Mexico City",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 1
+            },
+            "name": "Miami",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Bogota",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Lima",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Santiago",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Sao Paulo",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Buenos Aires",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Lagos",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Kinshasa",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 1
+            },
+            "name": "Khartoum",
+            "researchStation": false
+        },
+        {
+            "colour": "Y",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 1
+            },
+            "name": "Johannesburg",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 1,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Algiers",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Cairo",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 1,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Istanbul",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Moscow",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Tehran",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Delhi",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Baghdad",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Riyadh",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 1,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Karachi",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Mumbai",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 1,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Kolkata",
+            "researchStation": false
+        },
+        {
+            "colour": "K",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 1,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Chennai",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Beijing",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Seoul",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 1,
+                "Y": 0
+            },
+            "name": "Tokyo",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 1,
+                "Y": 0
+            },
+            "name": "Shanghai",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Hong Kong",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 1,
+                "Y": 0
+            },
+            "name": "Taipei",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Osaka",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 1,
+                "Y": 0
+            },
+            "name": "Bangkok",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Jakarta",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 1,
+                "Y": 0
+            },
+            "name": "Ho Chi Minh City",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 0,
+                "Y": 0
+            },
+            "name": "Manila",
+            "researchStation": false
+        },
+        {
+            "colour": "R",
+            "diseaseCubes": {
+                "B": 0,
+                "K": 0,
+                "R": 1,
+                "Y": 0
+            },
+            "name": "Sydney",
+            "researchStation": false
+        }
+    ],
+    "infection": {
+        "cured": [],
+        "deck": [
+            "Kinshasa",
+            "Lima",
+            "Mumbai",
+            "Milan",
+            "Buenos Aires",
+            "Jakarta",
+            "Delhi",
+            "Bogota",
+            "Essen",
+            "Cairo",
+            "Seoul",
+            "Moscow",
+            "Lagos",
+            "Chicago",
+            "Mexico City",
+            "Riyadh",
+            "Sao Paulo",
+            "Hong Kong",
+            "Tehran",
+            "Manila",
+            "Beijing"
+        ],
+        "discard": [
+            "New York",
+            "Los Angeles",
+            "Shanghai",
+            "Santiago",
+            "Baghdad",
+            "Osaka",
+            "San Francisco",
+            "Madrid",
+            "Istanbul",
+            "St. Petersburg",
+            "Paris",
+            "Washington",
+            "Khartoum",
+            "Taipei",
+            "Miami",
+            "Atlanta",
+            "Johannesburg",
+            "Chennai",
+            "Algiers",
+            "Ho Chi Minh City",
+            "Sydney",
+            "London",
+            "Tokyo",
+            "Montreal",
+            "Bangkok",
+            "Karachi",
+            "Kolkata"
+        ],
+        "outbreak": 0,
+        "rate": 1
+    },
+    "map": "earth2.map",
+    "playercards": {
+        "deck": [
+            "Cairo",
+            "Tokyo",
+            "St. Petersburg",
+            "Chicago",
+            "Jakarta",
+            "Bogota",
+            "Riyadh",
+            "Kinshasa",
+            "Ho Chi Minh City",
+            "Government Grant",
+            "Lima",
+            "Istanbul",
+            "Shanghai",
+            "Osaka",
+            "One Quiet Night",
+            "Johannesburg",
+            "San Francisco",
+            "Kolkata",
+            "Taipei",
+            "Milan",
+            "Manila",
+            "Bangkok",
+            "Hong Kong",
+            "New York",
+            "Airlift",
+            "Buenos Aires",
+            "Baghdad"
+        ],
+        "discard": [
+            "Sydney",
+            "Chennai",
+            "Santiago",
+            "Sao Paulo",
+            "Moscow",
+            "Beijing",
+            "Karachi",
+            "Paris",
+            "Mumbai",
+            "Tehran",
+            "Seoul",
+            "Los Angeles",
+            "Madrid",
+            "London",
+            "Khartoum"
+        ]
+    },
+    "players": [
+        {
+            "hand": [
+                "Resilient Population",
+                "Montreal",
+                "Lagos",
+                "Forecast",
+                "Algiers",
+                "Miami",
+                "Mexico City"
+            ],
+            "name": "Player1",
+            "position": "Lima",
+            "role": "Dispatcher"
+        },
+        {
+            "hand": [
+                "Washington",
+                "Essen",
+                "Atlanta",
+                "Delhi"
+            ],
+            "name": "Player2",
+            "position": "Atlanta",
+            "role": "Operations Expert"
+        }
+    ]
+}

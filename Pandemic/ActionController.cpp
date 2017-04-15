@@ -12,6 +12,7 @@
 #include "ShuttleFlight.h"
 #include "TakeKnowledge.h"
 #include "TreatDisease.h"
+#include "DoNothing.h"
 
 using namespace action;
 
@@ -63,8 +64,8 @@ void ActionController::solicitAction()
 	action.solicitData();
 	if (action.isValid())
 	{
-		// If action can be completed, cost the player a point
-		--_actionPointsRemaining;
+		// If action can be completed, reduce action points appropriately
+		action.spendActionPoints(*this);
 		action.perform();
 	}
 
@@ -96,6 +97,16 @@ void ActionController::resetActionList()
 	}
 }
 
+void ActionController::decrementActionPoints()
+{
+	--_actionPointsRemaining;
+}
+
+void ActionController::zeroActionPoints()
+{
+	_actionPointsRemaining = 0;
+}
+
 void ActionController::_resetGeneralActions()
 {
 	_generalActions.clear();
@@ -107,4 +118,5 @@ void ActionController::_resetGeneralActions()
 	_generalActions.push_back(_makeAction<DiscoverACure>());
 	_generalActions.push_back(_makeAction<GiveKnowledge>());
 	_generalActions.push_back(_makeAction<TakeKnowledge>());
+	_generalActions.push_back(_makeAction<DoNothing>());
 }

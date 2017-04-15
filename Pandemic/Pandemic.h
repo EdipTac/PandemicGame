@@ -8,6 +8,7 @@ void displayCities();
 void displayReferenceCard();
 void displayCurrentPosition();
 void displayCardsInHand();
+void displayRole();
 void infect();
 void loadGame();
 void newGame();
@@ -15,6 +16,7 @@ void waitForExit();
 
 bool actionQuit();
 bool performAction();
+bool skipAction();
 bool playEventCard();
 bool report();
 bool saveGame();
@@ -59,6 +61,7 @@ const ActionMenu turnMenu
 		{ "Report",			 report			},
 		{ "Perform Action",  performAction	},
 		{ "Play Event Card", playEventCard	},
+		{ "Skip Turn",		 skipAction     },
 		{ "Save Game",		 saveGameAction	},
 		{ "Quit Game",		 actionQuit		}
 	}
@@ -71,6 +74,7 @@ const GeneralMenu reportMenu
 		{ "Display Reference Card",	displayReferenceCard },
 		{ "Direct Connection Report",	directConnectionReport },
 		{ "Display Current Position",	displayCurrentPosition },
+		{ "Display Role",	displayRole },
 		{ "Display Cards in Hand",	displayCardsInHand }
 	}
 };

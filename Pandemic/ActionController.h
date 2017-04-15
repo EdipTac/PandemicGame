@@ -25,6 +25,12 @@ public:
 	// Resets the actions for the next selection.
 	void resetActionList();
 
+	// Reduces action points by 1
+	void decrementActionPoints();
+
+	// Reduces all action points
+	void zeroActionPoints();
+
 private:
 	Player& _player;
 	size_t _actionPointsTotal;
