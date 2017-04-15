@@ -124,7 +124,7 @@
     <ClInclude Include="ContingencyPlanner.h" />
     <ClInclude Include="CubePool.h" />
     <ClInclude Include="Deck.h" />
-    <ClInclude Include="DeckofEvents.h" />
+    <ClInclude Include="DeckOfEvents.h" />
     <ClInclude Include="DeckOfRoles.h" />
     <ClInclude Include="DirectFlight.h" />
     <ClInclude Include="DiscoverACure.h" />
@@ -197,7 +197,7 @@
     <ClCompile Include="ContingencyPlanner.cpp" />
     <ClCompile Include="CubePool.cpp" />
     <ClCompile Include="Deck.cpp" />
-    <ClCompile Include="DeckofEvents.cpp" />
+    <ClCompile Include="DeckOfEvents.cpp" />
     <ClCompile Include="DeckOfRoles.cpp" />
     <ClCompile Include="DirectFlight.cpp" />
     <ClCompile Include="DiscoverACure.cpp" />

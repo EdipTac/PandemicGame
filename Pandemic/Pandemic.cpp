@@ -22,7 +22,7 @@
 #include "Card.h"
 #include "City.h"
 #include "DeckOfRoles.h"
-#include "DeckofEvents.h"
+#include "DeckOfEvents.h"
 #include "EventCard.h"
 #include "GameStatistics.h"
 #include "InfectedCityPercentage.h"
@@ -109,7 +109,7 @@ void newGame()
 		
 	}
 	
-	auto eventCards = DeckOfEvents {}.deckOfEvents();
+	auto eventCards = event::cards();
 	while (!eventCards.empty())
 	{
 		Board::instance().playerDeck().addToDeck(std::move(eventCards.back()));

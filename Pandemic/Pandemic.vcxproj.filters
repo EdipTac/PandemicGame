@@ -180,9 +180,6 @@
     <ClInclude Include="Util.h">
       <Filter>Util\header</Filter>
     </ClInclude>
-    <ClInclude Include="DeckofEvents.h">
-      <Filter>General\header</Filter>
-    </ClInclude>
     <ClInclude Include="MapEditor.h">
       <Filter>Editors\header</Filter>
     </ClInclude>
@@ -336,6 +333,9 @@
     <ClInclude Include="PlayerController.h">
       <Filter>Controllers\header</Filter>
     </ClInclude>
+    <ClInclude Include="DeckOfEvents.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -394,9 +394,6 @@
     </ClCompile>
     <ClCompile Include="Util.cpp">
       <Filter>Util\src</Filter>
-    </ClCompile>
-    <ClCompile Include="DeckofEvents.cpp">
-      <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="MapEditor.cpp">
       <Filter>Editors\src</Filter>
@@ -535,6 +532,9 @@
     </ClCompile>
     <ClCompile Include="PlayerController.cpp">
       <Filter>Controllers\src</Filter>
+    </ClCompile>
+    <ClCompile Include="DeckOfEvents.cpp">
+      <Filter>General\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
