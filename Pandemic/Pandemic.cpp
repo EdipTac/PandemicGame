@@ -110,6 +110,7 @@ void newGame()
 	// Create players
 	std::cout << "How many players? ";
 	const auto& numPlayers = solicitSize(minPlayers, maxPlayers);
+	
 	const auto& map = Board::instance().map();	// alias
 	for (auto i = 1; i <= numPlayers; ++i)
 	{
@@ -120,6 +121,8 @@ void newGame()
 		player->pawn().setPosition(map.startingCity());
 		Board::instance().addPlayer(std::move(player));
 	}
+	std::cout << "How many epidemic cards in the game ( 4 - Introductory game; 5 - Standard game ; 6 - Heroic game) ? ";
+	const auto& numEpidemicCards = solicitEpidemicCardNumber(minEpidemicCards, maxEpidemicCards);
 
 	// Other initializtion here - cards, etc
 	for (const auto& city : Board::instance().map().cities())
@@ -153,14 +156,21 @@ void newGame()
 	Board::instance().playerDeck().shuffleDeck();
 
 	// Distribute cards to players
+	int numPlayerDistributed = 0;
 	for (const auto& player : Board::instance().players())
 	{
 		for (auto i = 0u; !Board::instance().playerDeck().empty() && i < Board::instance().initialCards(); ++i)
 		{
 			player->addCard(std::move(Board::instance().playerDeck().drawTopCard()));
+			numPlayerDistributed++;
 		}
 	}
-
+	// shuffle epidemic card into play card deck
+	int index = 0; int numEvenPile = (48 - numPlayerDistributed) / numEpidemicCards;
+	for (auto i = 1; i <= numEpidemicCards; ++i) {
+		Board::instance().playerDeck().addEpidemicToDeck(std::make_unique<EpidemicCard>(), index, numEpidemicCards);
+		index += numEvenPile;
+	}
 	for (const auto& player : Board::instance().players())
 	{
 		std::cout << "\nPlayer " << player->name() << ":";
@@ -387,6 +397,22 @@ size_t solicitSize(const size_t min, const size_t max)
 	}
 	return size;
 }
+size_t solicitEpidemicCardNumber(const size_t min, const size_t max)
+{
+	size_t size;
+	while (true)
+	{
+		std::cout << "Enter the number of epidemic cards from " << min << " to " << max << ", inclusive: ";
+		std::cin >> size;
+		std::cin.get();
+		if (min <= size && size <= max)
+		{
+			break;
+		}
+		std::cout << "Not a valid number.\n";
+	}
+	return size;
+}
 
 bool report()
 {
@@ -428,19 +454,19 @@ void directConnectionReport()
 
 void infect()
 {
-//	auto& oneQuietNightPlayer = Board::instance().nextPlayer();
-//	if (oneQuietNightPlayer.isOneQuietNight()) 
-//	{ 
-//		oneQuietNightPlayer.setOneQuietNight(false);
-//	} 
-//	else {
-//		for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
-//		{
-//			//auto& currentPlayer = Board::instance().nextPlayer();
-//			auto card = Board::instance().infectionDeck().drawTopCard();
-//			card->onDraw(Board::instance());
-//			Board::instance().infectionDeck().addToDiscard(std::move(card));
-//		}
-//	}
-//	Board::instance().notify();	
+	auto& oneQuietNightPlayer = Board::instance().nextPlayer();
+	if (oneQuietNightPlayer.isOneQuietNight()) 
+    { 
+		oneQuietNightPlayer.setOneQuietNight(false);
+	} 
+	else {
+		for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
+		{
+			//auto& currentPlayer = Board::instance().nextPlayer();
+			auto card = Board::instance().infectionDeck().drawTopCard();
+			card->onDraw(Board::instance());
+			Board::instance().infectionDeck().addToDiscard(std::move(card));
+		}
+	}
+	Board::instance().notify();	
 }

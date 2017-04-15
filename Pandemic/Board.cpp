@@ -184,9 +184,16 @@ size_t Board::initialCards() const
 }
 
 void Board::distributePlayerCards(const size_t count)
-{
+{    
+	
+	
 	for (auto i = 0u; !playerDeck().empty() && i < count; ++i)
-	{
-		currentPlayer().addCard(playerDeck().drawTopCard());
+	{   
+		auto& card = playerDeck().drawTopCard();// is epidemic card ?
+		if(!card->isCityCard() && !card->isEventCard())
+			card->cardWork(instance().infectionDeck()); // Epidemics
+		else
+		currentPlayer().addCard(move(card));
+		
 	}
 }

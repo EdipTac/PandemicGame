@@ -15,6 +15,7 @@
 #include "PlayerCard.h"
 #include "HandObserver.h"
 #include "PlayerController.h"
+#include "EpidemicCard.h"
 
 class TerminationHandler;
 

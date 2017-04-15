@@ -22,6 +22,7 @@ bool report();
 bool saveGame();
 
 size_t solicitSize(const size_t min, const size_t max);
+size_t solicitEpidemicCardNumber(const size_t min, const size_t max);
 
 std::string solicitFileName(const std::string& msg);
 std::string solicitPlayerName(const size_t number);
@@ -41,6 +42,8 @@ const auto& saveGameAction = static_cast<bool(*)()>(saveGame);
 //  ----  Constants  -----  //
 constexpr size_t minPlayers = 2;
 constexpr size_t maxPlayers = 4;
+constexpr size_t minEpidemicCards = 4;
+constexpr size_t maxEpidemicCards = 6;
 constexpr size_t actionsPerTurn = 4;
 constexpr size_t cardsPerTurn = 2;
 

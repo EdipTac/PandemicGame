@@ -1,8 +1,9 @@
 #pragma once
 
 #include <string>
-
+#include "Deck.h"
 #include "Card.h"
+#include "InfectionCard.h"
 
 // Represents a player card
 class PlayerCard
@@ -20,4 +21,6 @@ public:
 
 	// virtual function that converts a PlayerCard object into an informative string.
 	virtual std::string toString();
+	// virtual function for epidemic card
+	virtual void cardWork(Deck<InfectionCard>& deck);
 };

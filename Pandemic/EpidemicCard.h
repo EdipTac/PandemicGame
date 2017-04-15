@@ -10,15 +10,17 @@ class EpidemicCard
 	: public PlayerCard
 {	
 public:
+	EpidemicCard();
 	// Returns "EPIDEMIC"
-	virtual std::string name() const override;
-
+	std::string name() const override;
+	~EpidemicCard();
 	// The rules of the epidemic card
-	virtual std::string description() const override;
+	std::string description() const override;
 
 	// Custom implementation of the inherited virtual function from PlayerCard
-	std::string toString();
-
+	virtual std::string toString();
+	// Inherited via TextualCard
+	virtual void onDraw(Board& state) override;
 	// Inherited via PlayerCard
-	void cardWork(Deck<InfectionCard>& deck);
+	virtual void cardWork(Deck<InfectionCard>& deck);
 };

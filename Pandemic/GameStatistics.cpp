@@ -33,10 +33,10 @@ void GameStatistics::display() {
 		std::cout << "Player " << player->name() << " has " << countCity << " city card(s) " << countEvent << " event card(s)" << std::endl;
 	
 	}
-	std::cout << "\nThe remaining diseases cubes on map: " << std::endl;
-	for (const auto& color : colours()) {
-		std::cout << "Disease " << colourName(color) << ": " << Board::instance().diseaseCount(color) << " cube(s) " << std::endl;
-	}
+	//std::cout << "\nThe remaining diseases cubes on map: " << std::endl;
+	//for (const auto& color : colours()) {
+	//	std::cout << "Disease " << colourName(color) << ": " << Board::instance().diseaseCount(color) << " cube(s) " << std::endl;
+	//}
 	
 	unsigned countCity = 0; unsigned countEvent = 0;
 	for (const auto& card : Board::instance().playerDeck().drawPile())
@@ -47,10 +47,15 @@ void GameStatistics::display() {
 				countEvent++;
 		}
 	std::cout << "\nThe remaining resource: \n" << countCity << " city card(s) and " << countEvent << " event card(s)\n" <<
-		Board::instance().researchStations() << " Research stations " << std::endl;
+		Board::instance().researchStations() << " Research stations\n " << std::endl;
+	std::cout << "Outbreak mark: " << Board::instance().outbreaks() << std::endl;
+	std::cout << "Infection rate: " << Board::instance().infectionCounter() << "\n\n";
 
-
-
+	std::cout << "The remaining player card: \n";// for the test 
+		for (const auto& card : Board::instance().playerDeck().drawPile()) {
+			std::cout << card->name() << "\n";
+	}
+   
 
 }
 
