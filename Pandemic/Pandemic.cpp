@@ -58,6 +58,7 @@ void main()
 	auto infectDecro = std:: make_unique<RemainingInfectionCard>(decorator.get());// remaining infection card decorator initilization
 	auto infectStatus = std::make_unique <TreatmentPriority>(infectDecro.get());// treatment priority decorator initilization
 
+	// Main game loop
 	try
 	{
 		while (!Board::instance().shouldQuit())
@@ -74,8 +75,9 @@ void main()
 	catch (const Quit& q)
 	{
 		std::cout << "\n" << q.what() << "\n";
-		waitForExit();
 	}
+
+	waitForExit();
 }
 #endif
 

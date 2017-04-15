@@ -35,8 +35,8 @@ void TerminationHandler::update()
 
 void TerminationHandler::quit()
 {
-	throw Quit();
-	//_shouldQuit = true;
+	//throw Quit();
+	_shouldQuit = true;
 }
 
 bool TerminationHandler::shouldQuit() const
