@@ -38,6 +38,8 @@ public:
 
 	virtual void cardWork(Deck<InfectionCard>& deck) override;
 
+	virtual PlayerCardType type() const override;
+
 private:
 	std::unique_ptr<Action> _ability;
 };

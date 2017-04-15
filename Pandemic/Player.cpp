@@ -122,7 +122,7 @@ void Player::displayCards() {
 	}
 	for (auto& player : Board::instance().players()) {
 		for (auto& card : player->cards()) {
-			if (!card->isCityCard()) {
+			if (card->type() != PlayerCardType::CityCard) {
 				std::cout << card->toString() << "\n";
 			}
 		}
@@ -182,7 +182,7 @@ std::vector<PlayerCityCard*> Player::cityCards() const
 	std::vector<PlayerCityCard*> view;
 	for (const auto& card : _cards)
 	{
-		if (card->isCityCard())
+		if (card->type() == PlayerCardType::CityCard)
 		{
 			view.push_back(static_cast<PlayerCityCard*>(card.get()));
 		}

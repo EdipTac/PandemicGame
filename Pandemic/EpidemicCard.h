@@ -25,4 +25,5 @@ public:
 
 	virtual bool isEpidemicCard() const override;
 
+	virtual PlayerCardType type() const override;
 };

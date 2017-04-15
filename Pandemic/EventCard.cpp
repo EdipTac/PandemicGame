@@ -45,3 +45,8 @@ Action& EventCard::ability() {
 }
 
 void EventCard::cardWork(Deck<InfectionCard>& deck) {}
+
+PlayerCardType EventCard::type() const
+{
+	return PlayerCardType::EventCard;
+}

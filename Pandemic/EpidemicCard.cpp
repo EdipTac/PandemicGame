@@ -50,3 +50,8 @@ bool EpidemicCard::isEpidemicCard() const
 {
 	return true;
 }
+
+PlayerCardType EpidemicCard::type() const
+{
+	return PlayerCardType::EpidemicCard;
+}

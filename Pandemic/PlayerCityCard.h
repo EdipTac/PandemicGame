@@ -18,9 +18,6 @@ public:
 	// Destructor
 	~PlayerCityCard() override;
 
-	// True
-	bool isCityCard() const override;
-
 	// Custom implementation of the inherited virtual function from PlayerCard
 	std::string toString();
 
@@ -31,4 +28,6 @@ public:
 	virtual void cardWork(Deck<InfectionCard>& deck) override;
 
 	void onDraw(Board& state) override;
+
+	virtual PlayerCardType type() const override;
 };

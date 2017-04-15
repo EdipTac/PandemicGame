@@ -2,11 +2,6 @@
 
 PlayerCard::~PlayerCard() {}
 
-bool PlayerCard::isCityCard() const
-{
-	return false;
-}
-
 bool PlayerCard::isEventCard() const
 {
 	return false;
@@ -19,7 +14,8 @@ bool PlayerCard::isEpidemicCard() const
 
 bool PlayerCard::isHandCard() const
 {
-	return isCityCard() || isEventCard();
+	return type() == PlayerCardType::CityCard
+		|| type() == PlayerCardType::EventCard;
 }
 
 std::string PlayerCard::toString()

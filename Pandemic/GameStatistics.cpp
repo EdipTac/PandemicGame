@@ -27,30 +27,34 @@ void GameStatistics::display() {
 		"Number of cards on each player's hand: " << std::endl;
 	for (const auto& player : Board::instance().players())
 	{
-		unsigned countCity = 0; unsigned countEvent = 0;
+		unsigned countCity = 0, countEvent = 0;
 		for (const auto& card : player->cards())
 		{
-			if (card->isCityCard())
+			if (card->type() == PlayerCardType::CityCard)
+			{
 				countCity++;
+			}
 			else
+			{
 				countEvent++;
+			}
 		}
 		std::cout << "Player " << player->name() << " has " << countCity << " city card(s) " << countEvent << " event card(s)" << std::endl;
 	
 	}
-	//std::cout << "\nThe remaining diseases cubes on map: " << std::endl;
-	//for (const auto& color : colours()) {
-	//	std::cout << "Disease " << colourName(color) << ": " << Board::instance().diseaseCount(color) << " cube(s) " << std::endl;
-	//}
 	
-	unsigned countCity = 0; unsigned countEvent = 0;
+	unsigned countCity = 0, countEvent = 0;
 	for (const auto& card : Board::instance().playerDeck().drawPile())
 	{
-			if (card->isCityCard())
-				countCity++;
-			else
-				countEvent++;
+		if (card->type() == PlayerCardType::CityCard)
+		{
+			countCity++;
 		}
+		else
+		{
+			countEvent++;
+		}
+	}
 	std::cout << "\nThe remaining resource: \n" << countCity << " city card(s) and " << countEvent << " event card(s)\n" <<
 		Board::instance().researchStations() << " Research stations\n " << std::endl;
 	std::cout << "Outbreak mark: " << Board::instance().outbreaks() << std::endl;
@@ -60,6 +64,4 @@ void GameStatistics::display() {
 		for (const auto& card : Board::instance().playerDeck().drawPile()) {
 			std::cout << card->name() << "\n";
 	}
-   
-
 }
