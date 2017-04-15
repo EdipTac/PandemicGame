@@ -163,6 +163,7 @@
     <ClInclude Include="PlayerCard.h" />
     <ClInclude Include="PlayerCityCard.h" />
     <ClInclude Include="QuarantineSpecialist.h" />
+    <ClInclude Include="Quit.h" />
     <ClInclude Include="RemainingInfectionCard.h" />
     <ClInclude Include="Researcher.h" />
     <ClInclude Include="ResearcherGiveKnowledge.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="PlayerCityCard.cpp" />
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="QuarantineSpecialist.cpp" />
+    <ClCompile Include="Quit.cpp" />
     <ClCompile Include="RemainingInfectionCard.cpp" />
     <ClCompile Include="Researcher.cpp" />
     <ClCompile Include="ResearcherGiveKnowledge.cpp" />

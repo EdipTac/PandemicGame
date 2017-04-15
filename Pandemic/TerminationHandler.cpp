@@ -1,8 +1,9 @@
 #include <algorithm>
 #include <iostream>
 
-#include "TerminationHandler.h"
 #include "Board.h"
+#include "TerminationHandler.h"
+#include "Quit.h"
 
 TerminationHandler::~TerminationHandler()
 {
@@ -34,7 +35,8 @@ void TerminationHandler::update()
 
 void TerminationHandler::quit()
 {
-	_shouldQuit = true;
+	throw Quit();
+	//_shouldQuit = true;
 }
 
 bool TerminationHandler::shouldQuit() const
@@ -44,12 +46,10 @@ bool TerminationHandler::shouldQuit() const
 
 void TerminationHandler::onVictory()
 {
-	std::cout << "You win!" << std::endl;
-	quit();
+	throw Quit("You win!");
 }
 
 void TerminationHandler::onDefeat()
 {
-	std::cout << "You lose!" << std::endl;
-	quit();
+	throw Quit("You lose!");
 }

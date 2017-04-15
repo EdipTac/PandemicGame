@@ -336,6 +336,9 @@
     <ClInclude Include="PlayerCardDeck.h">
       <Filter>General\header</Filter>
     </ClInclude>
+    <ClInclude Include="Quit.h">
+      <Filter>Victory and Defeat\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -535,6 +538,9 @@
     </ClCompile>
     <ClCompile Include="PlayerCardDeck.cpp">
       <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="Quit.cpp">
+      <Filter>Victory and Defeat\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

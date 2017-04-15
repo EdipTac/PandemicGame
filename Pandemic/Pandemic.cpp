@@ -37,6 +37,7 @@
 #include "SaveBuilder.h"
 #include "TreatmentPriority.h"
 #include "Util.h"
+#include "Quit.h"
 
 
 //	----    Program entry point    ----  //
@@ -57,18 +58,24 @@ void main()
 	auto infectDecro = std:: make_unique<RemainingInfectionCard>(decorator.get());// remaining infection card decorator initilization
 	auto infectStatus = std::make_unique <TreatmentPriority>(infectDecro.get());// treatment priority decorator initilization
 
-	while (!Board::instance().shouldQuit())
+	try
 	{
-		auto& currentPlayer = Board::instance().currentPlayer();
-		std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
-		while (!turnMenu.solicitInput()); // Intentionally empty body
-		Board::instance().distributePlayerCards(cardsPerTurn);
-		currentPlayer.displayCards();
-		infect();
-		Board::instance().nextPlayer();
+		while (!Board::instance().shouldQuit())
+		{
+			auto& currentPlayer = Board::instance().currentPlayer();
+			std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
+			while (!turnMenu.solicitInput()); // Intentionally empty body
+			Board::instance().distributePlayerCards(cardsPerTurn);
+			currentPlayer.displayCards();
+			infect();
+			Board::instance().nextPlayer();
+		}
 	}
-
-	waitForExit();
+	catch (const Quit& q)
+	{
+		std::cout << q.what() << "\n";
+		waitForExit();
+	}
 }
 #endif
 
