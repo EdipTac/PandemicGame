@@ -33,6 +33,7 @@ public:
 	std::vector<PlayerCard*> cards() const;
 	size_t cardCount() const;
 	void addCard(std::unique_ptr<PlayerCard> card);
+	void drawFrom(Deck<PlayerCard>& deck, size_t count = 1);
 	PlayerCard* getCard(const std::string& name);
 	void discard(PlayerCard& card, Deck<PlayerCard>& deck);
 	void discard(const std::string& name, Deck<PlayerCard>& deck);
@@ -61,7 +62,7 @@ public:
 
 	void giveCard(const PlayerCard& card, Player& recipient);
 
-	void move(City& destination);
+	void moveTo(City& destination);
 
 	bool isOneQuietNight();
 	void setOneQuietNight(bool boolean);

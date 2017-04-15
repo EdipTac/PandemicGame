@@ -1,54 +1,43 @@
-//  Pandemic - Build 1
+//			  Pandemic  -   Build 2
 //
-//					Authors
-//		============================
+//					 Authors
+//	  ================================
 //		Michael Deom	-	29549641
 //		Jonny Linton	-	
 //		Edip Tac		-	26783287
 //		Kechun Ye		-	25654688
 //
-//  Submitted 15/03/2017
-//
-//  Build 1 of project.
-//
+//  Build 2 submitted 18/04/2017.
 //  An implementation of the board game "Pandemic" by Z-Man Games.
 
 #include <iostream>
-#include <fstream>
-#include <random>
-#include <sstream>
-#include <string>
-#include <vector>
 #include <map>
 #include <numeric>
+#include <string>
+#include <vector>
 
 #include "ActionController.h"
+#include "Board.h"
+#include "BoardBuilder.h"
 #include "Card.h"
 #include "City.h"
-#include "DeckofEvents.h"
 #include "DeckOfRoles.h"
-#include "Dispatcher.h"
-#include "DriveOrFerry.h"
+#include "DeckOfEvents.h"
 #include "EventCard.h"
-#include "Board.h"
+#include "GameStatistics.h"
+#include "InfectedCityPercentage.h"
 #include "InfectionCard.h"
-#include "InfectionCardDeck.h"
 #include "Map.h"
 #include "MapEditor.h"
 #include "Menu.h"
 #include "Pandemic.h"
 #include "Player.h"
 #include "PlayerCityCard.h"
-#include "BoardBuilder.h"
-#include "Util.h"
-#include "GameStatistics.h"
-#include "OutbreakCounter.h"
-#include "SaveBuilder.h"
 #include "RemainingInfectionCard.h"
-#include "InfectedCityPercentage.h"
+#include "SaveBuilder.h"
 #include "TreatmentPriority.h"
-#include "TerminationHandler.h"
-#include "HandObserver.h"
+#include "Util.h"
+#include "Quit.h"
 
 
 //	----    Program entry point    ----  //
@@ -56,15 +45,6 @@
 #ifdef TEST
 void main()
 {
-	HandObserver obs;
-	Player p;
-	City c("test");
-	for (int i = 1; i <= 8; ++i)
-	{
-		p.addCard(std::make_unique<PlayerCityCard>(c));
-	}
-	obs.subscribeTo(p);
-	p.addCard(std::make_unique<PlayerCityCard>(c));
 	waitForExit();
 }
 #else
@@ -78,23 +58,23 @@ void main()
 	auto infectDecro = std:: make_unique<RemainingInfectionCard>(decorator.get());// remaining infection card decorator initilization
 	auto infectStatus = std::make_unique <TreatmentPriority>(infectDecro.get());// treatment priority decorator initilization
 
-	while (!Board::instance().shouldQuit())
+	// Main game loop
+	try
 	{
-		auto& currentPlayer = Board::instance().currentPlayer();
-		std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
-		while (!turnMenu.solicitInput()); // Intentionally empty body
-		Board::instance().distributePlayerCards(cardsPerTurn);
-		currentPlayer.displayCards();
-		// the below steps are to check if the play has used the oneQuietNight event card, if they have we do not infect.
-		//auto& oneQuietNightPlayer = Board::instance().nextPlayer();
-		if (!currentPlayer.isOneQuietNight())
+		while (!Board::instance().shouldQuit())
 		{
+			auto& currentPlayer = Board::instance().currentPlayer();
+			std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
+			while (!turnMenu.solicitInput()); // Intentionally empty body
+			Board::instance().distributePlayerCards(cardsPerTurn);
+			currentPlayer.displayCards();
 			infect();
+			Board::instance().nextPlayer();
 		}
-		else {
-			currentPlayer.setOneQuietNight(false);
-		}
-		Board::instance().nextPlayer();
+	}
+	catch (const Quit& q)
+	{
+		std::cout << "\n" << q.what() << "\n";
 	}
 
 	waitForExit();
@@ -118,6 +98,7 @@ void newGame()
 	// Create players
 	std::cout << "How many players? ";
 	const auto& numPlayers = solicitSize(minPlayers, maxPlayers);
+	
 	const auto& map = Board::instance().map();	// alias
 	for (auto i = 1; i <= numPlayers; ++i)
 	{
@@ -128,6 +109,8 @@ void newGame()
 		player->pawn().setPosition(map.startingCity());
 		Board::instance().addPlayer(std::move(player));
 	}
+	std::cout << "How many epidemic cards in the game ( 4 - Introductory game; 5 - Standard game ; 6 - Heroic game) ? ";
+	const auto& numEpidemicCards = solicitEpidemicCardNumber(minEpidemicCards, maxEpidemicCards);
 
 	// Other initializtion here - cards, etc
 	for (const auto& city : Board::instance().map().cities())
@@ -137,7 +120,7 @@ void newGame()
 		
 	}
 	
-	auto eventCards = DeckofEvents {}.deckOfEvents();
+	auto eventCards = event::cards();
 	while (!eventCards.empty())
 	{
 		Board::instance().playerDeck().addToDeck(std::move(eventCards.back()));
@@ -161,14 +144,21 @@ void newGame()
 	Board::instance().playerDeck().shuffleDeck();
 
 	// Distribute cards to players
+	int numPlayerDistributed = 0;
 	for (const auto& player : Board::instance().players())
 	{
 		for (auto i = 0u; !Board::instance().playerDeck().empty() && i < Board::instance().initialCards(); ++i)
 		{
 			player->addCard(std::move(Board::instance().playerDeck().drawTopCard()));
+			numPlayerDistributed++;
 		}
 	}
-
+	// shuffle epidemic card into play card deck
+	int index = 0; int numEvenPile = (48 - numPlayerDistributed) / numEpidemicCards;
+	for (auto i = 1; i <= numEpidemicCards; ++i) {
+		Board::instance().playerDeck().addEpidemicToDeck(std::make_unique<EpidemicCard>(), index, numEpidemicCards);
+		index += numEvenPile;
+	}
 	for (const auto& player : Board::instance().players())
 	{
 		std::cout << "\nPlayer " << player->name() << ":";
@@ -395,6 +385,22 @@ size_t solicitSize(const size_t min, const size_t max)
 	}
 	return size;
 }
+size_t solicitEpidemicCardNumber(const size_t min, const size_t max)
+{
+	size_t size;
+	while (true)
+	{
+		std::cout << "Enter the number of epidemic cards from " << min << " to " << max << ", inclusive: ";
+		std::cin >> size;
+		std::cin.get();
+		if (min <= size && size <= max)
+		{
+			break;
+		}
+		std::cout << "Not a valid number.\n";
+	}
+	return size;
+}
 
 bool report()
 {
@@ -436,12 +442,12 @@ void directConnectionReport()
 
 void infect()
 {
-	/*auto& oneQuietNightPlayer = Board::instance().nextPlayer();
+	auto& oneQuietNightPlayer = Board::instance().nextPlayer();
 	if (oneQuietNightPlayer.isOneQuietNight()) 
-	{ 
+    { 
 		oneQuietNightPlayer.setOneQuietNight(false);
 	} 
-	else {*/
+	else {
 		for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
 		{
 			//auto& currentPlayer = Board::instance().nextPlayer();
@@ -449,6 +455,6 @@ void infect()
 			card->onDraw(Board::instance());
 			Board::instance().infectionDeck().addToDiscard(std::move(card));
 		}
-	//}
+	}
 	Board::instance().notify();	
 }

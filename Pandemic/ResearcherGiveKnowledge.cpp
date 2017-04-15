@@ -17,6 +17,10 @@ action::ResearcherGiveKnowledge::~ResearcherGiveKnowledge() {}
 
 void action::ResearcherGiveKnowledge::solicitData()
 {
+	// Reset
+	_target = nullptr;
+	_card = nullptr;
+
 	// Aliases
 	const auto& position = _performer->pawn().position();
 	const auto& players = Board::instance().players();

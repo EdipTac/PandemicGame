@@ -16,3 +16,4 @@ std::string PlayerCard::toString()
 {
 	return "Name: " + name();
 }
+void PlayerCard::cardWork(Deck<InfectionCard>& deck){}

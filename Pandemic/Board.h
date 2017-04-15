@@ -7,14 +7,15 @@
 #include "Deck.h"
 #include "DiseaseTracker.h"
 #include "InfectionCard.h"
-#include "InfectionCardDeck.h"
 #include "Map.h"
 #include "Observable.h"
 #include "OutbreakCounter.h"
 #include "Player.h"
 #include "PlayerCard.h"
+#include "PlayerCardDeck.h"
 #include "HandObserver.h"
 #include "PlayerController.h"
+#include "EpidemicCard.h"
 
 class TerminationHandler;
 
@@ -66,8 +67,8 @@ public:
 	void advanceOutbreakCounter();
 
 	// Cards
-	Deck<PlayerCard>& playerDeck();
-	InfectionCardDeck& infectionDeck();
+	PlayerCardDeck& playerDeck();
+	Deck<InfectionCard>& infectionDeck();
 	size_t initialCards() const;
 	void distributePlayerCards(const size_t count);
 
@@ -82,8 +83,8 @@ private:
 	DiseaseTracker _diseaseTracker;
 	unsigned _infectionCounter = 1;
 	unsigned _researchStations = 6;
-	Deck<PlayerCard> _playerDeck;
-	InfectionCardDeck _infectionDeck;
+	PlayerCardDeck _playerDeck;
+	Deck<InfectionCard> _infectionDeck;
 	OutbreakCounter _outbreakCounter;
 	std::unique_ptr<TerminationHandler> _terminationHandler;
 	HandObserver _handObserver;

@@ -13,6 +13,9 @@ action::TreatDisease::TreatDisease(Player* const performer)
 
 void action::TreatDisease::solicitData()
 {
+	// Reset
+	_city = nullptr;
+
 	auto& position = _performer->pawn().position();
 	const auto& diseases = position.diseases();
 	if (diseases.empty())

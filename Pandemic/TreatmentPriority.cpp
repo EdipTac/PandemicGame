@@ -15,14 +15,14 @@ void TreatmentPriority::update() {
 
 	TreatmentPriority::display();
 }
-bool TreatmentPriority::sortbysec(const pair<City*, int> &a, const pair<City*, int> &b)
+bool TreatmentPriority::sortbysec(const pair<City*, size_t> &a, const pair<City*, size_t> &b)
 {
 	return (a.second > b.second);
 }
 
 void TreatmentPriority::display() {
 	cout << "\nTreatment priority in descending order for \ncities which have more than two disease cubes:" << endl;
-	vector <pair<City*, int>> citylist;
+	vector <pair<City*, size_t>> citylist;
 	for (auto& city : Board::instance().map().cities()) {
 
 		citylist.push_back(make_pair(city.get(), city->totalCubes()));

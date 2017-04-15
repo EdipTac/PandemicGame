@@ -15,6 +15,7 @@ namespace action
 		virtual void perform() override;
 		virtual bool isValid() const override;
 		virtual void setTarget(City& target);
+
 	private:
 		City* _target;
 	};

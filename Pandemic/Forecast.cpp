@@ -8,6 +8,9 @@ action::Forecast::Forecast(Player * const performer)
 
 void action::Forecast::solicitData()
 {
+	// Reset
+	_target.clear();
+
 	const auto& cards = Board::instance().infectionDeck().drawPile();
 	
 	if (cards.empty())

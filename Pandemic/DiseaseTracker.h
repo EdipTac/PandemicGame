@@ -10,6 +10,7 @@ class DiseaseTracker
 {
 public:
 	virtual TerminationState terminationState() const override;
+	virtual std::string message() const override;
 	bool isCured(const Colour& colour) const;
 	void cure(const Colour& colour);
 

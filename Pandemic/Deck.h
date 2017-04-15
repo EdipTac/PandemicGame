@@ -36,6 +36,7 @@ public:
 	// Returns the top card of the active deck
 	virtual std::unique_ptr<T> drawTopCard();
 
+
 	// Returns the top card of the discard deck
 	virtual std::unique_ptr<T> drawTopDiscard();
 
@@ -48,7 +49,8 @@ public:
 
 	// Inserts a card into the draw pile
 	virtual void addToDeck(std::unique_ptr<T> card);
-
+	// Inserts a epidemic card into the draw pile 
+	virtual void addEpidemicToDeck(std::unique_ptr<T> card, int index, int numEpidemic);
 	// Discards a card
 	virtual void addToDiscard(std::unique_ptr<T> card);
 

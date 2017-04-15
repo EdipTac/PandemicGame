@@ -17,6 +17,7 @@ Board::Board()
 {
 	_terminationHandler->subscribeTo(_outbreakCounter);
 	_terminationHandler->subscribeTo(_diseaseTracker);
+	_terminationHandler->subscribeTo(_playerDeck);
 }
 
 Board::~Board() {}
@@ -165,12 +166,12 @@ CubePool& Board::cubePool()
 	return _cubePool;
 }
 
-Deck<PlayerCard>& Board::playerDeck()
+PlayerCardDeck& Board::playerDeck()
 {
 	return _playerDeck;
 }
 
-InfectionCardDeck& Board::infectionDeck()
+Deck<InfectionCard>& Board::infectionDeck()
 {
 	return _infectionDeck;
 }
@@ -184,9 +185,16 @@ size_t Board::initialCards() const
 }
 
 void Board::distributePlayerCards(const size_t count)
-{
+{    
+	
+	
 	for (auto i = 0u; !playerDeck().empty() && i < count; ++i)
-	{
-		currentPlayer().addCard(playerDeck().drawTopCard());
+	{   
+		auto& card = playerDeck().drawTopCard();// is epidemic card ?
+		if(!card->isCityCard() && !card->isEventCard())
+			card->cardWork(instance().infectionDeck()); // Epidemics
+		else
+		currentPlayer().addCard(move(card));
+		
 	}
 }

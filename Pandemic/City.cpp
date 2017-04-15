@@ -6,7 +6,6 @@
 #include "Colour.h"
 #include "Board.h"
 #include "Player.h"
-#include "InfectionCardDeck.h"
 #include "Board.h"
 
 City::City(const std::string& name, const Colour& colour, const std::map<Colour, size_t>& cubes)
@@ -63,8 +62,9 @@ size_t& City::diseaseCubes(const Colour& colour)
 {
 	return _diseaseCubes[colour];
 }
-int City::totalCubes() {
-	int sum = 0;
+
+size_t City::totalCubes() {
+	size_t sum = 0;
 	for (auto& color : diseases()) {
 		sum += diseaseCubes(color);
 	}
@@ -243,7 +243,7 @@ void City::onEnter(Player& player)
 	player.role().onEnter(*this);
 }
 
-void City::onExit(Player & player)
+void City::onExit(Player& player)
 {
 	player.role().onExit(*this);
 }

@@ -7,6 +7,9 @@ action::OneQuietNight::OneQuietNight(Player* const perfomer)
 
 void action::OneQuietNight::solicitData()
 {
+	// Reset
+	_target = nullptr;
+
 	const auto& players = Board::instance().players();
 	std::string name;
 	std::cout << "Please enter the name of the player that you would like to activate One Quiet Night for. \n";

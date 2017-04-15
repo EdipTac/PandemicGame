@@ -13,6 +13,7 @@ namespace action
 		virtual void solicitData() override;
 		virtual void perform() override;
 		virtual bool isValid() const override;
+
 	private:
 		City* _target;
 		bool _takeFromCity;
