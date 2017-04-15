@@ -9,7 +9,6 @@
 #include "CubePool.h"
 
 class Board;
-class InfectionCardDeck;
 class Player;
 
 // Represents a single city.
