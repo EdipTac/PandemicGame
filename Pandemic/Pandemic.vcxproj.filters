@@ -156,9 +156,6 @@
     <ClInclude Include="CubePool.h">
       <Filter>General\header</Filter>
     </ClInclude>
-    <ClInclude Include="InfectionCardDeck.h">
-      <Filter>General\header</Filter>
-    </ClInclude>
     <ClInclude Include="Map.h">
       <Filter>General\header</Filter>
     </ClInclude>
@@ -375,9 +372,6 @@
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="CubePool.cpp">
-      <Filter>General\src</Filter>
-    </ClCompile>
-    <ClCompile Include="InfectionCardDeck.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">

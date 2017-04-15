@@ -141,7 +141,6 @@
     <ClInclude Include="GovernmentGrant.h" />
     <ClInclude Include="HandObserver.h" />
     <ClInclude Include="InfectionCard.h" />
-    <ClInclude Include="InfectionCardDeck.h" />
     <ClInclude Include="InfectedCityPercentage.h" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="Map.h" />
@@ -215,7 +214,6 @@
     <ClCompile Include="GovernmentGrant.cpp" />
     <ClCompile Include="HandObserver.cpp" />
     <ClCompile Include="InfectionCard.cpp" />
-    <ClCompile Include="InfectionCardDeck.cpp" />
     <ClCompile Include="InfectedCityPercentage.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapEditor.cpp" />

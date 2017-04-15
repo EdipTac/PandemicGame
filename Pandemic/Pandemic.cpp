@@ -27,7 +27,6 @@
 #include "GameStatistics.h"
 #include "InfectedCityPercentage.h"
 #include "InfectionCard.h"
-#include "InfectionCardDeck.h"
 #include "Map.h"
 #include "MapEditor.h"
 #include "Menu.h"
