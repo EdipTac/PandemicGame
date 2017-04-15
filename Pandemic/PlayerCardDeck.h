@@ -1,0 +1,19 @@
+#pragma once
+
+#include "Deck.h"
+#include "PlayerCard.h"
+#include "Terminator.h"
+
+class PlayerCardDeck
+	: public Deck<PlayerCard>
+	, public Terminator
+{
+public:
+	// Dtor
+	virtual ~PlayerCardDeck() override;
+
+	virtual TerminationState terminationState() const override;
+
+	// Notifies on draw
+	virtual std::unique_ptr<PlayerCard> drawTopCard() override;
+};

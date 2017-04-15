@@ -243,7 +243,7 @@ void City::onEnter(Player& player)
 	player.role().onEnter(*this);
 }
 
-void City::onExit(Player & player)
+void City::onExit(Player& player)
 {
 	player.role().onExit(*this);
 }

@@ -336,6 +336,9 @@
     <ClInclude Include="DeckOfEvents.h">
       <Filter>General\header</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerCardDeck.h">
+      <Filter>General\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -534,6 +537,9 @@
       <Filter>Controllers\src</Filter>
     </ClCompile>
     <ClCompile Include="DeckOfEvents.cpp">
+      <Filter>General\src</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCardDeck.cpp">
       <Filter>General\src</Filter>
     </ClCompile>
   </ItemGroup>
