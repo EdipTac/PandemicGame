@@ -30,7 +30,7 @@ public:
 	// Player management
 	std::vector<Player*> players();
 	void addPlayer(std::unique_ptr<Player> player);
-	Player& nextPlayer();
+	void nextPlayer();
 	Player& currentPlayer();
 	Player& setCurrentPlayer(const size_t idx);
 	bool nameExists(const std::string& name) const;

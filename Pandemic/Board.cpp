@@ -53,9 +53,9 @@ void Board::quit()
 	_terminationHandler->quit();
 }
 
-Player& Board::nextPlayer()
+void Board::nextPlayer()
 {
-	return _playerController.next();
+	_playerController.next();
 }
 
 Player& Board::currentPlayer()
@@ -186,15 +186,17 @@ size_t Board::initialCards() const
 
 void Board::distributePlayerCards(const size_t count)
 {    
-	
-	
 	for (auto i = 0u; !playerDeck().empty() && i < count; ++i)
 	{   
-		auto& card = playerDeck().drawTopCard();// is epidemic card ?
-		if(!card->isCityCard() && !card->isEventCard())
+		auto card = playerDeck().drawTopCard();
+		if (!card->isCityCard() && !card->isEventCard())
+		{
+			// Is epidemic card ?
 			card->cardWork(instance().infectionDeck()); // Epidemics
+		}
 		else
-		currentPlayer().addCard(move(card));
-		
+		{
+			currentPlayer().addCard(std::move(card));
+		}
 	}
 }
