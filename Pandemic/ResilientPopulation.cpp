@@ -43,7 +43,7 @@ void action::ResilientPopulation::perform()
 
 bool action::ResilientPopulation::isValid() const
 {
-	return false;
+	return (!_target.empty());
 }
 
 
