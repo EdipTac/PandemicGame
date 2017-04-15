@@ -10,6 +10,7 @@ class OutbreakCounter
 public:
 	OutbreakCounter();
 	virtual TerminationState terminationState() const override;
+	virtual std::string message() const override;
 	size_t counter() const;
 	void advance();
 

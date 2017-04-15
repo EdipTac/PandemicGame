@@ -73,7 +73,7 @@ void main()
 	}
 	catch (const Quit& q)
 	{
-		std::cout << q.what() << "\n";
+		std::cout << "\n" << q.what() << "\n";
 		waitForExit();
 	}
 }

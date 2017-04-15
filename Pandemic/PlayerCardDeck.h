@@ -13,6 +13,7 @@ public:
 	virtual ~PlayerCardDeck() override;
 
 	virtual TerminationState terminationState() const override;
+	virtual std::string message() const override;
 
 	// Notifies on draw
 	virtual std::unique_ptr<PlayerCard> drawTopCard() override;

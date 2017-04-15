@@ -24,10 +24,10 @@ void TerminationHandler::update()
 		switch (subject->terminationState())
 		{
 			case TS::Victory:
-				onVictory();
+				onVictory(*subject);
 				return;
 			case TS::Defeat:
-				onDefeat();
+				onDefeat(*subject);
 				return;
 		}
 	}
@@ -44,12 +44,12 @@ bool TerminationHandler::shouldQuit() const
 	return _shouldQuit;
 }
 
-void TerminationHandler::onVictory()
+void TerminationHandler::onVictory(const Terminator& t)
 {
-	throw Quit("You win!");
+	throw Quit(t.message() + " You win!");
 }
 
-void TerminationHandler::onDefeat()
+void TerminationHandler::onDefeat(const Terminator& t)
 {
-	throw Quit("You lose!");
+	throw Quit(t.message() + " You lose!");
 }

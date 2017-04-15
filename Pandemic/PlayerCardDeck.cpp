@@ -8,6 +8,11 @@ TerminationState PlayerCardDeck::terminationState() const
 	return empty() ? TerminationState::Defeat : TerminationState::InProgress;
 }
 
+std::string PlayerCardDeck::message() const
+{
+	return "No cards left to draw.";
+}
+
 std::unique_ptr<PlayerCard> PlayerCardDeck::drawTopCard()
 {
 	notify();

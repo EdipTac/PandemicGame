@@ -16,8 +16,8 @@ public:
 	bool shouldQuit() const;
 
 protected:
-	virtual void onVictory();
-	virtual void onDefeat();
+	virtual void onVictory(const Terminator& t);
+	virtual void onDefeat(const Terminator& t);
 
 private:
 	bool _shouldQuit = false;
