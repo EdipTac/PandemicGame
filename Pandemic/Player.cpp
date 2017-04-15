@@ -53,10 +53,19 @@ void Player::drawFrom(Deck<PlayerCard>& deck, size_t count)
 		auto card = deck.drawTopCard();
 		if (!card)
 		{
-			// Deck was empty
+			// Dick was empty, so card pointer is null
 			break;
 		}
-		_cards.push_back(std::move(card));
+		card->onDraw(Board::instance());
+		card->cardWork(Board::instance().infectionDeck());
+		if (card->isHandCard())
+		{
+			_cards.push_back(std::move(card));
+		}
+		else
+		{
+			deck.addToDiscard(std::move(card));
+		}
 	}
 	notify();
 }
@@ -113,7 +122,7 @@ void Player::displayCards() {
 	}
 	for (auto& player : Board::instance().players()) {
 		for (auto& card : player->cards()) {
-			if (!card->isCityCard()) {
+			if (card->type() != PlayerCardType::CityCard) {
 				std::cout << card->toString() << "\n";
 			}
 		}
@@ -173,7 +182,7 @@ std::vector<PlayerCityCard*> Player::cityCards() const
 	std::vector<PlayerCityCard*> view;
 	for (const auto& card : _cards)
 	{
-		if (card->isCityCard())
+		if (card->type() == PlayerCardType::CityCard)
 		{
 			view.push_back(static_cast<PlayerCityCard*>(card.get()));
 		}

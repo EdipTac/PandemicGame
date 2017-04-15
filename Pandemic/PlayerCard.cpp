@@ -2,18 +2,23 @@
 
 PlayerCard::~PlayerCard() {}
 
-bool PlayerCard::isCityCard() const
+bool PlayerCard::isEventCard() const
 {
 	return false;
 }
 
-bool PlayerCard::isEventCard() const
+bool PlayerCard::isEpidemicCard() const
 {
 	return false;
+}
+
+bool PlayerCard::isHandCard() const
+{
+	return type() == PlayerCardType::CityCard
+		|| type() == PlayerCardType::EventCard;
 }
 
 std::string PlayerCard::toString()
 {
 	return "Name: " + name();
 }
-void PlayerCard::cardWork(Deck<InfectionCard>& deck){}

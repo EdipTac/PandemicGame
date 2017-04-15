@@ -17,10 +17,6 @@ PlayerCityCard::PlayerCityCard(City& city)
 
 PlayerCityCard::~PlayerCityCard() {}
 
-bool PlayerCityCard::isCityCard() const
-{
-	return true;
-}
 
 // Custom implementation of the inherited virtual function from PlayerCard
 std::string PlayerCityCard::toString()
@@ -38,4 +34,11 @@ std::string PlayerCityCard::description() const
 	return CityCard::description();
 }
 
+void PlayerCityCard::cardWork(Deck<InfectionCard>& deck) {}
+
 void PlayerCityCard::onDraw(Board& state) {}
+
+PlayerCardType PlayerCityCard::type() const
+{
+	return PlayerCardType::CityCard;
+}

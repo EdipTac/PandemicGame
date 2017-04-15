@@ -1,14 +1,17 @@
 //			  Pandemic  -   Build 2
+//			-------------------------
+//
 //
 //					 Authors
-//	  ================================
-//		Michael Deom	-	29549641
-//		Jonny Linton	-	
-//		Edip Tac		-	26783287
-//		Kechun Ye		-	25654688
+//		================================
+//		  Michael Deom	-	29549641
+//		  Jonny Linton	-	
+//		  Edip Tac		-	26783287
+//		  Kechun Ye		-	25654688
 //
-//  Build 2 submitted 18/04/2017.
-//  An implementation of the board game "Pandemic" by Z-Man Games.
+//
+//	  Build 2 submitted 18/04/2017.
+//	  An implementation of the board game "Pandemic" by Z-Man Games.
 
 #include <iostream>
 #include <map>
@@ -154,7 +157,7 @@ void newGame()
 	Board::instance().playerDeck().shuffleDeck();
 
 	// Distribute cards to players
-	int numPlayerDistributed = 0;
+	size_t numPlayerDistributed = 0;
 	for (const auto& player : Board::instance().players())
 	{
 		for (auto i = 0u; !Board::instance().playerDeck().empty() && i < Board::instance().initialCards(); ++i)
@@ -164,8 +167,9 @@ void newGame()
 		}
 	}
 	// shuffle epidemic card into play card deck
-	int index = 0; int numEvenPile = (48 - numPlayerDistributed) / numEpidemicCards;
-	for (auto i = 1; i <= numEpidemicCards; ++i) {
+	size_t index = 0;
+	size_t numEvenPile = (48 - numPlayerDistributed) / numEpidemicCards;
+	for (auto i = 1u; i <= numEpidemicCards; ++i) {
 		Board::instance().playerDeck().addEpidemicToDeck(std::make_unique<EpidemicCard>(), index, numEpidemicCards);
 		index += numEvenPile;
 	}
