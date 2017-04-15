@@ -69,7 +69,15 @@ void main()
 			while (!turnMenu.solicitInput()); // Intentionally empty body
 			Board::instance().distributePlayerCards(cardsPerTurn);
 			currentPlayer.displayCards();
-			infect();
+			// the below steps are to check if the play has used the oneQuietNight event card, if they have we do not infect.
+			//auto& oneQuietNightPlayer = Board::instance().nextPlayer();
+			if (!currentPlayer.isOneQuietNight())
+			{
+				infect();
+			}
+			else {
+				currentPlayer.setOneQuietNight(false);
+			}
 			Board::instance().nextPlayer();
 		}
 	}
@@ -443,12 +451,6 @@ void directConnectionReport()
 
 void infect()
 {
-	auto& oneQuietNightPlayer = Board::instance().currentPlayer();
-	if (oneQuietNightPlayer.isOneQuietNight()) 
-    { 
-		oneQuietNightPlayer.setOneQuietNight(false);
-	} 
-	else {
 		for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
 		{
 			//auto& currentPlayer = Board::instance().nextPlayer();
@@ -456,6 +458,6 @@ void infect()
 			card->onDraw(Board::instance());
 			Board::instance().infectionDeck().addToDiscard(std::move(card));
 		}
-	}
+	
 	Board::instance().notify();	
 }
