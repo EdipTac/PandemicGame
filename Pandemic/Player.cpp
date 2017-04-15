@@ -53,10 +53,19 @@ void Player::drawFrom(Deck<PlayerCard>& deck, size_t count)
 		auto card = deck.drawTopCard();
 		if (!card)
 		{
-			// Deck was empty
+			// Dick was empty, so card pointer is null
 			break;
 		}
-		_cards.push_back(std::move(card));
+		card->onDraw(Board::instance());
+		card->cardWork(Board::instance().infectionDeck());
+		if (card->isHandCard())
+		{
+			_cards.push_back(std::move(card));
+		}
+		else
+		{
+			deck.addToDiscard(std::move(card));
+		}
 	}
 	notify();
 }

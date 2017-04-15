@@ -38,4 +38,6 @@ std::string PlayerCityCard::description() const
 	return CityCard::description();
 }
 
+void PlayerCityCard::cardWork(Deck<InfectionCard>& deck) {}
+
 void PlayerCityCard::onDraw(Board& state) {}

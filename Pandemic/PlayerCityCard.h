@@ -28,5 +28,7 @@ public:
 	virtual std::string name() const override;
 	virtual std::string description() const override;
 
+	virtual void cardWork(Deck<InfectionCard>& deck) override;
+
 	void onDraw(Board& state) override;
 };

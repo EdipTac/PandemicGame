@@ -12,8 +12,17 @@ bool PlayerCard::isEventCard() const
 	return false;
 }
 
+bool PlayerCard::isEpidemicCard() const
+{
+	return false;
+}
+
+bool PlayerCard::isHandCard() const
+{
+	return isCityCard() || isEventCard();
+}
+
 std::string PlayerCard::toString()
 {
 	return "Name: " + name();
 }
-void PlayerCard::cardWork(Deck<InfectionCard>& deck){}

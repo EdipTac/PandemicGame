@@ -36,7 +36,7 @@ public:
 
 	virtual Action& ability();
 
-
+	virtual void cardWork(Deck<InfectionCard>& deck) override;
 
 private:
 	std::unique_ptr<Action> _ability;

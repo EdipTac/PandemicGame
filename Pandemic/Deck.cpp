@@ -87,7 +87,7 @@ std::unique_ptr<T> Deck<T>::drawTopCard()
 		throw std::logic_error { "Trying to draw from an empty deck." };
 	}
 
-	auto temp = move(_drawPile.back());
+	auto temp = std::move(_drawPile.back());
 	//_discardPile.push_back(move(temp)); should put used card to discard pile, but not compile
 	_drawPile.pop_back();
 	return temp;
@@ -100,7 +100,7 @@ std::unique_ptr<T> Deck<T>::drawTopDiscard()
 		throw std::logic_error{ "Trying to draw from an empty discard deck." };
 	}
 
-	auto temp = move(_discardPile.back());
+	auto temp = std::move(_discardPile.back());
 	_discardPile.pop_back();
 	return temp;
 }
@@ -113,7 +113,7 @@ std::unique_ptr<T> Deck<T>::drawBottomCard()
 		throw std::logic_error { "Trying to draw from an empty deck." };
 	}
 
-	auto temp = move(_drawPile.front());
+	auto temp = std::move(_drawPile.front());
 	_drawPile.erase(_drawPile.begin());
 	return temp;
 }
@@ -126,7 +126,7 @@ std::unique_ptr<T> Deck<T>::drawBottomDiscard()
 		throw std::logic_error{ "Trying to draw from an empty discard deck." };
 	}
 
-	auto temp = move(_discardPile.front());
+	auto temp = std::move(_discardPile.front());
 	_discardPile.erase(_discardPile.begin());
 	return temp;
 }
@@ -136,8 +136,9 @@ void Deck<T>::addToDeck(std::unique_ptr<T> card)
 {
 	_drawPile.push_back(move(card));
 }
+
 template <typename T>
-void Deck<T>::addEpidemicToDeck(std::unique_ptr<T> card, int index, int numEpidemic)
+void Deck<T>::addEpidemicToDeck(std::unique_ptr<T> card, size_t index, size_t numEpidemic)
 {
 	_drawPile.insert( _drawPile.begin() + index + (_drawPile.size()/numEpidemic), (move(card)));
 }

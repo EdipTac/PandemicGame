@@ -43,3 +43,5 @@ bool EventCard::isEventCard() const
 Action& EventCard::ability() {
 	return *_ability;
 }
+
+void EventCard::cardWork(Deck<InfectionCard>& deck) {}
