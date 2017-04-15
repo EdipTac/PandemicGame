@@ -88,7 +88,7 @@ BoardBuilder& BoardBuilder::loadBoard(std::string& gameSaveFile)
 BoardBuilder& BoardBuilder::loadPlayers()
 {
 	auto& cities = Board::instance().map().cities();
-	auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
+	auto events = std::make_unique<DeckOfEvents>()->deckOfEvents();
 	DeckOfRoles deckOfRoles;
 	std::vector<std::unique_ptr<RoleCard>> roles;
 	while (!deckOfRoles.empty())
@@ -269,7 +269,7 @@ BoardBuilder& BoardBuilder::loadInfectionCards()
 BoardBuilder& BoardBuilder::loadPlayerCards()
 {
 	auto& cities = Board::instance().map().cities();
-	auto events = std::make_unique<DeckofEvents>()->deckOfEvents();
+	auto events = std::make_unique<DeckOfEvents>()->deckOfEvents();
 	
 	// PLAYER CARDS INITIALIZATION:
 	json playerCards = gameFile["playercards"];

@@ -4,9 +4,9 @@
 #include <vector>
 
 
-class DeckofEvents {
+class DeckOfEvents {
 public:
-	DeckofEvents();
+	DeckOfEvents();
 	
 	std::vector<std::unique_ptr<EventCard>> deckOfEvents();
 private:

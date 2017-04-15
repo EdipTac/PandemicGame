@@ -109,7 +109,7 @@ void newGame()
 		
 	}
 	
-	auto eventCards = DeckofEvents {}.deckOfEvents();
+	auto eventCards = DeckOfEvents {}.deckOfEvents();
 	while (!eventCards.empty())
 	{
 		Board::instance().playerDeck().addToDeck(std::move(eventCards.back()));
