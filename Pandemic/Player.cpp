@@ -46,6 +46,21 @@ void Player::addCard(std::unique_ptr<PlayerCard> card) {
 	notify();
 }
 
+void Player::drawFrom(Deck<PlayerCard>& deck, size_t count)
+{
+	for (size_t i = 0; i < count; ++i)
+	{
+		auto card = deck.drawTopCard();
+		if (!card)
+		{
+			// Deck was empty
+			break;
+		}
+		_cards.push_back(std::move(card));
+	}
+	notify();
+}
+
 PlayerCard* Player::getCard(const std::string& name)
 {
 	auto it = std::find_if(_cards.begin(), _cards.end(), [&](const auto& card)
