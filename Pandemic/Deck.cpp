@@ -8,9 +8,11 @@
 #include "PlayerCard.h"
 #include "InfectionCard.h"
 #include "RoleCard.h"
+#include "Util.h"
 
-size_t randSize(const size_t max);
-template <typename T> void shuffle(std::vector<std::unique_ptr<T>>& cards);
+template class Deck<PlayerCard>;
+template class Deck<InfectionCard>;
+template class Deck<RoleCard>;
 
 template <typename T>
 void Deck<T>::shuffleDeck()
@@ -138,45 +140,11 @@ void Deck<T>::addToDeck(std::unique_ptr<T> card)
 }
 
 template <typename T>
-void Deck<T>::addEpidemicToDeck(std::unique_ptr<T> card, size_t index, size_t numEpidemic)
-{
-	_drawPile.insert( _drawPile.begin() + index + (_drawPile.size()/numEpidemic), (move(card)));
-}
-
-template <typename T>
 void Deck<T>::addToDiscard(std::unique_ptr<T> card)
 {
 	_discardPile.push_back(move(card));
 }
 
-template class Deck<PlayerCard>;
-template class Deck<InfectionCard>;
-template class Deck<RoleCard>;
-
-size_t randSize(const size_t max)
-{
-	static std::mt19937 gen { std::random_device {}() };
-	static std::uniform_int_distribution<size_t> dis;
-	dis.param(std::uniform_int_distribution<size_t>::param_type { 0, max - 1 });
-	return dis(gen);
-}
-
-template <typename T>
-void shuffle(std::vector<std::unique_ptr<T>>& cards)
-{
-	for (int i = 0; i < 2; i++) {
-		std::vector<std::unique_ptr<T>> temp;
-		temp.reserve(cards.size());
-		while (!cards.empty())
-		{
-			const auto j = randSize(cards.size());
-			temp.push_back(std::move(cards[j]));
-			cards.erase(cards.begin() + j);
-		}
-
-		cards = std::move(temp);
-	}
-}
 template <typename T>
 void Deck<T>::deleteDiscard()
 {
@@ -210,14 +178,15 @@ void Deck<T>::deleteDiscard(std::string cardToDelete)
 	{
 		throw std::logic_error{ "There are no cards in the discard pile." };
 	}
+	
 	const auto& it = std::find_if(_discardPile.begin(), _discardPile.end(), [&](const auto& c)
 	{
 		return cardToDelete == c->name();
 	});
+	
 	if (it != _discardPile.end())
 	{
 		_discardPile.erase(it);
 		return;
 	}
-
 }

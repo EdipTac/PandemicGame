@@ -77,3 +77,21 @@ City* solicitCity(const Map& map);
 std::string solicitFileName(const std::string& msg);
 
 std::string rightPad(const std::string& original, const size_t width = 0);
+
+template <typename T>
+void shuffle(std::vector<std::unique_ptr<T>>& cards)
+{
+	std::vector<std::unique_ptr<T>> temp;
+	temp.reserve(cards.size());
+	
+	while (!cards.empty())
+	{
+		const auto j = randSize(cards.size());
+		temp.push_back(std::move(cards[j]));
+		cards.erase(cards.begin() + j);
+	}
+
+	cards = std::move(temp);
+}
+
+size_t randSize(const size_t max);

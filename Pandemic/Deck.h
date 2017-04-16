@@ -48,9 +48,6 @@ public:
 	// Inserts a card into the draw pile
 	virtual void addToDeck(std::unique_ptr<T> card);
 
-	// Inserts a epidemic card into the draw pile 
-	virtual void addEpidemicToDeck(std::unique_ptr<T> card, size_t index, size_t numEpidemic);
-
 	// Discards a card
 	virtual void addToDiscard(std::unique_ptr<T> card);
 
