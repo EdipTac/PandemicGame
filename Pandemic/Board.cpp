@@ -161,6 +161,11 @@ void Board::advanceOutbreakCounter()
 	_outbreakCounter.advance();
 }
 
+void Board::setOutbreakCounter(int counter)
+{
+	_outbreakCounter.setCounter(counter);
+}
+
 CubePool& Board::cubePool()
 {
 	return _cubePool;

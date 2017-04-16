@@ -13,6 +13,7 @@ public:
 	virtual std::string message() const override;
 	size_t counter() const;
 	void advance();
+	void setCounter(int counter);
 
 private:
 	static const size_t _defaultLossCount;

@@ -239,9 +239,7 @@ BoardBuilder& BoardBuilder::loadInfectionCards()
 	}
 
 	auto outbreakMarker = infection["outbreak"].get<int>();
-	for (int k = 0; k < outbreakMarker; k++) {
-		Board::instance().advanceOutbreakCounter();
-	}
+	Board::instance().setOutbreakCounter(outbreakMarker);
 
 	auto infectionRateIndex = infection["rate"].get<int>();
 	for (int k = 0; k <= infectionRateIndex; k++) {

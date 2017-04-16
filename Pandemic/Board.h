@@ -65,6 +65,7 @@ public:
 	// Outbreak counter
 	size_t outbreaks() const;
 	void advanceOutbreakCounter();
+	void setOutbreakCounter(int counter);
 
 	// Cards
 	PlayerCardDeck& playerDeck();
