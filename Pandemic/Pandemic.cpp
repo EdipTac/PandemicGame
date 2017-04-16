@@ -124,7 +124,12 @@ void newGame()
 		player->pawn().setPosition(map.startingCity());
 		Board::instance().addPlayer(std::move(player));
 	}
-	std::cout << "How many epidemic cards in the game ( 4 - Introductory game; 5 - Standard game ; 6 - Heroic game) ? ";
+
+	std::cout << "\nSelect difficulty:\n\n";
+	std::cout << "  Level       \tEpidemic Cards\n";
+	std::cout << "  Introductory\t4\n";
+	std::cout << "  Standard    \t5\n";
+	std::cout << "  Heroic      \t6\n\n";
 	const auto& numEpidemicCards = solicitEpidemicCardNumber(minEpidemicCards, maxEpidemicCards);
 
 	// Other initializtion here - cards, etc
@@ -168,13 +173,9 @@ void newGame()
 			numPlayerDistributed++;
 		}
 	}
+
 	// shuffle epidemic card into play card deck
-	size_t index = 0;
-	size_t numEvenPile = (48 - numPlayerDistributed) / numEpidemicCards;
-	for (auto i = 1u; i <= numEpidemicCards; ++i) {
-		Board::instance().playerDeck().addEpidemicToDeck(std::make_unique<EpidemicCard>(), index, numEpidemicCards);
-		index += numEvenPile;
-	}
+	Board::instance().playerDeck().addEpidemicCards(numEpidemicCards);
 	for (const auto& player : Board::instance().players())
 	{
 		std::cout << "\nPlayer " << player->name() << ":";
@@ -410,6 +411,7 @@ size_t solicitSize(const size_t min, const size_t max)
 	}
 	return size;
 }
+
 size_t solicitEpidemicCardNumber(const size_t min, const size_t max)
 {
 	size_t size;

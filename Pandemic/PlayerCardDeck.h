@@ -2,6 +2,7 @@
 
 #include "Deck.h"
 #include "PlayerCard.h"
+#include "EpidemicCard.h"
 #include "Terminator.h"
 
 class PlayerCardDeck
@@ -17,4 +18,6 @@ public:
 
 	// Notifies on draw
 	virtual std::unique_ptr<PlayerCard> drawTopCard() override;
+
+	void addEpidemicCards(const size_t count);
 };

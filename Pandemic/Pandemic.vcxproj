@@ -114,6 +114,7 @@
     <ClInclude Include="Action.h" />
     <ClInclude Include="ActionController.h" />
     <ClInclude Include="Airlift.h" />
+    <ClInclude Include="AirliftCard.h" />
     <ClInclude Include="BoardBuilder.h" />
     <ClInclude Include="BuildResearchStation.h" />
     <ClInclude Include="Card.h" />
@@ -137,8 +138,10 @@
     <ClInclude Include="EventCard.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Forecast.h" />
+    <ClInclude Include="ForecastCard.h" />
     <ClInclude Include="GameStatistics.h" />
     <ClInclude Include="GovernmentGrant.h" />
+    <ClInclude Include="GovernmentGrantCard.h" />
     <ClInclude Include="HandObserver.h" />
     <ClInclude Include="InfectionCard.h" />
     <ClInclude Include="InfectedCityPercentage.h" />
@@ -150,6 +153,7 @@
     <ClInclude Include="MenuOption.h" />
     <ClInclude Include="MoveFromResearchStation.h" />
     <ClInclude Include="OneQuietNight.h" />
+    <ClInclude Include="OneQuietNightCard.h" />
     <ClInclude Include="PlayerCardDeck.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="PolyObserver.h" />
@@ -168,6 +172,7 @@
     <ClInclude Include="Researcher.h" />
     <ClInclude Include="ResearcherGiveKnowledge.h" />
     <ClInclude Include="ResilientPopulation.h" />
+    <ClInclude Include="ResilientPopulationCard.h" />
     <ClInclude Include="RoleCard.h" />
     <ClInclude Include="SaveBuilder.h" />
     <ClInclude Include="Scientist.h" />
@@ -188,6 +193,7 @@
     <ClCompile Include="Action.cpp" />
     <ClCompile Include="ActionController.cpp" />
     <ClCompile Include="Airlift.cpp" />
+    <ClCompile Include="AirliftCard.cpp" />
     <ClCompile Include="BoardBuilder.cpp" />
     <ClCompile Include="BuildResearchStation.cpp" />
     <ClCompile Include="Card.cpp" />
@@ -211,8 +217,10 @@
     <ClCompile Include="EventCard.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Forecast.cpp" />
+    <ClCompile Include="ForecastCard.cpp" />
     <ClCompile Include="GameStatistics.cpp" />
     <ClCompile Include="GovernmentGrant.cpp" />
+    <ClCompile Include="GovernmentGrantCard.cpp" />
     <ClCompile Include="HandObserver.cpp" />
     <ClCompile Include="InfectionCard.cpp" />
     <ClCompile Include="InfectedCityPercentage.cpp" />
@@ -223,6 +231,7 @@
     <ClCompile Include="MoveFromResearchStation.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="OneQuietNight.cpp" />
+    <ClCompile Include="OneQuietNightCard.cpp" />
     <ClCompile Include="OperationsExpert.cpp" />
     <ClCompile Include="OutbreakCounter.cpp" />
     <ClCompile Include="Pandemic.cpp" />
@@ -238,6 +247,7 @@
     <ClCompile Include="Researcher.cpp" />
     <ClCompile Include="ResearcherGiveKnowledge.cpp" />
     <ClCompile Include="ResilientPopulation.cpp" />
+    <ClCompile Include="ResilientPopulationCard.cpp" />
     <ClCompile Include="RoleCard.cpp" />
     <ClCompile Include="SaveBuilder.cpp" />
     <ClCompile Include="Scientist.cpp" />
