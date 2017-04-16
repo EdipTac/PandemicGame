@@ -19,5 +19,5 @@ public:
 	// Notifies on draw
 	virtual std::unique_ptr<PlayerCard> drawTopCard() override;
 
-	void addEpidemicToDeck(std::unique_ptr<EpidemicCard> card, size_t index, size_t numEpidemic);
+	void addEpidemicCards(const size_t count);
 };

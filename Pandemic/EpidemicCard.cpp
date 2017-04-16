@@ -31,12 +31,16 @@ void EpidemicCard::cardWork(Deck<InfectionCard>& deck)
 {
 	Board::instance().advanceInfectionCounter();//increase
 	std::cout << "        -------        Epidemic !!!!!!!!        ------         " << "\nDraw for the bottom of the infection card deck: " << std::endl;
-	auto temp = std::move(deck.drawBottomCard());
-	City& city = dynamic_cast <InfectionCard*> (temp.get())->city();
-	std::cout << "Infection card : " << temp->name() << " with the colour of: " << colourName(city.colour()) << std::endl;
-	std::cout << "Infects the city :" << temp->name() << " three times:"  << std::endl;
-	city.addDiseaseCubes(city.colour(), city.cubesBeforeOutbreak, Board::instance());//infect
-	deck.addToDiscard(move(temp));//put to discard pile
+	
+	if (!deck.empty())
+	{
+		auto temp = std::move(deck.drawTopCard());
+		City& city = dynamic_cast <InfectionCard*> (temp.get())->city();
+		std::cout << "Infection card : " << temp->name() << " with the colour of: " << colourName(city.colour()) << std::endl;
+		std::cout << "Infects the city :" << temp->name() << " three times:" << std::endl;
+		city.addDiseaseCubes(city.colour(), city.cubesBeforeOutbreak, Board::instance());//infect
+		deck.addToDiscard(move(temp));//put to discard pile
+	}
 
 	// intensify
 	deck.shuffleDiscards();

@@ -171,13 +171,9 @@ void newGame()
 			numPlayerDistributed++;
 		}
 	}
+
 	// shuffle epidemic card into play card deck
-	size_t index = 0;
-	size_t numEvenPile = (48 - numPlayerDistributed) / numEpidemicCards;
-	for (auto i = 1u; i <= numEpidemicCards; ++i) {
-		Board::instance().playerDeck().addEpidemicToDeck(std::make_unique<EpidemicCard>(), index, numEpidemicCards);
-		index += numEvenPile;
-	}
+	Board::instance().playerDeck().addEpidemicCards(numEpidemicCards);
 	for (const auto& player : Board::instance().players())
 	{
 		std::cout << "\nPlayer " << player->name() << ":";

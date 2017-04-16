@@ -3,6 +3,7 @@
 #include <functional>
 #include <iostream>
 #include <sstream>
+#include <random>
 
 #include "Util.h"
 
@@ -150,4 +151,12 @@ std::string titleFont(const std::string& original)
 	ornament();
 
 	return ss.str();
+}
+
+size_t randSize(const size_t max)
+{
+	static std::mt19937 gen { std::random_device {}() };
+	static std::uniform_int_distribution<size_t> dis;
+	dis.param(std::uniform_int_distribution<size_t>::param_type { 0, max - 1 });
+	return dis(gen);
 }

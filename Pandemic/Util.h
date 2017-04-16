@@ -93,3 +93,5 @@ void shuffle(std::vector<std::unique_ptr<T>>& cards)
 
 	cards = std::move(temp);
 }
+
+size_t randSize(const size_t max);

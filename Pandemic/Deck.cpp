@@ -145,14 +145,6 @@ void Deck<T>::addToDiscard(std::unique_ptr<T> card)
 	_discardPile.push_back(move(card));
 }
 
-size_t randSize(const size_t max)
-{
-	static std::mt19937 gen { std::random_device {}() };
-	static std::uniform_int_distribution<size_t> dis;
-	dis.param(std::uniform_int_distribution<size_t>::param_type { 0, max - 1 });
-	return dis(gen);
-}
-
 template <typename T>
 void Deck<T>::deleteDiscard()
 {
@@ -186,14 +178,15 @@ void Deck<T>::deleteDiscard(std::string cardToDelete)
 	{
 		throw std::logic_error{ "There are no cards in the discard pile." };
 	}
+	
 	const auto& it = std::find_if(_discardPile.begin(), _discardPile.end(), [&](const auto& c)
 	{
 		return cardToDelete == c->name();
 	});
+	
 	if (it != _discardPile.end())
 	{
 		_discardPile.erase(it);
 		return;
 	}
-
 }
