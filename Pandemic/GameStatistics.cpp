@@ -59,8 +59,7 @@ void GameStatistics::display() {
 		Board::instance().researchStations() << " Research stations\n " << std::endl;
 	std::cout << "Outbreak mark: " << Board::instance().outbreaks() << std::endl;
 	std::cout << "Infection rate: " << Board::instance().infectionCounter() << "\n\n";
-
-	std::cout << "The remaining player card: \n";// for the test 
+	std::cout << "The remaining player card: ( for test purpose )  \n";// for the test 
 		for (const auto& card : Board::instance().playerDeck().drawPile()) {
 			std::cout << card->name() << "\n";
 	}

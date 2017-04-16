@@ -32,4 +32,17 @@ void RemainingInfectionCard::display() {
 	{  
 		cout << card->name() << " " << colourName(card->colour()) << endl;
 	}
+	std::cout << "The remaining disease cubes to supply: " << "\nBlue: " <<
+		(24 - Board::instance().diseaseCount(colourFromName("Blue")))<< "\nBlack: " <<
+		(24 - Board::instance().diseaseCount(colourFromName("Black"))) << "\nRed: " <<
+			(24 - Board::instance().diseaseCount(colourFromName("Red"))) << "\nYellow: " <<
+			(24 - Board::instance().diseaseCount(colourFromName("Yellow"))) << "\n\n";
+
+	cout << "\nInfection cards on deck (for test purpose) "<< "\n";
+
+	for (const auto& card : Board::instance().infectionDeck().drawPile())
+	{
+		cout << card->name() << " " << colourName(card->colour()) << endl;
+	}
+
 };

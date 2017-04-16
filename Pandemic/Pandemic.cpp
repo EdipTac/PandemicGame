@@ -70,9 +70,11 @@ void main()
 		{
 			auto& currentPlayer = Board::instance().currentPlayer();
 			std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
+			//std::cout << currentPlayer.name() << " is at "<< currentPlayer.pawn().position().name() << "\n" << "Has research station: " << currentPlayer.pawn().position().hasResearchStation() << "\n\n";
+			Board::instance().currentPlayer().displayCards();
 			while (!turnMenu.solicitInput()); // Intentionally empty body
 			Board::instance().distributePlayerCards(cardsPerTurn);
-			currentPlayer.displayCards();
+			//currentPlayer.displayCards();
 			// the below steps are to check if the play has used the oneQuietNight event card, if they have we do not infect.
 			//auto& oneQuietNightPlayer = Board::instance().nextPlayer();
 			if (!currentPlayer.isOneQuietNight())
@@ -268,6 +270,13 @@ bool performAction()
 	ActionController controller(Board::instance().currentPlayer());
 	while (controller.hasActionPoints())
 	{
+		std::cout << Board::instance().currentPlayer().name() << " is at " << Board::instance().currentPlayer().pawn().position().name() << "\n" << "Has research station: " << Board::instance().currentPlayer().pawn().position().hasResearchStation() << "\n\n";
+		const auto& diseases = Board::instance().currentPlayer().pawn().position().diseases();
+		for (const auto& disease : diseases)
+		{
+			std::cout << "\t" << colourName(disease) << "(" << colourAbbreviation(disease) << "): " << Board::instance().currentPlayer().pawn().position().diseaseCubes(disease) << " cubes\n";
+		}
+		
 		controller.solicitAction();
 	}
 	return true;
