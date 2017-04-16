@@ -1,7 +1,6 @@
 #include "PlayerCardDeck.h"
 
-PlayerCardDeck::~PlayerCardDeck()
-{}
+PlayerCardDeck::~PlayerCardDeck() {}
 
 TerminationState PlayerCardDeck::terminationState() const
 {

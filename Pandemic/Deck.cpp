@@ -8,6 +8,11 @@
 #include "PlayerCard.h"
 #include "InfectionCard.h"
 #include "RoleCard.h"
+#include "Util.h"
+
+template class Deck<PlayerCard>;
+template class Deck<InfectionCard>;
+template class Deck<RoleCard>;
 
 size_t randSize(const size_t max);
 template <typename T> void shuffle(std::vector<std::unique_ptr<T>>& cards);
@@ -143,10 +148,6 @@ void Deck<T>::addToDiscard(std::unique_ptr<T> card)
 	_discardPile.push_back(move(card));
 }
 
-template class Deck<PlayerCard>;
-template class Deck<InfectionCard>;
-template class Deck<RoleCard>;
-
 size_t randSize(const size_t max)
 {
 	static std::mt19937 gen { std::random_device {}() };
@@ -155,22 +156,6 @@ size_t randSize(const size_t max)
 	return dis(gen);
 }
 
-template <typename T>
-void shuffle(std::vector<std::unique_ptr<T>>& cards)
-{
-	for (int i = 0; i < 2; i++) {
-		std::vector<std::unique_ptr<T>> temp;
-		temp.reserve(cards.size());
-		while (!cards.empty())
-		{
-			const auto j = randSize(cards.size());
-			temp.push_back(std::move(cards[j]));
-			cards.erase(cards.begin() + j);
-		}
-
-		cards = std::move(temp);
-	}
-}
 template <typename T>
 void Deck<T>::deleteDiscard()
 {
