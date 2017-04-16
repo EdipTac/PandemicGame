@@ -1,19 +1,13 @@
 #include "EventCard.h"
-#include "Airlift.h"
-#include "OneQuietNight.h"
-#include "ResilientPopulation.h"
-#include "GovernmentGrant.h"
-#include "Forecast.h"
+
 
 
 // Constructor
-EventCard::EventCard(const std::string& name, const std::string& description)
-	: TextualCard { name, description }
+EventCard::EventCard(const std::string& name, const std::string& description, std::unique_ptr<Action> actions)
+	: TextualCard { name, description } , _ability {std::move(actions)}
 {
-	/*if (name == "Airlift") {
-		_ability = 
-	}*/
-}
+	//_ability = std::move(actions);
+	}
 
 EventCard::~EventCard() {}
 

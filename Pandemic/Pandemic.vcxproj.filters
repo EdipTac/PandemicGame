@@ -339,6 +339,21 @@
     <ClInclude Include="PlayerCardDeck.h">
       <Filter>Victory and Defeat\header</Filter>
     </ClInclude>
+    <ClInclude Include="AirliftCard.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="ForecastCard.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="GovernmentGrantCard.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="OneQuietNightCard.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
+    <ClInclude Include="ResilientPopulationCard.h">
+      <Filter>Event Cards\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -541,6 +556,21 @@
     </ClCompile>
     <ClCompile Include="PlayerCardDeck.cpp">
       <Filter>Victory and Defeat\src</Filter>
+    </ClCompile>
+    <ClCompile Include="AirliftCard.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ForecastCard.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="GovernmentGrantCard.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="OneQuietNightCard.cpp">
+      <Filter>Event Cards\src</Filter>
+    </ClCompile>
+    <ClCompile Include="ResilientPopulationCard.cpp">
+      <Filter>Event Cards\src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
