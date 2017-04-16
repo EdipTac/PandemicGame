@@ -115,7 +115,7 @@ BoardBuilder& BoardBuilder::loadPlayers()
 		for (auto it = cities.begin(); it != cities.end(); ++it) {
 			if ((*it)->name() == cityName) {
 				// found a match
-				player->moveTo(**it);
+				player->pawn().setPosition(**it);
 			}
 		}
 
@@ -239,12 +239,10 @@ BoardBuilder& BoardBuilder::loadInfectionCards()
 	}
 
 	auto outbreakMarker = infection["outbreak"].get<int>();
-	for (int k = 0; k < outbreakMarker; k++) {
-		Board::instance().advanceOutbreakCounter();
-	}
+	Board::instance().setOutbreakCounter(outbreakMarker);
 
 	auto infectionRateIndex = infection["rate"].get<int>();
-	for (int k = 0; k <= infectionRateIndex; k++) {
+	for (int k = 1; k < infectionRateIndex; k++) {
 		Board::instance().advanceInfectionCounter();
 	}
 

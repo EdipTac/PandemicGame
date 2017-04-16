@@ -27,3 +27,8 @@ void OutbreakCounter::advance()
 	++_counter;
 	notify();
 }
+
+void OutbreakCounter::setCounter(int counter)
+{
+	_counter = counter;
+}

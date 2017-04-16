@@ -227,7 +227,9 @@ void loadGame()
 {
 	std::cout << "Load game...\n";
 	auto fileName = solicitFileName("Enter name of game save file: ");
+	std::cout << "\nLoading game \"" << fileName << "\"...\n";
 	BoardBuilder().loadBoard(fileName).loadPlayers().loadCities().loadInfectionCards().loadPlayerCards();
+	std::cout << "Game \"" << fileName << "\" loaded!\n\n";
 	std::cout << "\n\n" << titleFont("RESUMING GAME") << "\n\n";
 }
 
