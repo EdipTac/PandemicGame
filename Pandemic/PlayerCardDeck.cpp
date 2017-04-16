@@ -23,3 +23,8 @@ std::unique_ptr<PlayerCard> PlayerCardDeck::drawTopCard()
 	}
 	return Deck<PlayerCard>::drawTopCard();
 }
+
+void PlayerCardDeck::addEpidemicToDeck(std::unique_ptr<EpidemicCard> card, size_t index, size_t numEpidemic)
+{
+	_drawPile.insert(_drawPile.begin() + index + (_drawPile.size() / numEpidemic), (move(card)));
+}

@@ -138,12 +138,6 @@ void Deck<T>::addToDeck(std::unique_ptr<T> card)
 }
 
 template <typename T>
-void Deck<T>::addEpidemicToDeck(std::unique_ptr<T> card, size_t index, size_t numEpidemic)
-{
-	_drawPile.insert( _drawPile.begin() + index + (_drawPile.size()/numEpidemic), (move(card)));
-}
-
-template <typename T>
 void Deck<T>::addToDiscard(std::unique_ptr<T> card)
 {
 	_discardPile.push_back(move(card));
