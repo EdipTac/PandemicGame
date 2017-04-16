@@ -14,9 +14,6 @@ template class Deck<PlayerCard>;
 template class Deck<InfectionCard>;
 template class Deck<RoleCard>;
 
-size_t randSize(const size_t max);
-template <typename T> void shuffle(std::vector<std::unique_ptr<T>>& cards);
-
 template <typename T>
 void Deck<T>::shuffleDeck()
 {
