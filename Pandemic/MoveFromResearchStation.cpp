@@ -3,6 +3,7 @@
 #include "City.h"
 #include "PlayerCityCard.h"
 #include "Board.h"
+#include "MenuUtils.h"
 
 const std::string desc = "Move from a research station to any city by discarding any City card.";
 
@@ -36,51 +37,17 @@ void action::MoveFromResearchStation::solicitData()
 
 	// List destinations
 	const auto& cities = Board::instance().map().cities();
-	std::cout << "Pick a destination:\n";
-	for (const auto& city : cities)
-	{
-		std::cout << "\t" << city->name() << "\n";
-	}
 
-	// Get destination
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(cities.begin(), cities.end(), [&](const auto& c)
-		{
-			return input == c->name();
-		});
-		if (it != cities.end())
-		{
-			_destination = *it;
-			break;
-		}
-		std::cout << "No card of that name.\n";
-	}
+	_destination = 
+		namedMenu(cities)
+		.setMessage("Pick a destination:")
+		.solicitInput();
 
 	// List city cards in hand
-	std::cout << "Pick a card to discard:\n";
-	for (const auto& card : cards)
-	{
-		std::cout << "\t" << card->name() << "\n";
-	}
-
-	// Get user input
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(cards.begin(), cards.end(), [&](const auto& c)
-		{
-			return input == c->name();
-		});
-		if (it != cards.end())
-		{
-			_toDiscard = *it;
-			break;
-		}
-		std::cout << "No card of that name.\n";
-	}
+	_toDiscard =
+		namedMenu(cards)
+		.setMessage("Pick a card to discard: ")
+		.solicitInput();
 }
 
 void action::MoveFromResearchStation::perform()
