@@ -18,7 +18,7 @@ void action::TreatDisease::solicitData()
 	_city = nullptr;
 
 	auto& position = _performer->pawn().position();
-	const auto& diseases = position.diseases();
+	auto diseases = position.diseases();
 	if (diseases.empty())
 	{
 		std::cout << "No disease in this city.\n";
@@ -26,18 +26,29 @@ void action::TreatDisease::solicitData()
 	}
 
 	_city = &position;
-	std::cout << "Select a disease:\n";
-	for (const auto& disease : diseases)
+
+	std::vector<Colour*> dPtrs;
+	for (auto& disease : diseases)
 	{
-		std::cout << "\t" << colourName(disease) << "(" << colourAbbreviation(disease) << "): " << _city->diseaseCubes(disease) << " cubes\n";
+		dPtrs.push_back(&disease);
 	}
 
-	_colour = makeMenu(diseases, [&](const auto& disease)
+	// Don't have std::optional yet, need to use nullptr for "no value"... - too late to install Boost, too. Oh well
+	const auto& clrPtr = makeMenu(dPtrs, [&](const auto& disease)
 	{
-		return colourName(disease) + "(" + colourAbbreviation(disease) + "): " + std::to_string(_city->diseaseCubes(disease)) + " cubes";
+		return colourName(*disease) + "(" + colourAbbreviation(*disease) + "): " + std::to_string(_city->diseaseCubes(*disease)) + " cubes";
 	})
 		.setMessage("Select a disease: ")
 		.solicitInput();
+
+	if (clrPtr)
+	{
+		_colour = *clrPtr;
+	}
+	else
+	{
+		_city = nullptr;
+	}
 }
 
 void action::TreatDisease::perform()

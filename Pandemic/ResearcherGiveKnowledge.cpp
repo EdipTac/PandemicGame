@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Board.h"
 #include "PlayerCityCard.h"
+#include "MenuUtils.h"
 
 const std::string desc =
 		"Give any City card from her hand to another player in the same city as "
@@ -33,28 +34,10 @@ void action::ResearcherGiveKnowledge::solicitData()
 		return;
 	}
 
-	std::cout << "Pick a card to give:\n";
-	for (const auto& card : cards)
-	{
-		std::cout << "\t" << card->name() << "\n";
-	}
-
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(cards.begin(), cards.end(), [&](const auto& c)
-		{
-			return input == c->name();
-		});
-		if (it != cards.end())
-		{
-			_card = *it;
-			break;
-		}
-		std::cout << "Not a card in your hand.\n";
-	}
-
+	_card =
+		namedMenu(cards)
+		.setMessage("Pick a card to give: ")
+		.solicitInput();
 
 	// Select another player in your city
 	std::vector<Player*> others;
@@ -74,25 +57,10 @@ void action::ResearcherGiveKnowledge::solicitData()
 	}
 
 	// Select a player
-	std::cout << "Who to trade with?\n";
-	for (const auto& player : others)
-	{
-		std::cout << "\t" << player->name() << "\n";
-	}
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(others.begin(), others.end(), [&](const auto& p)
-		{
-			return input == p->name();
-		});
-		if (it != others.end())
-		{
-			_target = *it;
-			break;
-		}
-		std::cout << "Not a player in this city.\n";
-	}
+	_target =
+		namedMenu(others)
+		.setMessage("Who to trade with? ")
+		.solicitInput();
 }
 
 void action::ResearcherGiveKnowledge::perform()

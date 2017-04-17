@@ -35,20 +35,27 @@ void action::Forecast::solicitData()
 	}
 	std::cout << "Please enter the order in which you would like to add the cards to the deck. \n";
 	std::string input;
-	index = count;
-	while (true)
+	for (index = 0; index < count; ++index)
 	{
-		std::cout << "Please enter the name of card name you would like to make at index " << index << ": \n";
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(topCards.begin(), topCards.end(), [&](const auto& c)
+		while (true)
 		{
-			return input == c->name();
-		});
-		if (it != topCards.end())
-		{
-			_target.push_back(std::move(*it));
+			std::cout << "Please enter the name of card name you would like to make at index " << (count - index - 1) << ": \n";
+			std::getline(std::cin >> std::ws, input);
+			const auto& it = std::find_if(topCards.begin(), topCards.end(), [&](const auto& c)
+			{
+				return input == c->name();
+			});
+			if (it == topCards.end())
+			{
+				std::cout << "No city of that name.\n";
+			}
+			else
+			{
+				_target.push_back(std::move(*it));
+				topCards.erase(it);
+				break;
+			}
 		}
-		std::cout << "No city of that name.\n";
 	}
 }
 
