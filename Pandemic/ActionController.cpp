@@ -3,6 +3,7 @@
 
 #include "ActionController.h"
 #include "Action.h"
+#include "BuildResearchStation.h"
 #include "CharterFlight.h"
 #include "DirectFlight.h"
 #include "DiscoverACure.h"
@@ -26,6 +27,7 @@ ActionController::ActionController(Player& player)
 {
 	_generalActions.push_back(_makeAction<DriveOrFerry>());
 	_generalActions.push_back(_makeAction<DirectFlight>());
+	_generalActions.push_back(_makeAction<BuildResearchStation>());
 	_generalActions.push_back(_makeAction<ShuttleFlight>());
 	_generalActions.push_back(_makeAction<CharterFlight>());
 	_generalActions.push_back(_makeAction<TreatDisease>());
