@@ -37,7 +37,7 @@ Menu<T*> makeMenu(const std::vector<T*>& vector, F f, const bool optional = true
 
 // As makeMenu, but the function defaults to calling the name() member of the type
 template <typename T>
-Menu<T> namedMenu(const std::vector<T>& vector, const bool optional = false)
+Menu<T> namedMenu(const std::vector<T>& vector, const bool optional = true)
 {
 	return makeMenu(vector, [](const auto& e) { return e->name(); }, optional);
 }

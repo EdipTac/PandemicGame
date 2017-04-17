@@ -50,9 +50,6 @@ public:
 
 	// Discards a card
 	virtual void addToDiscard(std::unique_ptr<T> card);
-
-	// deletes a discarded card
-	virtual void deleteDiscard();
 	
 	virtual void deleteDiscard(std::string cardToDelete);
 
