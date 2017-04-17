@@ -27,14 +27,16 @@ void Map::setName(const std::string & name)
 	_name = name;
 }
 
-City& Map::addCity(CityPtr city)
+City& Map::addCity(std::unique_ptr<City> city)
 {
+	_cacheValid = false;
 	_cities.push_back(std::move(city));
 	return *_cities.back().get();
 }
 
 void Map::removeCity(const City& city)
 {
+	_cacheValid = false;
 	_cities.erase(std::find_if(_cities.begin(), _cities.end(), [&](const auto& c)
 	{
 		return *c == city;
@@ -89,17 +91,16 @@ City *& Map::startingCity()
 	return _startingCity;
 }
 
-//const std::vector<Map::CityPtr>& Map::cities() const
-//{
-//	return _cities;
-//}
-
 std::vector<City*> Map::cities() const
 {
-	std::vector<City*> view;
-	for (const auto& city : _cities)
+	if (!_cacheValid)
 	{
-		view.push_back(city.get());
+		_cityViewCache.clear();
+		for (const auto& city : _cities)
+		{
+			_cityViewCache.push_back(city.get());
+		}
+		_cacheValid = true;
 	}
-	return view;
+	return _cityViewCache;
 }

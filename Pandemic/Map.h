@@ -11,8 +11,6 @@
 // Represents a game map. Contains players and cities
 class Map
 {
-	using CityPtr = std::unique_ptr<City>;
-
 public:
 	// Constructs a map with a given file name
 	Map(const std::string& name = "", City* const startingCity = nullptr, std::vector<std::unique_ptr<City>> cities = {});
@@ -36,12 +34,10 @@ public:
 	City*& startingCity();
 
 	// List of pointers to all contained cities
-	//const std::vector<CityPtr>& cities() const;
-
 	std::vector<City*> cities() const;
 
 	// Add a city
-	City& addCity(CityPtr city);
+	City& addCity(std::unique_ptr<City> city);
 
 	// Remove a city
 	void removeCity(const City& city);
@@ -51,6 +47,8 @@ public:
 
 private:
 	std::string _name;
-	std::vector<CityPtr> _cities;
+	std::vector<std::unique_ptr<City>> _cities;
+	mutable std::vector<City*> _cityViewCache;
+	mutable bool _cacheValid = false;
 	City* _startingCity;
 };
