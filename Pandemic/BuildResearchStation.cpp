@@ -48,7 +48,7 @@ void action::BuildResearchStation::solicitData()
 		}
 
 		// List cards, get player target, discard card, and move
-		auto menu = cityMenu(stations);
+		auto menu = namedMenu(stations);
 		menu.setMessage("Select a City to take a Research Station from: ");
 		_target = menu.solicitInput();
 		_takeFromCity = _target;

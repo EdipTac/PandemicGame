@@ -29,7 +29,7 @@ void action::CharterFlight::solicitData()
 	}
 
 	// Get city choice from player, move, and discard card
-	auto menu = cityMenu(Board::instance().map().cities());
+	auto menu = namedMenu(Board::instance().map().cities());
 	menu.setMessage("Where would you like to fly to? ");
 	_target = menu.solicitInput();
 }
