@@ -2,8 +2,7 @@
 #include "Player.h"
 #include "Board.h"
 
-
-action::Forecast::Forecast(Player * const performer)
+action::Forecast::Forecast(Player* const performer)
 	: Action{ "Forecast", "Examine the top 6 cards of the Infection Draw Pile, rearrange them in the order of your choice, then place them back on the pile", performer } {}
 
 void action::Forecast::solicitData()

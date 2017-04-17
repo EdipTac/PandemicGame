@@ -187,6 +187,7 @@
     <ClInclude Include="TextualCard.h" />
     <ClInclude Include="TreatDisease.h" />
     <ClInclude Include="TreatmentPriority.h" />
+    <ClInclude Include="UseStoredEventCard.h" />
     <ClInclude Include="Util.h" />
     <ClInclude Include="MonoObserver.h" />
   </ItemGroup>
@@ -261,6 +262,7 @@
     <ClCompile Include="TextualCard.cpp" />
     <ClCompile Include="TreatDisease.cpp" />
     <ClCompile Include="TreatmentPriority.cpp" />
+    <ClCompile Include="UseStoredEventCard.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>

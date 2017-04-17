@@ -14,18 +14,17 @@ namespace role
 
 namespace action
 {
-	class StoreEventCard
+	class UseStoredEventCard
 		: public Action
 	{
 	public:
-		StoreEventCard(Player* const performer = nullptr, role::ContingencyPlanner* const roleCard = nullptr);
-		StoreEventCard(role::ContingencyPlanner* const roleCard = nullptr);
+		UseStoredEventCard(Player* const performer = nullptr, role::ContingencyPlanner* const roleCard = nullptr);
+		UseStoredEventCard(role::ContingencyPlanner* const roleCard = nullptr);
 		virtual void solicitData() override;
 		virtual void perform() override;
 		virtual bool isValid() const override;
 
 	private:
 		role::ContingencyPlanner* _roleCard;
-		std::unique_ptr<EventCard> _storedCard;
 	};
 }

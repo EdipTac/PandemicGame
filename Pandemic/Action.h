@@ -28,7 +28,7 @@ namespace action
 		// Prepare action for performance
 		virtual void solicitData() = 0;
 
-		// Perform the action, if valid
+		// Solicit data and then perform the action, if valid
 		virtual void perform() = 0;
 
 		// True iff the action can be completed - will consume an action

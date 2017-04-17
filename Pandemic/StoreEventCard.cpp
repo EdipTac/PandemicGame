@@ -3,10 +3,8 @@
 #include "Board.h"
 
 const std::string desc = 
-	"Take an Event card from anywhere in the Player Discard Pile and place it on his Role card.\n"
-	"Only 1 Event card can be on his role card at a time. It does not count against his hand limit.\n"
-	"When the Contingency Planner plays the Event card on his role card remove this Event card from\n"
-	"the game (instead of discarding it).";
+	"Take an Event card from anywhere in the Player Discard Pile and place it on your Role card.\n"
+	"Only 1 Event card can be on his role card at a time. It does not count against his hand limit.";
 
 action::StoreEventCard::StoreEventCard(Player* const performer, role::ContingencyPlanner* const roleCard)
 	: Action { "Store Event Card", desc, performer }
@@ -64,9 +62,4 @@ void action::StoreEventCard::perform()
 bool action::StoreEventCard::isValid() const
 {
 	return _storedCard && _roleCard;
-}
-
-void action::StoreEventCard::setRoleCard(role::ContingencyPlanner* const roleCard)
-{
-	_roleCard = roleCard;
 }
