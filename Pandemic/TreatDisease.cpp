@@ -32,29 +32,12 @@ void action::TreatDisease::solicitData()
 		std::cout << "\t" << colourName(disease) << "(" << colourAbbreviation(disease) << "): " << _city->diseaseCubes(disease) << " cubes\n";
 	}
 
-	/*_colour = makeMenu(diseases, [&](const auto& disease)
+	_colour = makeMenu(diseases, [&](const auto& disease)
 	{
-		return colourName(disease) + "(" + colourAbbreviation(disease) + "): " + _city->diseaseCubes(disease) + " cubes";
+		return colourName(disease) + "(" + colourAbbreviation(disease) + "): " + std::to_string(_city->diseaseCubes(disease)) + " cubes";
 	})
 		.setMessage("Select a disease: ")
-		.solicitInput();*/
-
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& clrs = colours();
-		const auto& it = std::find_if(clrs.begin(), clrs.end(), [&](const auto& c)
-		{
-			return input == colourName(c);
-		});
-		if (it != clrs.end())
-		{
-			_colour = *it;
-			break;
-		}
-		std::cout << "No colour of that name.\n";
-	}
+		.solicitInput();
 }
 
 void action::TreatDisease::perform()

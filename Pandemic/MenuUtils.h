@@ -4,11 +4,23 @@
 
 #include "Menu.h"
 
-// Makes a menu from a vector of pointer. The label for each option is given by function f applied to each element.
 template <typename T, typename F>
 Menu<T> makeMenu(const std::vector<T>& vector, F f)
 {
 	Menu<T> menu;
+	for (const auto& element : vector)
+	{
+		menu.addOption({ f(element), [=]() { return element; } });
+	}
+	menu.addOption({ "Back", []() { return T(); } });
+	return menu;
+}
+
+// Makes a menu from a vector of pointer. The label for each option is given by function f applied to each element.
+template <typename T, typename F>
+Menu<T*> makeMenu(const std::vector<T*>& vector, F f)
+{
+	Menu<T*> menu;
 	for (const auto& element : vector)
 	{
 		menu.addOption({ f(element), [=]() { return element; } });
