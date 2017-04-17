@@ -89,12 +89,12 @@ City *& Map::startingCity()
 	return _startingCity;
 }
 
-const std::vector<Map::CityPtr>& Map::cities() const
-{
-	return _cities;
-}
+//const std::vector<Map::CityPtr>& Map::cities() const
+//{
+//	return _cities;
+//}
 
-std::vector<City*> Map::cityView() const
+std::vector<City*> Map::cities() const
 {
 	std::vector<City*> view;
 	for (const auto& city : _cities)

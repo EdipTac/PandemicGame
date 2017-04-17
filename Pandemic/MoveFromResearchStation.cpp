@@ -35,7 +35,7 @@ void action::MoveFromResearchStation::solicitData()
 	}
 
 	// List destinations
-	const auto& cities = Board::instance().map().cityView();
+	const auto& cities = Board::instance().map().cities();
 	std::cout << "Pick a destination:\n";
 	for (const auto& city : cities)
 	{

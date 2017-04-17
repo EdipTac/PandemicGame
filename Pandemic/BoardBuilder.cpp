@@ -87,7 +87,7 @@ BoardBuilder& BoardBuilder::loadBoard(std::string& gameSaveFile)
 
 BoardBuilder& BoardBuilder::loadPlayers()
 {
-	const auto& cities = Board::instance().map().cityView();
+	const auto& cities = Board::instance().map().cities();
 	auto events = event::cards();
 	auto roles = role::cards();
 
@@ -168,7 +168,7 @@ BoardBuilder& BoardBuilder::loadPlayers()
 	
 BoardBuilder& BoardBuilder::loadCities()
 {
-	const auto& cities = Board::instance().map().cityView();
+	const auto& cities = Board::instance().map().cities();
 
 	// CITIES INITIALIZATION:
 	std::vector<json> cityListJSON = gameFile["cities"];
@@ -206,7 +206,7 @@ BoardBuilder& BoardBuilder::loadCities()
 	
 BoardBuilder& BoardBuilder::loadInfectionCards()
 {
-	const auto& cities = Board::instance().map().cityView();
+	const auto& cities = Board::instance().map().cities();
 
 	// INFECTION CARDS INITIALIZATION:
 	json infection = gameFile["infection"];
@@ -260,7 +260,7 @@ BoardBuilder& BoardBuilder::loadInfectionCards()
 
 BoardBuilder& BoardBuilder::loadPlayerCards()
 {
-	const auto& cities = Board::instance().map().cityView();
+	const auto& cities = Board::instance().map().cities();
 	auto events = event::cards();
 	
 	// PLAYER CARDS INITIALIZATION:

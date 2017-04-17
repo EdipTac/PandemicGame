@@ -131,7 +131,7 @@ void newGame()
 	const auto& numEpidemicCards = solicitEpidemicCardNumber(minEpidemicCards, maxEpidemicCards);
 
 	// Other initializtion here - cards, etc
-	for (const auto& city : Board::instance().map().cityView())
+	for (const auto& city : Board::instance().map().cities())
 	{
 		Board::instance().playerDeck().addToDeck(std::make_unique<PlayerCityCard>(*city));
 		Board::instance().infectionDeck().addToDeck(std::make_unique<InfectionCard>(*city));
@@ -431,7 +431,7 @@ bool report()
 
 void displayCities()
 {
-	const auto& cities = Board::instance().map().cityView();
+	const auto& cities = Board::instance().map().cities();
 	std::cout << "\n";
 	Menu<City*> cityMenu;
 	cityMenu.setMessage("Select a city: ");

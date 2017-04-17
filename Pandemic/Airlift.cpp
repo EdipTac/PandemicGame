@@ -30,7 +30,7 @@ void action::Airlift::solicitData() {
 	}
 	
 
-	const auto& cities = Board::instance().map().cityView();
+	const auto& cities = Board::instance().map().cities();
 	for (auto it = cities.begin(); it != cities.end(); ++it) {
 		if ((*it)->name() == destination) {
 			setTarget(**it);

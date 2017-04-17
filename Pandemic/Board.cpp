@@ -111,7 +111,7 @@ bool Board::isEradicated(const Colour& colour) const
 size_t Board::diseaseCount(const Colour& colour) const
 {
 	size_t count = 0;
-	for (const auto& city : _map->cityView())
+	for (const auto& city : _map->cities())
 	{
 		count += city->diseaseCubes(colour);
 	}
@@ -138,7 +138,7 @@ unsigned Board::infectionCounter() const
 size_t Board::infectedCityCounter() const
 {
 	size_t count = 0;
-	for (const auto& city : _map->cityView())
+	for (const auto& city : _map->cities())
 	{
 		if(city->isInfected())
 		count ++;

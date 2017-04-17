@@ -65,7 +65,7 @@ std::string solicitLine(const std::string& msg)
 
 City* solicitCity(const Map& map)
 {
-	if (map.cityView().empty())
+	if (map.cities().empty())
 	{
 		std::cout << "No cities.\n";
 		return nullptr;

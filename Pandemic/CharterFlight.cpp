@@ -32,7 +32,7 @@ void action::CharterFlight::solicitData()
 	std::string input;
 	while (true)
 	{
-		const auto& cities = Board::instance().map().cityView();
+		const auto& cities = Board::instance().map().cities();
 		std::getline(std::cin >> std::ws, input);
 		const auto& it = std::find_if(cities.begin(), cities.end(), [&](const auto& c)
 		{
