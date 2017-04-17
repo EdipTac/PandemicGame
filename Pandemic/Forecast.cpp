@@ -11,25 +11,28 @@ void action::Forecast::solicitData()
 	_target.clear();
 
 	const auto& cards = Board::instance().infectionDeck().drawPile();
+	const size_t count = std::min(6ull, cards.size());
 	
-	if (cards.empty())
+	if (count == 0)
 	{
 		std::cout << "No infection cards to draw from. \n";
+		return;
 	}
+
 	std::vector<std::unique_ptr<InfectionCard>> topCards;
-	for (auto it = cards.begin(); it != (cards.begin() + 6); ++it)
+	for (size_t i = 0; i < count; ++i)
 	{
-		_target.push_back(Board::instance().infectionDeck().drawTopCard()); //this should work fine
+		_target.push_back(Board::instance().infectionDeck().drawTopCard());
 	}
-	std::cout << "The following are the 6 top cards in the Infection Draw Pile: \n";
+	std::cout << "The following are the " << count << " top cards in the Infection Draw Pile: \n";
 	int index = 0;
 	for (auto it = topCards.begin(); it != topCards.end(); ++it, index++)
 	{
-		std::cout << "Card at index:" << index << "  " << (*it)->name() <<" " << (*it)->description() << std::endl; //not sure if this *it will print out the content of the city card. Should try to make it so that it prints it->name(); just not sure how at the moment
+		std::cout << "Card at index:" << index << "  " << (*it)->name() <<" " << (*it)->description() << std::endl;
 	}
 	std::cout << "Please enter the order in which you would like to add the cards to the deck \n";
 	std::string input;
-	index = 6;
+	index = count;
 	while (true)
 	{
 		std::cout << "Please enter the name of card number " << index << ". \n";
@@ -42,12 +45,6 @@ void action::Forecast::solicitData()
 		{
 			_target.push_back(std::move(*it));
 		}
-
-		/*if (it != topCards.end())
-		{
-			Board::instance().infectionDeck().addToDeck(std::move(*it));
-			break;
-		}*/
 		std::cout << "No city of that name.\n";
 	}
 }
@@ -60,6 +57,6 @@ void action::Forecast::perform() {
 }
 
 bool action::Forecast::isValid() const {
-	return (_performer!= NULL);
+	return _performer;
 }
 

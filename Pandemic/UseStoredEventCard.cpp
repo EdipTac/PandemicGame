@@ -1,9 +1,11 @@
+#include <iostream>
+
 #include "UseStoredEventCard.h"
 
 const std::string desc = "Play the stored Event Card and remove it from the game.";
 
 action::UseStoredEventCard::UseStoredEventCard(Player* const performer, role::ContingencyPlanner* const roleCard)
-	: Action { "Store Event Card", desc, performer }
+	: Action { "Use Store Event Card", desc, performer }
 	, _roleCard { roleCard }
 {}
 
@@ -13,7 +15,11 @@ action::UseStoredEventCard::UseStoredEventCard(role::ContingencyPlanner* const r
 
 void action::UseStoredEventCard::solicitData()
 {
-	// Nothing to do
+	if (_roleCard->hasStoredEventCard())
+	{
+		return;
+	}
+	std::cout << "No stored event card!\n";
 }
 
 void action::UseStoredEventCard::perform()
@@ -29,5 +35,5 @@ void action::UseStoredEventCard::perform()
 
 bool action::UseStoredEventCard::isValid() const
 {
-	return _roleCard && _roleCard->hasStoredEventCard();
+	return _performer && _roleCard && _roleCard->hasStoredEventCard();
 }
