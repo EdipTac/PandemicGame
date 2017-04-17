@@ -464,7 +464,7 @@ void displayCities()
 
 void displayCurrentPosition() 
 {
-	showCity(Board::instance().currentPlayer().pawn().position());
+	std::cout << Board::instance().currentPlayer().pawn().position().string();
 }
 
 void displayCardsInHand() 
@@ -474,7 +474,8 @@ void displayCardsInHand()
 
 void displayRole()
 {
-	std::cout << "Role: " << Board::instance().currentPlayer().role().name() << "\nDescription: " << Board::instance().currentPlayer().role().description() << "\n\n";
+	std::cout << "Role: " << Board::instance().currentPlayer().role().name() << "\n";
+	std::cout << "Description: " << Board::instance().currentPlayer().role().description() << "\n\n";
 }
 
 void directConnectionReport()
@@ -482,19 +483,17 @@ void directConnectionReport()
 	std::cout << "In one action, you can move to\n";
 	for (const auto& city : Board::instance().currentPlayer().pawn().position().connections())
 	{
-		showCity(*city);
+		std::cout << city->name() << "\n";
 	}
 }
 
 void infect()
 {
-		for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
-		{
-			//auto& currentPlayer = Board::instance().nextPlayer();
-			auto card = Board::instance().infectionDeck().drawTopCard();
-			card->onDraw(Board::instance());
-			Board::instance().infectionDeck().addToDiscard(std::move(card));
-		}
-	
+	for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
+	{
+		auto card = Board::instance().infectionDeck().drawTopCard();
+		card->onDraw(Board::instance());
+		Board::instance().infectionDeck().addToDiscard(std::move(card));
+	}	
 	Board::instance().notify();	
 }
