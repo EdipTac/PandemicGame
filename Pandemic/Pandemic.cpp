@@ -123,10 +123,11 @@ void newGame()
 	}
 
 	std::cout << "\nSelect difficulty:\n\n";
-	std::cout << "  Level       \tEpidemic Cards\n";
-	std::cout << "  Introductory\t4\n";
-	std::cout << "  Standard    \t5\n";
-	std::cout << "  Heroic      \t6\n\n";
+	std::cout << "  Level           Epidemic Cards\n";
+	std::cout << "==================================\n";
+	std::cout << "  Introductory    4\n";
+	std::cout << "  Standard        5\n";
+	std::cout << "  Heroic          6\n\n";
 	const auto& numEpidemicCards = solicitEpidemicCardNumber(minEpidemicCards, maxEpidemicCards);
 
 	// Other initializtion here - cards, etc
@@ -134,7 +135,6 @@ void newGame()
 	{
 		Board::instance().playerDeck().addToDeck(std::make_unique<PlayerCityCard>(*city));
 		Board::instance().infectionDeck().addToDeck(std::make_unique<InfectionCard>(*city));
-		
 	}
 	
 	auto eventCards = event::cards();
@@ -145,7 +145,7 @@ void newGame()
 	}
 
 
-	//Distribute Role Cards to players
+	// Distribute Role Cards to players
 	DeckOfRoles roleCardDeck;
 	roleCardDeck.shuffleDeck();
 	for (auto& player : Board::instance().players())
@@ -171,11 +171,11 @@ void newGame()
 		}
 	}
 
-	// shuffle epidemic card into play card deck
+	// Shuffle epidemic cards into play card deck
 	Board::instance().playerDeck().addEpidemicCards(numEpidemicCards);
 	for (const auto& player : Board::instance().players())
 	{
-		std::cout << "\nPlayer " << player->name() << ":";
+		std::cout << "\n" << player->name() << ": ";
 		player->displayCards();
 	}
 	
