@@ -227,7 +227,6 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapEditor.cpp" />
     <ClCompile Include="Medic.cpp" />
-    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="MoveFromResearchStation.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="OneQuietNight.cpp" />

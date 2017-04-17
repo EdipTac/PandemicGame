@@ -21,7 +21,6 @@ bool playEventCard();
 bool report();
 bool saveGame();
 
-size_t solicitSize(const size_t min, const size_t max);
 size_t solicitEpidemicCardNumber(const size_t min, const size_t max);
 
 std::string solicitFileName(const std::string& msg);

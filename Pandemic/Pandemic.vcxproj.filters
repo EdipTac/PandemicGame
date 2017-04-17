@@ -25,9 +25,6 @@
     <Filter Include="Menus\header">
       <UniqueIdentifier>{f3f60604-24cd-4a70-8234-278ae3ba1966}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Menus\src">
-      <UniqueIdentifier>{f13a43fe-de5a-4b06-bf76-b5690cdc0bf1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Util">
       <UniqueIdentifier>{2ef799ea-aeaa-4605-84e9-2fdae6a1b82e}</UniqueIdentifier>
     </Filter>
@@ -403,9 +400,6 @@
     </ClCompile>
     <ClCompile Include="Deck.cpp">
       <Filter>General\src</Filter>
-    </ClCompile>
-    <ClCompile Include="Menu.cpp">
-      <Filter>Menus\src</Filter>
     </ClCompile>
     <ClCompile Include="Util.cpp">
       <Filter>Util\src</Filter>
