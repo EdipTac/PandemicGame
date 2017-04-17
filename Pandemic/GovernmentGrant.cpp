@@ -12,15 +12,38 @@ void action::GovernmentGrant::solicitData() {
 	// Reset
 	_target = nullptr;
 
-	std::cout << "Please indicate the name of the city you would like to add a Research Station to";;
+	//std::cout << "Please indicate the name of the city you would like to add a Research Station to: ";
 	std::string destination;
-	std::getline(std::cin >> std::ws, destination);
+	//std::getline(std::cin >> std::ws, destination);
 
 	const auto& cities = Board::instance().map().cities();
-	for (auto it = cities.begin(); it != cities.end(); ++it) {
-		if ((*it)->name() == destination) {
+	bool looper = true;
+	/*while (looper)
+	{
+		std::cout << "Please indicate the name of the city you would like to add a Research Station to: ";
+		std::getline(std::cin >> std::ws, destination);
+		const auto& it = std::find_if(cities.begin(), cities.end(), [&](const auto& c)
+		{
+			return destination == c->name();
+		});
+		if (it != cities.end())
+		{
 			setTarget(**it);
+			looper = false;
 		}
+		std::cout << "No city of that name.\n";
+	}*/
+
+	while (looper) {
+		std::cout << "Please indicate the name of the city you would like to add a Research Station to: ";
+		std::getline(std::cin >> std::ws, destination);
+		for (auto it = cities.begin(); it != cities.end(); ++it) {
+			if ((*it)->name() == destination) {
+				setTarget(**it);
+				looper = false;
+			}
+		}
+		std::cout << "No city matches that name. \n";
 	}
 
 }
