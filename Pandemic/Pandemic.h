@@ -51,10 +51,10 @@ constexpr size_t cardsPerTurn = 2;
 const GeneralMenu mainMenu
 {
 	{
-		{ "New Game",	newGame },
-		{ "Load Game",	loadGame },
-		{ "Map Editor",	mapEditor },
-		{ "Exit",		[](){actionQuit();} }
+		{ "New Game",   newGame             },
+		{ "Load Game",  loadGame            },
+		{ "Map Editor", mapEditor           },
+		{ "Exit",       [](){actionQuit();} }
 	}
 };
 
@@ -73,11 +73,11 @@ const ActionMenu turnMenu
 const GeneralMenu reportMenu
 {
 	{
-		{ "Display Cities",				displayCities },
-		{ "Display Reference Card",	displayReferenceCard },
-		{ "Direct Connection Report",	directConnectionReport },
-		{ "Display Current Position",	displayCurrentPosition },
-		{ "Display Role",	displayRole },
-		{ "Display Cards in Hand",	displayCardsInHand }
+		{ "Display Cities",           displayCities          },
+		{ "Display Reference Card",   displayReferenceCard   },
+		{ "Direct Connection Report", directConnectionReport },
+		{ "Display Current Position", displayCurrentPosition },
+		{ "Display Role",             displayRole            },
+		{ "Display Cards in Hand",    displayCardsInHand     }
 	}
 };

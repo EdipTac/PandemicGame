@@ -482,12 +482,29 @@ void displayCurrentPosition()
 void displayCardsInHand() 
 {
 	Board::instance().currentPlayer().displayCards();
+	std::cout << "\nSelect a card to display description: ";
+	const auto& cards = Board::instance().currentPlayer().cards();
+	std::string input;
+	while (true)
+	{
+		std::getline(std::cin >> std::ws, input);
+		const auto& it = std::find_if(cards.begin(), cards.end(), [&](const auto& c)
+		{
+			return c->name() == input;
+		});
+		if (it != cards.end())
+		{
+			std::cout << "  " << (*it)->description() << "\n\n";
+			break;
+		}
+	}
 }
 
 void displayRole()
 {
-	std::cout << "Role: " << Board::instance().currentPlayer().role().name() << "\n";
-	std::cout << "Description: " << Board::instance().currentPlayer().role().description() << "\n\n";
+	const auto& role = Board::instance().currentPlayer().role();
+	std::cout << "Role: " << role.name() << "\n";
+	std::cout << "Description: " << role.description() << "\n\n";
 }
 
 void directConnectionReport()
