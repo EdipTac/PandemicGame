@@ -569,7 +569,9 @@
     <ClCompile Include="ResilientPopulationCard.cpp">
       <Filter>Event Cards\src</Filter>
     </ClCompile>
-    <ClCompile Include="StoreEventCard.cpp" />
+    <ClCompile Include="StoreEventCard.cpp">
+      <Filter>Actions\Role Actions\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">
