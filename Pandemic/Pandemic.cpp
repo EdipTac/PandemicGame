@@ -193,7 +193,7 @@ void newGame()
 				break;
 			}
 			auto temp = Board::instance().infectionDeck().drawTopCard();
-			temp->infect(Board::instance(), j);
+			temp->infect(j);
 			Board::instance().infectionDeck().addToDiscard(move(temp));
 		}
 	}
@@ -493,7 +493,7 @@ void infect()
 	for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
 	{
 		auto card = Board::instance().infectionDeck().drawTopCard();
-		card->onDraw(Board::instance());
+		card->onDraw();
 		Board::instance().infectionDeck().addToDiscard(std::move(card));
 	}	
 	Board::instance().notify();	

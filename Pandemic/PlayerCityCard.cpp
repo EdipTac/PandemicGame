@@ -33,9 +33,9 @@ std::string PlayerCityCard::description() const
 	return CityCard::description();
 }
 
-void PlayerCityCard::cardWork(Deck<InfectionCard>& deck) {}
+void PlayerCityCard::cardWork(Deck<InfectionCard>&) {}
 
-void PlayerCityCard::onDraw(Board& state) {}
+void PlayerCityCard::onDraw() {}
 
 PlayerCardType PlayerCityCard::type() const
 {

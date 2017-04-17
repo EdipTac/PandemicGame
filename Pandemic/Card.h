@@ -18,5 +18,5 @@ public:
 	virtual std::string description() const = 0;
 
 	// The card's action when drawn
-	virtual void onDraw(Board& state) = 0;
+	virtual void onDraw() = 0;
 };

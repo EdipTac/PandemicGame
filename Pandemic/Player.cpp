@@ -58,7 +58,7 @@ void Player::drawFrom(Deck<PlayerCard>& deck, size_t count)
 			// Dick was empty, so card pointer is null
 			break;
 		}
-		card->onDraw(Board::instance());
+		card->onDraw();
 		card->cardWork(Board::instance().infectionDeck());
 		if (card->isHandCard())
 		{

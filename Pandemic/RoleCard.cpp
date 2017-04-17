@@ -26,7 +26,7 @@ void RoleCard::print() {
 	std::cout << name() << " (" << _color << ")\n" << description() << "\n";
 }
 
-void RoleCard::onDraw(Board&) {}
+void RoleCard::onDraw() {}
 
 std::vector<action::Action*> RoleCard::actions() const
 {

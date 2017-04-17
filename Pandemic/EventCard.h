@@ -32,7 +32,7 @@ using namespace action;
 		virtual std::string rawString() const override;
 
 		// Inherited via TextualCard
-		virtual void onDraw(Board& state) override;
+		virtual void onDraw() override;
 
 		// True
 		virtual bool isEventCard() const override;

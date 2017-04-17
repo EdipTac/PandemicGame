@@ -10,7 +10,7 @@ EpidemicCard::EpidemicCard() {}
 
 EpidemicCard:: ~EpidemicCard(){}
 
-void EpidemicCard::onDraw(Board&) {}
+void EpidemicCard::onDraw() {}
 
 std::string EpidemicCard::name() const
 {
@@ -55,7 +55,7 @@ PlayerCardType EpidemicCard::type() const
 	return PlayerCardType::EpidemicCard;
 }
 
-std::string EpidemicCard::string(const size_t spacing) const
+std::string EpidemicCard::string(const size_t) const
 {
 	return rawString();
 }
