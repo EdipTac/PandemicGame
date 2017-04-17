@@ -18,24 +18,27 @@ void action::Forecast::solicitData()
 		std::cout << "No infection cards to draw from. \n";
 		return;
 	}
+	// the following has been changed:
+	//_target.push_back(Board::instance().infectionDeck().drawTopCard()); // changed to topCards.push_back.....
+
 
 	std::vector<std::unique_ptr<InfectionCard>> topCards;
 	for (size_t i = 0; i < count; ++i)
 	{
-		_target.push_back(Board::instance().infectionDeck().drawTopCard());
+		topCards.push_back(Board::instance().infectionDeck().drawTopCard());
 	}
-	std::cout << "The following are the " << count << " top cards in the Infection Draw Pile: \n";
-	int index = 0;
-	for (auto it = topCards.begin(); it != topCards.end(); ++it, index++)
+	std::cout << "The following are the " << (int)count << " top cards in the Infection Draw Pile: \n"; // added (int) to (int)count to cast it to an integer type
+	size_t index = 0; //changes from int index = 0 to size_t to see if it will help
+	for (auto it = topCards.begin(); it != topCards.end(); ++it, ++index)
 	{
-		std::cout << "Card at index:" << index << "  " << (*it)->name() <<" " << (*it)->description() << std::endl;
+		std::cout << "Card at index:" << index << " is " << (*it)->name() <<" " << (*it)->description() << std::endl;
 	}
-	std::cout << "Please enter the order in which you would like to add the cards to the deck \n";
+	std::cout << "Please enter the order in which you would like to add the cards to the deck. \n";
 	std::string input;
 	index = count;
 	while (true)
 	{
-		std::cout << "Please enter the name of card number " << index << ". \n";
+		std::cout << "Please enter the name of card name you would like to make at index " << index << ": \n";
 		std::getline(std::cin >> std::ws, input);
 		const auto& it = std::find_if(topCards.begin(), topCards.end(), [&](const auto& c)
 		{
