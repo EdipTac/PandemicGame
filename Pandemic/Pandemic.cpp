@@ -481,11 +481,12 @@ void displayRole()
 
 void directConnectionReport()
 {
-	std::cout << "In one action, you can move to\n";
+	std::cout << "\nIn one action, you can move to\n";
 	for (const auto& city : Board::instance().currentPlayer().pawn().position().connections())
 	{
-		std::cout << city->name() << "\n";
+		std::cout << "  " << city->name() << "\n";
 	}
+	std::cout << "\n";
 }
 
 void infect()
