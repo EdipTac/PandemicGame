@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Board.h"
 #include "InfectionCard.h"
+#include "MenuUtils.h"
 
 const std::string desc = "Take a card from the Infection Discard Pile and remove it from the game.";
 
@@ -23,21 +24,10 @@ void action::ResilientPopulation::solicitData()
 	}
 	Board::instance().infectionDeck().printDiscards();
 
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(discardCards.begin(), discardCards.end(), [&](const auto& c)
-		{
-			return input == c->name();
-		});
-		if (it != discardCards.end())
-		{
-			_target = input;
-			break;
-		}
-		std::cout << "Not infection card of that name in the discard pile. \n";		
-	}
+	_target =
+		namedMenu(discardCards)
+		.setMessage("Which card to remove: ")
+		.solicitInput()->name();
 }
 void action::ResilientPopulation::perform()
 {
