@@ -77,12 +77,12 @@ void action::BuildResearchStation::perform()
 {
 	if (_takeFromCity)
 	{
-		_target->removeResearchStation(Board::instance());
+		_target->removeResearchStation();
 	}
 	
 	// Remove card, place station
 	_performer->discard(*_positionCard, Board::instance().playerDeck());
-	_performer->pawn().position().giveResearchStation(Board::instance());
+	_performer->pawn().position().giveResearchStation();
 }
 
 bool action::BuildResearchStation::isValid() const

@@ -181,15 +181,15 @@ bool& City::hasResearchStation()
 	return _hasResearchStation;
 }
 
-void City::giveResearchStation(Board& game)
+void City::giveResearchStation()
 {
-	game.removeResearchStation();
+	Board::instance().removeResearchStation();
 	_hasResearchStation = true;
 }
 
-void City::removeResearchStation(Board& game)
+void City::removeResearchStation()
 {
-	game.returnResearchStation();
+	Board::instance().returnResearchStation();
 	_hasResearchStation = false;
 }
 

@@ -82,8 +82,8 @@ public:
 	// True iff the city has a research station
 	bool hasResearchStation() const;
 	bool& hasResearchStation();
-	void giveResearchStation(Board& game);
-	void removeResearchStation(Board& game);
+	void giveResearchStation();
+	void removeResearchStation();
 
 	// List of all diseases in this city
 	std::vector<Colour> diseases();

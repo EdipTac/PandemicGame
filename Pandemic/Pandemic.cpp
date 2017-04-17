@@ -179,7 +179,7 @@ void newGame()
 	}
 	
 	// Place first research station
-	map.startingCity().giveResearchStation(Board::instance());
+	map.startingCity().giveResearchStation();
 
 	// Initial distribution of disease cubes during game initialization
 	Board::instance().infectionDeck().shuffleDeck();
