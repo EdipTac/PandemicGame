@@ -238,10 +238,13 @@ void loadGame()
 
 bool saveGame()
 {
-	std::cout << "Save game...\nEnter name of game save file : ";
+	std::cout << "Save game...\n";
+	std::cout << "Enter name of game save file : ";
+
 	std::string fileName;
 	std::cin >> fileName;
 	std::cin.ignore();
+	
 	if (fileExists(fileName))
 	{
 		std::cout << "File exists. Overwrite? (Y/N)" << std::endl;
@@ -252,8 +255,17 @@ bool saveGame()
 			return false;
 		}
 	}
-	SaveBuilder().saveMap().savePlayers().savePlayerCards().saveInfectionCards().saveCities().persist(fileName);
+
+	SaveBuilder()
+		.saveMap()
+		.savePlayers()
+		.savePlayerCards()
+		.saveInfectionCards()
+		.saveCities()
+		.persist(fileName);
+
 	std::cout << "\n" << titleFont("GAME SAVED") << "\n\n";
+	
 	return false;
 }
 
