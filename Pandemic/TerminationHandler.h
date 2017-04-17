@@ -17,7 +17,4 @@ public:
 protected:
 	virtual void onVictory(const Terminator& t);
 	virtual void onDefeat(const Terminator& t);
-
-private:
-	bool _shouldQuit = false;
 };
