@@ -1,5 +1,7 @@
 #pragma once
 
+#include <sstream>
+
 #include "Pawn.h"
 #include "Player.h"
 #include "PlayerCityCard.h"
@@ -106,28 +108,25 @@ void Player::discard(const std::string& name, Deck<PlayerCard>& deck)
 
 std::ostream& operator<<(std::ostream& os, PlayerCard& card)
 {
-	return os << card.toString();
+	return os << card.string();
 }
 
-void Player::displayCards() {
-	_role->printRole();
-	std::cout << "\nDisplaying Cards on hand: \n";
-	int k = 0;
-	for (auto& card : cityCards()) {
-		std::cout << card->toString() << ", Colour: " << colourName(card->colour())<< "\n";
-		k++;
+void Player::displayCards()
+{
+	_role->print();
+	size_t maxLength = 0;
+	for (const auto& card : _cards)
+	{
+		maxLength = std::max(maxLength, card->rawString().size());
 	}
-	if (k > 7) {
-		std::cout << "More than seven city cards on hand, you have to drop " << (k - 7) << "city cards" << std::endl;
+	std::stringstream ss;
+	ss << "\nHand:\n";
+	for (const auto& card : _cards)
+	{
+		ss << "  " << card->string(maxLength + 2 - card->rawString().size()) << "\n";
 	}
-	for (auto& player : Board::instance().players()) {
-		for (auto& card : player->cards()) {
-			if (card->type() != PlayerCardType::CityCard) {
-				std::cout << card->toString() << "\n";
-			}
-		}
-	}
-
+	ss << "\n";
+	std::cout << ss.str();
 }
 
 bool Player::hasPositionCard()
@@ -226,7 +225,7 @@ void Player::setName(const std::string name) {
 }
 
 void Player::displayRole() {
-	_role->printRole();
+	_role->print();
 }
 
 bool Player::isOneQuietNight() {

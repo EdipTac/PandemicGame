@@ -19,7 +19,8 @@ public:
 	~PlayerCityCard() override;
 
 	// Custom implementation of the inherited virtual function from PlayerCard
-	std::string toString();
+	virtual std::string string(const size_t spacing = 0) const override;
+	virtual std::string rawString() const override;
 
 	// Inherited via PlayerCard
 	virtual std::string name() const override;

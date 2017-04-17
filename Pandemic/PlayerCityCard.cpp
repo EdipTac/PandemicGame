@@ -1,10 +1,5 @@
-#pragma warning(disable : 4100)	// To be removed
-
 #include "PlayerCityCard.h"
-
-// Default Constructor
-//PlayerCityCard::PlayerCityCard()
-//	: PlayerCard() {}
+#include "Util.h"
 
 PlayerCityCard::PlayerCityCard()
 	: CityCard {}
@@ -17,11 +12,15 @@ PlayerCityCard::PlayerCityCard(City& city)
 
 PlayerCityCard::~PlayerCityCard() {}
 
-
 // Custom implementation of the inherited virtual function from PlayerCard
-std::string PlayerCityCard::toString()
+std::string PlayerCityCard::string(const size_t spacing) const
 {
-	return "Type: PlayerCityCard, " + PlayerCard::toString();
+	return rawString() + spaces(spacing) + " [City Card]";
+}
+
+std::string PlayerCityCard::rawString() const
+{
+	return name() + " (" + colourName(colour()) + ")";
 }
 
 std::string PlayerCityCard::name() const

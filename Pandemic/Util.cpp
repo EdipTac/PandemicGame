@@ -117,6 +117,16 @@ std::string rightPad(const std::string& original, const size_t width)
 	return ss.str();
 }
 
+std::string spaces(const size_t count)
+{
+	std::stringstream ss;
+	for (size_t i = 0; i < count; ++i)
+	{
+		ss << " ";
+	}
+	return ss.str();;
+}
+
 std::string titleFont(const std::string& original)
 {
 	std::stringstream ss;

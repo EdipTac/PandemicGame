@@ -22,8 +22,8 @@ RoleCard::RoleCard(const std::string& role, const std::string& description, cons
 
 RoleCard::~RoleCard() {}
 
-void RoleCard::printRole() {
-	std::cout << name() << std::endl << _color << std::endl << description() << std::endl;
+void RoleCard::print() {
+	std::cout << name() << "\n" << _color << "\n" << description() << std::endl;
 }
 
 void RoleCard::onDraw(Board&) {}

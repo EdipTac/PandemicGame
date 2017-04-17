@@ -22,11 +22,6 @@ std::string EpidemicCard::description() const
 	return EPIDEMIC_DESCRIPTION;
 }
 
-std::string EpidemicCard::toString()
-{
-	return "Type: Epidemic, " + PlayerCard::toString() + ", Description: \n" + EPIDEMIC_DESCRIPTION;
-}
-
 void EpidemicCard::cardWork(Deck<InfectionCard>& deck)
 {
 	Board::instance().advanceInfectionCounter();//increase
@@ -58,4 +53,14 @@ bool EpidemicCard::isEpidemicCard() const
 PlayerCardType EpidemicCard::type() const
 {
 	return PlayerCardType::EpidemicCard;
+}
+
+std::string EpidemicCard::string(const size_t spacing) const
+{
+	return rawString();
+}
+
+std::string EpidemicCard::rawString() const
+{
+	return name();
 }

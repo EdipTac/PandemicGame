@@ -9,6 +9,8 @@
 #include "City.h"
 #include "Map.h"
 
+std::string spaces(const size_t count);
+
 std::string titleFont(const std::string& original);
 
 void clearStringStream(std::stringstream& ss);

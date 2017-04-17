@@ -19,11 +19,13 @@ public:
 	// The rules of the epidemic card
 	std::string description() const override;
 
-	virtual std::string toString();
 	virtual void onDraw(Board& state) override;
 	virtual void cardWork(Deck<InfectionCard>& deck);
 
 	virtual bool isEpidemicCard() const override;
 
 	virtual PlayerCardType type() const override;
+
+	virtual std::string string(const size_t spacing = 0) const override;
+	virtual std::string rawString() const override;
 };

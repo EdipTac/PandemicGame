@@ -30,7 +30,8 @@ public:
 	bool isHandCard() const;
 
 	// virtual function that converts a PlayerCard object into an informative string.
-	virtual std::string toString();
+	virtual std::string string(const size_t spacing = 0) const = 0;
+	virtual std::string rawString() const = 0;
 
 	// virtual function for epidemic card
 	virtual void cardWork(Deck<InfectionCard>& deck) = 0;

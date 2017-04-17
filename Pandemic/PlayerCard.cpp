@@ -17,8 +17,3 @@ bool PlayerCard::isHandCard() const
 	return type() == PlayerCardType::CityCard
 		|| type() == PlayerCardType::EventCard;
 }
-
-std::string PlayerCard::toString()
-{
-	return "Name: " + name();
-}
