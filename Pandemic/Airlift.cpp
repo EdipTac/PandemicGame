@@ -30,12 +30,10 @@ void action::Airlift::solicitData() {
 	}
 	
 
-	const auto& cities = Board::instance().map().cities();
+	const auto& cities = Board::instance().map().cityView();
 	for (auto it = cities.begin(); it != cities.end(); ++it) {
 		if ((*it)->name() == destination) {
-			//_performer->move((**it));
 			setTarget(**it);
-			//_target = (**it);
 			break;
 		}
 	}
@@ -55,30 +53,3 @@ void action::Airlift::setTarget(City& target) {
 bool action::Airlift::isValid() const {
 	return _performer && _target;
 }
-
-//void Airlift::performEvent(std::string liftee, std::string destination) {
-//	Player* playerToLift=nullptr;
-//	for (auto it = Board::instance().players().begin(); it != Board::instance().players().end(); ++it) {
-//		if ((*it)->name() == liftee) {
-//			playerToLift = (*it); 
-//		}
-//	}
-//
-//	auto& position = playerToLift->pawn().position();
-//	auto& cities = Board::instance().map().cities();
-//	
-//	for (auto it = Board::instance().map().cities().begin(); it != Board::instance().map().cities().end(); ++it) {
-//		if ((*it)->name() == destination) {
-//			playerToLift->move((**it));
-//		}
-//	}
-//
-//
-//
-//}
-
-//void Airlift::performEvent(Player* const performer, std::string destination) {
-//	action::DirectFlight obj(performer);
-//	obj.setTarget()
-//	//performer->
-//}

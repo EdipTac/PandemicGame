@@ -41,7 +41,7 @@ SaveBuilder& SaveBuilder::savePlayers()
 
 SaveBuilder& SaveBuilder::saveCities()
 {
-	const auto& cities = Board::instance().map().cities();
+	const auto& cities = Board::instance().map().cityView();
 	std::vector<json> citiesJSON(cities.size());
 	for (size_t idx = 0; idx < cities.size(); ++idx)
 	{

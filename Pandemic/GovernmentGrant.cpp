@@ -16,7 +16,8 @@ void action::GovernmentGrant::solicitData() {
 	std::string destination;
 	std::getline(std::cin >> std::ws, destination);
 
-	for (auto it = Board::instance().map().cities().begin(); it != Board::instance().map().cities().end(); ++it) {
+	const auto& cities = Board::instance().map().cityView();
+	for (auto it = cities.begin(); it != cities.end(); ++it) {
 		if ((*it)->name() == destination) {
 			setTarget(**it);
 		}

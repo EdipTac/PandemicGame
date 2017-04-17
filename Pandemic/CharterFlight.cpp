@@ -32,7 +32,7 @@ void action::CharterFlight::solicitData()
 	std::string input;
 	while (true)
 	{
-		const auto& cities = Board::instance().map().cities();
+		const auto& cities = Board::instance().map().cityView();
 		std::getline(std::cin >> std::ws, input);
 		const auto& it = std::find_if(cities.begin(), cities.end(), [&](const auto& c)
 		{
@@ -40,7 +40,7 @@ void action::CharterFlight::solicitData()
 		});
 		if (it != cities.end())
 		{
-			_target = (*it).get();
+			_target = *it;
 			break;
 		}
 		std::cout << "No city of that name.\n";

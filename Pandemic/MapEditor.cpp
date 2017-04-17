@@ -91,7 +91,7 @@ void deleteCity()
 
 void listCities()
 {
-	for (const auto& city : map->cities())
+	for (const auto& city : map->cityView())
 	{
 		std::cout << "\t" << city->name() << ": " << colourName(city->colour()) << "\n";
 	}

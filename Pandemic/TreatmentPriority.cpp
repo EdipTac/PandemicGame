@@ -23,9 +23,9 @@ bool TreatmentPriority::sortbysec(const pair<City*, size_t> &a, const pair<City*
 void TreatmentPriority::display() {
 	cout << "\nTreatment priority in descending order for \ncities which have more than two disease cubes:" << endl;
 	vector <pair<City*, size_t>> citylist;
-	for (auto& city : Board::instance().map().cities()) {
+	for (auto& city : Board::instance().map().cityView()) {
 
-		citylist.push_back(make_pair(city.get(), city->totalCubes()));
+		citylist.push_back(make_pair(city, city->totalCubes()));
 	}
 	sort(citylist.begin(), citylist.end(), sortbysec);
 	for (int i = 0; i<citylist.size(); i++)

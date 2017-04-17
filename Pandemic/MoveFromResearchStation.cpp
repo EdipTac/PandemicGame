@@ -35,7 +35,7 @@ void action::MoveFromResearchStation::solicitData()
 	}
 
 	// List destinations
-	const auto& cities = Board::instance().map().cities();
+	const auto& cities = Board::instance().map().cityView();
 	std::cout << "Pick a destination:\n";
 	for (const auto& city : cities)
 	{
@@ -53,7 +53,7 @@ void action::MoveFromResearchStation::solicitData()
 		});
 		if (it != cities.end())
 		{
-			_destination = it->get();
+			_destination = *it;
 			break;
 		}
 		std::cout << "No card of that name.\n";
