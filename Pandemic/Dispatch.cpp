@@ -3,6 +3,7 @@
 #include "Dispatch.h"
 #include "Board.h"
 #include "Player.h"
+#include "MenuUtils.h"
 
 const std::string desc = "Move any pawn to any city containing another pawn.";
 
@@ -32,29 +33,11 @@ void action::Dispatch::solicitData()
 		return;
 	}
 
-	// List other players
-	std::cout << "Who to move?\n";
-	for (const auto& player : others)
-	{
-		std::cout << "\t" << player->name() << "\n";
-	}
-
 	// Get dispatchee from player
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(others.begin(), others.end(), [&](const auto& p)
-		{
-			return input == p->name();
-		});
-		if (it != others.end())
-		{
-			_dispatchee = *it;
-			break;
-		}
-		std::cout << "No player of that name.\n";
-	}
+	_dispatchee =
+		namedMenu(others)
+		.setMessage("Who to move? ")
+		.solicitInput();
 
 	// Remove dispatchee from list of possible destinations
 	std::remove(others.begin(), others.end(), _dispatchee);
@@ -74,31 +57,18 @@ void action::Dispatch::solicitData()
 	// ...or connected cities ("regular" move)
 	for (const auto& city : _dispatchee->pawn().position().connections())
 	{
-		destinations.push_back(city);
-	}
-
-	// List possible destinations
-	std::cout << "Where to move to?\n";
-	for (const auto& city : destinations)
-	{
-		std::cout << "\t" << city->name() << "\n";
-	}
-
-	// Get destination from player
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(destinations.begin(), destinations.end(), [&](const auto& c)
+		if (std::find(destinations.begin(), destinations.end(), city) == destinations.end())
 		{
-			return input == c->name();
-		});
-		if (it != destinations.end())
-		{
-			_destination = *it;
-			break;
+			// Not already in list
+			destinations.push_back(city);
 		}
-		std::cout << "No city of that name.\n";
 	}
+
+	// List possible destinations and get destination from player
+	_destination =
+		namedMenu(destinations)
+		.setMessage("Where to move to? ")
+		.solicitInput();
 }
 
 void action::Dispatch::perform()
