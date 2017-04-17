@@ -125,16 +125,17 @@ void City::disconnectFrom(City& target)
 
 }
 
-void City::addDiseaseCubes(const Colour& colour, const size_t amount, Board& state){
-	if (!_outbreaks[colour] && !_quarantined && !state.cubePool().isEradicated(colour)) {
-		_diseaseCubes.takeFrom(colour, amount, state.cubePool());
+void City::addDiseaseCubes(const Colour& colour, const size_t amount)
+{
+	if (!_outbreaks[colour] && !_quarantined && !Board::instance().cubePool().isEradicated(colour)) {
+		_diseaseCubes.takeFrom(colour, amount, Board::instance().cubePool());
 		if (_diseaseCubes[colour] > cubesBeforeOutbreak) {
 
 		    _outbreaks[colour] = true;
-            state.advanceOutbreakCounter();
-            _diseaseCubes.giveTo(colour, (_diseaseCubes.operator[](colour) - cubesBeforeOutbreak), state.cubePool());
+			Board::instance().advanceOutbreakCounter();
+            _diseaseCubes.giveTo(colour, (_diseaseCubes.operator[](colour) - cubesBeforeOutbreak), Board::instance().cubePool());
             for (const auto& city : connections()){
-				city->addDiseaseCubes(colour, cubesPerInfection, state);
+				city->addDiseaseCubes(colour, cubesPerInfection);
 			}
 		}
 	}

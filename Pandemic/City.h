@@ -59,7 +59,7 @@ public:
 	bool diseaseOutbreak(const Colour& colour) const;
 
 	// Adds disease cubes of a given colour from a given source
-	void addDiseaseCubes(const Colour& colour, const size_t amount, Board&);
+	void addDiseaseCubes(const Colour& colour, const size_t amount);
 
 	// Removes disease cubes of a given colour, giving back to a given source
 	void removeDiseaseCubes(const Colour& colour, const size_t amount, CubePool& pool);
