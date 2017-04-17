@@ -38,6 +38,8 @@ public:
 	// List of pointers to all contained cities
 	const std::vector<CityPtr>& cities() const;
 
+	std::vector<City*> cityView() const;
+
 	// Add a city
 	City& addCity(CityPtr city);
 

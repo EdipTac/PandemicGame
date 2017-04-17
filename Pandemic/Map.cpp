@@ -93,3 +93,13 @@ const std::vector<Map::CityPtr>& Map::cities() const
 {
 	return _cities;
 }
+
+std::vector<City*> Map::cityView() const
+{
+	std::vector<City*> view;
+	for (const auto& city : _cities)
+	{
+		view.push_back(city.get());
+	}
+	return view;
+}
