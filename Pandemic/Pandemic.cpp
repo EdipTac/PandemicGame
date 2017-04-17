@@ -412,9 +412,11 @@ size_t solicitSize(const size_t min, const size_t max)
 	while (true)
 	{
 		std::cout << "Enter a number from " << min << " to " << max << ", inclusive: ";
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		std::cin >> size;
 		std::cin.get();
-		if (min <= size && size <= max)
+		if (std::cin.good() && min <= size && size <= max)
 		{
 			break;
 		}
