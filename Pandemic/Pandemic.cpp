@@ -124,10 +124,11 @@ void newGame()
 
 	std::cout << "\nSelect difficulty:\n\n";
 	std::cout << "  Level           Epidemic Cards\n";
-	std::cout << "==================================\n";
+	std::cout << " ================================\n";
 	std::cout << "  Introductory    4\n";
 	std::cout << "  Standard        5\n";
 	std::cout << "  Heroic          6\n\n";
+
 	const auto& numEpidemicCards = solicitEpidemicCardNumber(minEpidemicCards, maxEpidemicCards);
 
 	// Other initializtion here - cards, etc
@@ -144,13 +145,12 @@ void newGame()
 		eventCards.pop_back();
 	}
 
-
 	// Distribute Role Cards to players
-	DeckOfRoles roleCardDeck;
-	roleCardDeck.shuffleDeck();
+	auto roles = role::cards();
 	for (auto& player : Board::instance().players())
 	{
-		player->setRole(roleCardDeck.drawTopCard());
+		player->setRole(std::move(roles.back()));
+		roles.pop_back();
 	}
 
 	for (const auto& player : Board::instance().players())
@@ -200,27 +200,30 @@ void newGame()
 	}
 }
 
-//Initialize a reference card that any player can view
+// Initialize a reference card that any player can view
 void displayReferenceCard()
 {
-	std::cout << "Drive / Ferry: \nMove to a city connected by a white line to the one you are in.\n"
-		"Direct Flight: \nDiscard a city card to move to the city named on the card.\n"
-		"Charter Flight: \nDiscard the city card that MATCHES the city you are in to move to ANY city.\n"
-		"Shuttle Flight: \nMove from a city with a research station to any other city that has a research station.\n"
-		"Build a Research Station: \nDiscard the city card that matches the city you are in to place a research station there. \n"
-		"Take the research station from the pile next to the bard. If all the 6 research stations \n"
-		"have been builtm take a research station from anywhere on the board.\n"
-		"Treat Disease: \nRemove 1 disease cube from the city you are in, placing it in the cube suppled next to the board. \n"
-		"If this disease color has been cured (see Discover a Cure below), remove all cubes of that color from \n"
-		"the city you are in. \n If the LAST CUBE of a CURED DISEASE is removed from the board, this disease is \n"
-		"ERADICATED. Flip its cure marker from its VIAL side to its ERADICATED side\n"
-		"Share Knowledge: \nYou can do this action in two ways: \n GIVE the city card that matches the city you are in to another \n"
-		"player, or \n TAKE a city card that matches the city you are in from another player. \n  The other player \n"
-		"must also be in the city with you. Both of you need to agree to do this. if the player who gets the card \n"
-		"now has more than 7 cards, that player must immediately discard a card or play an Event card.\n"
-		"Discover a Cure: \nAt ANY research station, discard 5 city cards of the same color from your hand to cure the disease of THAT \n"
-		"COLOR. Move the disease's cure marker to its Cure indicator. \n If no cubes of this color are on the board, this \n"
-		"disease if now ERADICATED. Flip its cure marker from its VIAL side to its ERADICATED side.\n";
+	std::cout << "\n"
+		" - Drive / Ferry: Move to a city connected by a white line to the one you are in.                                     \n"
+		" - Direct Flight: Discard a city card to move to the city named on the card.                                          \n"
+		" - Charter Flight: Discard the city card that MATCHES the city you are in to move to ANY city.                        \n"
+		" - Shuttle Flight: Move from a city with a research station to any other city that has a research station.            \n"
+		" - Build a Research Station:                                                                                          \n"
+		"       Discard the city card that matches the city you are in to place a research station there.                      \n"
+		"       Take the research station from the pile next to the bard. If all the 6 research stations                       \n"
+		"       have been built take a research station from anywhere on the board.                                            \n"
+		" - Treat Disease: Remove 1 disease cube from the city you are in, placing it in the cube suppled next to the board.   \n"
+		"       If this disease color has been cured (see Discover a Cure below), remove all cubes of that color from          \n"
+		"       the city you are in. If the LAST CUBE of a CURED DISEASE is removed from the board, this disease is            \n"
+		"       ERADICATED. Flip its cure marker from its VIAL side to its ERADICATED side.                                    \n"
+		" - Share Knowledge: You can do this action in two ways:                                                               \n"
+		"        + GIVE the city card that matches the city you are in to another player, or                                   \n"
+		"        + TAKE a city card that matches the city you are in from another player.                                      \n"
+		"       The other player must also be in the city with you. Both of you need to agree to do this. If the player        \n"
+		"       who gets the card now has more than 7 cards, that player must immediately discard a card or play an Event card.\n"
+		" - Discover a Cure: At ANY research station, discard 5 city cards of the same color from your hand to cure the disease\n"
+		"       of THAT COLOR. Move the disease's cure marker to its Cure indicator. If no cubes of this color are on the      \n"
+		"       board, this disease is now ERADICATED. Flip its cure marker from its VIAL side to its ERADICATED side.         \n\n";
 }
 
 void loadGame()
@@ -434,9 +437,28 @@ bool report()
 
 void displayCities()
 {
-	for (const auto& city : Board::instance().map().cities())
+	const auto& cities = Board::instance().map().cities();
+	std::cout << "\n";
+	for (const auto& city : cities)
 	{
-		showCity(*city);
+		std::cout << city->name() << "\n";
+	}
+	std::cout << "\n";
+	std::cout << "Select a city: ";
+	std::string input;
+	while (true)
+	{
+		std::getline(std::cin >> std::ws, input);
+		const auto& it = std::find_if(cities.begin(), cities.end(), [&](const auto& c)
+		{
+			return c->name() == input;
+		});
+		if (it != cities.end())
+		{
+			std::cout << "\n" << (*it)->string();
+			break;
+		}
+		std::cout << "Not a city.\n";
 	}
 }
 

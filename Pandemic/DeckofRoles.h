@@ -21,3 +21,8 @@ public:
 	DeckOfRoles();
 	
 };
+
+namespace role
+{
+	std::vector<std::unique_ptr<RoleCard>> cards();
+}

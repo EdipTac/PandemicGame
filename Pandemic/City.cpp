@@ -7,6 +7,7 @@
 #include "Board.h"
 #include "Player.h"
 #include "Board.h"
+#include "Util.h"
 
 City::City(const std::string& name, const Colour& colour, const std::map<Colour, size_t>& cubes)
 	: _name { name }
@@ -209,29 +210,47 @@ std::string City::string()
 {
 	std::stringstream ss;
 	ss << name();
-	ss << " Colour: " << colourName(colour());
+	ss << " (" << colourName(colour()) << ")";
+	
 	ss << "\nInfection status:\n";
 	for (const auto& colour : colours())
 	{
-		ss << "\t" << colourName(colour) << ": " << diseaseCubes(colour) << "\n";
+		ss << "  " << colourName(colour);
 	}
-	ss << "Is quarantined: " << isQuarantined();
-	ss << "\nHas research station: " << hasResearchStation();
-	ss << "\nOutbreak status:\n";
+	ss << "\n  ";
 	for (const auto& colour : colours())
 	{
-		ss << "\t" << colourName(colour) << ": " << diseaseOutbreak(colour) << "\n";
+		ss << diseaseCubes(colour) << spaces(colourName(colour).size() + 1);
 	}
+	ss << "\n";
+
+	if (isQuarantined())
+	{
+		ss << "Quarantined\n";
+	}
+	if (hasResearchStation())
+	{
+		ss << "Research station present\n";
+	}
+
 	if (_connections.empty())
 	{
 		ss << "No connections.\n";
 	}
 	else
 	{
-		ss << "Connected to:\n";
-		for (const auto& connection : _connections)
+		ss << "Connected to ";
+		for (auto it = _connections.begin(); it != _connections.end(); ++it)
 		{
-			ss << "\t" << connection->_name << "\n";
+			ss << (*it)->_name;
+			if (it + 1 != _connections.end())
+			{
+				ss << ", ";
+			}
+			else
+			{
+				ss << ".\n";
+			}
 		}
 	}
 	ss << std::endl;

@@ -89,13 +89,7 @@ BoardBuilder& BoardBuilder::loadPlayers()
 {
 	auto& cities = Board::instance().map().cities();
 	auto events = event::cards();
-	DeckOfRoles deckOfRoles;
-	std::vector<std::unique_ptr<RoleCard>> roles;
-	while (!deckOfRoles.empty())
-	{
-		roles.push_back(deckOfRoles.drawTopCard());
-	}
-
+	auto roles = role::cards();
 
 	// PLAYER INITIALIZATION:
 	std::vector<json> playerListJSON = this->gameFile["players"];
