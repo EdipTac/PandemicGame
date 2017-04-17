@@ -1,31 +1,21 @@
+#include <sstream>
+
 #include "HandObserver.h"
 #include "Board.h"
+#include "MenuUtils.h"
 
 void forceDiscard(Player& player)
 {
 	const auto& cards = player.cards();
-	std::cout << "You have " << cards.size() << " cards out of a maximum of 7.\n";
-	std::cout << "You must discard " << cards.size() - 7 << ". Pick a card to discard:\n";
-	for (const auto& card : cards)
-	{
-		std::cout << "\t" << card->name() << "\n";
-	}
+	const std::string msg = "You have " + std::to_string(cards.size()) + " cards out of a maximum of 7.\n"
+							 + "You must discard " + std::to_string(cards.size() - 7) + ". Pick a card to discard:\n";
 
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(cards.begin(), cards.end(), [&](const auto& c)
-		{
-			return c->name() == input;
-		});
-		if (it != cards.end())
-		{
-			break;
-		}
-		std::cout << "Not a card in your hand.\n";
-	}
-	player.discard(input, Board::instance().playerDeck());
+	auto card =
+		namedMenu(cards, false) // Not optional - must discard!
+		.setMessage(msg)
+		.solicitInput();
+
+	player.discard(*card, Board::instance().playerDeck());
 }
 
 HandObserver::~HandObserver() {}
