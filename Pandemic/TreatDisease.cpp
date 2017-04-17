@@ -4,6 +4,7 @@
 #include "City.h"
 #include "Player.h"
 #include "TreatDisease.h"
+#include "MenuUtils.h"
 
 constexpr auto desc = "Remove 1 disease cube from the city you are in, placing it in the cube suppled next to the board.";
 
@@ -31,22 +32,12 @@ void action::TreatDisease::solicitData()
 		std::cout << "\t" << colourName(disease) << "(" << colourAbbreviation(disease) << "): " << _city->diseaseCubes(disease) << " cubes\n";
 	}
 
-	std::string input;
-	while (true)
+	_colour = makeMenu(diseases, [&](const auto& disease)
 	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& clrs = colours();
-		const auto& it = std::find_if(clrs.begin(), clrs.end(), [&](const auto& c)
-		{
-			return input == colourName(c);
-		});
-		if (it != clrs.end())
-		{
-			_colour = *it;
-			break;
-		}
-		std::cout << "No colour of that name.\n";
-	}
+		return colourName(disease) + "(" + colourAbbreviation(disease) + "): " + std::to_string(_city->diseaseCubes(disease)) + " cubes";
+	})
+		.setMessage("Select a disease: ")
+		.solicitInput();
 }
 
 void action::TreatDisease::perform()

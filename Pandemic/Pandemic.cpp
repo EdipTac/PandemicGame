@@ -54,7 +54,7 @@ void main()
 void main()
 {
 	// Title display
-	std::cout << titleFont("PANDEMIC") << "\n\n\n";
+	std::cout << titleFont("pandemic") << "\n\n\n";
 
 	// Main game loop
 	try
@@ -97,7 +97,7 @@ void main()
 // The player wants to start a new game
 void newGame()
 {
-	std::cout << titleFont("NEW GAME") << "\n\n";
+	std::cout << titleFont("new game") << "\n\n";
 
 	// Get map file name and load it
 	const auto& fileName = solicitFileName("Load map file to start new game: ");
@@ -175,13 +175,14 @@ void newGame()
 	for (const auto& player : Board::instance().players())
 	{
 		std::cout << "\n" << player->name() << ": ";
+		player->role().print();
 		player->displayCards();
 	}
 	
-	//Place first research station
-	map.startingCity().giveResearchStation(Board::instance());
+	// Place first research station
+	map.startingCity().giveResearchStation();
 
-	//Initial distribution of disease cubes during game initialization
+	// Initial distribution of disease cubes during game initialization
 	Board::instance().infectionDeck().shuffleDeck();
 	std::cout << "\nInitial infected cities are as follows:" << std::endl;
 	for (auto j = 3; j >= 1; --j)
@@ -193,7 +194,7 @@ void newGame()
 				break;
 			}
 			auto temp = Board::instance().infectionDeck().drawTopCard();
-			temp->infect(Board::instance(), j);
+			temp->infect(j);
 			Board::instance().infectionDeck().addToDiscard(move(temp));
 		}
 	}
@@ -232,7 +233,7 @@ void loadGame()
 	std::cout << "\nLoading game \"" << fileName << "\"...\n";
 	BoardBuilder().loadBoard(fileName).loadPlayers().loadCities().loadInfectionCards().loadPlayerCards();
 	std::cout << "Game \"" << fileName << "\" loaded!\n\n";
-	std::cout << "\n\n" << titleFont("RESUMING GAME") << "\n\n";
+	std::cout << "\n\n" << titleFont("resuming game") << "\n\n";
 }
 
 bool saveGame()
@@ -263,7 +264,7 @@ bool saveGame()
 		.saveCities()
 		.persist(fileName);
 
-	std::cout << "\n" << titleFont("GAME SAVED") << "\n\n";
+	std::cout << "\n" << titleFont("game saved") << "\n\n";
 	
 	return false;
 }
@@ -273,6 +274,8 @@ void waitForExit()
 {
 	std::cout << "\nThanks for playing!\n";
 	std::cout << "Press any key to continue...\n";
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cin.get();
 }
 
@@ -321,8 +324,7 @@ bool playEventCard()
 		return false;
 	}
 
-	// Display
-	std::cout << "Which card to play?\n";
+	// For alignment
 	size_t maxSize = 0;
 	for (const auto& cardOwner : cardOwners)
 	{
@@ -330,43 +332,39 @@ bool playEventCard()
 		maxSize = std::max(size, maxSize);
 	}
 	const auto width = maxSize + 1;
-	std::cout << "\t" << rightPad("<Card>", width) << "[<Owner>]\n";
+	
+	// Construct menu
+	Menu<EventCard*> menu;
+	menu.setMessage("\t    " + rightPad("<Card>", width) + " [<Owner>]");
 	for (const auto& cardOwner : cardOwners)
 	{
 		const auto& card = cardOwner.first;
 		const auto& owner = cardOwner.second;
-		std::cout << "\t" << rightPad(card->name(), width) << " [" << owner->name() << "]\n";
+		const auto& label = rightPad(card->name(), width) + " [" + owner->name() + "]";
+		const auto& function = [&]()
+		{
+			return card;
+		};
+		menu.addOption({ label, function });
 	}
+	menu.addOption({ "Back", [](){ return nullptr; } });
 
-	// Solicit input
-	EventCard* cardToPlay = nullptr;
-	std::string input;
-	while (true)
+	// Display and solicit
+	auto cardToPlay = menu.solicitInput();
+
+	if (!cardToPlay)
 	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(cardOwners.begin(), cardOwners.end(), [&](const auto& c)
-		{
-			return input == c.first->name();
-		});
-		if (it != cardOwners.end())
-		{
-			cardToPlay = it->first;
-			break;
-		}
-		std::cout << "No card of that name.\n";
+		// Back
+		return false;
 	}
 
-	// Play and discard card
-	// whatever.solicitData followed by whatever.isValid().... then do whatever.perform()
-
-	//cardToPlay->action(); TODO
+	// Perform event action, and discard if completed
 	cardToPlay->ability().solicitData();
 	if (cardToPlay->ability().isValid())
 	{
 		cardToPlay->ability().perform();
+		cardOwners[cardToPlay]->discard(*cardToPlay, Board::instance().playerDeck());
 	}
-
-	cardOwners[cardToPlay]->discard(*cardToPlay, Board::instance().playerDeck());
 
 	// Doesn't cost an action
 	return false;
@@ -446,28 +444,36 @@ void displayCities()
 
 void displayCurrentPosition() 
 {
-	std::cout << Board::instance().currentPlayer().pawn().position().string();
+	std::cout << "You are in " << Board::instance().currentPlayer().pawn().position().string();
 }
 
 void displayCardsInHand() 
 {
-	Board::instance().currentPlayer().displayCards();
-	std::cout << "\nSelect a card to display description: ";
+	// For aligning card labels
 	const auto& cards = Board::instance().currentPlayer().cards();
-	std::string input;
-	while (true)
+	size_t maxLength = 0;
+	for (const auto& card : cards)
 	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(cards.begin(), cards.end(), [&](const auto& c)
-		{
-			return c->name() == input;
-		});
-		if (it != cards.end())
-		{
-			std::cout << "  " << (*it)->description() << "\n\n";
-			break;
-		}
+		maxLength = std::max(maxLength, card->rawString().size());
 	}
+
+	// Construct menu
+	Menu<void> menu;
+	menu.setMessage("Select a card to display description :");
+	for (const auto& card : cards)
+	{
+		const auto& label = card->string(maxLength + 2 - card->rawString().size());
+		const auto& displayFunction = [&]()
+		{
+			std::cout << "  " << card->description() << "\n\n";
+		};
+		menu.addOption({ label, displayFunction });
+	}
+	menu.addOption({ "Back", [](){} });
+
+	// Display and prompt for description
+	std::cout << "\nHand:\n";
+	menu.solicitInput();
 }
 
 void displayRole()
@@ -482,8 +488,9 @@ void directConnectionReport()
 	std::cout << "In one action, you can move to\n";
 	for (const auto& city : Board::instance().currentPlayer().pawn().position().connections())
 	{
-		std::cout << city->name() << "\n";
+		std::cout << "  " << city->name() << "\n";
 	}
+	std::cout << "\n";
 }
 
 void infect()
@@ -491,7 +498,7 @@ void infect()
 	for (auto i = 0u; !Board::instance().infectionDeck().empty() && i < Board::instance().infectionRate(); ++i)
 	{
 		auto card = Board::instance().infectionDeck().drawTopCard();
-		card->onDraw(Board::instance());
+		card->onDraw();
 		Board::instance().infectionDeck().addToDiscard(std::move(card));
 	}	
 	Board::instance().notify();	

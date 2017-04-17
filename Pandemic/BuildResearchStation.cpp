@@ -3,7 +3,8 @@
 #include "Board.h"
 #include "City.h"
 #include "PlayerCard.h"
-
+#include "Menu.h"
+#include "MenuUtils.h"
 
 action::BuildResearchStation::BuildResearchStation(Player * const performer)
 	: Action{"Build Research Station", "Player discards a card matching the city they are in to build a research station", performer} {}
@@ -46,30 +47,11 @@ void action::BuildResearchStation::solicitData()
 			std::cout << "No research stations left to build.\n";
 		}
 
-		_takeFromCity = true;
-		// set the _target
 		// List cards, get player target, discard card, and move
-		std::cout << "Select a City to take a Research Station from: \n";
-		for (const auto& city : stations)
-		{
-			std::cout << "\t" << city->name() << "\n";
-		}
-
-		std::string input;
-		while (true)
-		{
-			std::getline(std::cin >> std::ws, input);
-			const auto& it = std::find_if(stations.begin(), stations.end(), [&](const auto& c)
-			{
-				return input == c->name();
-			});
-			if (it != stations.end())
-			{
-				_target = *it;
-				break;
-			}
-			std::cout << "No city of that name.\n";
-		}
+		auto menu = namedMenu(stations);
+		menu.setMessage("Select a City to take a Research Station from: ");
+		_target = menu.solicitInput();
+		_takeFromCity = _target;
 	}
 }
 
@@ -77,12 +59,12 @@ void action::BuildResearchStation::perform()
 {
 	if (_takeFromCity)
 	{
-		_target->removeResearchStation(Board::instance());
+		_target->removeResearchStation();
 	}
 	
 	// Remove card, place station
 	_performer->discard(*_positionCard, Board::instance().playerDeck());
-	_performer->pawn().position().giveResearchStation(Board::instance());
+	_performer->pawn().position().giveResearchStation();
 }
 
 bool action::BuildResearchStation::isValid() const

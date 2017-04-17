@@ -19,7 +19,7 @@ public:
 	// The rules of the epidemic card
 	std::string description() const override;
 
-	virtual void onDraw(Board& state) override;
+	virtual void onDraw() override;
 	virtual void cardWork(Deck<InfectionCard>& deck);
 
 	virtual bool isEpidemicCard() const override;

@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Board.h"
 #include "City.h"
+#include "MenuUtils.h"
 
 action::CharterFlight::CharterFlight(Player * const performer)
 	: Action{"Charter Flight", "Discard a city card matching the city you are in to fly to any other city.", performer} {}
@@ -28,23 +29,9 @@ void action::CharterFlight::solicitData()
 	}
 
 	// Get city choice from player, move, and discard card
-	std::cout << "Where would you like to fly to? ";
-	std::string input;
-	while (true)
-	{
-		const auto& cities = Board::instance().map().cities();
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(cities.begin(), cities.end(), [&](const auto& c)
-		{
-			return input == c->name();
-		});
-		if (it != cities.end())
-		{
-			_target = *it;
-			break;
-		}
-		std::cout << "No city of that name.\n";
-	}
+	auto menu = namedMenu(Board::instance().map().cities());
+	menu.setMessage("Where would you like to fly to? ");
+	_target = menu.solicitInput();
 }
 
 void action::CharterFlight::perform()

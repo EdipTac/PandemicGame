@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "PlayerCityCard.h"
 #include "Board.h"
+#include "MenuUtils.h"
 
 const std::string desc = "Discard a city card to move to the city named on the card.";
 
@@ -26,26 +27,13 @@ void action::DirectFlight::solicitData()
 	}
 
 	// List cards, get player target, discard card, and move
-	std::cout << "City cards: \n";
-	for (const auto& card : cards)
+	auto card =
+		makeMenu(cards, [](const auto& card) { return card->name() + " " + colourName(card->colour()); })
+		.setMessage("City cards: ")
+		.solicitInput();
+	if (card)
 	{
-		std::cout << "\t" << card->name() << " " << colourName(card->colour()) << "\n";
-	}
-	
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(cards.begin(), cards.end(), [&](const auto& c)
-		{
-			return input == c->name();
-		});
-		if (it != cards.end())
-		{
-			_target = &(*it)->city();
-			break;
-		}
-		std::cout << "No city of that name.\n";
+		_target = &card->city();
 	}
 }
 

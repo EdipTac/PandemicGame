@@ -28,7 +28,7 @@ public:
 
 	virtual void cardWork(Deck<InfectionCard>& deck) override;
 
-	void onDraw(Board& state) override;
+	void onDraw() override;
 
 	virtual PlayerCardType type() const override;
 };

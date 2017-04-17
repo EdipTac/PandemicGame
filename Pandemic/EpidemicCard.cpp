@@ -10,7 +10,7 @@ EpidemicCard::EpidemicCard() {}
 
 EpidemicCard:: ~EpidemicCard(){}
 
-void EpidemicCard::onDraw(Board&) {}
+void EpidemicCard::onDraw() {}
 
 std::string EpidemicCard::name() const
 {
@@ -33,7 +33,7 @@ void EpidemicCard::cardWork(Deck<InfectionCard>& deck)
 		City& city = dynamic_cast <InfectionCard*> (temp.get())->city();
 		std::cout << "Infection card : " << temp->name() << " with the colour of: " << colourName(city.colour()) << std::endl;
 		std::cout << "Infects the city :" << temp->name() << " three times:" << std::endl;
-		city.addDiseaseCubes(city.colour(), city.cubesBeforeOutbreak, Board::instance());//infect
+		city.addDiseaseCubes(city.colour(), city.cubesBeforeOutbreak);//infect
 		deck.addToDiscard(move(temp));//put to discard pile
 	}
 
@@ -55,7 +55,7 @@ PlayerCardType EpidemicCard::type() const
 	return PlayerCardType::EpidemicCard;
 }
 
-std::string EpidemicCard::string(const size_t spacing) const
+std::string EpidemicCard::string(const size_t) const
 {
 	return rawString();
 }

@@ -31,7 +31,7 @@ std::string EventCard::rawString() const
 	return name();
 }
 
-void EventCard::onDraw(Board&) {}
+void EventCard::onDraw() {}
 
 bool EventCard::isEventCard() const
 {
@@ -42,7 +42,7 @@ Action& EventCard::ability() {
 	return *_ability;
 }
 
-void EventCard::cardWork(Deck<InfectionCard>& deck) {}
+void EventCard::cardWork(Deck<InfectionCard>&) {}
 
 PlayerCardType EventCard::type() const
 {

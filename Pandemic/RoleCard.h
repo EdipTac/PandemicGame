@@ -17,8 +17,8 @@ class RoleCard
 public:
 	RoleCard(const std::string& role = "", const std::string& description = "", const std::string& color = "");
 	virtual ~RoleCard() override = 0;
-	void print();
-	void onDraw(Board& state) override;
+	void print() const;
+	void onDraw() override;
 	std::vector<action::Action*> actions() const;
 	virtual int numCardsNeededToCure() const;
 	virtual void onEnter(City& city) const;

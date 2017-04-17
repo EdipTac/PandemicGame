@@ -20,9 +20,9 @@ public:
 	~InfectionCard();
 	unsigned const CUBE_NORMAL_INFECTION = 1;
 	unsigned const CUBE_EPIDEMIC_INFECTION = 3;
-	void onDraw(Board& state);
-	void infect(Board& state, int numberOfCubes); //this is for the intial infection during game setup
-	void cardWork(Board&);
+	void onDraw();
+	void infect(int numberOfCubes); //this is for the intial infection during game setup
+	void cardWork();
 	std::string description() const override;
 
 };

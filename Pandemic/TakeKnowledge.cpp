@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "City.h"
 #include "Board.h"
+#include "MenuUtils.h"
 
 const std::string desc =
 	"TAKE a city card that matches the city you are in from another player. The other player "
@@ -42,26 +43,10 @@ void action::TakeKnowledge::solicitData()
 	}
 
 	// Select a player
-	std::cout << "Who to trade with?\n";
-	for (const auto& player : others)
-	{
-		std::cout << "\t" << player->name() << "\n";
-	}
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(others.begin(), others.end(), [&](const auto& p)
-		{
-			return input == p->name();
-		});
-		if (it != others.end())
-		{
-			_target = *it;
-			break;
-		}
-		std::cout << "Not a player in this city.\n";
-	}
+	_target =
+		namedMenu(others)
+		.setMessage("Who to trade with? ")
+		.solicitInput();
 
 	// Prepare their city card for transfer
 	_card = _target->positionCard();

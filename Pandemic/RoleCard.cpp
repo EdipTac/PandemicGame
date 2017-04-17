@@ -22,11 +22,12 @@ RoleCard::RoleCard(const std::string& role, const std::string& description, cons
 
 RoleCard::~RoleCard() {}
 
-void RoleCard::print() {
+void RoleCard::print() const
+{
 	std::cout << name() << " (" << _color << ")\n" << description() << "\n";
 }
 
-void RoleCard::onDraw(Board&) {}
+void RoleCard::onDraw() {}
 
 std::vector<action::Action*> RoleCard::actions() const
 {

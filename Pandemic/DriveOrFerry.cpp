@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "City.h"
 #include "Util.h"
+#include "MenuUtils.h"
 
 using namespace action;
 
@@ -41,28 +42,11 @@ void action::DriveOrFerry::solicitData()
 		return;
 	}
 
-	// List connections
-	std::cout << "You can move to\n";
-	list(position.connections());
-
 	// Get target from player and move there
-	std::cout << "Where would you like to move to? ";
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& cn = position.connections();
-		const auto& it = std::find_if(cn.begin(), cn.end(), [&](const auto& c)
-		{
-			return input == c->name();
-		});
-		if (it != cn.end())
-		{
-			_target = *it;
-			break;
-		}
-		std::cout << "No city of that name.\n";
-	}
+	_target =
+		namedMenu(connections)
+		.setMessage("Where would you like to move to? ")
+		.solicitInput();
 }
 
 bool action::DriveOrFerry::isValid() const

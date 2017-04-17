@@ -190,7 +190,7 @@ BoardBuilder& BoardBuilder::loadCities()
 				// found a match
 				if (isResearchStation) {
 					// mark the city as a research station
-					(*it)->giveResearchStation(Board::instance());
+					(*it)->giveResearchStation();
 				}
 				// set the disease cubes for the city
 				(*it)->setDiseaseCubes(Colour::Blue, numOfBlue);

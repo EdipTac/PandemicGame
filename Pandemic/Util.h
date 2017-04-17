@@ -24,6 +24,8 @@ std::string getline(std::ifstream& fs);
 
 bool lowercaseEquals(const std::string& a, const std::string& b);
 
+std::string toUpper(const std::string& original);
+
 std::string toLower(const std::string& s);
 
 template<typename T>

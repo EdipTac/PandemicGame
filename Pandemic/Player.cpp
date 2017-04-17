@@ -58,7 +58,7 @@ void Player::drawFrom(Deck<PlayerCard>& deck, size_t count)
 			// Dick was empty, so card pointer is null
 			break;
 		}
-		card->onDraw(Board::instance());
+		card->onDraw();
 		card->cardWork(Board::instance().infectionDeck());
 		if (card->isHandCard())
 		{
@@ -113,7 +113,6 @@ std::ostream& operator<<(std::ostream& os, PlayerCard& card)
 
 void Player::displayCards()
 {
-	_role->print();
 	size_t maxLength = 0;
 	for (const auto& card : _cards)
 	{
