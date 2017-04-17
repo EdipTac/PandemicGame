@@ -273,6 +273,8 @@ void waitForExit()
 {
 	std::cout << "\nThanks for playing!\n";
 	std::cout << "Press any key to continue...\n";
+	std::cin.clear();
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	std::cin.get();
 }
 
