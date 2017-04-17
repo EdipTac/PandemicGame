@@ -50,6 +50,11 @@ std::string stringTransform(const std::string& original, const std::function<cha
 	return copy;
 }
 
+std::string toUpper(const std::string& original)
+{
+	return stringTransform(original, ::toupper);
+}
+
 std::string toLower(const std::string& original)
 {
 	return stringTransform(original, ::tolower);
@@ -132,12 +137,12 @@ std::string titleFont(const std::string& original)
 		repeat('-', 8);
 		repeat(' ', 4);
 	};
-	const auto& insertSpaces = [&]()
+	const auto& insertSpaces = [&](const std::string& s)
 	{
-		for (auto it = original.begin(); it != original.end(); ++it)
+		for (auto it = s.begin(); it != s.end(); ++it)
 		{
 			ss << *it;
-			if (it == original.end() - 1)
+			if (it == s.end() - 1)
 			{
 				break;
 			}
@@ -146,7 +151,7 @@ std::string titleFont(const std::string& original)
 	};
 
 	ornament();
-	insertSpaces();
+	insertSpaces(toUpper(original));
 	ornament();
 
 	return ss.str();

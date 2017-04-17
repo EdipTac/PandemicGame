@@ -54,7 +54,7 @@ void main()
 void main()
 {
 	// Title display
-	std::cout << titleFont("PANDEMIC") << "\n\n\n";
+	std::cout << titleFont("pandemic") << "\n\n\n";
 
 	// Main game loop
 	try
@@ -97,7 +97,7 @@ void main()
 // The player wants to start a new game
 void newGame()
 {
-	std::cout << titleFont("NEW GAME") << "\n\n";
+	std::cout << titleFont("new game") << "\n\n";
 
 	// Get map file name and load it
 	const auto& fileName = solicitFileName("Load map file to start new game: ");
@@ -178,10 +178,10 @@ void newGame()
 		player->displayCards();
 	}
 	
-	//Place first research station
+	// Place first research station
 	map.startingCity().giveResearchStation(Board::instance());
 
-	//Initial distribution of disease cubes during game initialization
+	// Initial distribution of disease cubes during game initialization
 	Board::instance().infectionDeck().shuffleDeck();
 	std::cout << "\nInitial infected cities are as follows:" << std::endl;
 	for (auto j = 3; j >= 1; --j)
@@ -232,7 +232,7 @@ void loadGame()
 	std::cout << "\nLoading game \"" << fileName << "\"...\n";
 	BoardBuilder().loadBoard(fileName).loadPlayers().loadCities().loadInfectionCards().loadPlayerCards();
 	std::cout << "Game \"" << fileName << "\" loaded!\n\n";
-	std::cout << "\n\n" << titleFont("RESUMING GAME") << "\n\n";
+	std::cout << "\n\n" << titleFont("resuming game") << "\n\n";
 }
 
 bool saveGame()
@@ -263,7 +263,7 @@ bool saveGame()
 		.saveCities()
 		.persist(fileName);
 
-	std::cout << "\n" << titleFont("GAME SAVED") << "\n\n";
+	std::cout << "\n" << titleFont("game saved") << "\n\n";
 	
 	return false;
 }
