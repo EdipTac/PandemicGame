@@ -13,7 +13,6 @@ public:
 	virtual ~TerminationHandler();
 	virtual void update() override;
 	void quit();
-	bool shouldQuit() const;
 
 protected:
 	virtual void onVictory(const Terminator& t);

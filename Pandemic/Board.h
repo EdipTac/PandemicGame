@@ -40,7 +40,6 @@ public:
 	void setMap(std::unique_ptr<Map> map);
 	
 	// Quitting
-	bool shouldQuit() const;
 	void quit();
 
 	// Research stations

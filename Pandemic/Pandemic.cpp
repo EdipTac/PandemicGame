@@ -11,7 +11,7 @@
 //
 //
 //	  Build 2 submitted 18/04/2017.
-//	  An implementation of the board game "Pandemic" by Z-Man Games.
+//	  An implementation of the board game "Pandemic" by Z-Man Games in C++.
 
 #include <iostream>
 #include <map>
@@ -43,8 +43,6 @@
 #include "Util.h"
 #include "Quit.h"
 
-
-
 //	----    Program entry point    ----  //
 //#define TEST
 #ifdef TEST
@@ -57,28 +55,29 @@ void main()
 {
 	// Title display
 	std::cout << titleFont("PANDEMIC") << "\n\n\n";
-	mainMenu.solicitInput();
-	auto observer = std::make_unique<GameStatistics>(Board::instance());
-	auto decorator = std::make_unique<InfectedCityPercentage>(observer.get()); // city infection rate decorator initilization
-	auto infectDecro = std:: make_unique<RemainingInfectionCard>(decorator.get());// remaining infection card decorator initilization
-	auto infectStatus = std::make_unique <TreatmentPriority>(infectDecro.get());// treatment priority decorator initilization
 
 	// Main game loop
 	try
 	{
-		while (!Board::instance().shouldQuit())
+		mainMenu.solicitInput();
+		
+		auto observer = std::make_unique<GameStatistics>(Board::instance());
+		auto decorator = std::make_unique<InfectedCityPercentage>(observer.get()); // city infection rate decorator initilization
+		auto infectDecro = std::make_unique<RemainingInfectionCard>(decorator.get());// remaining infection card decorator initilization
+		auto infectStatus = std::make_unique<TreatmentPriority>(infectDecro.get());// treatment priority decorator initilization
+
+		while (true)
 		{
 			auto& currentPlayer = Board::instance().currentPlayer();
 			std::cout << "\n  --  " << currentPlayer.name() << "'s turn.  --  \n\n";
-			//Board::instance().currentPlayer().displayCards();
-			std::cout << "\n";
 			while (!turnMenu.solicitInput()); // Intentionally empty body
 			Board::instance().distributePlayerCards(cardsPerTurn);
 			if (!currentPlayer.isOneQuietNight())
 			{
 				infect();
 			}
-			else {
+			else
+			{
 				currentPlayer.setOneQuietNight(false);
 			}
 			Board::instance().nextPlayer();

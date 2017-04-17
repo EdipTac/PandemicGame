@@ -43,11 +43,6 @@ void Board::setMap(std::unique_ptr<Map> map)
 	_map = std::move(map);
 }
 
-bool Board::shouldQuit() const
-{
-	return _terminationHandler->shouldQuit();
-}
-
 void Board::quit()
 {
 	_terminationHandler->quit();

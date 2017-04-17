@@ -35,13 +35,7 @@ void TerminationHandler::update()
 
 void TerminationHandler::quit()
 {
-	//throw Quit();
-	_shouldQuit = true;
-}
-
-bool TerminationHandler::shouldQuit() const
-{
-	return _shouldQuit;
+	throw Quit();
 }
 
 void TerminationHandler::onVictory(const Terminator& t)
