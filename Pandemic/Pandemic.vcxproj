@@ -179,6 +179,7 @@
     <ClInclude Include="GiveKnowledge.h" />
     <ClInclude Include="ShuttleFlight.h" />
     <ClInclude Include="StatisticDecorator.h" />
+    <ClInclude Include="StoreEventCard.h" />
     <ClInclude Include="TakeKnowledge.h" />
     <ClInclude Include="TerminationHandler.h" />
     <ClInclude Include="TerminationState.h" />
@@ -253,6 +254,7 @@
     <ClCompile Include="GiveKnowledge.cpp" />
     <ClCompile Include="ShuttleFlight.cpp" />
     <ClCompile Include="StatisticDecorator.cpp" />
+    <ClCompile Include="StoreEventCard.cpp" />
     <ClCompile Include="TakeKnowledge.cpp" />
     <ClCompile Include="TerminationHandler.cpp" />
     <ClCompile Include="Terminator.cpp" />

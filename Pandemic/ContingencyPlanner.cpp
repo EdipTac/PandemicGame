@@ -1,4 +1,5 @@
 #include "ContingencyPlanner.h"
+#include "StoreEventCard.h"
 
 const std::string desc =
 	"The Contingency Planner may, as an action, take an Event card from anywhere in the Player Discard Pile\n"
@@ -9,7 +10,13 @@ const std::string desc =
 role::ContingencyPlanner::ContingencyPlanner()
 	: RoleCard { "Contingency Planner", desc, "Teal" }
 {
-	//_actions.push_back(EVENT);
+	_actions.push_back(std::make_unique<action::StoreEventCard>(this));
+	//_actions.push_back(std::make_unique<action::UseStoredEventCard>(this));
 }
 
 role::ContingencyPlanner::~ContingencyPlanner() {}
+
+void role::ContingencyPlanner::storeEventCard(std::unique_ptr<EventCard> card)
+{
+	_storedCard = std::move(card);
+}

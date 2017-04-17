@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Deck.h"
-#include "PlayerCard.h"
+#include "EventCard.h"
 #include "EpidemicCard.h"
+#include "PlayerCard.h"
 #include "Terminator.h"
 
 class PlayerCardDeck
@@ -20,4 +21,6 @@ public:
 	virtual std::unique_ptr<PlayerCard> drawTopCard() override;
 
 	void addEpidemicCards(const size_t count);
+
+	std::unique_ptr<EventCard> getFromDiscard(EventCard* const card);
 };

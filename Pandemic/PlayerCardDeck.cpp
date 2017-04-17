@@ -64,3 +64,22 @@ void PlayerCardDeck::addEpidemicCards(const size_t count)
 	// Assign to draw pile
 	_drawPile = std::move(newDrawPile);
 }
+
+std::unique_ptr<EventCard> PlayerCardDeck::getFromDiscard(EventCard* const card)
+{
+	const auto& it = std::find_if(_discardPile.begin(), _discardPile.end(), [&](const auto& c)
+	{
+		return c.get() == card;
+	});
+
+	if (it == _discardPile.end())
+	{
+		// Nullptr
+		return {};
+	}
+
+	// Release underlying pointer, cast to event card, and make new handle
+	auto found = std::unique_ptr<EventCard>(static_cast<EventCard*>(it->release()));
+	_discardPile.erase(it);
+	return found;
+}
