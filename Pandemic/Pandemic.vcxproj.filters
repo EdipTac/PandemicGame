@@ -357,6 +357,9 @@
     <ClInclude Include="UseStoredEventCard.h">
       <Filter>Actions\Role Actions\header</Filter>
     </ClInclude>
+    <ClInclude Include="MenuUtils.h">
+      <Filter>Menus\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Card.cpp">
@@ -578,6 +581,7 @@
     <ClCompile Include="UseStoredEventCard.cpp">
       <Filter>Actions\Role Actions\src</Filter>
     </ClCompile>
+    <ClCompile Include="MenuUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">

@@ -151,6 +151,7 @@
     <ClInclude Include="Medic.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="MenuOption.h" />
+    <ClInclude Include="MenuUtils.h" />
     <ClInclude Include="MoveFromResearchStation.h" />
     <ClInclude Include="OneQuietNight.h" />
     <ClInclude Include="OneQuietNightCard.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapEditor.cpp" />
     <ClCompile Include="Medic.cpp" />
+    <ClCompile Include="MenuUtils.cpp" />
     <ClCompile Include="MoveFromResearchStation.cpp" />
     <ClCompile Include="Observable.cpp" />
     <ClCompile Include="OneQuietNight.cpp" />
