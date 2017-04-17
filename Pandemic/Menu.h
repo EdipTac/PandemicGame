@@ -66,6 +66,7 @@ T Menu<T>::solicitInput() const
 {
 	std::cout << string();
 	const auto idx = solicitSize(1, _options.size());
+	std::cout << "\n";
 	return _options[idx - 1].action();
 }
 

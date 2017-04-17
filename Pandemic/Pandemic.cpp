@@ -175,6 +175,7 @@ void newGame()
 	for (const auto& player : Board::instance().players())
 	{
 		std::cout << "\n" << player->name() << ": ";
+		player->role().print();
 		player->displayCards();
 	}
 	
@@ -448,28 +449,36 @@ void displayCities()
 
 void displayCurrentPosition() 
 {
-	std::cout << Board::instance().currentPlayer().pawn().position().string();
+	std::cout << "You are in " << Board::instance().currentPlayer().pawn().position().string();
 }
 
 void displayCardsInHand() 
 {
-	Board::instance().currentPlayer().displayCards();
-	std::cout << "\nSelect a card to display description: ";
+	// For aligning card labels
 	const auto& cards = Board::instance().currentPlayer().cards();
-	std::string input;
-	while (true)
+	size_t maxLength = 0;
+	for (const auto& card : cards)
 	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(cards.begin(), cards.end(), [&](const auto& c)
-		{
-			return c->name() == input;
-		});
-		if (it != cards.end())
-		{
-			std::cout << "  " << (*it)->description() << "\n\n";
-			break;
-		}
+		maxLength = std::max(maxLength, card->rawString().size());
 	}
+
+	// Construct menu
+	Menu<void> menu;
+	menu.setMessage("Select a card to display description :");
+	for (const auto& card : cards)
+	{
+		const auto& label = card->string(maxLength + 2 - card->rawString().size());
+		const auto& displayFunction = [&]()
+		{
+			std::cout << "  " << card->description() << "\n\n";
+		};
+		menu.addOption({ label, displayFunction });
+	}
+	menu.addOption({ "Back", [](){} });
+
+	// Display and prompt for description
+	std::cout << "\nHand:\n";
+	menu.solicitInput();
 }
 
 void displayRole()
@@ -481,7 +490,7 @@ void displayRole()
 
 void directConnectionReport()
 {
-	std::cout << "\nIn one action, you can move to\n";
+	std::cout << "In one action, you can move to\n";
 	for (const auto& city : Board::instance().currentPlayer().pawn().position().connections())
 	{
 		std::cout << "  " << city->name() << "\n";

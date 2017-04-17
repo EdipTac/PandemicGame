@@ -113,7 +113,6 @@ std::ostream& operator<<(std::ostream& os, PlayerCard& card)
 
 void Player::displayCards()
 {
-	_role->print();
 	size_t maxLength = 0;
 	for (const auto& card : _cards)
 	{
