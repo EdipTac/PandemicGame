@@ -32,7 +32,7 @@ void action::StoreEventCard::solicitData()
 		const auto& eventCard = static_cast<EventCard*>(card);
 		
 		// Define lambda
-		const auto& getPtr = [&]()
+		const auto& getPtr = [=]()
 		{
 			return eventCard;
 		};
