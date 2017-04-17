@@ -13,10 +13,10 @@ void action::Airlift::solicitData() {
 	// Reset
 	_target = nullptr;
 
-	std::cout << "Please indicate the name of the player you would like to Airlift";
+	std::cout << "Please indicate the name of the player you would like to Airlift: ";
 	std::string liftee;
 	std::getline(std::cin >> std::ws, liftee);
-	std::cout << "Please indicate the city you would like to airlift to \n";
+	std::cout << "\n Please indicate the city you would like to airlift to: ";
 	std::string destination;
 	std::getline(std::cin >> std::ws, destination);
 
