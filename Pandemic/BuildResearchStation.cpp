@@ -1,8 +1,8 @@
-#pragma warning (disable: 4800)
-
 #include "BuildResearchStation.h"
 #include "Player.h"
 #include "Board.h"
+#include "City.h"
+#include "PlayerCard.h"
 
 
 action::BuildResearchStation::BuildResearchStation(Player * const performer)
@@ -17,12 +17,15 @@ void action::BuildResearchStation::solicitData()
 	if (cards.empty())
 	{
 		std::cout << "You have no city cards.\n";
+		return;
 	}
 
+	_positionCard = player.positionCard();
 	// Without the position card, you cannot perform this action
-	if (!player.hasPositionCard())
+	if (!_positionCard)
 	{
 		std::cout << "You don't have any city cards that match your position.\n";
+		return;
 	}
 
 	// If there are no remaining research stations, we have to steal from another city
@@ -72,22 +75,17 @@ void action::BuildResearchStation::solicitData()
 
 void action::BuildResearchStation::perform()
 {
-	if (_takeFromCity) {
+	if (_takeFromCity)
+	{
 		_target->removeResearchStation(Board::instance());
 	}
 	
 	// Remove card, place station
-	const auto& cards = _performer->cards();
-	const auto& positionName = _performer->pawn().position().name();
-	auto it = std::find_if(cards.begin(), cards.end(), [&](const auto& card)
-	{
-		return card->name() == positionName;
-	});
-	_performer->discard(**it, Board::instance().playerDeck());
+	_performer->discard(*_positionCard, Board::instance().playerDeck());
 	_performer->pawn().position().giveResearchStation(Board::instance());
 }
 
 bool action::BuildResearchStation::isValid() const
 {
-	return _performer;
+	return _performer && _positionCard;
 }

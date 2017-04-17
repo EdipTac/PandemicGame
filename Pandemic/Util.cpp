@@ -84,11 +84,6 @@ City* solicitCity(const Map& map)
 	return city;
 }
 
-void showCity(City& city)
-{
-	std::cout << city.string();
-}
-
 std::string solicitFileName(const std::string& msg)
 {
 	std::string fileName;
@@ -108,13 +103,7 @@ std::string solicitFileName(const std::string& msg)
 
 std::string rightPad(const std::string& original, const size_t width)
 {
-	std::stringstream ss;
-	ss << original;
-	for (auto i = original.size(); i < width; ++i)
-	{
-		ss << " ";
-	}
-	return ss.str();
+	return original + spaces(std::max(width - original.size(), 0ull));
 }
 
 std::string spaces(const size_t count)

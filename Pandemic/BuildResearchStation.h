@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Action.h"
-#include "City.h"
+
+class City;
+class PlayerCard;
 
 namespace action
 {
@@ -17,6 +19,7 @@ namespace action
 	private:
 		City* _target;
 		bool _takeFromCity;
+		PlayerCard* _positionCard;
 	};
 
 }

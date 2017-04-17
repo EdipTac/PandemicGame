@@ -72,8 +72,6 @@ void list(const T& collection)
 
 std::string solicitLine(const std::string& msg = "");
 
-void showCity(City& city);
-
 City* solicitCity(const Map& map);
 
 std::string solicitFileName(const std::string& msg);
