@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "City.h"
 #include "Board.h"
+#include "MenuUtils.h"
 
 const std::string desc = "Move from a city with a research station to any other city that has a research station.";
 
@@ -36,22 +37,10 @@ void action::ShuttleFlight::solicitData()
 	}
 
 	// List stations, get target, and move
-	std::cout << "Where do you want to fly?\n";
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(stations.begin(), stations.end(), [&](const auto& c)
-		{
-			return input == c->name();
-		});
-		if (it != stations.end())
-		{
-			_target = *it;
-			break;
-		}
-		std::cout << "No city of that name.\n";
-	}
+	_target =
+		namedMenu(stations)
+		.setMessage("Where do you want to fly? ")
+		.solicitInput();
 }
 
 void action::ShuttleFlight::perform()

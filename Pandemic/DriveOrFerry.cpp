@@ -43,9 +43,10 @@ void action::DriveOrFerry::solicitData()
 	}
 
 	// Get target from player and move there
-	auto menu = namedMenu(connections);
-	menu.setMessage("Where would you like to move to? ");
-	_target = menu.solicitInput();
+	_target =
+		namedMenu(connections)
+		.setMessage("Where would you like to move to? ")
+		.solicitInput();
 }
 
 bool action::DriveOrFerry::isValid() const

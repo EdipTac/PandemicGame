@@ -27,9 +27,10 @@ void action::DirectFlight::solicitData()
 	}
 
 	// List cards, get player target, discard card, and move
-	auto menu = makeMenu(cards, [](const auto& card) { return card->name() + " " + colourName(card->colour()); });
-	menu.setMessage("City cards: ");
-	auto card = menu.solicitInput();
+	auto card =
+		makeMenu(cards, [](const auto& card) { return card->name() + " " + colourName(card->colour()); })
+		.setMessage("City cards: ")
+		.solicitInput();
 	if (card)
 	{
 		_target = &card->city();

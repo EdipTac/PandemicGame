@@ -28,7 +28,7 @@ public:
 	Menu<T>(const std::vector<MenuOption<T>>& options = {});
 
 	// Sets the message for coliciting user input
-	void setMessage(const std::string& message);
+	Menu<T>& setMessage(const std::string& message);
 
 	// Adds a new menu option	
 	void addOption(const MenuOption<T>& option);
@@ -50,9 +50,10 @@ Menu<T>::Menu(const std::vector<MenuOption<T>>& options)
 {}
 
 template<typename T>
-void Menu<T>::setMessage(const std::string& message)
+Menu<T>& Menu<T>::setMessage(const std::string& message)
 {
 	_message = message;
+	return *this;
 }
 
 template <typename T>
