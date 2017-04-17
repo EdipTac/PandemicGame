@@ -108,7 +108,7 @@ void newGame()
 
 	// Create players
 	std::cout << "How many players? ";
-	const auto& numPlayers = solicitSize(minPlayers, maxPlayers);
+	const auto& numPlayers = solicitSize(minPlayers, maxPlayers, true);
 	
 	const auto& map = Board::instance().map();	// alias
 	for (auto i = 1; i <= numPlayers; ++i)
@@ -406,25 +406,6 @@ std::string solicitPlayerName(const size_t number)
 	return playerName;
 }
 
-size_t solicitSize(const size_t min, const size_t max)
-{
-	size_t size;
-	while (true)
-	{
-		std::cout << "Enter a number from " << min << " to " << max << ", inclusive: ";
-		std::cin.clear();
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		std::cin >> size;
-		std::cin.get();
-		if (std::cin.good() && min <= size && size <= max)
-		{
-			break;
-		}
-		std::cout << "Not a valid number.\n";
-	}
-	return size;
-}
-
 size_t solicitEpidemicCardNumber(const size_t min, const size_t max)
 {
 	size_t size;
@@ -452,27 +433,15 @@ void displayCities()
 {
 	const auto& cities = Board::instance().map().cities();
 	std::cout << "\n";
+	Menu<City*> cityMenu;
+	cityMenu.setMessage("Select a city: ");
 	for (const auto& city : cities)
 	{
-		std::cout << city->name() << "\n";
+		cityMenu.addOption({ city->name(), [&]() { return city.get(); } });
 	}
-	std::cout << "\n";
-	std::cout << "Select a city: ";
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(cities.begin(), cities.end(), [&](const auto& c)
-		{
-			return c->name() == input;
-		});
-		if (it != cities.end())
-		{
-			std::cout << "\n" << (*it)->string();
-			break;
-		}
-		std::cout << "Not a city.\n";
-	}
+	cityMenu.addOption({ "Back", []() { return nullptr; } });
+	const auto city = cityMenu.solicitInput();
+	std::cout << (city ? city->string() : "");
 }
 
 void displayCurrentPosition() 

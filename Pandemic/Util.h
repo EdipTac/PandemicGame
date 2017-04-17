@@ -95,3 +95,5 @@ void shuffle(std::vector<std::unique_ptr<T>>& cards)
 }
 
 size_t randSize(const size_t max);
+
+size_t solicitSize(const size_t min, const size_t max, const bool printMessage = false);

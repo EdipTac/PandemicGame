@@ -21,7 +21,9 @@ class Menu
 
 public:
 	// Constructs a menu from a list of options
-	Menu<T>(const std::vector<MenuOption<T>>& options);
+	Menu<T>(const std::vector<MenuOption<T>>& options = {});
+
+	void setMessage(const std::string& message);
 
 	// Adds a new menu option	
 	void addOption(const MenuOption<T>& option);
@@ -33,5 +35,6 @@ public:
 	std::string string() const;
 
 private:
+	std::string _message = "Please select an option:";
 	std::vector<MenuOption<T>> _options;
 };

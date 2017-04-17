@@ -159,3 +159,24 @@ size_t randSize(const size_t max)
 	dis.param(std::uniform_int_distribution<size_t>::param_type { 0, max - 1 });
 	return dis(gen);
 }
+
+size_t solicitSize(const size_t min, const size_t max, const bool printMessage)
+{
+	size_t size;
+	while (true)
+	{
+		if (printMessage)
+		{
+			std::cout << "Enter a number from " << min << " to " << max << ", inclusive: ";
+		}
+		std::cin >> size;
+		if (std::cin.good() && min <= size && size <= max)
+		{
+			break;
+		}
+		std::cout << "Not a valid number.\n";
+		std::cin.clear();
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	}
+	return size;
+}
