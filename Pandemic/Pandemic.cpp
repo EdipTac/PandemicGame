@@ -324,8 +324,7 @@ bool playEventCard()
 		return false;
 	}
 
-	// Display
-	std::cout << "Which card to play?\n";
+	// For alignment
 	size_t maxSize = 0;
 	for (const auto& cardOwner : cardOwners)
 	{
@@ -333,43 +332,39 @@ bool playEventCard()
 		maxSize = std::max(size, maxSize);
 	}
 	const auto width = maxSize + 1;
-	std::cout << "\t" << rightPad("<Card>", width) << "[<Owner>]\n";
+	
+	// Construct menu
+	Menu<EventCard*> menu;
+	menu.setMessage("\t    " + rightPad("<Card>", width) + " [<Owner>]");
 	for (const auto& cardOwner : cardOwners)
 	{
 		const auto& card = cardOwner.first;
 		const auto& owner = cardOwner.second;
-		std::cout << "\t" << rightPad(card->name(), width) << " [" << owner->name() << "]\n";
+		const auto& label = rightPad(card->name(), width) + " [" + owner->name() + "]";
+		const auto& function = [&]()
+		{
+			return card;
+		};
+		menu.addOption({ label, function });
 	}
+	menu.addOption({ "Back", [](){ return nullptr; } });
 
-	// Solicit input
-	EventCard* cardToPlay = nullptr;
-	std::string input;
-	while (true)
+	// Display and solicit
+	auto cardToPlay = menu.solicitInput();
+
+	if (!cardToPlay)
 	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(cardOwners.begin(), cardOwners.end(), [&](const auto& c)
-		{
-			return input == c.first->name();
-		});
-		if (it != cardOwners.end())
-		{
-			cardToPlay = it->first;
-			break;
-		}
-		std::cout << "No card of that name.\n";
+		// Back
+		return false;
 	}
 
-	// Play and discard card
-	// whatever.solicitData followed by whatever.isValid().... then do whatever.perform()
-
-	//cardToPlay->action(); TODO
+	// Perform event action, and discard if completed
 	cardToPlay->ability().solicitData();
 	if (cardToPlay->ability().isValid())
 	{
 		cardToPlay->ability().perform();
+		cardOwners[cardToPlay]->discard(*cardToPlay, Board::instance().playerDeck());
 	}
-
-	cardOwners[cardToPlay]->discard(*cardToPlay, Board::instance().playerDeck());
 
 	// Doesn't cost an action
 	return false;
