@@ -17,8 +17,7 @@ void action::GovernmentGrant::solicitData() {
 	//std::getline(std::cin >> std::ws, destination);
 
 	const auto& cities = Board::instance().map().cities();
-	bool looper = true;
-	/*while (looper)
+	while (true)
 	{
 		std::cout << "Please indicate the name of the city you would like to add a Research Station to: ";
 		std::getline(std::cin >> std::ws, destination);
@@ -26,15 +25,20 @@ void action::GovernmentGrant::solicitData() {
 		{
 			return destination == c->name();
 		});
-		if (it != cities.end())
+		if (it == cities.end())
+		{
+			std::cout << "No city of that name.\n";
+			
+		}
+		else
 		{
 			setTarget(**it);
-			looper = false;
+			break;
 		}
-		std::cout << "No city of that name.\n";
-	}*/
 
-	while (looper) {
+	}
+
+	/*while (looper) {
 		std::cout << "Please indicate the name of the city you would like to add a Research Station to: ";
 		std::getline(std::cin >> std::ws, destination);
 		for (auto it = cities.begin(); it != cities.end(); ++it) {
@@ -44,7 +48,7 @@ void action::GovernmentGrant::solicitData() {
 			}
 		}
 		std::cout << "No city matches that name. \n";
-	}
+	}*/
 
 }
 void action::GovernmentGrant::setTarget(City& target) {
@@ -53,7 +57,8 @@ void action::GovernmentGrant::setTarget(City& target) {
 }
 
 bool action::GovernmentGrant::isValid() const {
-	return _performer && _target;
+	//return _performer && _target;
+	return true;
 }
 
 void action::GovernmentGrant::perform() {

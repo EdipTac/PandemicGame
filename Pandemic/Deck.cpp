@@ -136,8 +136,9 @@ std::unique_ptr<T> Deck<T>::drawBottomDiscard()
 template <typename T>
 void Deck<T>::addToDeck(std::unique_ptr<T> card)
 {
-	_drawPile.push_back(move(card));
+	_drawPile.push_back(std::move(card));
 }
+
 
 template <typename T>
 void Deck<T>::addToDiscard(std::unique_ptr<T> card)

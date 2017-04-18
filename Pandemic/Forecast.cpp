@@ -33,7 +33,7 @@ void action::Forecast::solicitData()
 	{
 		std::cout << "Card at index:" << index << " is " << (*it)->name() <<" " << (*it)->description() << std::endl;
 	}
-	std::cout << "Please enter the order in which you would like to add the cards to the deck. \n";
+	std::cout << "Please enter the order in which you would like to add the cards to the deck. Index 5 will be drawn first and index 0 will be drawn last. \n ";
 	std::string input;
 	for (index = 0; index < count; ++index)
 	{
@@ -67,6 +67,6 @@ void action::Forecast::perform() {
 }
 
 bool action::Forecast::isValid() const {
-	return _performer;
+	return true;
 }
 

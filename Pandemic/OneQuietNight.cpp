@@ -32,10 +32,11 @@ void action::OneQuietNight::solicitData()
 
 void action::OneQuietNight::perform()
 {
-	_target->setOneQuietNight(true);
+	bool isIt = true;
+	_target->setOneQuietNight(isIt);
 }
 
 bool action::OneQuietNight::isValid() const
 {
-	return _performer && _target;
+	return (true && _target);
 }
