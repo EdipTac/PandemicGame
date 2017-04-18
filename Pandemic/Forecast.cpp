@@ -62,7 +62,7 @@ void action::Forecast::solicitData()
 void action::Forecast::perform() {
 	for (unsigned i = 0u; i < _target.size(); ++i)
 	{
-		Board::instance().infectionDeck().addToDeck(std::move(_target[i]));
+		Board::instance().infectionDeck().addToDeck(std::move(_target[_target.size() - i - 1]));
 	}
 }
 

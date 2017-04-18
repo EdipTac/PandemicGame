@@ -147,32 +147,6 @@ void Deck<T>::addToDiscard(std::unique_ptr<T> card)
 }
 
 template <typename T>
-void Deck<T>::deleteDiscard()
-{
-	if (_discardPile.empty())
-	{
-		throw std::logic_error{ "There are no cards in the discard pile." };
-	}
-	std::cout << "Please enter the name of the card you would like to delete.\n";
-	std::string input;
-	while (true)
-	{
-		std::getline(std::cin >> std::ws, input);
-		const auto& it = std::find_if(_discardPile.begin(), _discardPile.end(), [&](const auto& c)
-		{
-			return input == c->name();
-		});
-		if (it != _discardPile.end())
-		{
-			_discardPile.erase(it);
-			break;
-		}
-		std::cout << "No card by that name in the discard pile.\n";
-
-	}
-}
-
-template <typename T>
 void Deck<T>::deleteDiscard(std::string cardToDelete)
 {
 	if (_discardPile.empty())
