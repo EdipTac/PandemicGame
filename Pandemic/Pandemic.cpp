@@ -44,13 +44,6 @@
 #include "Quit.h"
 
 //	----    Program entry point    ----  //
-//#define TEST
-#ifdef TEST
-void main()
-{
-	waitForExit();
-}
-#else
 void main()
 {
 	// Title display
@@ -90,7 +83,6 @@ void main()
 
 	waitForExit();
 }
-#endif
 
 //  -----  Function definitions  ----  //
 

@@ -9,6 +9,7 @@ Data: 20170209*/
 
 #include "City.h"
 #include "InfectionCard.h"
+#include "Board.h"
 
 InfectionCard::InfectionCard(City& city)
 	: CityCard { city }
@@ -18,17 +19,25 @@ InfectionCard::~InfectionCard(){}
 
 void InfectionCard::onDraw()
 {
-	city().addDiseaseCubes(colour(), CUBE_NORMAL_INFECTION);
-	std::cout << city().name() << " infected with " << colourName(city().colour()) << " disease!\n";
-	city().infect();
+	if (Board::instance().isEradicated(colour()))
+	{
+		std::cout << city().name() << " is spared since " << colourName(city().colour()) << " disease has been eradicated.\n";
+	}
+	else
+	{
+		city().addDiseaseCubes(colour(), CUBE_NORMAL_INFECTION);
+		std::cout << city().name() << " infected with " << colourName(city().colour()) << " disease!\n";
+		city().infect();
+	}
 }
 
 //this function was added to be able to infect cities with however many cubes we want to (Used during initial infection of the map)
 void InfectionCard::infect(int numberOfCubes)
 {
 	city().addDiseaseCubes(colour(), numberOfCubes);
-	std::cout << city().name() << " infected with " <<numberOfCubes << " cubes of " << colourName(city().colour()) << " disease!\n";
+	std::cout << city().name() << " infected with " << numberOfCubes << " cubes of " << colourName(city().colour()) << " disease!\n";
 }
+
 std::string InfectionCard::description() const
 {
 	return "This card infects " + name() + " with the " + colourAbbreviation(colour()) + " disease.";

@@ -96,6 +96,7 @@ bool Board::hasResearchStation() const
 void Board::cureDisease(const Colour& colour)
 {
 	_diseaseTracker.cure(colour);
+	std::cout << colourName(colour) << " cured!\n";
 }
 
 bool Board::isCured(const Colour& colour) const
@@ -135,6 +136,7 @@ unsigned Board::infectionCounter() const
 {
 	return _infectionCounter;
 }
+
 size_t Board::infectedCityCounter() const
 {
 	size_t count = 0;

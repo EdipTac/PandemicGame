@@ -29,6 +29,10 @@ void Map::setName(const std::string & name)
 
 City& Map::addCity(std::unique_ptr<City> city)
 {
+	if (contains(city->name()))
+	{
+		throw std::invalid_argument("A city of this name already exists.");
+	}
 	_cacheValid = false;
 	_cities.push_back(std::move(city));
 	return *_cities.back().get();
