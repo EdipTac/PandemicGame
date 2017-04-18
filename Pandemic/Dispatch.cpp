@@ -8,7 +8,7 @@
 const std::string desc = "Move any pawn to any city containing another pawn.";
 
 action::Dispatch::Dispatch(Player* const performer)
-	: Action { "Dispatch", desc, performer }
+	: Action { "Dispatch [Dispatcher Ability]", desc, performer }
 {}
 
 void action::Dispatch::solicitData()

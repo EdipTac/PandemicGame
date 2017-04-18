@@ -1,5 +1,6 @@
 #include "Researcher.h"
 #include "ResearcherGiveKnowledge.h"
+#include "TakeKnowledgeFromResearcher.h"
 
 const std::string desc =
 	"As an action, the Researcher may give any City card from her hand to another player in the same city as her,\n"
@@ -10,6 +11,7 @@ role::Researcher::Researcher()
 	: RoleCard { "Researcher", desc, "Brown" }
 {
 	_actions.push_back(std::make_unique<action::ResearcherGiveKnowledge>());
+	_sharedActions.push_back(std::make_unique<action::TakeKnowledgeFromResearcher>());
 }
 
 role::Researcher::~Researcher() {}

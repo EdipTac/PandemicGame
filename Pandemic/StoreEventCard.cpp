@@ -7,7 +7,7 @@ const std::string desc =
 	"Only 1 Event card can be on his role card at a time. It does not count against his hand limit.";
 
 action::StoreEventCard::StoreEventCard(Player* const performer, role::ContingencyPlanner* const roleCard)
-	: Action { "Store Event Card", desc, performer }
+	: Action { "Store Event Card [Contingency Planner Ability]", desc, performer }
 	, _roleCard { roleCard }
 {}
 

@@ -182,6 +182,7 @@
     <ClInclude Include="StatisticDecorator.h" />
     <ClInclude Include="StoreEventCard.h" />
     <ClInclude Include="TakeKnowledge.h" />
+    <ClInclude Include="TakeKnowledgeFromResearcher.h" />
     <ClInclude Include="TerminationHandler.h" />
     <ClInclude Include="TerminationState.h" />
     <ClInclude Include="Terminator.h" />
@@ -259,6 +260,7 @@
     <ClCompile Include="StatisticDecorator.cpp" />
     <ClCompile Include="StoreEventCard.cpp" />
     <ClCompile Include="TakeKnowledge.cpp" />
+    <ClCompile Include="TakeKnowledgeFromResearcher.cpp" />
     <ClCompile Include="TerminationHandler.cpp" />
     <ClCompile Include="Terminator.cpp" />
     <ClCompile Include="TextualCard.cpp" />

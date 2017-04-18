@@ -5,7 +5,7 @@
 const std::string desc = "Play the stored Event Card and remove it from the game.";
 
 action::UseStoredEventCard::UseStoredEventCard(Player* const performer, role::ContingencyPlanner* const roleCard)
-	: Action { "Use Store Event Card", desc, performer }
+	: Action { "Use Stored Event Card [Contingency Planner Ability]", desc, performer }
 	, _roleCard { roleCard }
 {}
 

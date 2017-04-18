@@ -8,7 +8,7 @@
 const std::string desc = "Move from a research station to any city by discarding any City card.";
 
 action::MoveFromResearchStation::MoveFromResearchStation(Player* const performer)
-	: Action { "Move from a research station", desc, performer }
+	: Action { "Move from a research station [Operations Expert Ability]", desc, performer }
 {}
 
 action::MoveFromResearchStation::~MoveFromResearchStation() {}

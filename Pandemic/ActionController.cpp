@@ -114,7 +114,7 @@ void ActionController::resetActionList()
 		{
 			continue;
 		}
-		for (const auto& action : player->role().actions())
+		for (const auto& action : player->role().sharedActions())
 		{
 			_actions.push_back(action);
 			_actions.back()->setPerformer(player);

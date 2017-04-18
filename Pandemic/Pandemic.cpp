@@ -55,9 +55,9 @@ void main()
 		mainMenu.solicitInput();
 		
 		auto observer = std::make_unique<GameStatistics>(Board::instance());
-		auto decorator = std::make_unique<InfectedCityPercentage>(observer.get()); // city infection rate decorator initilization
-		auto infectDecro = std::make_unique<RemainingInfectionCard>(decorator.get());// remaining infection card decorator initilization
-		auto infectStatus = std::make_unique<TreatmentPriority>(infectDecro.get());// treatment priority decorator initilization
+		auto decorator = std::make_unique<InfectedCityPercentage>(observer.get());		// city infection rate decorator initilization
+		auto infectDecro = std::make_unique<RemainingInfectionCard>(decorator.get());	// remaining infection card decorator initilization
+		auto infectStatus = std::make_unique<TreatmentPriority>(infectDecro.get());		// treatment priority decorator initilization
 
 		while (true)
 		{

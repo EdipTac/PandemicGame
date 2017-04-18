@@ -11,7 +11,7 @@ const std::string desc =
 		"player’s turn.";
 
 action::ResearcherGiveKnowledge::ResearcherGiveKnowledge(Player* const performer)
-	: Action { "Give Any Knowledge", desc, performer }
+	: Action { "Give Any Knowledge [Researcher Ability]", desc, performer }
 {}
 
 action::ResearcherGiveKnowledge::~ResearcherGiveKnowledge() {}
@@ -64,9 +64,11 @@ void action::ResearcherGiveKnowledge::solicitData()
 }
 
 void action::ResearcherGiveKnowledge::perform()
-{}
+{
+	_performer->giveCard(*_card, *_target);
+}
 
 bool action::ResearcherGiveKnowledge::isValid() const
 {
-	return false;
+	return _performer && _target && _card;
 }
