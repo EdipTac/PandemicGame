@@ -584,8 +584,9 @@
     <ClCompile Include="UseStoredEventCard.cpp">
       <Filter>Actions\Role Actions\src</Filter>
     </ClCompile>
-    <ClCompile Include="MenuUtils.cpp" />
-    <ClCompile Include="TakeKnowledgeFromResearcher.cpp" />
+    <ClCompile Include="TakeKnowledgeFromResearcher.cpp">
+      <Filter>Actions\Role Actions\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="earth.map">
