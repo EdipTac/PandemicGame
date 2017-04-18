@@ -119,6 +119,7 @@ void addConnection(City& city)
 	if (target)
 	{
 		city.connectTo(*target);
+		target->connectTo(city);
 	}
 }
 
