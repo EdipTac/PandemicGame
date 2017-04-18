@@ -19,6 +19,8 @@ void addConnection(City& city);
 void deleteConnection(City& city);
 void createNewMap();
 
+std::unique_ptr<Map> map;
+
 const GeneralMenu mapEditorMainMenu
 {
 	{
@@ -31,15 +33,14 @@ const GeneralMenu mapEditorMainMenu
 const GeneralMenu editMapMenu
 {
 	{
-		{ "Add City",		addCity		},
-		{ "Delete City",	deleteCity	},
-		{ "List Cities",	listCities	},
-		{ "Edit City",		editCity	},
-		{ "Save Map",		saveMap		},
+		{ "Add City",    addCity               },
+		{ "Delete City", deleteCity            },
+		{ "List Cities", listCities            },
+		{ "Edit City",   editCity              },
+		{ "Save Map",    saveMap               },
+		{ "Quit",        [](){ throw Quit(); } },
 	}
 };
-
-std::unique_ptr<Map> map;
 
 void mapEditor()
 {
@@ -62,6 +63,10 @@ void addCity()
 	city->name() = solicitLine("Enter city name: ");
 	std::cout << "Enter city colour: ";
 	city->colour() = validateInput(colourNameMap(), "Not a colour.\n");
+	if (map->cities().size() == 0)
+	{
+		map->startingCity() = city.get();
+	}
 	map->addCity(std::move(city));
 }
 
@@ -101,6 +106,10 @@ void listCities()
 void cityReport(City& city)
 {
 	std::cout << city.string();
+	if (map->startingCity() == &city)
+	{
+		std::cout << "*Starting city*\n\n";
+	}
 }
 
 void addConnection(City& city)
@@ -130,4 +139,10 @@ void loadMap()
 }
 
 void saveMap()
-{}
+{
+	std::cout << "File name: ";
+	std::string fileName;
+	std::getline(std::cin >> std::ws, fileName);
+	writeMapToFile(*map, fileName);
+	std::cout << "Map saved!\n";
+}
