@@ -39,6 +39,11 @@ void action::Dispatch::solicitData()
 		.setMessage("Who to move? ")
 		.solicitInput();
 
+	if (!_dispatchee)
+	{
+		return;
+	}
+
 	// Remove dispatchee from list of possible destinations
 	std::remove(others.begin(), others.end(), _dispatchee);
 
