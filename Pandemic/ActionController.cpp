@@ -3,6 +3,7 @@
 
 #include "ActionController.h"
 #include "Action.h"
+#include "Board.h"
 #include "BuildResearchStation.h"
 #include "CharterFlight.h"
 #include "DirectFlight.h"
@@ -104,6 +105,20 @@ void ActionController::resetActionList()
 	{
 		_actions.push_back(action);
 		_actions.back()->setPerformer(&_player);
+	}
+
+	// Shared actions
+	for (const auto& player : Board::instance().players())
+	{
+		if (player == &Board::instance().currentPlayer())
+		{
+			continue;
+		}
+		for (const auto& action : player->role().actions())
+		{
+			_actions.push_back(action);
+			_actions.back()->setPerformer(player);
+		}
 	}
 }
 

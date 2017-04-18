@@ -39,6 +39,16 @@ std::vector<action::Action*> RoleCard::actions() const
 	return list;
 }
 
+std::vector<action::Action*> RoleCard::sharedActions() const
+{
+	std::vector<action::Action*> list;
+	for (const auto& action : _sharedActions)
+	{
+		list.push_back(action.get());
+	}
+	return list;
+}
+
 int RoleCard::numCardsNeededToCure() const{
 	return 5;
 }
