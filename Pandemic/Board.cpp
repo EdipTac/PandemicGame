@@ -3,7 +3,6 @@
 #include <memory>
 
 #include "Board.h"
-#include "TerminationHandler.h"
 
 Board& Board::instance()
 {
@@ -13,12 +12,11 @@ Board& Board::instance()
 
 Board::Board()
 	: _cubePool { 96 / 4 }
-	, _terminationHandler { std::make_unique<TerminationHandler>() }
 {
-	_terminationHandler->subscribeTo(_outbreakCounter);
-	_terminationHandler->subscribeTo(_diseaseTracker);
-	_terminationHandler->subscribeTo(_playerDeck);
-	_terminationHandler->subscribeTo(_cubePool);
+	_terminationHandler.subscribeTo(_outbreakCounter);
+	_terminationHandler.subscribeTo(_diseaseTracker);
+	_terminationHandler.subscribeTo(_playerDeck);
+	_terminationHandler.subscribeTo(_cubePool);
 }
 
 Board::~Board() {}
@@ -46,7 +44,7 @@ void Board::setMap(std::unique_ptr<Map> map)
 
 void Board::quit()
 {
-	_terminationHandler->quit();
+	_terminationHandler.quit();
 }
 
 void Board::nextPlayer()

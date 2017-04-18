@@ -16,8 +16,7 @@
 #include "HandObserver.h"
 #include "PlayerController.h"
 #include "EpidemicCard.h"
-
-class TerminationHandler;
+#include "TerminationHandler.h"
 
 // Represents the state of the game
 class Board
@@ -86,6 +85,6 @@ private:
 	PlayerCardDeck _playerDeck;
 	Deck<InfectionCard> _infectionDeck;
 	OutbreakCounter _outbreakCounter;
-	std::unique_ptr<TerminationHandler> _terminationHandler;
+	TerminationHandler _terminationHandler;
 	HandObserver _handObserver;
 };
