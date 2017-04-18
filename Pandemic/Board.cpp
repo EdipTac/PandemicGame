@@ -18,6 +18,7 @@ Board::Board()
 	_terminationHandler->subscribeTo(_outbreakCounter);
 	_terminationHandler->subscribeTo(_diseaseTracker);
 	_terminationHandler->subscribeTo(_playerDeck);
+	_terminationHandler->subscribeTo(_cubePool);
 }
 
 Board::~Board() {}

@@ -38,9 +38,24 @@ bool CubePool::isEradicated(const Colour& colour) const
 	return _diseasesEradicated.find(colour)->second;
 }
 
+TerminationState CubePool::terminationState() const
+{
+	return _cubesLeft ? TerminationState::InProgress : TerminationState::Defeat;
+}
+
+std::string CubePool::message() const
+{
+	return "No cubes left to distribute.";
+}
+
 void CubePool::giveTo(const Colour& colour, const size_t amount, CubePool& target)
 {
 	const size_t trueAmount = std::min(_diseaseCubes[colour], amount);
+	if (trueAmount > amount)
+	{
+		_cubesLeft = false;
+	}
 	_diseaseCubes[colour] -= trueAmount;
 	target._diseaseCubes[colour] += trueAmount;
+	notify();
 }

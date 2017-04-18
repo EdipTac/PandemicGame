@@ -3,9 +3,11 @@
 #include <map>
 
 #include "Colour.h"
+#include "Terminator.h"
 
 // Represents a collection of disease cubes of each colour.
 class CubePool
+	: public Terminator
 {
 public:
 	// Constructs a CubePool with a uniform number of disease cubes per colour.
@@ -26,6 +28,9 @@ public:
 	// The eradication boolean of a given colour
 	bool isEradicated (const Colour& colour) const;
 
+	virtual TerminationState terminationState() const override;
+	virtual std::string message() const override;
+
 private:
 	// Holds the count of disease cubes of each colour.
 	std::map<Colour, size_t> _diseaseCubes;
@@ -33,5 +38,6 @@ private:
 	std::map<Colour, bool> _diseasesCured;
 	// Holds the eradicated boolean of each colour
 	std::map<Colour, bool> _diseasesEradicated;
+	bool _cubesLeft = true;
 };
 
