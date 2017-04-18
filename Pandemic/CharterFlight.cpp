@@ -20,12 +20,14 @@ void action::CharterFlight::solicitData()
 	if (cards.empty())
 	{
 		std::cout << "You have no city cards.\n";
+		return;
 	}
 
 	// Without the position card, you cannot perform this action
 	if (!player.hasPositionCard())
 	{
 		std::cout << "You don't have any city cards that match your position.\n";
+		return;
 	}
 
 	// Get city choice from player, move, and discard card
