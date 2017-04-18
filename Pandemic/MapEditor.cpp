@@ -6,6 +6,7 @@
 #include "Menu.h"
 #include "BoardBuilder.h"
 #include "Util.h"
+#include "Quit.h"
 
 void addCity();
 void deleteCity();
@@ -21,9 +22,9 @@ void createNewMap();
 const GeneralMenu mapEditorMainMenu
 {
 	{
-		{ "Create New Map", createNewMap	},
-		{ "Load Map",		loadMap			},
-		{ "Quit",			[](){}			},
+		{ "Create New Map", createNewMap	      },
+		{ "Load Map",		loadMap			      },
+		{ "Quit",			[](){ throw Quit(); } },
 	}
 };
 
